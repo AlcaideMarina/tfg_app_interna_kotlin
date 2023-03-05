@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 33
@@ -46,4 +47,8 @@ dependencies {
 
     // Rounded images
     implementation 'com.makeramen:roundedimageview:2.3.0'
+
+    // Firebase
+    implementation platform('com.google.firebase:firebase-bom:31.2.3')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
 }
