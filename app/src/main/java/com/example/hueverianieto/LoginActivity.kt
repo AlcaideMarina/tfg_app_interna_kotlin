@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity() {
 
         this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
         this.binding.loginButton.setTextBold(true)
-        this.binding.loginButton.isEnabled = false
+        this.binding.loginButton.isEnabled = true       // TODO: Esto hay que cambiarlo para que inicialmente esté deshabilitado
 
     }
 
