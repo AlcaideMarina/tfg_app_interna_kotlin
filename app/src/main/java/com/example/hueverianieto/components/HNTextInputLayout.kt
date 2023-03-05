@@ -5,13 +5,14 @@ import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.core.content.res.ResourcesCompat
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentTextInputLayoutBinding
 import com.google.android.material.textfield.TextInputLayout
 
-class HNTextInputLayout : TextInputLayout, BaseComponent {
+open class HNTextInputLayout : TextInputLayout, BaseComponent {
 
     private var isMandatory: Boolean = false
     private var errorText: String? = null
@@ -113,11 +114,18 @@ class HNTextInputLayout : TextInputLayout, BaseComponent {
         this.binding.textInputEditText.maxLines = maxLines
     }
 
+    fun getText(): String {
+        return this.binding.textInputEditText.text.toString()
+    }
+
 
     /// Context
     override fun getComponentContext(): Context {
         return this.context
     }
 
+    override fun getView(): View {
+        return this
+    }
 
 }

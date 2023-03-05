@@ -4,15 +4,10 @@
     android:enterFadeDuration="200"
     android:exitFadeDuration="200">
 
-    <item android:state_pressed="false">
+    <item android:state_enabled="true">
         <shape>
             <corners android:radius="16dp" />
             <solid android:color="@color/red_primary_color" />
-            <!-- <padding
-                android:bottom="4dp"
-                android:left="4dp"
-                android:right="4dp"
-                android:top="4dp" /> -->
         </shape>
     </item>
 
@@ -20,11 +15,6 @@
         <shape>
             <corners android:radius="16dp" />
             <solid android:color="@color/gray_color" />
-            <!-- <padding
-                android:bottom="4dp"
-                android:left="4dp"
-                android:right="4dp"
-                android:top="4dp" /> -->
         </shape>
     </item>
 
@@ -32,11 +22,7 @@
         <shape>
             <corners android:radius="16dp" />
             <solid android:color="#FC6967" />
-            <!-- <padding
-                android:bottom="4dp"
-                android:left="4dp"
-                android:right="4dp"
-                android:top="4dp" /> -->
         </shape>
     </item>
+
 </selector>

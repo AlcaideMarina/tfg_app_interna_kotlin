@@ -5,16 +5,25 @@ import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentButtonBinding
 import com.example.hueverianieto.utils.Conversions
 
-class HNButton : ConstraintLayout, BaseComponent {
+open class HNButton : ConstraintLayout, BaseComponent {
 
-    constructor(context: Context) : super(context)
+    private var binding: ComponentButtonBinding = ComponentButtonBinding.inflate(
+        LayoutInflater.from(this.context)
+    )
+
+    constructor(context: Context) : super(context) {
+        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
+    }
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
         initAttrs(attrs)
     }
 
@@ -23,14 +32,9 @@ class HNButton : ConstraintLayout, BaseComponent {
         attrs,
         defStyleAttr
     ) {
+        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
         initAttrs(attrs)
     }
-
-    private var binding: ComponentButtonBinding = ComponentButtonBinding.bind(
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.component_button, this, true)
-    )
 
     init {
         // TODO: sin implementar
@@ -39,8 +43,7 @@ class HNButton : ConstraintLayout, BaseComponent {
     private fun initAttrs(attrs: AttributeSet?) {
         if (attrs == null) return
         val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.HNButton, 0, 0
-        )
+            attrs, R.styleable.HNButton)
         this.initBoolAttrs(typedArray)
         this.initStringAttrs(typedArray)
         typedArray.recycle()
@@ -48,7 +51,7 @@ class HNButton : ConstraintLayout, BaseComponent {
 
     private fun initBoolAttrs(typedArray: TypedArray) {
         typedArray.getBoolean(R.styleable.HNButton_isButtonEnabled, true).let {
-            this.setIsEnabled(it)
+            this.isEnabled = false
         }
     }
 
@@ -67,6 +70,7 @@ class HNButton : ConstraintLayout, BaseComponent {
     }
 
     fun setTextBold(isBold: Boolean) {
+        this.binding.buttonBackground.isEnabled = false
         if (isBold) {
             this.binding.buttonText.setTypeface(null, Typeface.BOLD)
         }
@@ -83,8 +87,10 @@ class HNButton : ConstraintLayout, BaseComponent {
         this.binding.buttonText.layoutParams = param
     }
 
-    fun setIsEnabled(isEnabled: Boolean) {
-        // TODO: sin implementar - ¿cómo setteamos esto?
+    override fun setEnabled(enabled: Boolean) {
+        super.setEnabled(enabled)
+        this.binding.buttonBackground.isEnabled = enabled
+        this.binding.buttonText.isEnabled = enabled
     }
 
     fun setSize(width: Int?, height: Int?) {
@@ -99,5 +105,9 @@ class HNButton : ConstraintLayout, BaseComponent {
 
     override fun getComponentContext(): Context {
         return this.context
+    }
+
+    override fun getView(): View {
+        return this
     }
 }
