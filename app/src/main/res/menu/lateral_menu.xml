@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- TODO: Añadir las imágenes correspondientes -->
+
+    <!-- Subcomponentes
+    <item
+        android:id="@+id/prueba"
+        android:title="prueba"
+        android:icon="@drawable/ic_launcher_background">
+
+        <menu>
+
+            <item
+                android:id="@+id/prueba2"
+                android:title="prueba 2"
+                android:icon="@drawable/ic_launcher_background"/>
+
+        </menu>
+
+    </item>
+    -->
+
+    <item
+        android:id="@+id/home_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/home_bottom_menu" />
+    <item
+        android:id="@+id/orders_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/orders_lateral_menu" />
+    <item
+        android:id="@+id/economy_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/economy_lateral_menu" />
+    <item
+        android:id="@+id/farm_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/farm_lateral_menu" />
+    <item
+        android:id="@+id/material_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/material_lateral_menu" />
+    <item
+        android:id="@+id/users_bottom_menu"
+        android:icon="@drawable/ic_launcher_background"
+        android:title="@string/users_lateral_menu" />
+
+</menu>

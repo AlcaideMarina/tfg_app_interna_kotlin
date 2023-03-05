@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="HNTextInputLayout">
+        <attr name="isMandatory" format="boolean" />
+        <attr name="errorText" format="string" />
+        <attr name="hint" format="string" />
+        <attr name="isEnabled" format="boolean" />
+        <attr name="textValue" format="string" />
+        <attr name="allowsEnters" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="HNButton">
+        <attr name="text" format="string" />
+        <attr name="isButtonEnabled" format="boolean" />
+    </declare-styleable>
+
+</resources>

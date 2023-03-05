@@ -1,0 +1,53 @@
+package com.example.hueverianieto.base
+
+import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+
+abstract class BaseActivity : AppCompatActivity() {
+
+    protected abstract fun injection()
+    protected abstract fun setUp()
+    protected abstract fun configureUI()
+    protected abstract fun setListeners()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        Log.d(this.javaClass.simpleName, "Calling onCreate(): " + this.javaClass.simpleName)
+        injection()
+        setUp()
+        configureUI()
+        setListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d(this.javaClass.simpleName, "Calling onStart(): " + this.javaClass.simpleName)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d(this.javaClass.simpleName, "Calling onResume(): " + this.javaClass.simpleName)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d(this.javaClass.simpleName, "Calling onPause(): " + this.javaClass.simpleName)
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(this.javaClass.simpleName, "Calling onRestart(): " + this.javaClass.simpleName)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d(this.javaClass.simpleName, "Calling onStop(): " + this.javaClass.simpleName)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d(this.javaClass.simpleName, "Calling onDestroy(): " + this.javaClass.simpleName)
+    }
+}
