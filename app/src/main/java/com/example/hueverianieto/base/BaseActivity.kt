@@ -14,7 +14,7 @@ abstract class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        Log.d(this.javaClass.simpleName, "Calling onCreate(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onCreate(): " + this.javaClass.simpleName)
         injection()
         setUp()
         configureUI()
@@ -23,31 +23,31 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        Log.d(this.javaClass.simpleName, "Calling onStart(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onStart(): " + this.javaClass.simpleName)
     }
 
     override fun onResume() {
         super.onResume()
-        Log.d(this.javaClass.simpleName, "Calling onResume(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onResume(): " + this.javaClass.simpleName)
     }
 
     override fun onPause() {
         super.onPause()
-        Log.d(this.javaClass.simpleName, "Calling onPause(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onPause(): " + this.javaClass.simpleName)
     }
 
     override fun onRestart() {
         super.onRestart()
-        Log.d(this.javaClass.simpleName, "Calling onRestart(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onRestart(): " + this.javaClass.simpleName)
     }
 
     override fun onStop() {
         super.onStop()
-        Log.d(this.javaClass.simpleName, "Calling onStop(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onStop(): " + this.javaClass.simpleName)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d(this.javaClass.simpleName, "Calling onDestroy(): " + this.javaClass.simpleName)
+        Log.d(this.javaClass.simpleName, "Calling activity onDestroy(): " + this.javaClass.simpleName)
     }
 }

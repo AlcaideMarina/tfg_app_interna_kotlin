@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
 
     <!-- TODO: Añadir las imágenes correspondientes -->
 
@@ -21,29 +23,33 @@
     </item>
     -->
 
-    <item
-        android:id="@+id/home_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/home_bottom_menu" />
-    <item
-        android:id="@+id/orders_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/orders_lateral_menu" />
-    <item
-        android:id="@+id/economy_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/economy_lateral_menu" />
-    <item
-        android:id="@+id/farm_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/farm_lateral_menu" />
-    <item
-        android:id="@+id/material_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/material_lateral_menu" />
-    <item
-        android:id="@+id/users_bottom_menu"
-        android:icon="@drawable/ic_launcher_background"
-        android:title="@string/users_lateral_menu" />
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/home_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/home_bottom_menu" />
+        <item
+            android:id="@+id/orders_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/orders_lateral_menu" />
+        <item
+            android:id="@+id/economy_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/economy_lateral_menu" />
+        <item
+            android:id="@+id/farm_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/farm_lateral_menu" />
+        <item
+            android:id="@+id/material_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/material_lateral_menu" />
+        <item
+            android:id="@+id/users_bottom_menu"
+            android:icon="@drawable/ic_launcher_background"
+            android:title="@string/users_lateral_menu" />
+
+    </group>
 
 </menu>

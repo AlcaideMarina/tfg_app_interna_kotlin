@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -18,6 +19,14 @@
         </activity>
 
         <activity android:name=".MainActivity"
+            android:exported="true">
+            <!--Default Intent Filter-->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".ui.AllClientsActivity"
             android:exported="true">
             <!--Default Intent Filter-->
             <intent-filter>
