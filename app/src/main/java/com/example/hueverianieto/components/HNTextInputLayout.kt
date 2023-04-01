@@ -10,6 +10,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentTextInputLayoutBinding
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 open class HNTextInputLayout : TextInputLayout, BaseComponent {
@@ -118,6 +119,9 @@ open class HNTextInputLayout : TextInputLayout, BaseComponent {
         return this.binding.textInputEditText.text.toString()
     }
 
+    fun getTextInputEditTextComponent(): TextInputEditText {
+        return this.binding.textInputEditText;
+    }
 
     /// Context
     override fun getComponentContext(): Context {
