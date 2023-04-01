@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui
 
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.databinding.ActivityAllClientsBinding
 
@@ -17,7 +18,8 @@ class AllClientsActivity : BaseActivity()  {
     }
 
     override fun configureUI() {
-        // No UI configuration is necessary for this activity
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container, AllClientsFragment()).commit()
     }
 
     override fun setListeners() {
