@@ -4,12 +4,12 @@ import android.content.Intent
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.widget.Toast
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-
 
 class LoginActivity : BaseActivity() {
 
@@ -38,7 +38,7 @@ class LoginActivity : BaseActivity() {
 
         this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
         this.binding.loginButton.setTextBold(true)
-        this.binding.loginButton.isEnabled = false       // TODO: Esto hay que cambiarlo para que inicialmente esté deshabilitado
+        this.binding.loginButton.isEnabled = false
 
     }
 
@@ -49,9 +49,10 @@ class LoginActivity : BaseActivity() {
 
         // TODO: Listener del botón
         this.binding.loginButton.setOnClickListener {
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-            finish()
+            it.hideSoftInput()
+            val email: String = this.binding.userTextInputLayout.getText()
+            val password: String = this.binding.passwordTextInputLayout.getText()
+            checkCredentials(email, password)
         }
     }
 
@@ -64,6 +65,27 @@ class LoginActivity : BaseActivity() {
                         || this@LoginActivity.binding.passwordTextInputLayout.getText().isEmpty())
             Log.v(TAG, "loginButton: " + this@LoginActivity.binding.loginButton.isEnabled.toString())
         }
+    }
+
+    private fun checkCredentials(email: String, password: String) {
+        // TODO: Añadir corrutinas
+        auth.signInWithEmailAndPassword(email, password)
+            .addOnCompleteListener(this) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d(TAG, "signInWithEmail:success")
+                    val user = auth.currentUser
+
+                    val intent = Intent(this, MainActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w(TAG, "signInWithEmail:failure", task.exception)
+                    Toast.makeText(baseContext, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show()
+                }
+            }
     }
 
     companion object {

@@ -1,7 +1,10 @@
 package com.example.hueverianieto.base
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -50,4 +53,10 @@ abstract class BaseActivity : AppCompatActivity() {
         super.onDestroy()
         Log.d(this.javaClass.simpleName, "Calling activity onDestroy(): " + this.javaClass.simpleName)
     }
+
+    fun View.hideSoftInput() {
+        val inputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+    
 }
