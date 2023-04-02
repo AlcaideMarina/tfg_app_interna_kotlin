@@ -3,6 +3,7 @@ package com.example.hueverianieto.components
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -109,6 +110,10 @@ open class HNTextInputLayout : TextInputLayout, BaseComponent {
 
     fun setInputType(inputText: Int) {
         this.binding.textInputEditText.inputType = inputText
+    }
+
+    fun setTransformationMethod(transformationMethod: TransformationMethod) {
+        this.binding.textInputEditText.transformationMethod = transformationMethod
     }
 
     fun setMaxLines(maxLines: Int) {

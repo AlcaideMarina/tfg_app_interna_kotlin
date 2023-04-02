@@ -2,7 +2,9 @@ package com.example.hueverianieto
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
+import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.widget.Toast
 import com.example.hueverianieto.base.BaseActivity
@@ -35,6 +37,7 @@ class LoginActivity : BaseActivity() {
         this.binding.passwordTextInputLayout.setHintText(
             resources.getString(R.string.password_text_input_layout)
         )
+        this.binding.passwordTextInputLayout.setTransformationMethod(PasswordTransformationMethod.getInstance())
 
         this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
         this.binding.loginButton.setTextBold(true)
