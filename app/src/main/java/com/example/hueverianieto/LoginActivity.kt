@@ -2,21 +2,27 @@ package com.example.hueverianieto
 
 import android.content.Intent
 import android.text.Editable
-import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
+import android.view.View
+import android.view.WindowManager
+import android.widget.ProgressBar
+import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
+
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var progressBar: ProgressBar
 
     override fun injection() {
         // TODO: sin implementar
@@ -72,6 +78,8 @@ class LoginActivity : BaseActivity() {
 
     private fun checkCredentials(email: String, password: String) {
         // TODO: Añadir corrutinas
+        initProgressBar()
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
@@ -88,7 +96,25 @@ class LoginActivity : BaseActivity() {
                     Toast.makeText(baseContext, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
                 }
+                closeProgressBar()
             }
+    }
+
+    private fun initProgressBar() {
+        Log.v(TAG, "inicio")
+        this.binding.loadingComponent.visibility = View.VISIBLE
+        this.binding.loadingContainerComponent.visibility = View.VISIBLE
+
+        window.setFlags(
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
+            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
+    }
+
+    private fun closeProgressBar() {
+        Log.v(TAG, "FIN")
+        this.binding.loadingComponent.visibility = View.GONE
+        this.binding.loadingContainerComponent.visibility = View.GONE
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
 
     companion object {
