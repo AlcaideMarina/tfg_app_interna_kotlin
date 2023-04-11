@@ -9,9 +9,12 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
 import android.widget.RelativeLayout
+import android.widget.ScrollView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.base.BaseActivity
+import com.example.hueverianieto.components.HNModalDialog
+import com.example.hueverianieto.data.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -49,6 +52,8 @@ class LoginActivity : BaseActivity() {
         this.binding.loginButton.setTextBold(true)
         this.binding.loginButton.isEnabled = false
 
+        this.binding.userTextInputLayout.clearFocus()
+        this.binding.passwordTextInputLayout.clearFocus()
     }
 
     override fun setListeners() {
@@ -56,9 +61,9 @@ class LoginActivity : BaseActivity() {
         this.binding.userTextInputLayout.getTextInputEditTextComponent().addTextChangedListener(watcher)
         this.binding.passwordTextInputLayout.getTextInputEditTextComponent().addTextChangedListener(watcher)
 
-        // TODO: Listener del botón
         this.binding.loginButton.setOnClickListener {
             it.hideSoftInput()
+            // TODO: bloquear scroll
             val email: String = this.binding.userTextInputLayout.getText()
             val password: String = this.binding.passwordTextInputLayout.getText()
             checkCredentials(email, password)
@@ -87,23 +92,28 @@ class LoginActivity : BaseActivity() {
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
 
+                    // TODO: pasar el user a la siguiente pantalla
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
+                    closeProgressBar()
                     finish()
                 } else {
-                    // If sign in fails, display a message to the user.
-                    Log.w(TAG, "signInWithEmail:failure", task.exception)
-                    Toast.makeText(baseContext, "Authentication failed.",
-                        Toast.LENGTH_SHORT).show()
+                    closeProgressBar()
+                    val errorMessage: String = if (task.exception != null) {
+                        task.exception!!.message.toString()
+                    } else {
+                        "generic error"
+                    }
+                    setPopUp(errorMessage)
+
                 }
-                closeProgressBar()
             }
     }
 
     private fun initProgressBar() {
         Log.v(TAG, "inicio")
         this.binding.loadingComponent.visibility = View.VISIBLE
-        this.binding.loadingContainerComponent.visibility = View.VISIBLE
+        this.binding.extraComponentsContainer.visibility = View.VISIBLE
 
         window.setFlags(
             WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
@@ -113,9 +123,38 @@ class LoginActivity : BaseActivity() {
     private fun closeProgressBar() {
         Log.v(TAG, "FIN")
         this.binding.loadingComponent.visibility = View.GONE
-        this.binding.loadingContainerComponent.visibility = View.GONE
+        this.binding.extraComponentsContainer.visibility = View.GONE
         window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
     }
+
+    private fun setPopUp(errorMessage: String) {
+
+        HNModalDialog(this).show(
+            this,
+            ModalDialogModel(
+                "Vaya... ha habido un error",
+                "Parece que no tienes conexión a internet. Por favor, inténtalo más tarde.",
+                "De acuerdo",
+                null,
+                {},
+                null,
+                true
+            )
+        )
+
+        /*this.binding.popupComponent.visibility = View.VISIBLE
+        this.binding.extraComponentsContainer.visibility = View.VISIBLE
+        this.binding.popupComponent.setPopUpTitle("Vaya... ha habido un error")
+        this.binding.popupComponent.setPopUpLeftButtonText("De acuerdo")
+        if (errorMessage == Constants.loginNetworkError) {
+            this.binding.popupComponent.setPopUpText("Parece que no tienes conexión a internet. Por favor, inténtalo más tarde.")
+        } else {
+            this.binding.popupComponent.setPopUpText("Se ha producido un error inesperado. Por favor, inténtalo más tarde.")
+        }*/
+        // TODO: listener botón
+        // TODO: listener fondo - que al pulsar en el fondo se cierre el popup
+    }
+
 
     companion object {
         private val TAG = LoginActivity::class.java.simpleName
