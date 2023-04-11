@@ -133,7 +133,7 @@ class LoginActivity : BaseActivity() {
             this,
             ModalDialogModel(
                 "Vaya... ha habido un error",
-                "Parece que no tienes conexión a internet. Por favor, inténtalo más tarde.",
+                errorMap(errorMessage),
                 "De acuerdo",
                 null,
                 {},
@@ -142,17 +142,16 @@ class LoginActivity : BaseActivity() {
             )
         )
 
-        /*this.binding.popupComponent.visibility = View.VISIBLE
-        this.binding.extraComponentsContainer.visibility = View.VISIBLE
-        this.binding.popupComponent.setPopUpTitle("Vaya... ha habido un error")
-        this.binding.popupComponent.setPopUpLeftButtonText("De acuerdo")
-        if (errorMessage == Constants.loginNetworkError) {
-            this.binding.popupComponent.setPopUpText("Parece que no tienes conexión a internet. Por favor, inténtalo más tarde.")
-        } else {
-            this.binding.popupComponent.setPopUpText("Se ha producido un error inesperado. Por favor, inténtalo más tarde.")
-        }*/
-        // TODO: listener botón
-        // TODO: listener fondo - que al pulsar en el fondo se cierre el popup
+    }
+
+    private fun errorMap(errorMessage: String): String {
+        return when(errorMessage) {
+            Constants.loginNetworkError -> "Parece que no tienes conexión a internet. Por favor, inténtalo más tarde."
+            Constants.loginBadFormattedEmailError -> "El email introducido no tiene un formato válido. Por favor, revisa los datos y vuelve a intentarlo."
+            Constants.loginNoUserRecordedError -> "El usuario no consta en nuestra base de datos. Por favor, revisa los datos y vuelve a intentarlo."
+            Constants.loginInvalidPasswordError -> "El usuario y/o contraseña no son correctas. Por favor, revisa los datos y vuelve a intentarlo."
+            else -> "Se ha producido un error inesperado. Por favor, inténtalo más tarde.\nError: $errorMessage"
+        }
     }
 
 
