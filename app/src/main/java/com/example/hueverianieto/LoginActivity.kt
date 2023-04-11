@@ -52,8 +52,6 @@ class LoginActivity : BaseActivity() {
         this.binding.loginButton.setTextBold(true)
         this.binding.loginButton.isEnabled = false
 
-        this.binding.userTextInputLayout.clearFocus()
-        this.binding.passwordTextInputLayout.clearFocus()
     }
 
     override fun setListeners() {
@@ -91,6 +89,7 @@ class LoginActivity : BaseActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
+                    // TODO: Comprobar que no sea un cliente
 
                     // TODO: pasar el user a la siguiente pantalla
                     val intent = Intent(this, MainActivity::class.java)
