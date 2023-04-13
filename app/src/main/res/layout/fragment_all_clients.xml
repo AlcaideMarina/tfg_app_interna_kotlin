@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools">
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:id="@+id/top_bar"
@@ -43,35 +43,35 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/size32"
         android:layout_marginVertical="@dimen/size16"
-        app:layout_constraintTop_toBottomOf="@id/top_bar"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" >
+        app:layout_constraintTop_toBottomOf="@id/top_bar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/buttons_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size16"
-            app:layout_constraintTop_toBottomOf="@id/top_bar"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/top_bar">
 
             <com.example.hueverianieto.components.HNButton
                 android:id="@+id/new_user_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.example.hueverianieto.components.HNButton
                 android:id="@+id/deleted_users_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size8"
-                app:layout_constraintTop_toBottomOf="@id/new_user_button"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/new_user_button" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -81,26 +81,26 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/size16"
             android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/buttons_container"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" >
+            app:layout_constraintTop_toBottomOf="@id/buttons_container">
 
             <com.example.hueverianieto.components.HNComponentClients
                 android:id="@+id/client_component_1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
             <com.example.hueverianieto.components.HNComponentClients
                 android:id="@+id/client_component_2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size8"/>
+                android:layout_marginTop="@dimen/size8" />
 
             <com.example.hueverianieto.components.HNComponentClients
                 android:id="@+id/client_component_3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size8"/>
+                android:layout_marginTop="@dimen/size8" />
 
         </LinearLayout>
 

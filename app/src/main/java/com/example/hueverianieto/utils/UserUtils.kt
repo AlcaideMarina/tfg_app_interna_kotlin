@@ -18,7 +18,8 @@ object UserUtils {
             data.containsKey("phone") && data.containsKey("position") &&
             data.containsKey("postal_code") && data.containsKey("province") &&
             data.containsKey("ss_number") && data.containsKey("surname") && data.containsKey("uid")
-            && data.containsKey("user")) {
+            && data.containsKey("user")
+        ) {
             null
         } else {
             "missing fields"
@@ -48,4 +49,5 @@ object UserUtils {
             documentId
         )
     }
+
 }

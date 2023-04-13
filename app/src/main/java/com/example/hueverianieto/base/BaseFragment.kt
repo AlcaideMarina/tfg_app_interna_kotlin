@@ -5,7 +5,7 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 
-abstract class BaseFragment: Fragment() {
+abstract class BaseFragment : Fragment() {
 
     protected abstract fun injection()
 
@@ -17,7 +17,10 @@ abstract class BaseFragment: Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d(this.javaClass.simpleName, "Calling fragment onCreate(): " + this.javaClass.simpleName)
+        Log.d(
+            this.javaClass.simpleName,
+            "Calling fragment onCreate(): " + this.javaClass.simpleName
+        )
         injection()
         setObservers()
     }
@@ -35,7 +38,10 @@ abstract class BaseFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d(this.javaClass.simpleName, "Calling fragment onResume(): " + this.javaClass.simpleName)
+        Log.d(
+            this.javaClass.simpleName,
+            "Calling fragment onResume(): " + this.javaClass.simpleName
+        )
     }
 
     override fun onStop() {

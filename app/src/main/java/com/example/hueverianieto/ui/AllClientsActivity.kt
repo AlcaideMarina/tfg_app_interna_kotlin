@@ -4,7 +4,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.databinding.ActivityAllClientsBinding
 
-class AllClientsActivity : BaseActivity()  {
+class AllClientsActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAllClientsBinding
 

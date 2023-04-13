@@ -34,13 +34,32 @@ class MainActivity : AppCompatActivity() {
 
         this.binding.navigationView.setNavigationItemSelectedListener {
             it.isChecked = true
-            when(it.itemId) {
+            when (it.itemId) {
                 R.id.home_bottom_menu -> replaceFragment(HomeFragment(), "Huevería Nieto")
-                R.id.orders_bottom_menu -> Toast.makeText(applicationContext, "ORDERS", Toast.LENGTH_SHORT).show()
-                R.id.economy_bottom_menu -> Toast.makeText(applicationContext, "ECCONOMY", Toast.LENGTH_SHORT).show()
-                R.id.farm_bottom_menu -> Toast.makeText(applicationContext, "FARM", Toast.LENGTH_SHORT).show()
-                R.id.material_bottom_menu -> Toast.makeText(applicationContext, "MATERIAL", Toast.LENGTH_SHORT).show()
-                R.id.users_bottom_menu -> replaceFragment(UsersAndClientsFragment(), it.title.toString())
+                R.id.orders_bottom_menu -> Toast.makeText(
+                    applicationContext,
+                    "ORDERS",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.economy_bottom_menu -> Toast.makeText(
+                    applicationContext,
+                    "ECCONOMY",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.farm_bottom_menu -> Toast.makeText(
+                    applicationContext,
+                    "FARM",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.material_bottom_menu -> Toast.makeText(
+                    applicationContext,
+                    "MATERIAL",
+                    Toast.LENGTH_SHORT
+                ).show()
+                R.id.users_bottom_menu -> replaceFragment(
+                    UsersAndClientsFragment(),
+                    it.title.toString()
+                )
             }
             true
         }

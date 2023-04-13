@@ -2,7 +2,7 @@ package com.example.hueverianieto.data.components
 
 import android.view.View
 
-data class ModalDialogModel (
+data class ModalDialogModel(
     var title: String,
     var text: String,
     var leftButtonText: String,

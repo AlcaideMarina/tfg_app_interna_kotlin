@@ -12,37 +12,37 @@
         android:id="@+id/modal_dialog_content_layout"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/red_gray_secondary_color">
+        android:background="@color/red_gray_secondary_color"
+        android:orientation="vertical">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/modal_dialog_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            app:autoSizeTextType="uniform"
-            app:autoSizeMaxTextSize="24dp"
             android:background="@color/red_gray_secondary_color"
-            tools:text="Title"
             android:gravity="center"
             android:textAlignment="center"
             android:textColor="@color/black_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            app:autoSizeMaxTextSize="24dp"
+            app:autoSizeTextType="uniform"
+            tools:text="Title" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/modal_dialog_text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="8dp"
             android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"
             android:gravity="center"
             android:textAlignment="center"
-            android:textStyle="bold"
             android:textColor="@color/black_color"
             android:textSize="12sp"
+            android:textStyle="bold"
             tools:text="Text" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -57,11 +57,11 @@
             style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:backgroundTint="@color/red_gray_secondary_color"
-            tools:text="leftButton"
             android:textAllCaps="false"
             android:textColor="@color/black_color"
-            android:textSize="12sp"/>
+            android:textSize="12sp"
+            app:backgroundTint="@color/red_gray_secondary_color"
+            tools:text="leftButton" />
 
     </LinearLayout>
 

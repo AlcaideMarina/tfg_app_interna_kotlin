@@ -20,10 +20,19 @@ open class HNButton : ConstraintLayout, BaseComponent {
     )
 
     constructor(context: Context) : super(context) {
-        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
+        this.addView(
+            this.binding.root,
+            LayoutParams.MATCH_PARENT,
+            resources.getDimensionPixelSize(R.dimen.size64)
+        )
     }
+
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
+        this.addView(
+            this.binding.root,
+            LayoutParams.MATCH_PARENT,
+            resources.getDimensionPixelSize(R.dimen.size64)
+        )
         initAttrs(attrs)
     }
 
@@ -32,7 +41,11 @@ open class HNButton : ConstraintLayout, BaseComponent {
         attrs,
         defStyleAttr
     ) {
-        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, resources.getDimensionPixelSize(R.dimen.size64))
+        this.addView(
+            this.binding.root,
+            LayoutParams.MATCH_PARENT,
+            resources.getDimensionPixelSize(R.dimen.size64)
+        )
         initAttrs(attrs)
     }
 
@@ -43,7 +56,8 @@ open class HNButton : ConstraintLayout, BaseComponent {
     private fun initAttrs(attrs: AttributeSet?) {
         if (attrs == null) return
         val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.HNButton)
+            attrs, R.styleable.HNButton
+        )
         this.initBoolAttrs(typedArray)
         this.initStringAttrs(typedArray)
         typedArray.recycle()

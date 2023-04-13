@@ -12,8 +12,7 @@ import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.data.components.ModalDialogModel
 import com.example.hueverianieto.databinding.ComponentModalDialogBinding
 
-
-open class HNModalDialog: ConstraintLayout, BaseComponent {
+open class HNModalDialog : ConstraintLayout, BaseComponent {
 
     private var binding: ComponentModalDialogBinding = ComponentModalDialogBinding.inflate(
         LayoutInflater.from(this.context)

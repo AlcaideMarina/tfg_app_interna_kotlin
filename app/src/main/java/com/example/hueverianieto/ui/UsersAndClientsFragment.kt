@@ -10,7 +10,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
 
-class UsersAndClientsFragment: BaseFragment() {
+class UsersAndClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUsersAndClientsBinding
     private lateinit var view: View
@@ -37,7 +37,10 @@ class UsersAndClientsFragment: BaseFragment() {
             activity?.let {
                 val intent = Intent(it, AllClientsActivity::class.java)
                 it.startActivity(intent)
-            } ?: Log.e(UsersAndClientsFragment::class.simpleName, "Error en la navegación en clientsButton")
+            } ?: Log.e(
+                UsersAndClientsFragment::class.simpleName,
+                "Error en la navegación en clientsButton"
+            )
         }
     }
 

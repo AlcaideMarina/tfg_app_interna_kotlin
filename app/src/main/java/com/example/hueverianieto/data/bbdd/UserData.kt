@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class UserData (
+data class UserData(
     var bankAccount: String,
     var city: String,
     var createdBy: String,
