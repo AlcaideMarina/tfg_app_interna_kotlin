@@ -112,20 +112,24 @@ class LoginActivity : BaseActivity() {
                                         closeProgressBar()
                                         finish()
                                     } else {
-                                        // TODO: Popup - hay un error en el usuario
+                                        if (UserUtils.checkErrorMap(document) == "empty input map") {
+                                            closeProgressBar()
+                                            setPopUp("Ha habido un problema con tu usuario. Por favor, vuelve a intentarlo, y si el error persiste, ponte en contacto con nosotros.")
+                                        }
                                     }
                                 }
 
                             } else {
-                                Log.v("CONSULTA", "ERROR 1:")
+                                closeProgressBar()
+                                setPopUp("Ha habido un en el proceso de login. Por favor, inténtalo de nuevo.")
                             }
                         }.addOnFailureListener {
-                            // TODO: Popup del error
-
-                            Log.v("CONSULTA", "ERROR 2: " + it.message)
+                            closeProgressBar()
+                            setPopUp("Ha habido un en el proceso de login. Por favor, inténtalo de nuevo.")
                         }
                     } else {
-                        // TODO: Popup informando de un error
+                        closeProgressBar()
+                        setPopUp("No hemos podido encontrar tu usuario en nuestra base de datos. Por favor, ponte en contacto con nosotros.")
                     }
                 } else {
                     closeProgressBar()
@@ -134,7 +138,7 @@ class LoginActivity : BaseActivity() {
                     } else {
                         "generic error"
                     }
-                    setPopUp(errorMessage)
+                    setPopUp(errorMap(errorMessage))
 
                 }
             }
@@ -163,7 +167,7 @@ class LoginActivity : BaseActivity() {
             this,
             ModalDialogModel(
                 "Vaya... ha habido un error",
-                errorMap(errorMessage),
+                errorMessage,
                 "De acuerdo",
                 null,
                 {},
