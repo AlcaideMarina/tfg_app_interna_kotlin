@@ -9,7 +9,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.data.ModalDialogModel
+import com.example.hueverianieto.data.components.ModalDialogModel
 import com.example.hueverianieto.databinding.ComponentModalDialogBinding
 
 

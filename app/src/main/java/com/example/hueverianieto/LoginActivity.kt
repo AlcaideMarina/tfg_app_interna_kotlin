@@ -11,7 +11,7 @@ import android.widget.ProgressBar
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.components.HNModalDialog
 import com.example.hueverianieto.data.bbdd.UserData
-import com.example.hueverianieto.data.ModalDialogModel
+import com.example.hueverianieto.data.components.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
 import com.example.hueverianieto.utils.UserUtils
 import com.google.firebase.Timestamp

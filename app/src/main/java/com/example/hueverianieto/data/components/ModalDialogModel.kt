@@ -1,4 +1,4 @@
-package com.example.hueverianieto.data
+package com.example.hueverianieto.data.components
 
 import android.view.View
 
