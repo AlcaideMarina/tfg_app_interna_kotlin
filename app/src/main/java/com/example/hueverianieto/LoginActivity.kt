@@ -64,7 +64,7 @@ class LoginActivity : BaseActivity() {
             // TODO: bloquear scroll
             val email: String = this.binding.userTextInputLayout.getText()
             val password: String = this.binding.passwordTextInputLayout.getText()
-            checkCredentials(email, password)
+            checkCredentials(email.trim(), password)
         }
     }
 
