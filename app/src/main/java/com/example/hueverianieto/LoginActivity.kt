@@ -8,16 +8,16 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.ProgressBar
-import android.widget.RelativeLayout
-import android.widget.ScrollView
-import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.components.HNModalDialog
+import com.example.hueverianieto.data.bbdd.UserData
 import com.example.hueverianieto.data.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
+import com.example.hueverianieto.utils.UserUtils
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 
@@ -89,13 +89,44 @@ class LoginActivity : BaseActivity() {
                     // Sign in success, update UI with the signed-in user's information
                     Log.d(TAG, "signInWithEmail:success")
                     val user = auth.currentUser
-                    // TODO: Comprobar que no sea un cliente
 
-                    // TODO: pasar el user a la siguiente pantalla
-                    val intent = Intent(this, MainActivity::class.java)
-                    startActivity(intent)
-                    closeProgressBar()
-                    finish()
+                    if (user != null) {
+                        val db = Firebase.firestore
+                        db.collection("user_info")
+                            .whereEqualTo("uid", user.uid)
+                            .whereEqualTo("deleted", false)
+                            .limit(1)
+                            .get()
+                            .addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                val documents = task.result
+                                if (!documents.isEmpty) {
+                                    // TODO: Control de nulos
+                                    val document = documents.documents[0].data as MutableMap<String, Any?>?
+                                    if (UserUtils.checkErrorMap(document) == null) {
+                                        val data = document as MutableMap<String, Any?>
+                                        val userData = UserUtils.mapToParcelable(data, documents.documents[0].id)
+                                        val intent = Intent(this, MainActivity::class.java)
+                                        intent.putExtra("current_user", userData)
+                                        startActivity(intent)
+                                        closeProgressBar()
+                                        finish()
+                                    } else {
+                                        // TODO: Popup - hay un error en el usuario
+                                    }
+                                }
+
+                            } else {
+                                Log.v("CONSULTA", "ERROR 1:")
+                            }
+                        }.addOnFailureListener {
+                            // TODO: Popup del error
+
+                            Log.v("CONSULTA", "ERROR 2: " + it.message)
+                        }
+                    } else {
+                        // TODO: Popup informando de un error
+                    }
                 } else {
                     closeProgressBar()
                     val errorMessage: String = if (task.exception != null) {
