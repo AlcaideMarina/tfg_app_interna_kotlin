@@ -9,7 +9,7 @@ data class UserData(
     var bankAccount: String,
     var city: String,
     var createdBy: String,
-    var creationDate: Timestamp,
+    var creationDatetime: Timestamp,
     var deleted: Boolean,
     var direction: String,
     var dni: String,
