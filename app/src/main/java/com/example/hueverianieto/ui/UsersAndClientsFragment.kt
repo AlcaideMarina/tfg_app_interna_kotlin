@@ -39,8 +39,6 @@ class UsersAndClientsFragment : BaseFragment() {
         this.binding.externalUsersButton.isEnabled = true
         this.binding.externalUsersButton.setText("Usuarios externos")
 
-        getClientsListData()
-
     }
 
     override fun setObservers() {
@@ -68,43 +66,6 @@ class UsersAndClientsFragment : BaseFragment() {
             .inflate(inflater, container, false)
         this.view = inflater.inflate(R.layout.fragment_users_and_clients, container, false)
         return this.binding.root
-    }
-
-    private fun getClientsListData() {
-        val db = Firebase.firestore
-        db.collection("client_info")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val documentList = task.result
-                    if (!documentList.isEmpty) {
-                        for (document in documentList) {
-                            Log.v("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta")
-                            val doc = document.data as MutableMap<String, Any?>?
-                            if (ClientUtils.checkErrorMap(doc) == null) {
-                                val data = doc as MutableMap<String, Any?>
-                                val clientData = ClientUtils.mapToParcelable(data, document.id)
-                                val componentClientModel = ComponentClientModel(
-                                    clientData.id,
-                                    clientData.company,
-                                    clientData.cif
-                                ) {
-                                    // TODO: Navegación
-                                }
-                                clientList.add(componentClientModel)
-                            }
-                        }
-                        // Aquí ya tenemos toda la lista con todos los clientes
-                    }
-
-                } else {
-                    // TODO
-                    Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 1")
-                }
-            }.addOnFailureListener {
-                // TODO
-                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 2")
-            }
     }
 
 }
