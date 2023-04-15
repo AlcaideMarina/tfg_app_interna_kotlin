@@ -90,7 +90,7 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
     }
 
     fun setModalDialogLeftButtonListener(listener: OnClickListener) {
-        // TODO: Set left button listener - add function parameter
+        this.binding.modalDialogLeftButton.setOnClickListener(listener)
     }
 
     fun setModalDialogRightButtonListener(listener: OnClickListener) {
