@@ -17,6 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:background="@color/colorPrimaryDark">
 
+        <!-- TODO: Cambiar imagen por fecha atrás -->
         <ImageView
             android:id="@+id/top_bar_menu_icon"
             android:layout_width="@dimen/size32"

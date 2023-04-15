@@ -14,6 +14,7 @@ class ComponentClientViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.binding.idText.text = "CIF: ${componentClientModel.id}"
         this.binding.actualOrderText.text = "Pedido actual: TODO"
         this.binding.nameText.text = componentClientModel.company
+        this.itemView.setOnClickListener(componentClientModel.onClickListener)
     }
 
 }

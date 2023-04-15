@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -73,12 +74,12 @@ class AllClientsFragment : BaseFragment() {
                                     clientData.company,
                                     clientData.cif
                                 ) {
-                                    // TODO: Navegación
+                                    navigateToClientDetails()
                                 }
                                 clientList.add(componentClientModel)
                             } else {
                                 // TODO
-                                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 1")
+                                Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 1")
                             }
                         }
                         initRecyclerView()
@@ -88,17 +89,22 @@ class AllClientsFragment : BaseFragment() {
 
                 } else {
                     // TODO
-                    Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 2")
+                    Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 2")
                 }
             }.addOnFailureListener {
                 // TODO
-                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 3")
+                Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 3")
             }
     }
 
     private fun initRecyclerView() {
         this.binding.clientsRecyclerView.layoutManager = LinearLayoutManager(context)
         this.binding.clientsRecyclerView.adapter = ComponentClientAdapter(clientList)
+    }
+
+    private fun navigateToClientDetails() {
+        // TODO: Navegación a pantalla de detalles
+        Log.v("NAVEGACIÓN", AllClientsFragment::class.java.simpleName + " - Aquí iría la navegación a la pantalla de detalle de cliente")
     }
 
 }
