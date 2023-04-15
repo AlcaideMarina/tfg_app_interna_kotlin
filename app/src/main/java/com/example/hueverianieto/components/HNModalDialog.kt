@@ -69,6 +69,10 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
         this.alertDialog.show()
     }
 
+    open fun cancel() {
+        this.alertDialog.cancel()
+    }
+
     fun setModalDialogTitle(title: String) {
         this.binding.modalDialogTitle.text = title
     }
