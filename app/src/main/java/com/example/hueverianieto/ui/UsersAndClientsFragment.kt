@@ -24,8 +24,6 @@ class UsersAndClientsFragment : BaseFragment() {
     private lateinit var binding: FragmentUsersAndClientsBinding
     private lateinit var view: View
 
-    private val clientList: MutableList<ComponentClientModel?> = mutableListOf()
-
     override fun injection() {
         // TODO: sin implementar
     }
