@@ -3,58 +3,58 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="@dimen/size24"
-    android:layout_marginHorizontal="@dimen/size32">
+    android:layout_marginHorizontal="@dimen/size32"
+    android:layout_marginVertical="@dimen/size24">
 
     <TextView
         android:id="@+id/clients_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/red_primary_color"
-        android:textStyle="bold"
         android:text="Clientes"
+        android:textColor="@color/red_primary_color"
         android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.example.hueverianieto.components.HNButton
         android:id="@+id/clients_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size16"
-        app:layout_constraintTop_toBottomOf="@id/clients_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/clients_text" />
 
     <TextView
         android:id="@+id/users_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/red_primary_color"
-        android:textStyle="bold"
-        android:text="Usuarios"
-        android:textSize="20sp"
         android:layout_marginTop="48dp"
-        app:layout_constraintTop_toBottomOf="@id/clients_button"
+        android:text="Usuarios"
+        android:textColor="@color/red_primary_color"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/clients_button" />
 
     <com.example.hueverianieto.components.HNButton
         android:id="@+id/internal_users_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size16"
-        app:layout_constraintTop_toBottomOf="@id/users_text"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/users_text" />
 
     <com.example.hueverianieto.components.HNButton
         android:id="@+id/external_users_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size16"
-        app:layout_constraintTop_toBottomOf="@id/internal_users_button"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@id/internal_users_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

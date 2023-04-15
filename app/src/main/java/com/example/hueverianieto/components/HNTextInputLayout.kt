@@ -3,6 +3,7 @@ package com.example.hueverianieto.components
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.drawable.Drawable
+import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.core.content.res.ResourcesCompat
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentTextInputLayoutBinding
+import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 
 open class HNTextInputLayout : TextInputLayout, BaseComponent {
@@ -110,6 +112,10 @@ open class HNTextInputLayout : TextInputLayout, BaseComponent {
         this.binding.textInputEditText.inputType = inputText
     }
 
+    fun setTransformationMethod(transformationMethod: TransformationMethod) {
+        this.binding.textInputEditText.transformationMethod = transformationMethod
+    }
+
     fun setMaxLines(maxLines: Int) {
         this.binding.textInputEditText.maxLines = maxLines
     }
@@ -118,6 +124,9 @@ open class HNTextInputLayout : TextInputLayout, BaseComponent {
         return this.binding.textInputEditText.text.toString()
     }
 
+    fun getTextInputEditTextComponent(): TextInputEditText {
+        return this.binding.textInputEditText;
+    }
 
     /// Context
     override fun getComponentContext(): Context {

@@ -8,7 +8,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
 
-class AllClientsFragment: BaseFragment() {
+class AllClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllClientsBinding
 

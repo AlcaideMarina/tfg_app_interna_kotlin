@@ -9,7 +9,8 @@ object Conversions {
         return TypedValue.applyDimension(
             TypedValue.COMPLEX_UNIT_DIP,
             px.toFloat(),
-            Resources.getSystem().displayMetrics).toInt()
+            Resources.getSystem().displayMetrics
+        ).toInt()
     }
 
 }
