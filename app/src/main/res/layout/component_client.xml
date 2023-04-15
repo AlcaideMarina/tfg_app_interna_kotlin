@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
-    android:padding="@dimen/size16">
+    android:padding="@dimen/size16"
+    android:layout_marginTop="@dimen/size8">
 
     <LinearLayout
         android:id="@+id/texts_linear_layout"
