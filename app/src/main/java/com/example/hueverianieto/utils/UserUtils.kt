@@ -26,7 +26,7 @@ object UserUtils {
         }
     }
 
-    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): Parcelable {
+    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): UserData {
         return UserData(
             data["bank_account"] as String,
             data["city"] as String,
