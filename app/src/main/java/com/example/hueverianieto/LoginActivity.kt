@@ -21,6 +21,7 @@ class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
+    private lateinit var alertDialog: HNModalDialog
 
     override fun injection() {
         // TODO: sin implementar
@@ -46,6 +47,8 @@ class LoginActivity : BaseActivity() {
         this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
         this.binding.loginButton.setTextBold(true)
         this.binding.loginButton.isEnabled = false
+
+        this.alertDialog = HNModalDialog(this)
 
     }
 
@@ -158,14 +161,15 @@ class LoginActivity : BaseActivity() {
     }
 
     private fun setPopUp(errorMessage: String) {
-        HNModalDialog(this).show(
+        // TODO: Close button
+        alertDialog.show(
             this,
             ModalDialogModel(
                 "Vaya... ha habido un error",
                 errorMessage,
                 "De acuerdo",
                 null,
-                {},
+                { alertDialog.cancel() },
                 null,
                 true
             )
