@@ -6,9 +6,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.example.hueverianieto.MainActivity
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.data.bbdd.ClientData
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
+import com.example.hueverianieto.utils.ClientUtils
+import com.example.hueverianieto.utils.UserUtils
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 class UsersAndClientsFragment : BaseFragment() {
 
@@ -20,12 +26,16 @@ class UsersAndClientsFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+
         this.binding.clientsButton.isEnabled = true
         this.binding.clientsButton.setText("Ver clientes")
         this.binding.internalUsersButton.isEnabled = true
         this.binding.internalUsersButton.setText("Usuarios internos")
         this.binding.externalUsersButton.isEnabled = true
         this.binding.externalUsersButton.setText("Usuarios externos")
+
+        getClientsListData()
+
     }
 
     override fun setObservers() {
@@ -53,6 +63,34 @@ class UsersAndClientsFragment : BaseFragment() {
             .inflate(inflater, container, false)
         this.view = inflater.inflate(R.layout.fragment_users_and_clients, container, false)
         return this.binding.root
+    }
+
+    private fun getClientsListData() {
+        val db = Firebase.firestore
+        db.collection("client_info")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val documentList = task.result
+                    if (!documentList.isEmpty) {
+                        for (document in documentList) {
+                            Log.v("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta")
+                            val doc = document.data as MutableMap<String, Any?>?
+                            if (ClientUtils.checkErrorMap(doc) == null) {
+                                val data = doc as MutableMap<String, Any?>
+                                val clientData = ClientUtils.mapToParcelable(data, document.id)
+                            }
+                        }
+                    }
+
+                } else {
+                    // TODO
+                    Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 1")
+                }
+            }.addOnFailureListener {
+                // TODO
+                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 2")
+            }
     }
 
 }
