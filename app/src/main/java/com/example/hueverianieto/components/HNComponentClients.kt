@@ -7,11 +7,11 @@ import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.databinding.ComponentClientsBinding
+import com.example.hueverianieto.databinding.ComponentClientBinding
 
 class HNComponentClients: ConstraintLayout, BaseComponent {
 
-    private var binding: ComponentClientsBinding = ComponentClientsBinding.inflate(
+    private var binding: ComponentClientBinding = ComponentClientBinding.inflate(
         LayoutInflater.from(this.context)
     )
 
