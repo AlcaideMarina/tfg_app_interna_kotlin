@@ -10,16 +10,21 @@ import com.example.hueverianieto.MainActivity
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.data.bbdd.ClientData
+import com.example.hueverianieto.data.components.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.UserUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
+// TODO: Investigar cómo hacer para que no se carguen todos los clientes de golpe, sino que sea según se vaya bajando
+
 class UsersAndClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUsersAndClientsBinding
     private lateinit var view: View
+
+    private val clientList: MutableList<ComponentClientModel?> = mutableListOf()
 
     override fun injection() {
         // TODO: sin implementar
@@ -79,8 +84,17 @@ class UsersAndClientsFragment : BaseFragment() {
                             if (ClientUtils.checkErrorMap(doc) == null) {
                                 val data = doc as MutableMap<String, Any?>
                                 val clientData = ClientUtils.mapToParcelable(data, document.id)
+                                val componentClientModel = ComponentClientModel(
+                                    clientData.id,
+                                    clientData.company,
+                                    clientData.cif
+                                ) {
+                                    // TODO: Navegación
+                                }
+                                clientList.add(componentClientModel)
                             }
                         }
+                        // Aquí ya tenemos toda la lista con todos los clientes
                     }
 
                 } else {
