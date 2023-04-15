@@ -5,7 +5,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.data.components.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
@@ -17,7 +19,7 @@ class AllClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllClientsBinding
 
-    private val clientList: MutableList<ComponentClientModel?> = mutableListOf()
+    private val clientList: MutableList<ComponentClientModel> = mutableListOf()
 
     override fun injection() {
         // TODO: sin implementar
@@ -54,6 +56,7 @@ class AllClientsFragment : BaseFragment() {
     private fun getClientsListData() {
         val db = Firebase.firestore
         db.collection("client_info")
+            .orderBy("id")
             .get()
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -73,19 +76,29 @@ class AllClientsFragment : BaseFragment() {
                                     // TODO: Navegación
                                 }
                                 clientList.add(componentClientModel)
+                            } else {
+                                // TODO
+                                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 1")
                             }
                         }
-                        // Aquí ya tenemos toda la lista con todos los clientes
+                        initRecyclerView()
+                    } else {
+                        // TODO: Mostrar un texto
                     }
 
                 } else {
                     // TODO
-                    Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 1")
+                    Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 2")
                 }
             }.addOnFailureListener {
                 // TODO
-                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 2")
+                Log.e("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Error 3")
             }
+    }
+
+    private fun initRecyclerView() {
+        this.binding.clientsRecyclerView.layoutManager = LinearLayoutManager(context)
+        this.binding.clientsRecyclerView.adapter = ComponentClientAdapter(clientList)
     }
 
 }
