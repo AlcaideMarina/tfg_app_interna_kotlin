@@ -3,4 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@layout/activity_login"/>
+    app:startDestination="@id/allClientsFragment">
+    <fragment
+        android:id="@+id/allClientsFragment"
+        android:name="com.example.hueverianieto.ui.AllClientsFragment"
+        android:label="AllClientsFragment" >
+        <action
+            android:id="@+id/action_allClientsFragment_to_newClientFragment"
+            app:destination="@id/newClientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newClientFragment"
+        android:name="com.example.hueverianieto.ui.NewClientFragment"
+        android:label="NewClientFragment" />
+</navigation>
