@@ -2,11 +2,17 @@ package com.example.hueverianieto.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Layout.Directions
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.NavGraph
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.data.components.ComponentClientModel
@@ -20,13 +26,14 @@ class AllClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllClientsBinding
 
-    private val clientList: MutableList<ComponentClientModel> = mutableListOf()
+    private var clientList: MutableList<ComponentClientModel> = mutableListOf()
 
     override fun injection() {
         // TODO: sin implementar
     }
 
     override fun configureUI() {
+
         this.binding.newUserButton.isEnabled = true
         this.binding.newUserButton.setText("Nuevos")
         this.binding.deletedUsersButton.isEnabled = true
@@ -41,7 +48,7 @@ class AllClientsFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // TODO: sin implementar
+       this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
     }
 
     override fun onCreateView(
@@ -49,6 +56,7 @@ class AllClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        (activity as AllClientsActivity).configNav("Ver clientes")
         this.binding = FragmentAllClientsBinding
             .inflate(inflater, container, false)
         return this.binding.root
@@ -60,6 +68,7 @@ class AllClientsFragment : BaseFragment() {
             .orderBy("id")
             .get()
             .addOnCompleteListener { task ->
+                clientList = mutableListOf()
                 if (task.isSuccessful) {
                     val documentList = task.result
                     if (!documentList.isEmpty) {
@@ -104,7 +113,15 @@ class AllClientsFragment : BaseFragment() {
 
     private fun navigateToClientDetails() {
         // TODO: Navegación a pantalla de detalles
-        Log.v("NAVEGACIÓN", AllClientsFragment::class.java.simpleName + " - Aquí iría la navegación a la pantalla de detalle de cliente")
+        Log.v("NAVEGACIÓN", AllClientsFragment::class.java.simpleName + " - Aquí iría la navegación ")
+    }
+
+    private fun navigateToNewClient() {
+        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_newClientFragment)
+            ?: Log.e(
+            AllClientsFragment::class.simpleName,
+            "Error en la navegación en newClientButton"
+        )
     }
 
 }
