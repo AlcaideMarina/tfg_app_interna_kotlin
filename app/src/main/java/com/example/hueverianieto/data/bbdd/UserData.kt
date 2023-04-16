@@ -1,15 +1,14 @@
 package com.example.hueverianieto.data.bbdd
 
 import android.os.Parcelable
-import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
+import java.sql.Timestamp
 
 @Parcelize
 data class UserData(
     var bankAccount: String,
     var city: String,
     var createdBy: String,
-    var creationDatetime: Timestamp,
     var deleted: Boolean,
     var direction: String,
     var dni: String,
