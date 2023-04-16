@@ -1,6 +1,7 @@
 package com.example.hueverianieto.data.components
 
 import android.text.method.TransformationMethod
+import com.example.hueverianieto.base.BaseModel
 
 class TextInputLayoutModel(
     var inputText: String? = null,
@@ -11,4 +12,4 @@ class TextInputLayoutModel(
     var iconMode: Int? = null,
     var transformationMethod: TransformationMethod? = null,
     var maxLines: Int? = null
-)
+) : BaseModel
