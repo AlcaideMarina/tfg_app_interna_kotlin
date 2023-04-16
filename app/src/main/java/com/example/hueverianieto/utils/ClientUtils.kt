@@ -1,7 +1,11 @@
 package com.example.hueverianieto.utils
 
 import android.os.Parcelable
+import android.text.InputType
 import com.example.hueverianieto.data.bbdd.ClientData
+import com.example.hueverianieto.data.components.RowTextInputLayoutModel
+import com.example.hueverianieto.data.components.TextInputLayoutModel
+import com.example.hueverianieto.data.components.TitleTextInputLayoutModel
 import com.google.firebase.Timestamp
 
 // TODO: Sacar constantes
@@ -45,6 +49,76 @@ object ClientUtils {
             data["user"] as String?,
             documentId
         )
+    }
+
+    fun newClientFields() : MutableList<TitleTextInputLayoutModel> {
+        val fieldList: MutableList<TitleTextInputLayoutModel> = mutableListOf()
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Empresa:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Dirección:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Ciudad:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Provincia:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Código postal:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "CIF:",
+                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Correo:",
+                listOf(RowTextInputLayoutModel(
+                    TextInputLayoutModel(
+                        inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT
+                    ))
+                )
+            )
+        )
+        fieldList.add(
+            TitleTextInputLayoutModel(
+                "Teléfono",
+                listOf(
+                    RowTextInputLayoutModel(
+                        TextInputLayoutModel(),
+                        TextInputLayoutModel(
+                            inputType = InputType.TYPE_CLASS_PHONE
+                        )
+                    ),
+                    RowTextInputLayoutModel(
+                        TextInputLayoutModel(),
+                        TextInputLayoutModel(
+                            inputType = InputType.TYPE_CLASS_PHONE
+                        )
+                    )
+                )
+            )
+        )
+        return fieldList
     }
 
 }
