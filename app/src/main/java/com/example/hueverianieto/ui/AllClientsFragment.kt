@@ -109,6 +109,7 @@ class AllClientsFragment : BaseFragment() {
     private fun initRecyclerView() {
         this.binding.clientsRecyclerView.layoutManager = LinearLayoutManager(context)
         this.binding.clientsRecyclerView.adapter = ComponentClientAdapter(clientList)
+        this.binding.clientsRecyclerView.setHasFixedSize(false)
     }
 
     private fun navigateToClientDetails() {
