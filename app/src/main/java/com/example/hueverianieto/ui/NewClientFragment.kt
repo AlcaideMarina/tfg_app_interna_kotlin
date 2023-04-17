@@ -122,53 +122,54 @@ class NewClientFragment : BaseFragment() {
                     ) {
                         alertDialog.cancel()
                     }
+                } else {
+                    // TODO: Sacar el id
+                    // TODO: Crear usuario en Auth
+                    // TODO: Guardar datos
+                    val userData = ClientData(
+                        cif,
+                        city,
+                        "TODO: created_by",
+                        company,
+                        false,
+                        direction,
+                        email,
+                        accountEmail,
+                        hasAccount,
+                        "00000",
+                        listOf(
+                            mapOf(namePhone1 to phone1.toLong()),
+                            mapOf(namePhone2 to phone2.toLong())
+                        ),
+                        postalCode.toLong(),
+                        province,
+                        null,
+                        accountUser,
+                        null
+                    )
+                    Firebase.firestore
+                        .collection("client_info")
+                        .add(ClientUtils.parcelableToMap(userData))
+                        .addOnSuccessListener {
+                            Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
+                            setPopUp(
+                                "Guardado correcto.",
+                                "El cliente ha sido guardado correctamente en la base de datos."
+                            ) {
+                                alertDialog.cancel()
+                                activity?.onBackPressedDispatcher?.onBackPressed()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
+                            setPopUp(
+                                "Ha ocurrido un error.",
+                                "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
+                            ){
+                                alertDialog.cancel()
+                            }
+                        }
                 }
-                // TODO: Sacar el id
-                // TODO: Crear usuario en Auth
-                // TODO: Guardar datos
-                val userData = ClientData(
-                    cif,
-                    city,
-                    "TODO: created_by",
-                    company,
-                    false,
-                    direction,
-                    email,
-                    accountEmail,
-                    hasAccount,
-                    "00000",
-                    listOf(
-                        mapOf(namePhone1 to phone1.toLong()),
-                        mapOf(namePhone2 to phone2.toLong())
-                    ),
-                    postalCode.toLong(),
-                    province,
-                    null,
-                    accountUser,
-                    null
-                )
-                Firebase.firestore
-                    .collection("client_info")
-                    .add(ClientUtils.parcelableToMap(userData))
-                    .addOnSuccessListener {
-                        Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
-                        setPopUp(
-                            "Guardado correcto.",
-                            "El cliente ha sido guardado correctamente en la base de datos."
-                        ) {
-                            alertDialog.cancel()
-                            activity?.onBackPressedDispatcher?.onBackPressed()
-                        }
-                    }
-                    .addOnFailureListener { e ->
-                        Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
-                        setPopUp(
-                            "Ha ocurrido un error.",
-                            "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
-                        ){
-                            alertDialog.cancel()
-                        }
-                    }
             } else {
                 setPopUp(
                     "Revise los datos",
