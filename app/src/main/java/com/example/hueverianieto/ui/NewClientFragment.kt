@@ -29,6 +29,21 @@ class NewClientFragment : BaseFragment() {
     private lateinit var binding: FragmentNewClientBinding
     private lateinit var alertDialog: HNModalDialog
 
+    private var company : String = ""
+    private var direction : String = ""
+    private var city : String = ""
+    private var province : String = ""
+    private var postalCode : String = ""
+    private var cif : String  = ""
+    private var email : String = ""
+    private var phone1 : String = ""
+    private  var namePhone1 : String = ""
+    private var phone2 : String = ""
+    private var namePhone2 : String = ""
+    private var hasAccount : Boolean = false
+    private var accountEmail : String? = ""
+    private var accountUser : String? = ""
+
     override fun injection() {
         // TODO: Sin implementar
     }
@@ -75,21 +90,6 @@ class NewClientFragment : BaseFragment() {
         }
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
         this.binding.saveButton.setOnClickListener {
-            // TODO: Checkear si vienen todos los datos
-            var company : String
-            var direction : String
-            var city : String
-            var province : String
-            var postalCode : String
-            var cif : String
-            var email : String
-            var phone1 : String
-            var namePhone1 : String
-            var phone2 : String
-            var namePhone2 : String
-            var hasAccount : Boolean
-            var accountEmail : String?
-            var accountUser : String?
 
             this.binding.let {
                 company = it.companyTextInputLayout.getText()
@@ -114,6 +114,9 @@ class NewClientFragment : BaseFragment() {
                 if (!hasAccount) {
                     accountEmail = null
                     accountUser = null
+                } else {
+                    // TODO: Crear usuario en Auth
+                    // TODO: Coger el uid
                 }
                 if (!Utils.isValidEmail(email) || (accountEmail != null && !Utils.isValidEmail(accountEmail))) {
                     setPopUp(
@@ -124,51 +127,7 @@ class NewClientFragment : BaseFragment() {
                     }
                 } else {
                     // TODO: Sacar el id
-                    // TODO: Crear usuario en Auth
-                    // TODO: Guardar datos
-                    val userData = ClientData(
-                        cif,
-                        city,
-                        "TODO: created_by",
-                        company,
-                        false,
-                        direction,
-                        email,
-                        accountEmail,
-                        hasAccount,
-                        "00000",
-                        listOf(
-                            mapOf(namePhone1 to phone1.toLong()),
-                            mapOf(namePhone2 to phone2.toLong())
-                        ),
-                        postalCode.toLong(),
-                        province,
-                        null,
-                        accountUser,
-                        null
-                    )
-                    Firebase.firestore
-                        .collection("client_info")
-                        .add(ClientUtils.parcelableToMap(userData))
-                        .addOnSuccessListener {
-                            Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
-                            setPopUp(
-                                "Guardado correcto.",
-                                "El cliente ha sido guardado correctamente en la base de datos."
-                            ) {
-                                alertDialog.cancel()
-                                activity?.onBackPressedDispatcher?.onBackPressed()
-                            }
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
-                            setPopUp(
-                                "Ha ocurrido un error.",
-                                "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
-                            ){
-                                alertDialog.cancel()
-                            }
-                        }
+                    saveUser()
                 }
             } else {
                 setPopUp(
@@ -219,5 +178,66 @@ class NewClientFragment : BaseFragment() {
                 true
             )
         )
+    }
+
+    private fun saveUser() : String {
+        var nextIdStr = "0000000000"
+        Firebase.firestore.collection("client_info")
+            .get()
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    val documents = task.result
+                    nextIdStr = documents.size().toString()
+                    while(nextIdStr.length < 10) {
+                        nextIdStr = "0$nextIdStr"
+                    }
+
+                    // TODO: Guardar datos
+                    val userData = ClientData(
+                        cif,
+                        city,
+                        "TODO: created_by",
+                        company,
+                        false,
+                        direction,
+                        email,
+                        accountEmail,
+                        hasAccount,
+                        nextIdStr,
+                        listOf(
+                            mapOf(namePhone1 to phone1.toLong()),
+                            mapOf(namePhone2 to phone2.toLong())
+                        ),
+                        postalCode.toLong(),
+                        province,
+                        null,
+                        accountUser,
+                        null
+                    )
+                    Firebase.firestore
+                        .collection("client_info")
+                        .add(ClientUtils.parcelableToMap(userData))
+                        .addOnSuccessListener {
+                            Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
+                            setPopUp(
+                                "Guardado correcto.",
+                                "El cliente ha sido guardado correctamente en la base de datos."
+                            ) {
+                                alertDialog.cancel()
+                                activity?.onBackPressedDispatcher?.onBackPressed()
+                            }
+                        }
+                        .addOnFailureListener { e ->
+                            Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
+                            setPopUp(
+                                "Ha ocurrido un error.",
+                                "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
+                            ){
+                                alertDialog.cancel()
+                            }
+                        }
+                }
+            }
+        return nextIdStr
     }
 }
