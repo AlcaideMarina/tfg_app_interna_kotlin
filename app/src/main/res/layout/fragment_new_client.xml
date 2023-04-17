@@ -322,7 +322,7 @@
                             android:layout_height="wrap_content"
                             android:text="Se le mandará a la dirección de correo un mensaje con la información para terminar de crear la cuenta"
                             android:layout_marginTop="@dimen/size16"
-                            android:layout_marginBottom="@dimen/size8"/>
+                            android:layout_marginBottom="4dp"/>
 
                     </LinearLayout>
 

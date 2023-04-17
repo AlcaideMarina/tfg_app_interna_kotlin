@@ -23,6 +23,7 @@ import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
+// TODO: Loading
 class NewClientFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewClientBinding
@@ -55,7 +56,8 @@ class NewClientFragment : BaseFragment() {
             it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
 
-            // TODO: Setear check e inhabilitar textos cuando proceda
+            it.emailAccountTextInputLayout.isEnabled = false
+            it.userAccountTextInputLayout.isEnabled = false
         }
 
     }
@@ -65,6 +67,12 @@ class NewClientFragment : BaseFragment() {
     }
 
     override fun setListeners() {
+        this.binding.checkedTextView.setOnClickListener {
+            this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
+            this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
+            this.binding.emailAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
+
+        }
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
         this.binding.saveButton.setOnClickListener {
             // TODO: Checkear si vienen todos los datos
