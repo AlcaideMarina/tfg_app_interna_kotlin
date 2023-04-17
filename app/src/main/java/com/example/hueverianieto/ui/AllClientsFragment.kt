@@ -48,7 +48,7 @@ class AllClientsFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-       this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
+        this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
     }
 
     override fun onCreateView(
@@ -72,6 +72,8 @@ class AllClientsFragment : BaseFragment() {
                 if (task.isSuccessful) {
                     val documentList = task.result
                     if (!documentList.isEmpty) {
+                        this.binding.clientsRecyclerView.visibility = View.VISIBLE
+                        this.binding.containerWaringNoClients.visibility = View.GONE
                         for (document in documentList) {
                             Log.v("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta")
                             val doc = document.data as MutableMap<String, Any?>?
@@ -93,7 +95,10 @@ class AllClientsFragment : BaseFragment() {
                         }
                         initRecyclerView()
                     } else {
-                        // TODO: Mostrar un texto
+                        this.binding.clientsRecyclerView.visibility = View.GONE
+                        this.binding.containerWaringNoClients.visibility = View.VISIBLE
+                        this.binding.containerWaringNoClients.setTitle("No hay clientes")
+                        this.binding.containerWaringNoClients.setText("No hay registro de clientes activos en la base de datos")
                     }
 
                 } else {
