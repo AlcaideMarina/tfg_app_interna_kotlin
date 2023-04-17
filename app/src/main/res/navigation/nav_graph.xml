@@ -11,9 +11,16 @@
         <action
             android:id="@+id/action_allClientsFragment_to_newClientFragment"
             app:destination="@id/newClientFragment" />
+        <action
+            android:id="@+id/action_allClientsFragment_to_deletedClientsFragment"
+            app:destination="@id/deletedClientsFragment" />
     </fragment>
     <fragment
         android:id="@+id/newClientFragment"
         android:name="com.example.hueverianieto.ui.NewClientFragment"
         android:label="NewClientFragment" />
+    <fragment
+        android:id="@+id/deletedClientsFragment"
+        android:name="com.example.hueverianieto.ui.DeletedClientsFragment"
+        android:label="DeletedClientsFragment" />
 </navigation>
