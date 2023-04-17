@@ -19,6 +19,7 @@ import com.example.hueverianieto.data.components.TextInputLayoutModel
 import com.example.hueverianieto.data.components.TitleTextInputLayoutModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
 import com.example.hueverianieto.utils.ClientUtils
+import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -67,51 +68,108 @@ class NewClientFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
         this.binding.saveButton.setOnClickListener {
             // TODO: Checkear si vienen todos los datos
-            // TODO: Checkear tipos
-            // TODO: Guardar datos
-            val userData = ClientData(
-                this.binding.cifTextInputLayout.getText(),
-                this.binding.cityTextInputLayout.getText(),
-                "TODO: created_by",
-                this.binding.companyTextInputLayout.getText(),
-                false,
-                this.binding.directionTextInputLayout.getText(),
-                this.binding.emailTextInputLayout.getText(),
-                null,
-                false,
-                "00000",
-                listOf(
-                    mapOf(this.binding.phoneTextInputLayoutName1.getText() to this.binding.phoneTextInputLayoutPhone1.getText().toLong()),
-                    mapOf(this.binding.phoneTextInputLayoutName2.getText() to this.binding.phoneTextInputLayoutPhone2.getText().toLong())
-                ),
-                this.binding.postalCodeTextInputLayout.getText().toLong(),
-                this.binding.provinceTextInputLayout.getText(),
-                null,
-                null,
-                null
-            )
-            Firebase.firestore
-                .collection("client_info")
-                .add(ClientUtils.parcelableToMap(userData))
-                .addOnSuccessListener {
-                    Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
+            var company : String
+            var direction : String
+            var city : String
+            var province : String
+            var postalCode : String
+            var cif : String
+            var email : String
+            var phone1 : String
+            var namePhone1 : String
+            var phone2 : String
+            var namePhone2 : String
+            var hasAccount : Boolean
+            var accountEmail : String?
+            var accountUser : String?
+
+            this.binding.let {
+                company = it.companyTextInputLayout.getText()
+                direction = it.directionTextInputLayout.getText()
+                city = it.cityTextInputLayout.getText()
+                province = it.provinceTextInputLayout.getText()
+                postalCode = it.postalCodeTextInputLayout.getText()
+                cif = it.cifTextInputLayout.getText()
+                email = it.emailTextInputLayout.getText()
+                phone1 = it.phoneTextInputLayoutPhone1.getText()
+                namePhone1 = it.phoneTextInputLayoutName1.getText()
+                phone2 = it.phoneTextInputLayoutPhone2.getText()
+                namePhone2 = it.phoneTextInputLayoutName1.getText()
+                hasAccount = it.checkedTextView.isChecked
+                accountEmail = it.emailAccountTextInputLayout.getText()
+                accountUser = it.userAccountTextInputLayout.getText()
+            }
+            if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
+                cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
+                namePhone2 != "") {
+                // TODO: Checkear tipos
+                if (!hasAccount) {
+                    accountEmail = null
+                    accountUser = null
+                }
+                if (!Utils.isValidEmail(email) || (accountEmail != null && !Utils.isValidEmail(accountEmail))) {
                     setPopUp(
-                        "Guardado correcto.",
-                        "El cliente ha sido guardado correctamente en la base de datos."
+                        "Email incorrecto",
+                        "Hemos detectado que el formato del email introducido no es correcto. Por favor, revise los datos."
                     ) {
                         alertDialog.cancel()
-                        activity?.onBackPressedDispatcher?.onBackPressed()
                     }
                 }
-                .addOnFailureListener { e ->
-                    Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
-                    setPopUp(
-                        "Ha ocurrido un error.",
-                        "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
-                    ){
-                        alertDialog.cancel()
+                // TODO: Sacar el id
+                // TODO: Crear usuario en Auth
+                // TODO: Guardar datos
+                val userData = ClientData(
+                    cif,
+                    city,
+                    "TODO: created_by",
+                    company,
+                    false,
+                    direction,
+                    email,
+                    accountEmail,
+                    hasAccount,
+                    "00000",
+                    listOf(
+                        mapOf(namePhone1 to phone1.toLong()),
+                        mapOf(namePhone2 to phone2.toLong())
+                    ),
+                    postalCode.toLong(),
+                    province,
+                    null,
+                    accountUser,
+                    null
+                )
+                Firebase.firestore
+                    .collection("client_info")
+                    .add(ClientUtils.parcelableToMap(userData))
+                    .addOnSuccessListener {
+                        Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
+                        setPopUp(
+                            "Guardado correcto.",
+                            "El cliente ha sido guardado correctamente en la base de datos."
+                        ) {
+                            alertDialog.cancel()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        }
                     }
+                    .addOnFailureListener { e ->
+                        Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
+                        setPopUp(
+                            "Ha ocurrido un error.",
+                            "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
+                        ){
+                            alertDialog.cancel()
+                        }
+                    }
+            } else {
+                setPopUp(
+                    "Revise los datos",
+                    "Hemos detectado que no se han rellenado todos los campos solicitados o que son incorrectos. Por favor, revise el formulario. Recuerde que los campos de usuario son obligatorios si el la casilla de verificación está marcada."
+                ) {
+                    alertDialog.cancel()
                 }
+            }
+
         }
     }
 
@@ -138,6 +196,7 @@ class NewClientFragment : BaseFragment() {
     }*/
 
     private fun setPopUp(title: String, message: String, listener: OnClickListener) {
+
         // TODO: Close button
         alertDialog.show(
             requireContext(),
@@ -146,10 +205,7 @@ class NewClientFragment : BaseFragment() {
                 message,
                 "De acuerdo",
                 null,
-                {
-                    alertDialog.cancel()
-                    activity?.onBackPressedDispatcher?.onBackPressed()
-                },
+                listener,
                 null,
                 true
             )
