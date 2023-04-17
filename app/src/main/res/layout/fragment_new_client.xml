@@ -18,7 +18,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="@dimen/size16"
+            android:padding="@dimen/size8"
             android:orientation="vertical">
 
             <!-- <androidx.recyclerview.widget.RecyclerView
@@ -190,7 +190,8 @@
                 android:id="@+id/phone_text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/size16">
 
                 <TextView
                     android:id="@+id/phone_text_view"
@@ -199,17 +200,55 @@
                     android:layout_height="match_parent"
                     android:text="Teléfono:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <LinearLayout
                     android:id="@+id/phone_text_input_layout_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/size16" />
+                    android:orientation="horizontal"
+                    android:baselineAligned="false" >
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                    <com.example.hueverianieto.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_name_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="16dp" />
+
+                    <com.example.hueverianieto.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_phone_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:id="@+id/phone_text_input_layout_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/size16" />
+                    android:orientation="horizontal"
+                    android:baselineAligned="false" >
+
+                    <com.example.hueverianieto.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_name_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="16dp" />
+
+                    <com.example.hueverianieto.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_phone_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="16dp" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -282,13 +321,12 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Se le mandará a la dirección de correo un mensaje con la información para terminar de crear la cuenta"
-                            android:layout_marginVertical="@dimen/size16"
-                            />
+                            android:layout_marginTop="@dimen/size16"
+                            android:layout_marginBottom="@dimen/size8"/>
 
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
 
                 <CheckedTextView
                     android:layout_width="wrap_content"
