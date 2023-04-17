@@ -70,20 +70,29 @@ class DeletedClientsFragment : BaseFragment() {
                             if (ClientUtils.checkErrorMap(doc) == null) {
                                 val data = doc as MutableMap<String, Any?>
                                 val clientData = ClientUtils.mapToParcelable(data, document.id)
-                                val componentClientModel = ComponentClientModel(
-                                    clientData.id,
-                                    clientData.company,
-                                    clientData.cif
-                                ) {
-                                    navigateToClientDetails()
+                                if (clientData.deleted) {
+                                    val componentClientModel = ComponentClientModel(
+                                        clientData.id,
+                                        clientData.company,
+                                        clientData.cif
+                                    ) {
+                                        navigateToClientDetails()
+                                    }
+                                    clientList.add(componentClientModel)
                                 }
-                                clientList.add(componentClientModel)
                             } else {
                                 // TODO
                                 Log.e("CONSULTA", DeletedClientsFragment::class.java.simpleName + " - Error 1")
                             }
                         }
-                        initRecyclerView()
+                        if (clientList.isEmpty()) {
+                            this.binding.clientsRecyclerView.visibility = View.GONE
+                            this.binding.containerWaringNoClients.visibility = View.VISIBLE
+                            this.binding.containerWaringNoClients.setTitle("No hay clientes eliminados")
+                            this.binding.containerWaringNoClients.setText("No hay registro de clientes eliminados en la base de datos")
+                        } else {
+                            initRecyclerView()
+                        }
                     } else {
                         this.binding.clientsRecyclerView.visibility = View.GONE
                         this.binding.containerWaringNoClients.visibility = View.VISIBLE
