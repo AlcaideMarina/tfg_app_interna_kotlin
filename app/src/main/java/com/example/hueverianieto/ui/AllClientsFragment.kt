@@ -49,6 +49,7 @@ class AllClientsFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
+        this.binding.deletedUsersButton.setOnClickListener { navigateDeleteClients() }
     }
 
     override fun onCreateView(
@@ -128,6 +129,14 @@ class AllClientsFragment : BaseFragment() {
             AllClientsFragment::class.simpleName,
             "Error en la navegación en newClientButton"
         )
+    }
+
+    private fun navigateDeleteClients() {
+        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment)
+            ?: Log.e(
+                AllClientsFragment::class.simpleName,
+                "Error en la navegación en newClientButton"
+            )
     }
 
 }
