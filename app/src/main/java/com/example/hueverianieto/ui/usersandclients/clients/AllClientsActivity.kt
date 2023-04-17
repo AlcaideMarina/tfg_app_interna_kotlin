@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui
+package com.example.hueverianieto.ui.usersandclients.clients
 
 import android.util.Log
 import android.view.View.OnClickListener

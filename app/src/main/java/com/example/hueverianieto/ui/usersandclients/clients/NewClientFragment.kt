@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui
+package com.example.hueverianieto.ui.usersandclients.clients
 
 import android.os.Bundle
 import android.text.InputType
@@ -7,16 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.HNModalDialog
-import com.example.hueverianieto.components.titletextinputlayout.TitleTextInputLayoutAdapter
-import com.example.hueverianieto.components.titletextinputlayout.TitleTextInputLayoutViewHolder
 import com.example.hueverianieto.data.bbdd.ClientData
-import com.example.hueverianieto.data.bbdd.UserData
 import com.example.hueverianieto.data.components.ModalDialogModel
-import com.example.hueverianieto.data.components.TextInputLayoutModel
-import com.example.hueverianieto.data.components.TitleTextInputLayoutModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils

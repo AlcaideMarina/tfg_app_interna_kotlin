@@ -1,18 +1,16 @@
-package com.example.hueverianieto.ui
+package com.example.hueverianieto.ui.usersandclients.clients
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.data.components.ComponentClientModel
-import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentDeletedClientsBinding
+import com.example.hueverianieto.ui.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

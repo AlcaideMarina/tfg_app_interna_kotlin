@@ -6,7 +6,7 @@
     app:startDestination="@id/allClientsFragment">
     <fragment
         android:id="@+id/allClientsFragment"
-        android:name="com.example.hueverianieto.ui.AllClientsFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.AllClientsFragment"
         android:label="AllClientsFragment" >
         <action
             android:id="@+id/action_allClientsFragment_to_newClientFragment"
@@ -17,10 +17,10 @@
     </fragment>
     <fragment
         android:id="@+id/newClientFragment"
-        android:name="com.example.hueverianieto.ui.NewClientFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.NewClientFragment"
         android:label="NewClientFragment" />
     <fragment
         android:id="@+id/deletedClientsFragment"
-        android:name="com.example.hueverianieto.ui.DeletedClientsFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.DeletedClientsFragment"
         android:label="DeletedClientsFragment" />
 </navigation>

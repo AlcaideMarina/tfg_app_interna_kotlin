@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.AllClientsActivity"
+            android:name=".ui.usersandclients.clients.AllClientsActivity"
             android:exported="true">
 
             <!-- Default Intent Filter -->

@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui
+package com.example.hueverianieto.ui.usersandclients
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,16 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.hueverianieto.MainActivity
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
-import com.example.hueverianieto.data.bbdd.ClientData
-import com.example.hueverianieto.data.components.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
-import com.example.hueverianieto.utils.ClientUtils
-import com.example.hueverianieto.utils.UserUtils
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.example.hueverianieto.ui.usersandclients.clients.AllClientsActivity
 
 // TODO: Investigar cómo hacer para que no se carguen todos los clientes de golpe, sino que sea según se vaya bajando
 
