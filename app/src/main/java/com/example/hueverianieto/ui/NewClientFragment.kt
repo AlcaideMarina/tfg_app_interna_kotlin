@@ -1,6 +1,7 @@
 package com.example.hueverianieto.ui
 
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,21 @@ class NewClientFragment : BaseFragment() {
             it.saveButton.setText("Guardar")
             it.cancelButton.isEnabled = true
             it.cancelButton.setText("Eliminar")
+
+            it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
+            it.cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
+            it.emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+            it.phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
+            it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
+            it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+
+            // TODO: Setear check e inhabilitar textos cuando proceda
         }
 
     }
@@ -51,6 +67,7 @@ class NewClientFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
         this.binding.saveButton.setOnClickListener {
             // TODO: Checkear si vienen todos los datos
+            // TODO: Checkear tipos
             // TODO: Guardar datos
             val userData = ClientData(
                 this.binding.cifTextInputLayout.getText(),
@@ -63,7 +80,10 @@ class NewClientFragment : BaseFragment() {
                 null,
                 false,
                 "00000",
-                listOf(mapOf("h" to 1), mapOf("h" to 2)),
+                listOf(
+                    mapOf(this.binding.phoneTextInputLayoutName1.getText() to this.binding.phoneTextInputLayoutPhone1.getText().toLong()),
+                    mapOf(this.binding.phoneTextInputLayoutName2.getText() to this.binding.phoneTextInputLayoutPhone2.getText().toLong())
+                ),
                 this.binding.postalCodeTextInputLayout.getText().toLong(),
                 this.binding.provinceTextInputLayout.getText(),
                 null,
