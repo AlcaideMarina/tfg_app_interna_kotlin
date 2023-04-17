@@ -46,7 +46,7 @@ class DeletedClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllClientsActivity).configNav("Ver clientes")
+        (activity as AllClientsActivity).configNav("Ver clientes eliminados")
         this.binding = FragmentDeletedClientsBinding
             .inflate(inflater, container, false)
         return this.binding.root

@@ -57,7 +57,7 @@ class AllClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllClientsActivity).configNav("Ver clientes eliminados")
+        (activity as AllClientsActivity).configNav("Ver clientes")
         this.binding = FragmentAllClientsBinding
             .inflate(inflater, container, false)
         return this.binding.root
