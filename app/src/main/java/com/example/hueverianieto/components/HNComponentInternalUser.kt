@@ -44,11 +44,11 @@ class HNComponentInternalUser : ConstraintLayout, BaseComponent {
         this.binding.nameText.text = nameText
     }
 
-    fun setCifText(cifText: String) {
+    fun setDniText(cifText: String) {
         this.binding.dniText.text = cifText
     }
 
-    fun setActualOrderText(actualOrderText: String) {
+    fun setJobRoleText(actualOrderText: String) {
         this.binding.jobRoleText.text = actualOrderText
     }
 

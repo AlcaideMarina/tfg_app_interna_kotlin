@@ -6,6 +6,6 @@
     <fragment
         android:id="@+id/allInternalUsersFragment"
         android:name="com.example.hueverianieto.ui.usersandclients.users.AllInternalUsersFragment"
-        android:label="Ver usuarios internos">
+        android:label="AllInternalUsersFragment">
     </fragment>
 </navigation>
