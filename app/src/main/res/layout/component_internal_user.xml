@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
+    android:padding="@dimen/size16"
+    android:layout_marginTop="@dimen/size8">
+
+    <LinearLayout
+        android:id="@+id/texts_linear_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/id_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="ID"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/name_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Nombre"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/cif_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="DNI: "
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/actual_order_text"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Pedido: "
+                android:textSize="16sp" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="24dp"
+            android:contentDescription="Ver usuario"
+            android:src="@drawable/ic_next_arrow" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
