@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="@dimen/size16"
     android:orientation="vertical">
 
@@ -342,6 +343,50 @@
                     android:background="@color/white_color"/>
 
             </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/orders_linear_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:layout_marginVertical="@dimen/size32"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Últimos pedidos:" />
+
+                <com.example.hueverianieto.components.HNComponentOrder
+                    android:id="@+id/order_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"/>
+
+                <com.example.hueverianieto.components.HNComponentOrder
+                    android:id="@+id/order_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+
+                <com.example.hueverianieto.components.HNComponentOrder
+                    android:id="@+id/order_3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"/>
+
+                <com.example.hueverianieto.components.HNButton
+                    android:id="@+id/see_all_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/buttons_container"
