@@ -12,7 +12,6 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.data.bbdd.ClientData
-import com.example.hueverianieto.data.bbdd.UserData
 import com.example.hueverianieto.data.components.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.ui.usersandclients.UsersAndClientsFragment
@@ -33,9 +32,9 @@ class AllClientsFragment : BaseFragment() {
     override fun configureUI() {
 
         this.binding.newUserButton.isEnabled = true
-        this.binding.newUserButton.setText("Nuevos")
+        this.binding.newUserButton.setText("Nuevo")
         this.binding.deletedUsersButton.isEnabled = true
-        this.binding.deletedUsersButton.setText("Usuarios eliminados")
+        this.binding.deletedUsersButton.setText("Clientes eliminados")
 
         getClientsListData()
 
