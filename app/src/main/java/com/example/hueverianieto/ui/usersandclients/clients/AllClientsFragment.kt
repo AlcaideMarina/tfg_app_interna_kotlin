@@ -5,11 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.componentclientadapter.ComponentClientAdapter
+import com.example.hueverianieto.data.bbdd.ClientData
+import com.example.hueverianieto.data.bbdd.UserData
 import com.example.hueverianieto.data.components.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.ui.usersandclients.UsersAndClientsFragment
@@ -82,7 +85,7 @@ class AllClientsFragment : BaseFragment() {
                                         clientData.company,
                                         clientData.cif
                                     ) {
-                                        navigateToClientDetails()
+                                        navigateToClientDetails(clientData)
                                     }
                                     clientList.add(componentClientModel)
                                 }
@@ -122,9 +125,12 @@ class AllClientsFragment : BaseFragment() {
         this.binding.clientsRecyclerView.setHasFixedSize(false)
     }
 
-    private fun navigateToClientDetails() {
-        // TODO: Navegación a pantalla de detalles
-        Log.v("NAVEGACIÓN", AllClientsFragment::class.java.simpleName + " - Aquí iría la navegación ")
+    private fun navigateToClientDetails(clientData: ClientData) {
+        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_clientDetailFragment, bundleOf("clientData" to clientData))
+            ?: Log.e(
+                AllClientsFragment::class.simpleName,
+                "Error en la navegación en newClientButton"
+            )
     }
 
     private fun navigateToNewClient() {
