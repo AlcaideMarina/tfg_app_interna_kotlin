@@ -5,7 +5,8 @@ import com.example.hueverianieto.base.BaseModel
 
 class ComponentInternalUserModel (
     var id: String,
-    var nameSurname: String,
+    var name: String,
+    var surname: String,
     var dni: String,
     var jobRole: String,
     var onClickListener: OnClickListener
