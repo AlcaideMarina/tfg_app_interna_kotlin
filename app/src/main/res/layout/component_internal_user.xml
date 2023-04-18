@@ -36,17 +36,17 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/cif_text"
+                android:id="@+id/dni_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="DNI: "
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/actual_order_text"
+                android:id="@+id/job_role_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Pedido: "
+                android:text="Puesto: "
                 android:textSize="16sp" />
 
         </LinearLayout>
