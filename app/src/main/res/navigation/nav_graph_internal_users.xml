@@ -7,5 +7,12 @@
         android:id="@+id/allInternalUsersFragment"
         android:name="com.example.hueverianieto.ui.usersandclients.users.AllInternalUsersFragment"
         android:label="AllInternalUsersFragment">
+        <action
+            android:id="@+id/action_allInternalUsersFragment_to_deletedInternalUsersFragment"
+            app:destination="@id/deletedInternalUsersFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/deletedInternalUsersFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.users.DeletedInternalUsersFragment"
+        android:label="DeletedInternalUsersFragment" />
 </navigation>
