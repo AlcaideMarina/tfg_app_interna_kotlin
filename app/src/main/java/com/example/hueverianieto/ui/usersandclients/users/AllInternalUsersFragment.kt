@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.data.components.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentAllInternalUsersBinding
 import com.example.hueverianieto.ui.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.ui.usersandclients.clients.AllClientsActivity
+import com.example.hueverianieto.ui.usersandclients.clients.AllClientsFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.UserUtils
 import com.google.firebase.firestore.ktx.firestore
@@ -41,7 +44,7 @@ class AllInternalUsersFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // TODO: Sin implementar
+        this.binding.deletedInternalUsersButton.setOnClickListener { navigateDeleteInternalUsers() }
     }
 
     override fun onCreateView(
@@ -119,6 +122,14 @@ class AllInternalUsersFragment : BaseFragment() {
         this.binding.internalUsersRecyclerView.layoutManager = LinearLayoutManager(context)
         this.binding.internalUsersRecyclerView.adapter = ComponentInternalUserAdapter(internalUserList)
         this.binding.internalUsersRecyclerView.setHasFixedSize(false)
+    }
+
+    private fun navigateDeleteInternalUsers() {
+        this.view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_deletedInternalUsersFragment)
+            ?: Log.e(
+                AllClientsFragment::class.simpleName,
+                "Error en la navegación en newClientButton"
+            )
     }
 
 }
