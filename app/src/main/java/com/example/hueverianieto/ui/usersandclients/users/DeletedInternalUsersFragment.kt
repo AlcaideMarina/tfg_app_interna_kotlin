@@ -88,7 +88,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
                         if (internalUserList.isEmpty()) {
                             this.binding.deletedInternalUsersRecyclerView.visibility = View.GONE
                             this.binding.containerWaringNoDeletedInternalUsers.visibility = View.VISIBLE
-                            this.binding.containerWaringNoDeletedInternalUsers.setText("No hay usuarios internos eliminados")
+                            this.binding.containerWaringNoDeletedInternalUsers.setTitle("No hay usuarios internos eliminados")
                             this.binding.containerWaringNoDeletedInternalUsers.setText("No hay registro de clientes eliminados en la base de datos")
                         } else {
                             initRecyclerView()
@@ -96,7 +96,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
                     } else {
                         this.binding.deletedInternalUsersRecyclerView.visibility = View.GONE
                         this.binding.containerWaringNoDeletedInternalUsers.visibility = View.VISIBLE
-                        this.binding.containerWaringNoDeletedInternalUsers.setText("No hay usuarios internos eliminados")
+                        this.binding.containerWaringNoDeletedInternalUsers.setTitle("No hay usuarios internos eliminados")
                         this.binding.containerWaringNoDeletedInternalUsers.setText("No hay registro de clientes eliminados en la base de datos")
                     }
                 } else {

@@ -52,7 +52,7 @@ class AllInternalUsersFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllInternalUsersActivity).configNav("Ver clientes")
+        (activity as AllInternalUsersActivity).configNav("Ver usuarios internos")
         this.binding = FragmentAllInternalUsersBinding
             .inflate(inflater, container, false)
         return this.binding.root
@@ -105,8 +105,8 @@ class AllInternalUsersFragment : BaseFragment() {
                     } else {
                         this.binding.internalUsersRecyclerView.visibility = View.GONE
                         this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
-                        this.binding.containerWaringNoInternalUsers.setTitle("No hay clientes")
-                        this.binding.containerWaringNoInternalUsers.setText("No hay registro de clientes activos en la base de datos")
+                        this.binding.containerWaringNoInternalUsers.setTitle("No hay usuarios internos")
+                        this.binding.containerWaringNoInternalUsers.setText("No hay registro de usuarios internos en la base de datos")
                     }
                 } else {
                     // TODO
