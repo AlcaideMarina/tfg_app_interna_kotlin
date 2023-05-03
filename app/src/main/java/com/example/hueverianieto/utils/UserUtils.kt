@@ -1,6 +1,6 @@
 package com.example.hueverianieto.utils
 
-import com.example.hueverianieto.data.UserData
+import com.example.hueverianieto.data.InternalUserData
 
 // TODO: Sacar constantes
 
@@ -24,8 +24,8 @@ object UserUtils {
         }
     }
 
-    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): UserData {
-        return UserData(
+    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): InternalUserData {
+        return InternalUserData(
             data["bank_account"] as String,
             data["city"] as String,
             data["created_by"] as String,
