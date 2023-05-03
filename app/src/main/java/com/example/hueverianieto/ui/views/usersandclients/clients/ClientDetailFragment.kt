@@ -46,7 +46,7 @@ class ClientDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args: com.example.hueverianieto.ui.usersandclients.clients.ClientDetailFragmentArgs by navArgs()
+        val args: ClientDetailFragmentArgs by navArgs()
         this.clientData = args.clientData
 
         this.binding.let {

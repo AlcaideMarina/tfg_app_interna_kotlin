@@ -359,19 +359,19 @@
                     android:layout_height="wrap_content"
                     android:text="Últimos pedidos:" />
 
-                <com.example.hueverianieto.ui.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"/>
 
-                <com.example.hueverianieto.ui.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"/>
 
-                <com.example.hueverianieto.ui.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

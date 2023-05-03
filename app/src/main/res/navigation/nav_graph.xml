@@ -32,6 +32,6 @@
         android:label="ClientDetailFragment" >
         <argument
             android:name="clientData"
-            app:argType="com.example.hueverianieto.data.bbdd.ClientData" />
+            app:argType="com.example.hueverianieto.data.ClientData" />
     </fragment>
 </navigation>

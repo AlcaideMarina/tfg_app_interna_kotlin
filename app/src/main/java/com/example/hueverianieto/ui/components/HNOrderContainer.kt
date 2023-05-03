@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.databinding.ComponentOrderBinding
+import com.example.hueverianieto.databinding.ComponentOrderContainerBinding
 
-class HNComponentOrder: ConstraintLayout, BaseComponent {
+class HNOrderContainer : ConstraintLayout, BaseComponent {
 
-    private var binding: ComponentOrderBinding = ComponentOrderBinding.inflate(
+    private var binding: ComponentOrderContainerBinding = ComponentOrderContainerBinding.inflate(
         LayoutInflater.from(this.context)
     )
 
@@ -29,19 +29,19 @@ class HNComponentOrder: ConstraintLayout, BaseComponent {
     }
 
     override fun getComponentContext(): Context {
-        TODO("Not yet implemented")
+        return context
     }
 
     override fun getView(): View {
-        TODO("Not yet implemented")
+        return this
     }
 
-    fun setDateText(idText: String) {
-        this.binding.dateText.text = idText
+    fun setDateText(dateText: String) {
+        this.binding.dateText.text = dateText
     }
 
-    fun setOrderDeliveryText(deliveryText: String) {
-        this.binding.orderDeliveryText.text = deliveryText
+    fun setOrderIdText(orderIdText: String) {
+        this.binding.orderIdText.text = orderIdText
     }
 
     fun setCompanyText(companyText: String) {
@@ -56,8 +56,8 @@ class HNComponentOrder: ConstraintLayout, BaseComponent {
         this.binding.priceText.text = priceText
     }
 
-    fun setDeliveryInfoText(deliveryInfoText: String) {
-        this.binding.deliveryInfoText.text = deliveryInfoText
+    fun setStatusDateText(statusDateText: String) {
+        this.binding.statusDateText.text = statusDateText
     }
 
 }

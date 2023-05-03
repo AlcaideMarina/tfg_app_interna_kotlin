@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.view.*
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
@@ -48,7 +49,7 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
         this.setModalDialogText(model.text)
         this.setModalDialogLeftButtonText(model.leftButtonText)
         this.setModalDialogLeftButtonListener(model.leftButtonListener)
-        if (model.rightButtonText != null && model.rightButtonListener != null) {
+        if (model.rightButtonText != null) {
             // TODO: Cuidado con !! - Intentar cambiarlo
             this.setModalDialogButtons(true)
             this.setModalDialogRightButtonText(model.rightButtonText!!)
@@ -73,32 +74,33 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
         this.alertDialog.cancel()
     }
 
-    fun setModalDialogTitle(title: String) {
+    private fun setModalDialogTitle(title: String) {
         this.binding.modalDialogTitle.text = title
     }
 
-    fun setModalDialogText(text: String) {
+    private fun setModalDialogText(text: String) {
         this.binding.modalDialogText.text = text
     }
 
-    fun setModalDialogLeftButtonText(text: String) {
+    private fun setModalDialogLeftButtonText(text: String) {
         this.binding.modalDialogLeftButton.text = text
     }
 
     fun setModalDialogRightButtonText(text: String) {
-        // TODO: Set right button text
+        this.binding.modalDialogRightButton.text = text
     }
 
-    fun setModalDialogButtons(isRightButton: Boolean) {
-        // TODO: Set right button and buttons divider visibility
+    private fun setModalDialogButtons(isRightButton: Boolean) {
+        this.binding.modalDialogRightButton.isVisible = isRightButton
+        this.binding.verticalDivider.isVisible = isRightButton
     }
 
-    fun setModalDialogLeftButtonListener(listener: OnClickListener) {
+    private fun setModalDialogLeftButtonListener(listener: OnClickListener) {
         this.binding.modalDialogLeftButton.setOnClickListener(listener)
     }
 
-    fun setModalDialogRightButtonListener(listener: OnClickListener) {
-        // TODO: Set right button listener - add function parameter
+    private fun setModalDialogRightButtonListener(listener: OnClickListener) {
+        this.binding.modalDialogRightButton.setOnClickListener(listener)
     }
 
 }
