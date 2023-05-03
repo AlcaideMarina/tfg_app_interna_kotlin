@@ -2,10 +2,9 @@ package com.example.hueverianieto.data
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
-import java.sql.Timestamp
 
 @Parcelize
-data class UserData(
+data class InternalUserData(
     var bankAccount: String,
     var city: String,
     var createdBy: String,
