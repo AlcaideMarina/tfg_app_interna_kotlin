@@ -5,7 +5,7 @@
     app:startDestination="@id/allClientsFragment">
     <fragment
         android:id="@+id/allClientsFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.clients.AllClientsFragment"
+        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsFragment"
         android:label="AllClientsFragment" >
         <action
             android:id="@+id/action_allClientsFragment_to_newClientFragment"
@@ -19,16 +19,16 @@
     </fragment>
     <fragment
         android:id="@+id/newClientFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.clients.NewClientFragment"
+        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.NewClientFragment"
         android:label="NewClientFragment" >
     </fragment>
     <fragment
         android:id="@+id/deletedClientsFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.clients.DeletedClientsFragment"
+        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.DeletedClientsFragment"
         android:label="DeletedClientsFragment" />
     <fragment
         android:id="@+id/clientDetailFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.clients.ClientDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.ClientDetailFragment"
         android:label="ClientDetailFragment" >
         <argument
             android:name="clientData"

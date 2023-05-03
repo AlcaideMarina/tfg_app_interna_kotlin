@@ -1,12 +1,10 @@
 package com.example.hueverianieto.utils
 
-import android.os.Parcelable
 import android.text.InputType
-import com.example.hueverianieto.data.bbdd.ClientData
-import com.example.hueverianieto.data.components.RowTextInputLayoutModel
-import com.example.hueverianieto.data.components.TextInputLayoutModel
-import com.example.hueverianieto.data.components.TitleTextInputLayoutModel
-import java.sql.Timestamp
+import com.example.hueverianieto.data.ClientData
+import com.example.hueverianieto.domain.model.textinputlayout.RowTextInputLayoutModel
+import com.example.hueverianieto.domain.model.textinputlayout.TextInputLayoutModel
+import com.example.hueverianieto.domain.model.textinputlayout.TitleTextInputLayoutModel
 
 // TODO: Sacar constantes
 

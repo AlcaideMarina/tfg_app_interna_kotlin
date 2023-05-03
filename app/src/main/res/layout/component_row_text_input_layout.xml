@@ -13,13 +13,13 @@
         app:layout_constraintTop_toTopOf="parent"
         android:baselineAligned="false" >
 
-        <com.example.hueverianieto.components.HNTextInputLayout
+        <com.example.hueverianieto.ui.components.HNTextInputLayout
             android:id="@+id/left_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
-        <com.example.hueverianieto.components.HNTextInputLayout
+        <com.example.hueverianieto.ui.components.HNTextInputLayout
             android:id="@+id/right_text_input_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

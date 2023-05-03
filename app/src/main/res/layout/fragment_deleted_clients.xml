@@ -20,7 +20,7 @@
             android:layout_marginTop="@dimen/size8"
             android:nestedScrollingEnabled="true"/>
 
-        <com.example.hueverianieto.components.HNWarningContainer
+        <com.example.hueverianieto.ui.components.HNWarningContainer
             android:id="@+id/container_waring_no_clients"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

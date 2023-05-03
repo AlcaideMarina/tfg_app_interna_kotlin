@@ -1,8 +1,6 @@
 package com.example.hueverianieto.utils
 
-import android.os.Parcelable
-import com.example.hueverianieto.data.bbdd.UserData
-import java.sql.Timestamp
+import com.example.hueverianieto.data.UserData
 
 // TODO: Sacar constantes
 
