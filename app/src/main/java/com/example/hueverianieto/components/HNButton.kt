@@ -33,7 +33,6 @@ open class HNButton : ConstraintLayout, BaseComponent {
             LayoutParams.MATCH_PARENT,
             resources.getDimensionPixelSize(R.dimen.size64)
         )
-        initAttrs(attrs)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -46,11 +45,6 @@ open class HNButton : ConstraintLayout, BaseComponent {
             LayoutParams.MATCH_PARENT,
             resources.getDimensionPixelSize(R.dimen.size64)
         )
-        initAttrs(attrs)
-    }
-
-    init {
-        // TODO: sin implementar
     }
 
     private fun initAttrs(attrs: AttributeSet?) {
