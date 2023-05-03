@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
-    android:padding="@dimen/size16">
+    android:padding="@dimen/size16"
+    android:layout_marginTop="@dimen/size8">
 
     <LinearLayout
         android:id="@+id/texts_linear_layout"
@@ -35,17 +36,17 @@
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/cif_text"
+                android:id="@+id/dni_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="CIF: "
+                android:text="DNI: "
                 android:textSize="16sp" />
 
             <TextView
-                android:id="@+id/actual_order_text"
+                android:id="@+id/job_role_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Pedido actual: "
+                android:text="Puesto: "
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -53,10 +54,9 @@
         <ImageView
             android:layout_width="16dp"
             android:layout_height="24dp"
-            android:contentDescription="Ver cliente"
+            android:contentDescription="Ver usuario"
             android:src="@drawable/ic_next_arrow" />
 
     </LinearLayout>
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,6 +7,7 @@ import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
@@ -20,62 +21,16 @@ open class HNTextInputLayout : TextInputLayout, BaseComponent {
     private var errorText: String? = null
 
     constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs) {
-        initAttrs(attrs)
-    }
-
+    constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) : super(
         context, attrs, defStyleAttr
-    ) {
-        initAttrs(attrs)
-    }
+    )
 
     private var binding: ComponentTextInputLayoutBinding = ComponentTextInputLayoutBinding.bind(
         LayoutInflater
             .from(context)
             .inflate(R.layout.component_text_input_layout, this, true)
     )
-
-    init {
-        // TODO: sin implementar - ¿la siguiente línea es necesaria?
-        //orientation = VERTICAL
-    }
-
-    private fun initAttrs(attrs: AttributeSet?) {
-        if (attrs == null) return
-        val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.HNTextInputLayout, 0, 0
-        )
-        this.initBoolAttrs(typedArray)
-        this.initStringAttrs(typedArray)
-        typedArray.recycle()
-    }
-
-    private fun initBoolAttrs(typedArray: TypedArray) {
-        this.isMandatory = typedArray.getBoolean(
-            R.styleable.HNTextInputLayout_isMandatory, false
-        )
-        this.isEnabled = typedArray.getBoolean(
-            R.styleable.HNTextInputLayout_isEnabled, true
-        )
-    }
-
-    private fun initStringAttrs(typedArray: TypedArray) {
-        typedArray.getString(R.styleable.HNTextInputLayout_errorText)?.let {
-            this.errorText = it
-            this.setErrorTextAndIcon(
-                it,
-                ResourcesCompat.getDrawable(
-                    typedArray.resources,
-                    R.drawable.ic_logo,
-                    null
-                )
-            )
-        }
-        typedArray.getString(R.styleable.HNTextInputLayout_hint)?.let {
-            setHintText(it)
-        }
-    }
 
     private fun setErrorTextAndIcon(text: String, drawable: Drawable?) {
         this.binding.errorText.text = text

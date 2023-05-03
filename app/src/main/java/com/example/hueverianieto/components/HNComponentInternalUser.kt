@@ -5,13 +5,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.databinding.ComponentClientBinding
+import com.example.hueverianieto.databinding.ComponentInternalUserBinding
 
-class HNComponentClients: ConstraintLayout, BaseComponent {
+class HNComponentInternalUser : ConstraintLayout, BaseComponent {
 
-    private var binding: ComponentClientBinding = ComponentClientBinding.inflate(
+    private var binding: ComponentInternalUserBinding = ComponentInternalUserBinding.inflate(
         LayoutInflater.from(this.context)
     )
 
@@ -26,7 +25,7 @@ class HNComponentClients: ConstraintLayout, BaseComponent {
     )
 
     init {
-        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        this.addView(this.binding.root)
     }
 
     override fun getComponentContext(): Context {
@@ -45,11 +44,12 @@ class HNComponentClients: ConstraintLayout, BaseComponent {
         this.binding.nameText.text = nameText
     }
 
-    fun setCifText(cifText: String) {
-        this.binding.cifText.text = cifText
+    fun setDniText(cifText: String) {
+        this.binding.dniText.text = cifText
     }
 
-    fun setActualOrderText(actualOrderText: String) {
-        this.binding.actualOrderText.text = actualOrderText
+    fun setJobRoleText(actualOrderText: String) {
+        this.binding.jobRoleText.text = actualOrderText
     }
+
 }

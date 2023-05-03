@@ -5,13 +5,12 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.databinding.ComponentClientBinding
+import com.example.hueverianieto.databinding.ComponentWarningContainerBinding
 
-class HNComponentClients: ConstraintLayout, BaseComponent {
+class HNWarningContainer : ConstraintLayout, BaseComponent {
 
-    private var binding: ComponentClientBinding = ComponentClientBinding.inflate(
+    private var binding: ComponentWarningContainerBinding = ComponentWarningContainerBinding.inflate(
         LayoutInflater.from(this.context)
     )
 
@@ -26,30 +25,22 @@ class HNComponentClients: ConstraintLayout, BaseComponent {
     )
 
     init {
-        this.addView(this.binding.root, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT)
+        this.addView(this.binding.root)
     }
 
     override fun getComponentContext(): Context {
-        return context
+        return this.context
     }
 
     override fun getView(): View {
         return this
     }
 
-    fun setIdText(idText: String) {
-        this.binding.idText.text = idText
+    fun setTitle(text: String) {
+        this.binding.containerTitle.text = text
     }
 
-    fun setNameText(nameText: String) {
-        this.binding.nameText.text = nameText
-    }
-
-    fun setCifText(cifText: String) {
-        this.binding.cifText.text = cifText
-    }
-
-    fun setActualOrderText(actualOrderText: String) {
-        this.binding.actualOrderText.text = actualOrderText
+    fun setText(text: String) {
+        this.binding.containerText.text = text
     }
 }

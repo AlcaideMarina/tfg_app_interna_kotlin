@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@layout/activity_login"/>
+    app:startDestination="@id/allClientsFragment">
+    <fragment
+        android:id="@+id/allClientsFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.AllClientsFragment"
+        android:label="AllClientsFragment" >
+        <action
+            android:id="@+id/action_allClientsFragment_to_newClientFragment"
+            app:destination="@id/newClientFragment" />
+        <action
+            android:id="@+id/action_allClientsFragment_to_deletedClientsFragment"
+            app:destination="@id/deletedClientsFragment" />
+        <action
+            android:id="@+id/action_allClientsFragment_to_clientDetailFragment"
+            app:destination="@id/clientDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/newClientFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.NewClientFragment"
+        android:label="NewClientFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/deletedClientsFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.DeletedClientsFragment"
+        android:label="DeletedClientsFragment" />
+    <fragment
+        android:id="@+id/clientDetailFragment"
+        android:name="com.example.hueverianieto.ui.usersandclients.clients.ClientDetailFragment"
+        android:label="ClientDetailFragment" >
+        <argument
+            android:name="clientData"
+            app:argType="com.example.hueverianieto.data.bbdd.ClientData" />
+    </fragment>
+</navigation>

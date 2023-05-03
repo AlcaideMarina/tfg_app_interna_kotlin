@@ -2,7 +2,7 @@ package com.example.hueverianieto.utils
 
 import android.os.Parcelable
 import com.example.hueverianieto.data.bbdd.UserData
-import com.google.firebase.Timestamp
+import java.sql.Timestamp
 
 // TODO: Sacar constantes
 
@@ -12,7 +12,7 @@ object UserUtils {
         return if (data == null) {
             "empty input map"
         } else if (data.containsKey("bank_account") && data.containsKey("city") &&
-            data.containsKey("created_by") && data.containsKey("creation_date") &&
+            data.containsKey("created_by") &&
             data.containsKey("deleted") && data.containsKey("direction") && data.containsKey("dni")
             && data.containsKey("email") && data.containsKey("id") && data.containsKey("name") &&
             data.containsKey("phone") && data.containsKey("position") &&
@@ -26,12 +26,11 @@ object UserUtils {
         }
     }
 
-    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): Parcelable {
+    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): UserData {
         return UserData(
             data["bank_account"] as String,
             data["city"] as String,
             data["created_by"] as String,
-            data["creation_date"] as Timestamp,
             data["deleted"] as Boolean,
             data["direction"] as String,
             data["dni"] as String,

@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui
+package com.example.hueverianieto.ui.usersandclients
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,10 @@ import android.view.ViewGroup
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
+import com.example.hueverianieto.ui.usersandclients.clients.AllClientsActivity
+import com.example.hueverianieto.ui.usersandclients.users.AllInternalUsersActivity
+
+// TODO: Investigar cómo hacer para que no se carguen todos los clientes de golpe, sino que sea según se vaya bajando
 
 class UsersAndClientsFragment : BaseFragment() {
 
@@ -20,12 +24,14 @@ class UsersAndClientsFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+
         this.binding.clientsButton.isEnabled = true
         this.binding.clientsButton.setText("Ver clientes")
         this.binding.internalUsersButton.isEnabled = true
         this.binding.internalUsersButton.setText("Usuarios internos")
         this.binding.externalUsersButton.isEnabled = true
         this.binding.externalUsersButton.setText("Usuarios externos")
+
     }
 
     override fun setObservers() {
@@ -40,6 +46,15 @@ class UsersAndClientsFragment : BaseFragment() {
             } ?: Log.e(
                 UsersAndClientsFragment::class.simpleName,
                 "Error en la navegación en clientsButton"
+            )
+        }
+        this.binding.internalUsersButton.setOnClickListener {
+            activity?.let {
+                val intent = Intent(it, AllInternalUsersActivity::class.java)
+                it.startActivity(intent)
+            } ?: Log.e(
+                UsersAndClientsFragment::class.simpleName,
+                "Error en la navegación en internalUsersButton"
             )
         }
     }

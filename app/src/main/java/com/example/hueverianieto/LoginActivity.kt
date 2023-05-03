@@ -83,7 +83,7 @@ class LoginActivity : BaseActivity() {
     private fun checkCredentials(email: String, password: String) {
 
         initProgressBar()
-
+// TODO: If email, password != ""
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
