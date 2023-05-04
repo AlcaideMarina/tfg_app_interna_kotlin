@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.home
+package com.example.hueverianieto.ui.views.main.fragments.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentHomeBinding
-import com.example.hueverianieto.ui.views.MainActivity
+import com.example.hueverianieto.ui.views.main.fragments.MainActivity
 
 class HomeFragment : BaseFragment() {
 

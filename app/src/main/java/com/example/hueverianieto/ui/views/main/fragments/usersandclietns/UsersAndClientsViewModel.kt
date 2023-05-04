@@ -1,9 +1,8 @@
-package com.example.hueverianieto.ui.views.usersandclients
+package com.example.hueverianieto.ui.views.main.fragments.usersandclietns
 
 import android.content.Context
 import android.content.Intent
 import androidx.lifecycle.ViewModel
-import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.HomeUseCase
 import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsActivity

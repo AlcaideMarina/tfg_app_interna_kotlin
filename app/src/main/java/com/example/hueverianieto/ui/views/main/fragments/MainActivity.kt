@@ -1,18 +1,15 @@
-package com.example.hueverianieto.ui.views
+package com.example.hueverianieto.ui.views.main.fragments
 
 import android.os.Build
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.fragment.app.Fragment
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityMainBinding
-import com.example.hueverianieto.ui.views.home.HomeFragment
-import com.example.hueverianieto.ui.views.usersandclients.UsersAndClientsFragment
+import com.example.hueverianieto.ui.views.main.fragments.home.HomeFragment
+import com.example.hueverianieto.ui.views.main.fragments.usersandclietns.UsersAndClientsFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
 

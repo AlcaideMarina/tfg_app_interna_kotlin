@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients
+package com.example.hueverianieto.ui.views.main.fragments.usersandclietns
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
-import com.example.hueverianieto.ui.views.MainActivity
+import com.example.hueverianieto.ui.views.main.fragments.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

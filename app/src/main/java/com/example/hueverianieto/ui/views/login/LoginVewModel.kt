@@ -15,7 +15,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.local.UserLoginData
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
 import com.example.hueverianieto.domain.usecases.LoginUseCase
-import com.example.hueverianieto.ui.views.MainActivity
+import com.example.hueverianieto.ui.views.main.fragments.MainActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
