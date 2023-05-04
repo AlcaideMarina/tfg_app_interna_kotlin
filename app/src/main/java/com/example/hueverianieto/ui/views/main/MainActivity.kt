@@ -8,7 +8,11 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityMainBinding
+import com.example.hueverianieto.ui.views.main.fragments.ecconomy.EcconomyFragment
+import com.example.hueverianieto.ui.views.main.fragments.farm.FarmFragment
 import com.example.hueverianieto.ui.views.main.fragments.home.HomeFragment
+import com.example.hueverianieto.ui.views.main.fragments.material.MaterialFragment
+import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryFragment
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.google.android.material.navigation.NavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -173,6 +177,14 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         when(item.itemId) {
             R.id.home_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment()).commit()
+            R.id.orders_bottom_menu -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, OrderAndDeliveryFragment()).commit()
+            R.id.economy_bottom_menu -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, EcconomyFragment()).commit()
+            R.id.farm_bottom_menu -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, FarmFragment()).commit()
+            R.id.material_bottom_menu -> supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, MaterialFragment()).commit()
             R.id.users_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, UsersAndClientsFragment()).commit()
         }
