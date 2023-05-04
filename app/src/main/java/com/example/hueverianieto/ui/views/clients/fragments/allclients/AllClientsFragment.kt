@@ -90,7 +90,12 @@ class AllClientsFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
-        this.binding.deletedUsersButton.setOnClickListener { navigateDeleteClients() }
+        this.binding.deletedUsersButton.setOnClickListener {
+            this.allClientsViewModel.navigateDeleteClients(
+                this.view,
+                bundleOf("currentUserData" to currentUserData)
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

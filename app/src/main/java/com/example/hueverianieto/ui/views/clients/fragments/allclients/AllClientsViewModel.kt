@@ -61,4 +61,12 @@ class AllClientsViewModel @Inject constructor(
             )
     }
 
+    fun navigateDeleteClients(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment, bundle)
+            ?: Log.e(
+                AllClientsFragment::class.simpleName,
+                "Error en la navegación a 'Clientes eliminados'"
+            )
+    }
+
 }

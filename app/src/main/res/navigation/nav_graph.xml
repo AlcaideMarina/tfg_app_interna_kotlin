@@ -25,7 +25,11 @@
     <fragment
         android:id="@+id/deletedClientsFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsFragment"
-        android:label="Clientes eliminados" />
+        android:label="Clientes eliminados" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
     <fragment
         android:id="@+id/clientDetailFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailFragment"
