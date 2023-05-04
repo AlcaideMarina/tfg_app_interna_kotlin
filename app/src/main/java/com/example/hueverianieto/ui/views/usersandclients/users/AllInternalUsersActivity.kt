@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui.views.usersandclients.users
 
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -38,6 +39,10 @@ class AllInternalUsersActivity : BaseActivity() {
 
     override fun setObservers() {
         //TODO("Not yet implemented")
+    }
+
+    fun getToolbar() : Toolbar {
+        return this.binding.topBar
     }
 
 }

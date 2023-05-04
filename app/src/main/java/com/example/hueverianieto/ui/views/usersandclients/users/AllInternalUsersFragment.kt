@@ -15,6 +15,7 @@ import com.example.hueverianieto.ui.components.componentinternaluseradapter.Comp
 import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentAllInternalUsersBinding
 import com.example.hueverianieto.ui.views.usersandclients.UsersAndClientsFragment
+import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsFragment
 import com.example.hueverianieto.utils.InternalUserUtils
 import com.google.firebase.firestore.ktx.firestore
@@ -53,6 +54,7 @@ class AllInternalUsersFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
+        (activity as AllInternalUsersActivity).getToolbar().setNavigationOnClickListener { (activity as BaseActivity).goBackFragments() }
         this.binding = FragmentAllInternalUsersBinding
             .inflate(inflater, container, false)
         return this.binding.root
