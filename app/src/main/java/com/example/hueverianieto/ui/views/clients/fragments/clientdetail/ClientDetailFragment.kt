@@ -114,13 +114,13 @@ class ClientDetailFragment : BaseFragment() {
             cifTextInputLayout.isEnabled = false
             emailTextInputLayout.setInputText(clientData.email)
             emailTextInputLayout.isEnabled = false
-            phoneTextInputLayoutPhone1.setInputText(phone1.key)
+            phoneTextInputLayoutPhone1.setInputText(phone1.value.toString())
             phoneTextInputLayoutPhone1.isEnabled = false
-            phoneTextInputLayoutName1.setInputText(phone1.value.toString())
+            phoneTextInputLayoutName1.setInputText(phone1.key)
             phoneTextInputLayoutName1.isEnabled = false
-            phoneTextInputLayoutPhone2.setInputText(phone2.key)
+            phoneTextInputLayoutPhone2.setInputText(phone2.value.toString())
             phoneTextInputLayoutPhone2.isEnabled = false
-            phoneTextInputLayoutName2.setInputText(phone2.value.toString())
+            phoneTextInputLayoutName2.setInputText(phone2.key)
             phoneTextInputLayoutName2.isEnabled = false
         }
     }
