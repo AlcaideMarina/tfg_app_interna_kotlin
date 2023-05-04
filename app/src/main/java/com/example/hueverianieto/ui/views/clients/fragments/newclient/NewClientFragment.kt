@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients.clients
+package com.example.hueverianieto.ui.views.clients.fragments.newclient
 
 import android.os.Bundle
 import android.text.InputType

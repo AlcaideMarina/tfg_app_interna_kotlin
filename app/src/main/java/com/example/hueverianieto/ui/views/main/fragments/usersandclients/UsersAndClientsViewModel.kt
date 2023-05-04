@@ -5,7 +5,7 @@ import android.content.Intent
 import androidx.lifecycle.ViewModel
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.HomeUseCase
-import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsActivity
+import com.example.hueverianieto.ui.views.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.usersandclients.users.AllInternalUsersActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject

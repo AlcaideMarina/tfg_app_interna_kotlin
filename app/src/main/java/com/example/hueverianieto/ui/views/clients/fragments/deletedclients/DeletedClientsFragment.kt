@@ -1,39 +1,30 @@
-package com.example.hueverianieto.ui.views.usersandclients.clients
+package com.example.hueverianieto.ui.views.clients.fragments.deletedclients
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
-import com.example.hueverianieto.databinding.FragmentAllClientsBinding
+import com.example.hueverianieto.databinding.FragmentDeletedClientsBinding
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
-class AllClientsFragment : BaseFragment() {
+class DeletedClientsFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentAllClientsBinding
+    private lateinit var binding: FragmentDeletedClientsBinding
 
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
 
 
     override fun configureUI() {
-
-        this.binding.newUserButton.isEnabled = true
-        this.binding.newUserButton.setText("Nuevo")
-        this.binding.deletedUsersButton.isEnabled = true
-        this.binding.deletedUsersButton.setText("Clientes eliminados")
 
         getClientsListData()
 
@@ -44,8 +35,7 @@ class AllClientsFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
-        this.binding.deletedUsersButton.setOnClickListener { navigateDeleteClients() }
+        //
     }
 
     override fun updateUI(state: BaseState) {
@@ -58,8 +48,7 @@ class AllClientsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
-        (activity as AllClientsActivity).getToolbar().setNavigationOnClickListener { (activity as BaseActivity).goBackFragments() }
-        this.binding = FragmentAllClientsBinding
+        this.binding = FragmentDeletedClientsBinding
             .inflate(inflater, container, false)
         return this.binding.root
     }
@@ -82,43 +71,43 @@ class AllClientsFragment : BaseFragment() {
                             if (ClientUtils.checkErrorMap(doc) == null) {
                                 val data = doc as MutableMap<String, Any?>
                                 val clientData = ClientUtils.mapToParcelable(data, document.id)
-                                if (!clientData.deleted) {
+                                if (clientData.deleted) {
                                     val componentClientModel = ComponentClientModel(
                                         clientData.id,
                                         clientData.company,
                                         clientData.cif
                                     ) {
-                                        navigateToClientDetails(clientData)
+                                        navigateToClientDetails()
                                     }
                                     clientList.add(componentClientModel)
                                 }
                             } else {
                                 // TODO
-                                Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 1")
+                                Log.e("CONSULTA", DeletedClientsFragment::class.java.simpleName + " - Error 1")
                             }
                         }
                         if (clientList.isEmpty()) {
                             this.binding.clientsRecyclerView.visibility = View.GONE
                             this.binding.containerWaringNoClients.visibility = View.VISIBLE
-                            this.binding.containerWaringNoClients.setTitle("No hay clientes")
-                            this.binding.containerWaringNoClients.setText("No hay registro de clientes activos en la base de datos")
+                            this.binding.containerWaringNoClients.setTitle("No hay clientes eliminados")
+                            this.binding.containerWaringNoClients.setText("No hay registro de clientes eliminados en la base de datos")
                         } else {
                             initRecyclerView()
                         }
                     } else {
                         this.binding.clientsRecyclerView.visibility = View.GONE
                         this.binding.containerWaringNoClients.visibility = View.VISIBLE
-                        this.binding.containerWaringNoClients.setTitle("No hay clientes")
-                        this.binding.containerWaringNoClients.setText("No hay registro de clientes activos en la base de datos")
+                        this.binding.containerWaringNoClients.setTitle("No hay clientes eliminados")
+                        this.binding.containerWaringNoClients.setText("No hay registro de clientes eliminados en la base de datos")
                     }
 
                 } else {
                     // TODO
-                    Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 2")
+                    Log.e("CONSULTA", DeletedClientsFragment::class.java.simpleName + " - Error 2")
                 }
             }.addOnFailureListener {
                 // TODO
-                Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 3")
+                Log.e("CONSULTA", DeletedClientsFragment::class.java.simpleName + " - Error 3")
             }
     }
 
@@ -128,28 +117,9 @@ class AllClientsFragment : BaseFragment() {
         this.binding.clientsRecyclerView.setHasFixedSize(false)
     }
 
-    private fun navigateToClientDetails(clientData: ClientData) {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_clientDetailFragment, bundleOf("clientData" to clientData))
-            ?: Log.e(
-                AllClientsFragment::class.simpleName,
-                "Error en la navegación en newClientButton"
-            )
-    }
-
-    private fun navigateToNewClient() {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_newClientFragment)
-            ?: Log.e(
-            AllClientsFragment::class.simpleName,
-            "Error en la navegación en newClientButton"
-        )
-    }
-
-    private fun navigateDeleteClients() {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment)
-            ?: Log.e(
-                AllClientsFragment::class.simpleName,
-                "Error en la navegación en newClientButton"
-            )
+    private fun navigateToClientDetails() {
+        // TODO: Navegación a pantalla de detalles
+        Log.v("NAVEGACIÓN", DeletedClientsFragment::class.java.simpleName + " - Aquí iría la navegación ")
     }
 
 }

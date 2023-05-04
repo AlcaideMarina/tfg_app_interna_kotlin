@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients.clients
+package com.example.hueverianieto.ui.views.clients.fragments.clientdetail
 
 import android.os.Bundle
 import android.text.InputType
@@ -14,6 +14,7 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
+import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
