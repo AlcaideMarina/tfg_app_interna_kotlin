@@ -46,28 +46,6 @@ open class HNButton : ConstraintLayout, BaseComponent {
         )
     }
 
-    private fun initAttrs(attrs: AttributeSet?) {
-        if (attrs == null) return
-        val typedArray = context.obtainStyledAttributes(
-            attrs, R.styleable.HNButton
-        )
-        this.initBoolAttrs(typedArray)
-        this.initStringAttrs(typedArray)
-        typedArray.recycle()
-    }
-
-    private fun initBoolAttrs(typedArray: TypedArray) {
-        typedArray.getBoolean(R.styleable.HNButton_isButtonEnabled, true).let {
-            this.isEnabled = false
-        }
-    }
-
-    private fun initStringAttrs(typedArray: TypedArray) {
-        typedArray.getString(R.styleable.HNButton_text)?.let {
-            this.setText(it)
-        }
-    }
-
     fun setText(text: String) {
         this.binding.buttonText.text = text
     }
