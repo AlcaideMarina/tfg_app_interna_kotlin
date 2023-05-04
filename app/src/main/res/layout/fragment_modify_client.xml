@@ -246,6 +246,7 @@
                     android:layout_height="wrap_content"
                     android:padding="15dp"
                     android:layout_marginTop="15dp"
+                    android:layout_marginBottom="16dp"
                     android:background="@drawable/bg_border_container_border_check_title" >
 
                     <LinearLayout
