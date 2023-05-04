@@ -47,7 +47,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment()).commit()
-        this.binding.navView.setCheckedItem(R.id.homeFragment)
+        this.binding.navView.setCheckedItem(R.id.home_bottom_menu)
 
         /*if (savedInstanceState == null) {
             navigationView.setCheckedItem(R.id.nav_home)

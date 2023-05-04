@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
@@ -51,7 +52,7 @@ class AllInternalUsersFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllInternalUsersActivity).configNav("Ver usuarios internos")
+        (activity as BaseActivity).configNav(true)
         this.binding = FragmentAllInternalUsersBinding
             .inflate(inflater, container, false)
         return this.binding.root

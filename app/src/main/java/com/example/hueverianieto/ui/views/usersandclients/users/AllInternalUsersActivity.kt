@@ -26,7 +26,6 @@ class AllInternalUsersActivity : BaseActivity() {
             setOf(R.id.allInternalUsersFragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        configNav("Ver usuarios internos")
     }
 
     override fun configureUI() {
@@ -39,12 +38,6 @@ class AllInternalUsersActivity : BaseActivity() {
 
     override fun setObservers() {
         //TODO("Not yet implemented")
-    }
-
-    fun configNav(title: String) {
-        this.binding.topBar.title = title
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        this.binding.topBar.setNavigationOnClickListener { this.onBackPressedDispatcher.onBackPressed() }
     }
 
 }

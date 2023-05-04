@@ -4,6 +4,7 @@ import android.util.Log
 import android.view.View.OnClickListener
 import android.widget.Toast
 import androidx.appcompat.content.res.AppCompatResources
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
@@ -31,8 +32,6 @@ class AllClientsActivity : BaseActivity() {
             setOf(R.id.allClientsFragment, R.id.newClientFragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        configNav("Ver clientes")
-
     }
 
     override fun configureUI() {
@@ -47,10 +46,8 @@ class AllClientsActivity : BaseActivity() {
         //TODO("Not yet implemented")
     }
 
-    fun configNav(title: String) {
-        this.binding.topBar.title = title
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        this.binding.topBar.setNavigationOnClickListener { this.onBackPressedDispatcher.onBackPressed() }
+    fun getToolbar() : Toolbar {
+        return this.binding.topBar
     }
 
 }

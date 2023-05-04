@@ -9,6 +9,7 @@ import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
@@ -56,7 +57,8 @@ class AllClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllClientsActivity).configNav("Ver clientes")
+        (activity as BaseActivity).configNav(true)
+        (activity as AllClientsActivity).getToolbar().setNavigationOnClickListener { (activity as BaseActivity).goBackFragments() }
         this.binding = FragmentAllClientsBinding
             .inflate(inflater, container, false)
         return this.binding.root

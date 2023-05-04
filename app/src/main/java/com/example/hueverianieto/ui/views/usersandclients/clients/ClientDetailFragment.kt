@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.HNModalDialog
@@ -165,7 +166,7 @@ class ClientDetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllClientsActivity).configNav("Nuevo cliente")
+        (activity as BaseActivity).configNav(true)
         this.binding = FragmentNewClientBinding.inflate(
             inflater, container, false
         )

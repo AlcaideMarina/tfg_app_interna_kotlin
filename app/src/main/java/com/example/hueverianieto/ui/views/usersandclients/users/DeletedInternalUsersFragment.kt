@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
@@ -45,7 +46,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllInternalUsersActivity).configNav("Ver usuarios eliminados")
+        (activity as BaseActivity).configNav(true)
         this.binding = FragmentDeletedInternalUsersBinding.inflate(
             inflater, container, false
         )
