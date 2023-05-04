@@ -13,6 +13,7 @@ import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.ui.views.home.MainActivity
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
@@ -30,6 +31,7 @@ class LoginActivity : BaseActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var alertDialog: HNModalDialog
     private val loginViewModel: LoginViewModel by viewModels()
+    private lateinit var internalUserData: InternalUserData
 
 
     override fun setUp() {
@@ -70,7 +72,19 @@ class LoginActivity : BaseActivity() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        loginViewModel.alertDialog.observe(this) { userLoginData ->
+            if (userLoginData.error) {
+                setPopUp("Ha habido un error en el login. Por favor, revisa los datos y comprueba que tengas acceso a internet.")
+            }
+        }
+        loginViewModel.internalUserData.observe(this) { userData ->
+            this.internalUserData = userData
+        }
+        loginViewModel.navigateToMainActivity.observe(this) { event ->
+            event.getControlled()?.let {
+                this.loginViewModel.navigateToMainActivity(this, internalUserData)
+            }
+        }
     }
 
     private val watcher: TextWatcher = object : TextWatcher {

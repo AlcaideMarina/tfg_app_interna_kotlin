@@ -37,8 +37,8 @@ class LoginViewModel @Inject constructor (
     private var _navigateToMainActivity = MutableLiveData<Event<Boolean>>()
     val navigateToMainActivity: LiveData<Event<Boolean>> get() = _navigateToMainActivity
 
-    private var _userData = MutableLiveData<InternalUserData>()
-    val userData: LiveData<InternalUserData> get() = _userData
+    private var _internalUserData = MutableLiveData<InternalUserData>()
+    val internalUserData: LiveData<InternalUserData> get() = _internalUserData
 
     private fun checkValidEmail(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
@@ -58,7 +58,7 @@ class LoginViewModel @Inject constructor (
                                 _viewState.value = LoginViewState(false)
                             }
                             else -> {
-                                _userData.value = internalUser!!
+                                _internalUserData.value = internalUser!!
                                 _navigateToMainActivity.value = Event(true)
                             }
                         }
