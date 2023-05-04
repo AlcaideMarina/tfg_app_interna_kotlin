@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.main.fragments.usersandclietns
+package com.example.hueverianieto.ui.views.main.fragments.usersandclients
 
 import android.os.Bundle
 import android.view.LayoutInflater

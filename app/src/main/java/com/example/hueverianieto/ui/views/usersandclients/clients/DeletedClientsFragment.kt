@@ -12,7 +12,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentDeletedClientsBinding
-import com.example.hueverianieto.ui.views.main.fragments.usersandclietns.UsersAndClientsFragment
+import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
