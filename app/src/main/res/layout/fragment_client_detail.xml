@@ -397,15 +397,6 @@
                                 app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
                         </LinearLayout>
 
-                        <com.example.hueverianieto.ui.components.HNButton
-                            android:id="@+id/delete_user_button"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
-
                     </LinearLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

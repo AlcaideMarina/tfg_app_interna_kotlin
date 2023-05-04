@@ -24,6 +24,7 @@ import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyC
 import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
+import com.example.hueverianieto.utils.Utils.setPopUp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,10 +62,14 @@ class ClientDetailFragment : BaseFragment() {
 
         setButtons()
         // TODO: Habrá que controlar la parte de pedidos -> ordersLinearLayout.visibility = View.VISIBLE -> por ahora lo dejo seteado para que se muestre siempre
+
+        clientDetailViewModel.getClientData(clientData.documentId!!)
+
         setFieldTexts()
         setUserInfo()
         
         lifecycleScope.launchWhenStarted {
+            clientDetailViewModel.getClientData(clientData.documentId!!)
             clientDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -72,7 +77,39 @@ class ClientDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        // Not necessary
+        this.clientDetailViewModel.alertDialog.observe(this) { alertErrorOkData ->
+            if (alertErrorOkData.finish) {
+                if (alertErrorOkData.customCode == 0) {
+                    setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertErrorOkData.title,
+                        alertErrorOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null)
+                } else {
+                    setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertErrorOkData.title,
+                        alertErrorOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null)
+                }
+            }
+        }
+        this.clientDetailViewModel.clientData.observe(this) {
+            this.clientData = it
+            setFieldTexts()
+            setUserInfo()
+        }
     }
 
     override fun setListeners() {
@@ -83,6 +120,22 @@ class ClientDetailFragment : BaseFragment() {
                     "clientData" to clientData,
                     "currentUserData" to currentUserData
                 )
+            )
+        }
+
+        this.binding.deleteClientButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso importante",
+                "Esta acción es irreversible. ¿Está seguro de que quiere eliminar el cliente?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    this.clientDetailViewModel.deleteClient(clientData.documentId!!)
+                }
             )
         }
     }
@@ -97,7 +150,6 @@ class ClientDetailFragment : BaseFragment() {
         with(this.binding) {
             modifyButton.setText("Modificar")
             deleteClientButton.setText("Eliminar cliente")
-            deleteUserButton.setText("Eliminar usuario")
             seeAllButton.setText("Ver todos")
         }
     }
@@ -139,7 +191,12 @@ class ClientDetailFragment : BaseFragment() {
             checkedTextView.isChecked = clientData.hasAccount
             userAccountTextInputLayout.isEnabled = false
             userAccountTextInputLayout.setText(clientData.user ?: "")
-            deleteUserButton.isVisible = clientData.hasAccount
         }
     }
+
+    override fun onResume() {
+        clientDetailViewModel.getClientData(clientData.documentId!!)
+        super.onResume()
+    }
+
 }
