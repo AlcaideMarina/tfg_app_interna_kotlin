@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
@@ -69,6 +70,15 @@ class ClientDetailFragment : BaseFragment() {
 
     override fun setListeners() {
         // TODO: Listeners de los botones - El resto es estático
+        this.binding.modifyButton.setOnClickListener {
+            this.clientDetailViewModel.navigateToModifyClient(
+                this.view,
+                bundleOf(
+                    "clientData" to clientData,
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
