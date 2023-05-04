@@ -27,6 +27,7 @@ class ModifyClientViewModel @Inject constructor(
 
     private var _alertDialog = MutableLiveData(AlertErrorOkData())
     val alertDialog: LiveData<AlertErrorOkData> get() = _alertDialog
+
     fun updateUser(clientData: ClientData) {
 
         _viewState.value = ModifyClientViewState(isLoading = true)
@@ -39,7 +40,8 @@ class ModifyClientViewModel @Inject constructor(
                             _viewState.value = ModifyClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertErrorOkData(
                                 "Error",
-                                "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres."
+                                "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres.",
+                                true
                             )
                         }
                         else -> {
@@ -52,7 +54,8 @@ class ModifyClientViewModel @Inject constructor(
                                     _viewState.value = ModifyClientViewState(isLoading = false, error = true)
                                     _alertDialog.value = AlertErrorOkData(
                                         "Error",
-                                        "Se ha producido un error al guardar los cambios. Revise los datos e inténtelo de nuevo."
+                                        "Se ha producido un error al guardar los cambios. Revise los datos e inténtelo de nuevo.",
+                                        true
                                     )
                                 }
                                 true -> {
@@ -62,7 +65,6 @@ class ModifyClientViewModel @Inject constructor(
                         }
                     }
                 } else {
-                    // TODO: Sólo hay que llamar al segundo servicio - cuidado con los datos que tienen que ver con hasaccount
                     val clientDataMap = ClientUtils.parcelableToMap(clientData)
                     when (val result =
                         updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
@@ -77,7 +79,8 @@ class ModifyClientViewModel @Inject constructor(
             } else {
                 _alertDialog.value = AlertErrorOkData(
                     "Correo no válido",
-                    "Por favor, revise el formato del correo."
+                    "Por favor, revise el formato del correo.",
+                    true
                 )
             }
 

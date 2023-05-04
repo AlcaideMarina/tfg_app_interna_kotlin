@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -14,6 +15,8 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifyClientBinding
+import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
+import com.example.hueverianieto.ui.components.HNModalDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -23,6 +26,7 @@ class ModifyClientFragment : BaseFragment() {
     private lateinit var clientData : ClientData
     private lateinit var currentUserData : InternalUserData
     private val modifyClientViewModel : ModifyClientViewModel by viewModels()
+    private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,23 +55,31 @@ class ModifyClientFragment : BaseFragment() {
         }
         setFieldTexts()
         setFieldTypes()
+
+        this.alertDialog = HNModalDialog(requireContext())
+
+        lifecycleScope.launchWhenStarted {
+            modifyClientViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.modifyClientViewModel.alertDialog.observe(this) { alertErrorOkData ->
+            if (alertErrorOkData.finish) setPopUp(alertErrorOkData.title, alertErrorOkData.text)
+        }
     }
 
     override fun setListeners() {
         this.binding.checkedTextView.setOnClickListener {
             this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
             this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
-            this.binding.emailAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
         }
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
-            // TODO: Actualizar clientdata
             var user : String? = null
             var hasAccount : Boolean = false
 
@@ -93,7 +105,6 @@ class ModifyClientFragment : BaseFragment() {
                 false,
                 this.binding.directionTextInputLayout.getText(),
                 this.binding.emailTextInputLayout.getText(),
-                this.binding.emailTextInputLayout.getText(),
                 hasAccount,
                 clientData.id,
                 listOf(
@@ -111,7 +122,11 @@ class ModifyClientFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyClientViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun setFieldTexts() {
@@ -133,7 +148,7 @@ class ModifyClientFragment : BaseFragment() {
             phoneTextInputLayoutName2.setInputText(phone2.key)
 
             userAccountTextInputLayout.isEnabled = checkedTextView.isChecked
-            emailAccountTextInputLayout.isEnabled = checkedTextView.isChecked
+            userAccountTextInputLayout.setInputText(clientData.user ?: "")
         }
     }
 
@@ -150,7 +165,22 @@ class ModifyClientFragment : BaseFragment() {
             phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
             phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
         }
+    }
+
+    private fun setPopUp(title: String, errorMessage: String) {
+        // TODO: Close button
+        alertDialog.show(
+            requireContext(),
+            ModalDialogModel(
+                title,
+                errorMessage,
+                "De acuerdo",
+                null,
+                { alertDialog.cancel() },
+                null,
+                true
+            )
+        )
     }
 }

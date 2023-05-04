@@ -278,28 +278,6 @@
 
                         </LinearLayout>
 
-                        <LinearLayout
-                            android:id="@+id/email_account_text_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical" >
-
-                            <TextView
-                                android:id="@+id/email_account_text_view"
-                                android:layout_marginTop="@dimen/size8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="Correo:" />
-
-                            <com.example.hueverianieto.ui.components.HNTextInputLayout
-                                android:id="@+id/email_account_text_input_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="@dimen/size16"
-                                android:layout_marginBottom="4dp"/>
-
-                        </LinearLayout>
-
                         <com.example.hueverianieto.ui.components.HNButton
                             android:id="@+id/delete_user_button"
                             android:layout_width="match_parent"

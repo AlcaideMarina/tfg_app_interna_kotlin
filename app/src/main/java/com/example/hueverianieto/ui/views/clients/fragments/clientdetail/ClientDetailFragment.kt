@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -19,6 +20,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentClientDetailBinding
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
+import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
@@ -61,7 +63,12 @@ class ClientDetailFragment : BaseFragment() {
         // TODO: Habrá que controlar la parte de pedidos -> ordersLinearLayout.visibility = View.VISIBLE -> por ahora lo dejo seteado para que se muestre siempre
         setFieldTexts()
         setUserInfo()
-
+        
+        lifecycleScope.launchWhenStarted {
+            clientDetailViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -69,7 +76,6 @@ class ClientDetailFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // TODO: Listeners de los botones - El resto es estático
         this.binding.modifyButton.setOnClickListener {
             this.clientDetailViewModel.navigateToModifyClient(
                 this.view,
@@ -82,7 +88,9 @@ class ClientDetailFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        // Not necessary
+        with(state as ClientDetailViewState) {
+            Log.v(ClientDetailFragment::class.java.simpleName, "Actualizando")
+        }
     }
 
     private fun setButtons() {
@@ -128,8 +136,7 @@ class ClientDetailFragment : BaseFragment() {
     private fun setUserInfo() {
         with(this.binding) {
             checkedTextView.isEnabled = false
-            emailAccountTextInputLayout.isEnabled = false
-            emailAccountTextInputLayout.setInputText(clientData.email ?: "")
+            checkedTextView.isChecked = clientData.hasAccount
             userAccountTextInputLayout.isEnabled = false
             userAccountTextInputLayout.setInputText(clientData.user ?: "")
             deleteUserButton.isVisible = clientData.hasAccount
