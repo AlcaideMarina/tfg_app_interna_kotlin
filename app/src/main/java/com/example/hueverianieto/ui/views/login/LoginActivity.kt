@@ -2,11 +2,13 @@ package com.example.hueverianieto.ui.views.login
 
 import android.content.Intent
 import android.text.Editable
+import android.text.InputType
 import android.text.TextWatcher
 import android.text.method.PasswordTransformationMethod
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
+import androidx.activity.viewModels
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.ui.views.home.MainActivity
 import com.example.hueverianieto.R
@@ -14,17 +16,20 @@ import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
-import com.example.hueverianieto.utils.UserUtils
+import com.example.hueverianieto.utils.InternalUserUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginActivity : BaseActivity() {
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var auth: FirebaseAuth
     private lateinit var alertDialog: HNModalDialog
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun injection() {
         // TODO: sin implementar
@@ -42,6 +47,7 @@ class LoginActivity : BaseActivity() {
         this.binding.userTextInputLayout.setHintText(
             resources.getString(R.string.user_text_input_layout)
         )
+        this.binding.userTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
         this.binding.passwordTextInputLayout.setHintText(
             resources.getString(R.string.password_text_input_layout)
         )
@@ -62,12 +68,7 @@ class LoginActivity : BaseActivity() {
         this.binding.passwordTextInputLayout.getTextInputEditTextComponent()
             .addTextChangedListener(watcher)
 
-        this.binding.loginButton.setOnClickListener {
-            it.hideSoftInput()
-            val email: String = this.binding.userTextInputLayout.getText()
-            val password: String = this.binding.passwordTextInputLayout.getText()
-            checkCredentials(email.trim(), password)
-        }
+        this.binding.loginButton.setOnClickListener { login(it) }
 
     }
 
@@ -81,6 +82,15 @@ class LoginActivity : BaseActivity() {
                         || this@LoginActivity.binding.passwordTextInputLayout.getText().isEmpty())
         }
 
+    }
+
+    private fun login(view: View) {
+        view.hideSoftInput()
+        val email: String = this.binding.userTextInputLayout.getText()
+        val password: String = this.binding.passwordTextInputLayout.getText()
+        if (email != "" && password != "") {
+            loginViewModel.login(email, password)
+        }
     }
 
     private fun checkCredentials(email: String, password: String) {
@@ -108,9 +118,9 @@ class LoginActivity : BaseActivity() {
                                         // TODO: Control de nulos
                                         val document =
                                             documents.documents[0].data as MutableMap<String, Any?>?
-                                        if (UserUtils.checkErrorMap(document) == null) {
+                                        if (InternalUserUtils.checkErrorMap(document) == null) {
                                             val data = document as MutableMap<String, Any?>
-                                            val userData = UserUtils.mapToParcelable(
+                                            val userData = InternalUserUtils.mapToParcelable(
                                                 data,
                                                 documents.documents[0].id
                                             )
@@ -120,7 +130,7 @@ class LoginActivity : BaseActivity() {
                                             closeProgressBar()
                                             finish()
                                         } else {
-                                            if (UserUtils.checkErrorMap(document) == "empty input map") {
+                                            if (InternalUserUtils.checkErrorMap(document) == "empty input map") {
                                                 setPopUp("Ha habido un problema con tu usuario. Por favor, vuelve a intentarlo, y si el error persiste, ponte en contacto con nosotros.")
                                             }
                                         }
