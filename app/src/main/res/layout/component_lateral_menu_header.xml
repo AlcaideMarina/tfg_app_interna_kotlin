@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/size24">
+    android:padding="@dimen/size24"
+    android:layout_marginTop="@dimen/size16">
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/profile_image"

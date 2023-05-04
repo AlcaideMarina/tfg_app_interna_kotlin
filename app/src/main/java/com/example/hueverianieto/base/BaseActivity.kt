@@ -73,4 +73,16 @@ abstract class BaseActivity : AppCompatActivity() {
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
     }
 
+    fun configNav(setHome: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(setHome)
+    }
+    
+    fun changeTopBarName(newName: String) {
+        supportActionBar?.title = newName
+    }
+
+    fun goBackFragments() {
+        onBackPressedDispatcher.onBackPressed()
+    }
+
 }
