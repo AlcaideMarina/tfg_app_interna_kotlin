@@ -12,6 +12,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
 import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
@@ -25,6 +26,7 @@ class ClientDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentNewClientBinding
     private lateinit var alertDialog: HNModalDialog
     private lateinit var clientData: ClientData
+    private lateinit var currentUserData: InternalUserData
 
     private var company : String = ""
     private var direction : String = ""
@@ -48,6 +50,7 @@ class ClientDetailFragment : BaseFragment() {
 
         val args: ClientDetailFragmentArgs by navArgs()
         this.clientData = args.clientData
+        this.currentUserData = args.currentUserData
 
         this.binding.let {
             it.saveButton.isEnabled = true
@@ -58,7 +61,6 @@ class ClientDetailFragment : BaseFragment() {
             it.ordersLinearLayout.visibility = View.VISIBLE
 
             var phones: MutableList<MutableMap<String, Long>> = mutableListOf(mutableMapOf())
-
 
             it.companyTextInputLayout.setInputText(this.clientData.company)
             it.directionTextInputLayout.setInputText(this.clientData.direction)

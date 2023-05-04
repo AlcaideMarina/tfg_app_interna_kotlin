@@ -31,7 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AllClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllClientsBinding
-    lateinit var currentUserData: InternalUserData
+    private lateinit var currentUserData: InternalUserData
 
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
     private val allClientsViewModel : AllClientsViewModel by viewModels()
