@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -13,6 +14,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
+import com.example.hueverianieto.databinding.FragmentClientDetailBinding
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
 import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
@@ -20,13 +22,17 @@ import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ClientDetailFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentNewClientBinding
+    private lateinit var binding: FragmentClientDetailBinding
     private lateinit var alertDialog: HNModalDialog
     private lateinit var clientData: ClientData
     private lateinit var currentUserData: InternalUserData
+    private val clientDetailViewModel : ClientDetailViewModel by viewModels()
+
 
     private var company : String = ""
     private var direction : String = ""
@@ -46,53 +52,37 @@ class ClientDetailFragment : BaseFragment() {
 
     override fun configureUI() {
 
-        this.alertDialog = HNModalDialog(requireContext())
+        // TODO: hay que controlar el botón de eliminar usuario
 
-        val args: ClientDetailFragmentArgs by navArgs()
-        this.clientData = args.clientData
-        this.currentUserData = args.currentUserData
+        with(this.binding) {
+            modifyButton.setText("Modificar")
+            deleteClientButton.setText("Eliminar cliente")
+            deleteUserButton.setText("Eliminar usuario")
+            seeAllButton.setText("Ver todos")
 
-        this.binding.let {
-            it.saveButton.isEnabled = true
-            it.saveButton.setText("Guardar")
-            it.cancelButton.isEnabled = true
-            it.cancelButton.setText("Eliminar")
+            ordersLinearLayout.visibility = View.VISIBLE
 
-            it.ordersLinearLayout.visibility = View.VISIBLE
+            val phone1 = clientData.phone[0].entries.iterator().next()
+            val phone2 = clientData.phone[1].entries.iterator().next()
 
-            var phones: MutableList<MutableMap<String, Long>> = mutableListOf(mutableMapOf())
+            companyTextInputLayout.setInputText(clientData.company)
+            directionTextInputLayout.setInputText(clientData.direction)
+            cityTextInputLayout.setInputText(clientData.city)
+            provinceTextInputLayout.setInputText(clientData.province)
+            postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
+            cifTextInputLayout.setInputText(clientData.cif)
+            emailTextInputLayout.setInputText(clientData.email)
+            phoneTextInputLayoutPhone1.setInputText(phone1.key)
+            phoneTextInputLayoutName1.setInputText(phone1.value.toString())
+            phoneTextInputLayoutPhone2.setInputText(phone2.key)
+            phoneTextInputLayoutName2.setInputText(phone2.value.toString())
+            emailAccountTextInputLayout.setInputText(clientData.company)
 
-            it.companyTextInputLayout.setInputText(this.clientData.company)
-            it.directionTextInputLayout.setInputText(this.clientData.direction)
-            it.cityTextInputLayout.setInputText(this.clientData.city)
-            it.provinceTextInputLayout.setInputText(this.clientData.province)
-            it.postalCodeTextInputLayout.setInputText(this.clientData.postalCode.toString())
-            it.cifTextInputLayout.setInputText(this.clientData.cif)
-            it.emailTextInputLayout.setInputText(this.clientData.email)
-            it.phoneTextInputLayoutPhone1.setInputText("this.clientData.phone[0].values.")
-            it.phoneTextInputLayoutName1.setInputText("this.clientData.phone[0].values.")
-            it.phoneTextInputLayoutPhone2.setInputText("this.clientData.phone[0].values.")
-            it.phoneTextInputLayoutName2.setInputText("this.clientData.phone[0].values.")
-            it.emailAccountTextInputLayout.setInputText(this.clientData.company)
+            emailAccountTextInputLayout.isEnabled = clientData.hasAccount
+            emailAccountTextInputLayout.setInputText(clientData.emailAccount ?: "")
+            userAccountTextInputLayout.isEnabled = clientData.hasAccount
+            userAccountTextInputLayout.setInputText(clientData.user ?: "")
 
-            it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
-            it.cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
-            it.emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-            it.phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-
-            it.emailAccountTextInputLayout.isEnabled = this.clientData.hasAccount
-            it.emailAccountTextInputLayout.setInputText(this.clientData.emailAccount ?: "")
-            it.userAccountTextInputLayout.isEnabled = this.clientData.hasAccount
-            it.userAccountTextInputLayout.setInputText(this.clientData.user ?: ""
-            )
         }
 
     }
@@ -107,57 +97,8 @@ class ClientDetailFragment : BaseFragment() {
             this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
             this.binding.emailAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
         }
-        this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
-        this.binding.saveButton.setOnClickListener {
-
-            this.binding.let {
-                company = it.companyTextInputLayout.getText()
-                direction = it.directionTextInputLayout.getText()
-                city = it.cityTextInputLayout.getText()
-                province = it.provinceTextInputLayout.getText()
-                postalCode = it.postalCodeTextInputLayout.getText()
-                cif = it.cifTextInputLayout.getText()
-                email = it.emailTextInputLayout.getText()
-                phone1 = it.phoneTextInputLayoutPhone1.getText()
-                namePhone1 = it.phoneTextInputLayoutName1.getText()
-                phone2 = it.phoneTextInputLayoutPhone2.getText()
-                namePhone2 = it.phoneTextInputLayoutName1.getText()
-                hasAccount = it.checkedTextView.isChecked
-                accountEmail = it.emailAccountTextInputLayout.getText()
-                accountUser = it.userAccountTextInputLayout.getText()
-            }
-            if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
-                cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
-                namePhone2 != "") {
-                // TODO: Checkear tipos
-                if (!hasAccount) {
-                    accountEmail = null
-                    accountUser = null
-                } else {
-                    // TODO: Crear usuario en Auth
-                    // TODO: Coger el uid
-                }
-                if (!Utils.isValidEmail(email) || (accountEmail != null && !Utils.isValidEmail(accountEmail))) {
-                    setPopUp(
-                        "Email incorrecto",
-                        "Hemos detectado que el formato del email introducido no es correcto. Por favor, revise los datos."
-                    ) {
-                        alertDialog.cancel()
-                    }
-                } else {
-                    // TODO: Sacar el id
-                    updateUser()
-                }
-            } else {
-                setPopUp(
-                    "Revise los datos",
-                    "Hemos detectado que no se han rellenado todos los campos solicitados o que son incorrectos. Por favor, revise el formulario. Recuerde que los campos de usuario son obligatorios si el la casilla de verificación está marcada."
-                ) {
-                    alertDialog.cancel()
-                }
-            }
-
-        }
+        this.binding.deleteClientButton.setOnClickListener {  }
+        this.binding.modifyButton.setOnClickListener {  }
     }
 
     override fun updateUI(state: BaseState) {
@@ -170,9 +111,17 @@ class ClientDetailFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
-        this.binding = FragmentNewClientBinding.inflate(
+
+        this.binding = FragmentClientDetailBinding.inflate(
             inflater, container, false
         )
+
+        val args: ClientDetailFragmentArgs by navArgs()
+        this.clientData = args.clientData
+        this.currentUserData = args.currentUserData
+
+        this.alertDialog = HNModalDialog(requireContext())
+
         return this.binding.root
     }
 
