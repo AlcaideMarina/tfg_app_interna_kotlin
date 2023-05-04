@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical">
+
+    <!-- TODO: Arreglar el final del scroll -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/size24"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/company_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/company_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Empresa:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/company_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/direction_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/direction_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Dirección:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/direction_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/city_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/city_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Ciudad:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/city_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/province_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/province_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Provincia:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/province_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/postal_code_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/postal_code_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Código postal:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/postal_code_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/cif_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/cif_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="CIF:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/cif_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/email_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/email_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Correo:" />
+
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
+                    android:id="@+id/email_text_input_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/phone_text_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginBottom="@dimen/size16">
+
+                <TextView
+                    android:id="@+id/phone_text_view"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="Teléfono:" />
+
+                <LinearLayout
+                    android:id="@+id/phone_text_input_layout_1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false" >
+
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_name_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="16dp" />
+
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_phone_1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="16dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/phone_text_input_layout_2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:baselineAligned="false" >
+
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_name_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="4dp"
+                        android:layout_marginStart="16dp" />
+
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
+                        android:id="@+id/phone_text_input_layout_phone_2"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="16dp" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/container_border_check_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/body_container_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="15dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@drawable/bg_border_container_border_check_title" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent">
+
+                        <LinearLayout
+                            android:id="@+id/user_account_text_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/user_account_text_view"
+                                android:layout_marginTop="@dimen/size8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Usuario:" />
+
+                            <com.example.hueverianieto.ui.components.HNTextInputLayout
+                                android:id="@+id/user_account_text_input_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/size16" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/email_account_text_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical" >
+
+                            <TextView
+                                android:id="@+id/email_account_text_view"
+                                android:layout_marginTop="@dimen/size8"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:text="Correo:" />
+
+                            <com.example.hueverianieto.ui.components.HNTextInputLayout
+                                android:id="@+id/email_account_text_input_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/size16" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Se le mandará a la dirección de correo un mensaje con la información para terminar de crear la cuenta"
+                            android:layout_marginTop="@dimen/size16"
+                            android:layout_marginBottom="4dp"/>
+
+                    </LinearLayout>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <CheckedTextView
+                    android:id="@+id/checked_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:gravity="center"
+                    android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+                    android:text="Crear usuario para la app cliente"
+                    android:layout_marginStart="@dimen/size24"
+                    android:paddingStart="12dp"
+                    android:paddingEnd="16dp"
+                    android:background="@color/white_color"/>
+
+            </RelativeLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/buttons_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size16">
+
+                <com.example.hueverianieto.ui.components.HNButton
+                    android:id="@+id/save_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <com.example.hueverianieto.ui.components.HNButton
+                    android:id="@+id/cancel_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/size8"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/save_button" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

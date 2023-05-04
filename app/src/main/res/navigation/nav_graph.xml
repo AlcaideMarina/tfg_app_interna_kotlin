@@ -36,5 +36,19 @@
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_clientDetailFragment_to_modifyClientFragment"
+            app:destination="@id/modifyClientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyClientFragment"
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientFragment"
+        android:label="ModifyClientFragment" >
+        <argument
+            android:name="clientData"
+            app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
