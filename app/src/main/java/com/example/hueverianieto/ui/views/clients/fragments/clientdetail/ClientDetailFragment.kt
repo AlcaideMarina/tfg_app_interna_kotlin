@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
@@ -52,38 +53,10 @@ class ClientDetailFragment : BaseFragment() {
 
     override fun configureUI() {
 
-        // TODO: hay que controlar el botón de eliminar usuario
-
-        with(this.binding) {
-            modifyButton.setText("Modificar")
-            deleteClientButton.setText("Eliminar cliente")
-            deleteUserButton.setText("Eliminar usuario")
-            seeAllButton.setText("Ver todos")
-
-            ordersLinearLayout.visibility = View.VISIBLE
-
-            val phone1 = clientData.phone[0].entries.iterator().next()
-            val phone2 = clientData.phone[1].entries.iterator().next()
-
-            companyTextInputLayout.setInputText(clientData.company)
-            directionTextInputLayout.setInputText(clientData.direction)
-            cityTextInputLayout.setInputText(clientData.city)
-            provinceTextInputLayout.setInputText(clientData.province)
-            postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
-            cifTextInputLayout.setInputText(clientData.cif)
-            emailTextInputLayout.setInputText(clientData.email)
-            phoneTextInputLayoutPhone1.setInputText(phone1.key)
-            phoneTextInputLayoutName1.setInputText(phone1.value.toString())
-            phoneTextInputLayoutPhone2.setInputText(phone2.key)
-            phoneTextInputLayoutName2.setInputText(phone2.value.toString())
-            emailAccountTextInputLayout.setInputText(clientData.company)
-
-            emailAccountTextInputLayout.isEnabled = clientData.hasAccount
-            emailAccountTextInputLayout.setInputText(clientData.emailAccount ?: "")
-            userAccountTextInputLayout.isEnabled = clientData.hasAccount
-            userAccountTextInputLayout.setInputText(clientData.user ?: "")
-
-        }
+        setButttons()
+        // TODO: Habrá que controlar la parte de pedidos -> ordersLinearLayout.visibility = View.VISIBLE -> por ahora lo dejo seteado para que se muestre siempre
+        setFieldTexts()
+        setUserInfo()
 
     }
 
@@ -204,5 +177,56 @@ class ClientDetailFragment : BaseFragment() {
 
 
         return "0000000000"
+    }
+
+    private fun setButttons() {
+        with(this.binding) {
+            modifyButton.setText("Modificar")
+            deleteClientButton.setText("Eliminar cliente")
+            deleteUserButton.setText("Eliminar usuario")
+            seeAllButton.setText("Ver todos")
+        }
+    }
+
+    private fun setFieldTexts() {
+
+        val phone1 = clientData.phone[0].entries.iterator().next()
+        val phone2 = clientData.phone[1].entries.iterator().next()
+
+        with(this.binding) {
+            companyTextInputLayout.setInputText(clientData.company)
+            companyTextInputLayout.isEnabled = false
+            directionTextInputLayout.setInputText(clientData.direction)
+            directionTextInputLayout.isEnabled = false
+            cityTextInputLayout.setInputText(clientData.city)
+            cityTextInputLayout.isEnabled = false
+            provinceTextInputLayout.setInputText(clientData.province)
+            provinceTextInputLayout.isEnabled = false
+            postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
+            postalCodeTextInputLayout.isEnabled = false
+            cifTextInputLayout.setInputText(clientData.cif)
+            cifTextInputLayout.isEnabled = false
+            emailTextInputLayout.setInputText(clientData.email)
+            emailTextInputLayout.isEnabled = false
+            phoneTextInputLayoutPhone1.setInputText(phone1.key)
+            phoneTextInputLayoutPhone1.isEnabled = false
+            phoneTextInputLayoutName1.setInputText(phone1.value.toString())
+            phoneTextInputLayoutName1.isEnabled = false
+            phoneTextInputLayoutPhone2.setInputText(phone2.key)
+            phoneTextInputLayoutPhone2.isEnabled = false
+            phoneTextInputLayoutName2.setInputText(phone2.value.toString())
+            phoneTextInputLayoutName2.isEnabled = false
+        }
+    }
+
+    private fun setUserInfo() {
+        with(this.binding) {
+            checkedTextView.isEnabled = false
+            emailAccountTextInputLayout.isEnabled = false
+            emailAccountTextInputLayout.setInputText(clientData.emailAccount ?: "")
+            userAccountTextInputLayout.isEnabled = false
+            userAccountTextInputLayout.setInputText(clientData.user ?: "")
+            deleteUserButton.isVisible = clientData.hasAccount
+        }
     }
 }
