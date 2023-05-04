@@ -13,7 +13,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifyClientBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ModifyClientFragment : BaseFragment() {
 
     private lateinit var binding : FragmentModifyClientBinding
