@@ -45,10 +45,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -76,10 +73,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -107,10 +101,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -138,10 +129,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -169,10 +157,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -200,10 +185,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="name"/>
 
             </LinearLayout>
 
@@ -231,10 +213,7 @@
                     android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size24"
                     android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="email"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                    android:autofillHints="email"/>
 
             </LinearLayout>
 
@@ -272,10 +251,7 @@
                         android:layout_marginTop="@dimen/size24"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="16dp"
-                        android:autofillHints="name"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                        android:autofillHints="name"/>
 
                     <EditText
                         android:id="@+id/phone_text_input_layout_phone_1"
@@ -290,10 +266,7 @@
                         android:layout_marginTop="@dimen/size24"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="16dp"
-                        android:autofillHints="phone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                        android:autofillHints="phone"/>
 
                 </LinearLayout>
 
@@ -317,10 +290,7 @@
                         android:layout_marginTop="@dimen/size24"
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="16dp"
-                        android:autofillHints="name"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                        android:autofillHints="name"/>
 
                     <EditText
                         android:id="@+id/phone_text_input_layout_phone_2"
@@ -335,10 +305,7 @@
                         android:layout_marginTop="@dimen/size24"
                         android:layout_marginStart="4dp"
                         android:layout_marginEnd="16dp"
-                        android:autofillHints="phone"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                        android:autofillHints="phone"/>
 
                 </LinearLayout>
 
@@ -391,10 +358,8 @@
                                 android:paddingHorizontal="12dp"
                                 android:layout_marginTop="@dimen/size24"
                                 android:layout_marginHorizontal="@dimen/size16"
-                                android:autofillHints="username"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toBottomOf="@id/logo_icon"/>
+                                android:autofillHints="username"/>
+
                         </LinearLayout>
 
                     </LinearLayout>
