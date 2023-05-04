@@ -10,7 +10,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
-import com.example.hueverianieto.ui.views.main.fragments.MainActivity
+import com.example.hueverianieto.ui.views.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

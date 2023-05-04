@@ -9,7 +9,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentHomeBinding
-import com.example.hueverianieto.ui.views.main.fragments.MainActivity
+import com.example.hueverianieto.ui.views.main.MainActivity
 
 class HomeFragment : BaseFragment() {
 

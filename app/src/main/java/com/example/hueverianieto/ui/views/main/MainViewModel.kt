@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.main.fragments
+package com.example.hueverianieto.ui.views.main
 
 import androidx.lifecycle.ViewModel
 import com.example.hueverianieto.domain.usecases.HomeUseCase

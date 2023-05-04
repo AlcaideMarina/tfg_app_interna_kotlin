@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.main.fragments
+package com.example.hueverianieto.ui.views.main
 
 import android.os.Build
 import android.view.MenuItem
