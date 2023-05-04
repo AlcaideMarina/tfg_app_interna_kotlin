@@ -5,14 +5,14 @@
     app:startDestination="@id/allInternalUsersFragment">
     <fragment
         android:id="@+id/allInternalUsersFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.users.AllInternalUsersFragment"
-        android:label="AllInternalUsersFragment">
+        android:name="com.example.hueverianieto.ui.views.usersandclients.users.AllInternalUsersFragment"
+        android:label="Ver usuarios internos">
         <action
             android:id="@+id/action_allInternalUsersFragment_to_deletedInternalUsersFragment"
             app:destination="@id/deletedInternalUsersFragment" />
     </fragment>
     <fragment
         android:id="@+id/deletedInternalUsersFragment"
-        android:name="com.example.hueverianieto.ui.usersandclients.users.DeletedInternalUsersFragment"
-        android:label="DeletedInternalUsersFragment" />
+        android:name="com.example.hueverianieto.ui.views.usersandclients.users.DeletedInternalUsersFragment"
+        android:label="Usuarios internos eliminados" />
 </navigation>

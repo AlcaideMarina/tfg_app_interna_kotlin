@@ -7,13 +7,13 @@ import androidx.fragment.app.Fragment
 
 abstract class BaseFragment : Fragment() {
 
-    protected abstract fun injection()
-
     protected abstract fun configureUI()
 
     protected abstract fun setObservers()
 
     protected abstract fun setListeners()
+
+    protected abstract fun updateUI(state: BaseState)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,6 @@ abstract class BaseFragment : Fragment() {
             this.javaClass.simpleName,
             "Calling fragment onCreate(): " + this.javaClass.simpleName
         )
-        injection()
         setObservers()
     }
 

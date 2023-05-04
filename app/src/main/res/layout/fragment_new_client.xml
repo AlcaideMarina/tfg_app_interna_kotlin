@@ -53,7 +53,7 @@
                     android:layout_height="match_parent"
                     android:text="Empresa:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/company_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -74,7 +74,7 @@
                     android:layout_height="match_parent"
                     android:text="Dirección:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/direction_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -95,7 +95,7 @@
                     android:layout_height="match_parent"
                     android:text="Ciudad:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/city_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -116,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:text="Provincia:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/province_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -137,7 +137,7 @@
                     android:layout_height="match_parent"
                     android:text="Código postal:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/postal_code_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -158,7 +158,7 @@
                     android:layout_height="match_parent"
                     android:text="CIF:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/cif_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -179,7 +179,7 @@
                     android:layout_height="match_parent"
                     android:text="Correo:" />
 
-                <com.example.hueverianieto.components.HNTextInputLayout
+                <com.example.hueverianieto.ui.components.HNTextInputLayout
                     android:id="@+id/email_text_input_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -208,7 +208,7 @@
                     android:orientation="horizontal"
                     android:baselineAligned="false" >
 
-                    <com.example.hueverianieto.components.HNTextInputLayout
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
                         android:id="@+id/phone_text_input_layout_name_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -216,7 +216,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="16dp" />
 
-                    <com.example.hueverianieto.components.HNTextInputLayout
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
                         android:id="@+id/phone_text_input_layout_phone_1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -233,7 +233,7 @@
                     android:orientation="horizontal"
                     android:baselineAligned="false" >
 
-                    <com.example.hueverianieto.components.HNTextInputLayout
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
                         android:id="@+id/phone_text_input_layout_name_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -241,7 +241,7 @@
                         android:layout_marginEnd="4dp"
                         android:layout_marginStart="16dp" />
 
-                    <com.example.hueverianieto.components.HNTextInputLayout
+                    <com.example.hueverianieto.ui.components.HNTextInputLayout
                         android:id="@+id/phone_text_input_layout_phone_2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -289,7 +289,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Usuario:" />
 
-                            <com.example.hueverianieto.components.HNTextInputLayout
+                            <com.example.hueverianieto.ui.components.HNTextInputLayout
                                 android:id="@+id/user_account_text_input_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -310,7 +310,7 @@
                                 android:layout_height="match_parent"
                                 android:text="Correo:" />
 
-                            <com.example.hueverianieto.components.HNTextInputLayout
+                            <com.example.hueverianieto.ui.components.HNTextInputLayout
                                 android:id="@+id/email_account_text_input_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -359,25 +359,25 @@
                     android:layout_height="wrap_content"
                     android:text="Últimos pedidos:" />
 
-                <com.example.hueverianieto.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"/>
 
-                <com.example.hueverianieto.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"/>
 
-                <com.example.hueverianieto.components.HNComponentOrder
+                <com.example.hueverianieto.ui.components.HNOrderContainer
                     android:id="@+id/order_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"/>
 
-                <com.example.hueverianieto.components.HNButton
+                <com.example.hueverianieto.ui.components.HNButton
                     android:id="@+id/see_all_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -394,7 +394,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="@dimen/size16">
 
-                <com.example.hueverianieto.components.HNButton
+                <com.example.hueverianieto.ui.components.HNButton
                     android:id="@+id/save_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,7 +402,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.example.hueverianieto.components.HNButton
+                <com.example.hueverianieto.ui.components.HNButton
                     android:id="@+id/cancel_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

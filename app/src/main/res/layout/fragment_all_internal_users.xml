@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size16">
 
-            <com.example.hueverianieto.components.HNButton
+            <com.example.hueverianieto.ui.components.HNButton
                 android:id="@+id/new_internal_user_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.hueverianieto.components.HNButton
+            <com.example.hueverianieto.ui.components.HNButton
                 android:id="@+id/deleted_internal_users_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
             android:layout_marginTop="@dimen/size8"
             android:nestedScrollingEnabled="false"/>
 
-        <com.example.hueverianieto.components.HNWarningContainer
+        <com.example.hueverianieto.ui.components.HNWarningContainer
             android:id="@+id/container_waring_no_internal_users"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

@@ -17,7 +17,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.example.hueverianieto.components.HNButton
+    <com.example.hueverianieto.ui.components.HNButton
         android:id="@+id/clients_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/clients_button" />
 
-    <com.example.hueverianieto.components.HNButton
+    <com.example.hueverianieto.ui.components.HNButton
         android:id="@+id/internal_users_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,7 +48,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/users_text" />
 
-    <com.example.hueverianieto.components.HNButton
+    <com.example.hueverianieto.ui.components.HNButton
         android:id="@+id/external_users_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

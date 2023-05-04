@@ -9,10 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 
 abstract class BaseActivity : AppCompatActivity() {
 
-    protected abstract fun injection()
     protected abstract fun setUp()
     protected abstract fun configureUI()
     protected abstract fun setListeners()
+
+    protected abstract fun setObservers()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +22,10 @@ abstract class BaseActivity : AppCompatActivity() {
             this.javaClass.simpleName,
             "Calling activity onCreate(): " + this.javaClass.simpleName
         )
-        injection()
         setUp()
         configureUI()
         setListeners()
+        setObservers()
     }
 
     override fun onStart() {
@@ -70,6 +71,18 @@ abstract class BaseActivity : AppCompatActivity() {
         val inputMethodManager =
             context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(windowToken, 0)
+    }
+
+    fun configNav(setHome: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(setHome)
+    }
+    
+    fun changeTopBarName(newName: String) {
+        supportActionBar?.title = newName
+    }
+
+    fun goBackFragments() {
+        onBackPressedDispatcher.onBackPressed()
     }
 
 }
