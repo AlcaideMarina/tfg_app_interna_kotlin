@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
 import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.usersandclients.users.AllInternalUsersActivity
@@ -19,9 +20,6 @@ class UsersAndClientsFragment : BaseFragment() {
     private lateinit var binding: FragmentUsersAndClientsBinding
     private lateinit var view: View
 
-    override fun injection() {
-        // TODO: sin implementar
-    }
 
     override fun configureUI() {
 
@@ -57,6 +55,10 @@ class UsersAndClientsFragment : BaseFragment() {
                 "Error en la navegación en internalUsersButton"
             )
         }
+    }
+
+    override fun updateUI(state: BaseState) {
+        //TODO("Not yet implemented")
     }
 
     override fun onCreateView(

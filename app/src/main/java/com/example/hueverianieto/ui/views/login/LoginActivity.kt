@@ -31,9 +31,6 @@ class LoginActivity : BaseActivity() {
     private lateinit var alertDialog: HNModalDialog
     private val loginViewModel: LoginViewModel by viewModels()
 
-    override fun injection() {
-        // TODO: sin implementar
-    }
 
     override fun setUp() {
         this.binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -70,6 +67,10 @@ class LoginActivity : BaseActivity() {
 
         this.binding.loginButton.setOnClickListener { login(it) }
 
+    }
+
+    override fun setObservers() {
+        //TODO("Not yet implemented")
     }
 
     private val watcher: TextWatcher = object : TextWatcher {

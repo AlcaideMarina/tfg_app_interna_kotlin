@@ -9,6 +9,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentAllInternalUsersBinding
@@ -24,9 +25,6 @@ class AllInternalUsersFragment : BaseFragment() {
 
     private var internalUserList: MutableList<ComponentInternalUserModel> = mutableListOf()
 
-    override fun injection() {
-        // TODO: Sin implementar
-    }
 
     override fun configureUI() {
         this.binding.newInternalUserButton.isEnabled = true
@@ -42,6 +40,10 @@ class AllInternalUsersFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.deletedInternalUsersButton.setOnClickListener { navigateDeleteInternalUsers() }
+    }
+
+    override fun updateUI(state: BaseState) {
+        //TODO("Not yet implemented")
     }
 
     override fun onCreateView(

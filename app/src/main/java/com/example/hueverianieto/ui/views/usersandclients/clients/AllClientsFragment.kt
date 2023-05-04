@@ -10,6 +10,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
@@ -25,9 +26,6 @@ class AllClientsFragment : BaseFragment() {
 
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
 
-    override fun injection() {
-        // TODO: sin implementar
-    }
 
     override fun configureUI() {
 
@@ -47,6 +45,10 @@ class AllClientsFragment : BaseFragment() {
     override fun setListeners() {
         this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
         this.binding.deletedUsersButton.setOnClickListener { navigateDeleteClients() }
+    }
+
+    override fun updateUI(state: BaseState) {
+        //TODO("Not yet implemented")
     }
 
     override fun onCreateView(

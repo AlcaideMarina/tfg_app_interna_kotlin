@@ -15,9 +15,6 @@ class AllInternalUsersActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun injection() {
-        // TODO: Sin implementar
-    }
 
     override fun setUp() {
         this.binding = ActivityAllInternalUsersBinding.inflate(layoutInflater)
@@ -38,6 +35,10 @@ class AllInternalUsersActivity : BaseActivity() {
 
     override fun setListeners() {
         // TODO: Sin implementar
+    }
+
+    override fun setObservers() {
+        //TODO("Not yet implemented")
     }
 
     fun configNav(title: String) {

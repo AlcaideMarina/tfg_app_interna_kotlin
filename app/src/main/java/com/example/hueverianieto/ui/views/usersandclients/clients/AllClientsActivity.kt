@@ -19,9 +19,6 @@ class AllClientsActivity : BaseActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun injection() {
-        // TODO: Sin implementar
-    }
 
     override fun setUp() {
         this.binding = ActivityAllClientsBinding.inflate(layoutInflater)
@@ -44,6 +41,10 @@ class AllClientsActivity : BaseActivity() {
 
     override fun setListeners() {
         // No listeners are necessary for this activity
+    }
+
+    override fun setObservers() {
+        //TODO("Not yet implemented")
     }
 
     fun configNav(title: String) {

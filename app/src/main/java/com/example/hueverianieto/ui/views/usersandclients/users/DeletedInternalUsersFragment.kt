@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentDeletedInternalUsersBinding
@@ -22,9 +23,6 @@ class DeletedInternalUsersFragment : BaseFragment() {
 
     private var internalUserList: MutableList<ComponentInternalUserModel> = mutableListOf()
 
-    override fun injection() {
-        // TODO: Sin implementar
-    }
 
     override fun configureUI() {
         getInternalUsers()
@@ -36,6 +34,10 @@ class DeletedInternalUsersFragment : BaseFragment() {
 
     override fun setListeners() {
         // TODO: Sin implementar
+    }
+
+    override fun updateUI(state: BaseState) {
+        TODO("Not yet implemented")
     }
 
     override fun onCreateView(

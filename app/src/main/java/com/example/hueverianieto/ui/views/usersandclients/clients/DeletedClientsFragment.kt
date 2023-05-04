@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentDeletedClientsBinding
@@ -21,9 +22,6 @@ class DeletedClientsFragment : BaseFragment() {
 
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
 
-    override fun injection() {
-        // TODO: sin implementar
-    }
 
     override fun configureUI() {
 
@@ -37,6 +35,10 @@ class DeletedClientsFragment : BaseFragment() {
 
     override fun setListeners() {
         //
+    }
+
+    override fun updateUI(state: BaseState) {
+        //TODO("Not yet implemented")
     }
 
     override fun onCreateView(

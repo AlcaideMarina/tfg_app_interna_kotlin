@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import com.example.hueverianieto.base.BaseFragment
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
@@ -38,9 +39,6 @@ class NewClientFragment : BaseFragment() {
     private var accountEmail : String? = ""
     private var accountUser : String? = ""
 
-    override fun injection() {
-        // TODO: Sin implementar
-    }
 
     override fun configureUI() {
 
@@ -133,6 +131,10 @@ class NewClientFragment : BaseFragment() {
             }
 
         }
+    }
+
+    override fun updateUI(state: BaseState) {
+        //TODO("Not yet implemented")
     }
 
     override fun onCreateView(
