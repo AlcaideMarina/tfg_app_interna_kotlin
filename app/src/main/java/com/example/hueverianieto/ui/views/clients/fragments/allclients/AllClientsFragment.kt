@@ -68,7 +68,7 @@ class AllClientsFragment : BaseFragment() {
                                 this.view,
                                 bundleOf(
                                     "clientData" to clientData,
-                                    "currentUser" to currentUserData
+                                    "currentUserData" to currentUserData
                                 )
                             )
                         }
