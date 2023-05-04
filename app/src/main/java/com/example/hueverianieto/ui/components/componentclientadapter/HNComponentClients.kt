@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.components
+package com.example.hueverianieto.ui.components.componentclientadapter
 
 import android.content.Context
 import android.util.AttributeSet

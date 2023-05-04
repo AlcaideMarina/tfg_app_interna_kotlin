@@ -8,5 +8,5 @@ data class ComponentClientModel(
     var company: String,
     var cif: String,
     // TODO: orders
-    var onClickListener: View.OnClickListener
+    var onClickListener: View.OnClickListener?
 ) : BaseModel
