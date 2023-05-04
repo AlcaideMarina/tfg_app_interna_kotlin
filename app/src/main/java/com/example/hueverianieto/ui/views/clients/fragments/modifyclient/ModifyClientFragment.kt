@@ -88,31 +88,31 @@ class ModifyClientFragment : BaseFragment() {
                 user = clientData.user!!
             } else {
                 if (this.binding.checkedTextView.isChecked) {
-                    if (this.binding.userAccountTextInputLayout.getText() == "") {
+                    if (this.binding.userAccountTextInputLayout.text.toString() == "") {
                         // TODO: popup con error
                     } else {
                         hasAccount = true
-                        user = this.binding.userAccountTextInputLayout.getText()
+                        user = this.binding.userAccountTextInputLayout.text.toString()
                     }
                 }
             }
 
             var newClientData = ClientData(
-                this.binding.cifTextInputLayout.getText(),
-                this.binding.cityTextInputLayout.getText(),
+                this.binding.cifTextInputLayout.text.toString(),
+                this.binding.cityTextInputLayout.text.toString(),
                 clientData.createdBy,
-                this.binding.companyTextInputLayout.getText(),
+                this.binding.companyTextInputLayout.text.toString(),
                 false,
-                this.binding.directionTextInputLayout.getText(),
-                this.binding.emailTextInputLayout.getText(),
+                this.binding.directionTextInputLayout.text.toString(),
+                this.binding.emailTextInputLayout.text.toString(),
                 hasAccount,
                 clientData.id,
                 listOf(
-                    mapOf(this.binding.phoneTextInputLayoutName1.getText() to this.binding.phoneTextInputLayoutPhone1.getText().toLong()),
-                    mapOf(this.binding.phoneTextInputLayoutName2.getText() to this.binding.phoneTextInputLayoutPhone2.getText().toLong()),
+                    mapOf(this.binding.phoneTextInputLayoutName1.text.toString() to this.binding.phoneTextInputLayoutPhone1.text.toString().toLong()),
+                    mapOf(this.binding.phoneTextInputLayoutName2.text.toString() to this.binding.phoneTextInputLayoutPhone2.text.toString().toLong()),
                 ),
-                this.binding.postalCodeTextInputLayout.getText().toLong(),
-                this.binding.provinceTextInputLayout.getText(),
+                this.binding.postalCodeTextInputLayout.text.toString().toLong(),
+                this.binding.provinceTextInputLayout.text.toString(),
                 null,
                 user,
                 clientData.documentId,
@@ -135,25 +135,25 @@ class ModifyClientFragment : BaseFragment() {
         val phone2 = clientData.phone[1].entries.iterator().next()
 
         with(this.binding) {
-            companyTextInputLayout.setInputText(clientData.company)
-            directionTextInputLayout.setInputText(clientData.direction)
-            cityTextInputLayout.setInputText(clientData.city)
-            provinceTextInputLayout.setInputText(clientData.province)
-            postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
-            cifTextInputLayout.setInputText(clientData.cif)
-            emailTextInputLayout.setInputText(clientData.email)
-            phoneTextInputLayoutPhone1.setInputText(phone1.value.toString())
-            phoneTextInputLayoutName1.setInputText(phone1.key)
-            phoneTextInputLayoutPhone2.setInputText(phone2.value.toString())
-            phoneTextInputLayoutName2.setInputText(phone2.key)
+            companyTextInputLayout.setText(clientData.company)
+            directionTextInputLayout.setText(clientData.direction)
+            cityTextInputLayout.setText(clientData.city)
+            provinceTextInputLayout.setText(clientData.province)
+            postalCodeTextInputLayout.setText(clientData.postalCode.toString())
+            cifTextInputLayout.setText(clientData.cif)
+            emailTextInputLayout.setText(clientData.email)
+            phoneTextInputLayoutPhone1.setText(phone1.value.toString())
+            phoneTextInputLayoutName1.setText(phone1.key)
+            phoneTextInputLayoutPhone2.setText(phone2.value.toString())
+            phoneTextInputLayoutName2.setText(phone2.key)
 
             userAccountTextInputLayout.isEnabled = checkedTextView.isChecked
-            userAccountTextInputLayout.setInputText(clientData.user ?: "")
+            userAccountTextInputLayout.setText(clientData.user ?: "")
         }
     }
 
     private fun setFieldTypes() {
-        with(this.binding) {
+       /* with(this.binding) {
             companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
@@ -165,7 +165,7 @@ class ModifyClientFragment : BaseFragment() {
             phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
             phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-        }
+        }*/
     }
 
     private fun setPopUp(title: String, errorMessage: String) {

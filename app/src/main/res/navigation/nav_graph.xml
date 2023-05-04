@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/modifyClientFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientFragment"
-        android:label="ModifyClientFragment" >
+        android:label="Modificar cliente" >
         <argument
             android:name="clientData"
             app:argType="com.example.hueverianieto.data.models.remote.ClientData" />

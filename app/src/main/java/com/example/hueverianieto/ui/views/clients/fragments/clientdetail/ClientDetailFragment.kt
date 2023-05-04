@@ -108,27 +108,27 @@ class ClientDetailFragment : BaseFragment() {
         val phone2 = clientData.phone[1].entries.iterator().next()
 
         with(this.binding) {
-            companyTextInputLayout.setInputText(clientData.company)
+            companyTextInputLayout.setText(clientData.company)
             companyTextInputLayout.isEnabled = false
-            directionTextInputLayout.setInputText(clientData.direction)
+            directionTextInputLayout.setText(clientData.direction)
             directionTextInputLayout.isEnabled = false
-            cityTextInputLayout.setInputText(clientData.city)
+            cityTextInputLayout.setText(clientData.city)
             cityTextInputLayout.isEnabled = false
-            provinceTextInputLayout.setInputText(clientData.province)
+            provinceTextInputLayout.setText(clientData.province)
             provinceTextInputLayout.isEnabled = false
-            postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
+            postalCodeTextInputLayout.setText(clientData.postalCode.toString())
             postalCodeTextInputLayout.isEnabled = false
-            cifTextInputLayout.setInputText(clientData.cif)
+            cifTextInputLayout.setText(clientData.cif)
             cifTextInputLayout.isEnabled = false
-            emailTextInputLayout.setInputText(clientData.email)
+            emailTextInputLayout.setText(clientData.email)
             emailTextInputLayout.isEnabled = false
-            phoneTextInputLayoutPhone1.setInputText(phone1.value.toString())
+            phoneTextInputLayoutPhone1.setText(phone1.value.toString())
             phoneTextInputLayoutPhone1.isEnabled = false
-            phoneTextInputLayoutName1.setInputText(phone1.key)
+            phoneTextInputLayoutName1.setText(phone1.key)
             phoneTextInputLayoutName1.isEnabled = false
-            phoneTextInputLayoutPhone2.setInputText(phone2.value.toString())
+            phoneTextInputLayoutPhone2.setText(phone2.value.toString())
             phoneTextInputLayoutPhone2.isEnabled = false
-            phoneTextInputLayoutName2.setInputText(phone2.key)
+            phoneTextInputLayoutName2.setText(phone2.key)
             phoneTextInputLayoutName2.isEnabled = false
         }
     }
@@ -138,7 +138,7 @@ class ClientDetailFragment : BaseFragment() {
             checkedTextView.isEnabled = false
             checkedTextView.isChecked = clientData.hasAccount
             userAccountTextInputLayout.isEnabled = false
-            userAccountTextInputLayout.setInputText(clientData.user ?: "")
+            userAccountTextInputLayout.setText(clientData.user ?: "")
             deleteUserButton.isVisible = clientData.hasAccount
         }
     }
