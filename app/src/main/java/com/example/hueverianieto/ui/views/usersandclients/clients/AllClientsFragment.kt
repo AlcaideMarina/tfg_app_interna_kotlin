@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
-import com.example.hueverianieto.data.ClientData
+import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.ui.views.usersandclients.UsersAndClientsFragment

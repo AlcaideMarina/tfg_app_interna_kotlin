@@ -1,7 +1,7 @@
 package com.example.hueverianieto.utils
 
 import android.text.InputType
-import com.example.hueverianieto.data.ClientData
+import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.model.textinputlayout.RowTextInputLayoutModel
 import com.example.hueverianieto.domain.model.textinputlayout.TextInputLayoutModel
 import com.example.hueverianieto.domain.model.textinputlayout.TitleTextInputLayoutModel

@@ -12,7 +12,7 @@ import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInt
 import com.example.hueverianieto.databinding.FragmentDeletedInternalUsersBinding
 import com.example.hueverianieto.ui.views.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.ui.views.usersandclients.clients.DeletedClientsFragment
-import com.example.hueverianieto.utils.UserUtils
+import com.example.hueverianieto.utils.InternalUserUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -65,9 +65,9 @@ class DeletedInternalUsersFragment : BaseFragment() {
                         for (document in documentList) {
                             Log.v("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta")
                             val doc = document.data as MutableMap<String, Any?>?
-                            if (UserUtils.checkErrorMap(doc) == null) {
+                            if (InternalUserUtils.checkErrorMap(doc) == null) {
                                 val data = doc as MutableMap<String, Any?>
-                                val userData = UserUtils.mapToParcelable(data, document.id)
+                                val userData = InternalUserUtils.mapToParcelable(data, document.id)
                                 if (userData.deleted) {
                                     val componentInternalUserModel = ComponentInternalUserModel(
                                         userData.id,
