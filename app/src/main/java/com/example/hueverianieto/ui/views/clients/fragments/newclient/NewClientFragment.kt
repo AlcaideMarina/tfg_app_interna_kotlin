@@ -198,7 +198,6 @@ class NewClientFragment : BaseFragment() {
                         false,
                         direction,
                         email,
-                        accountEmail,
                         hasAccount,
                         nextIdStr,
                         listOf(

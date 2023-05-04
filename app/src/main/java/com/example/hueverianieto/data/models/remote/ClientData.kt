@@ -14,7 +14,6 @@ data class ClientData(
     var deleted: Boolean,
     var direction: String,
     var email: String,
-    var emailAccount: String?,
     var hasAccount: Boolean,
     var id: String,
     var phone: List<Map<String, Long>>,

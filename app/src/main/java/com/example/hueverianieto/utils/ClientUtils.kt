@@ -37,7 +37,6 @@ object ClientUtils {
             data["deleted"] as Boolean,
             data["direction"] as String,
             data["email"] as String,
-            data["email_account"] as String?,
             data["has_account"] as Boolean,
             data["id"] as String,
             data["phone"] as List<Map<String, Long>>,
@@ -58,7 +57,6 @@ object ClientUtils {
         map["deleted"] = clientData.deleted
         map["direction"] = clientData.direction
         map["email"] = clientData.email
-        map["email_account"] = clientData.emailAccount
         map["has_account"] = clientData.hasAccount
         map["id"] = clientData.id
         map["phone"] = clientData.phone

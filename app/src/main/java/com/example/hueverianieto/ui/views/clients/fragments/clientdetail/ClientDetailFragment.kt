@@ -129,7 +129,7 @@ class ClientDetailFragment : BaseFragment() {
         with(this.binding) {
             checkedTextView.isEnabled = false
             emailAccountTextInputLayout.isEnabled = false
-            emailAccountTextInputLayout.setInputText(clientData.emailAccount ?: "")
+            emailAccountTextInputLayout.setInputText(clientData.email ?: "")
             userAccountTextInputLayout.isEnabled = false
             userAccountTextInputLayout.setInputText(clientData.user ?: "")
             deleteUserButton.isVisible = clientData.hasAccount
