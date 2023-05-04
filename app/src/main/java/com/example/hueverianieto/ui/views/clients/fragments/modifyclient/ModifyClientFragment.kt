@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -21,6 +22,7 @@ class ModifyClientFragment : BaseFragment() {
     private lateinit var binding : FragmentModifyClientBinding
     private lateinit var clientData : ClientData
     private lateinit var currentUserData : InternalUserData
+    private val modifyClientViewModel : ModifyClientViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -64,6 +66,48 @@ class ModifyClientFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
+        this.binding.saveButton.setOnClickListener {
+            // TODO: Actualizar clientdata
+            var user : String? = null
+            var hasAccount : Boolean = false
+
+            if (clientData.hasAccount) {
+                hasAccount = true
+                user = clientData.user!!
+            } else {
+                if (this.binding.checkedTextView.isChecked) {
+                    if (this.binding.userAccountTextInputLayout.getText() == "") {
+                        // TODO: popup con error
+                    } else {
+                        hasAccount = true
+                        user = this.binding.userAccountTextInputLayout.getText()
+                    }
+                }
+            }
+
+            var newClientData = ClientData(
+                this.binding.cifTextInputLayout.getText(),
+                this.binding.cityTextInputLayout.getText(),
+                clientData.createdBy,
+                this.binding.companyTextInputLayout.getText(),
+                false,
+                this.binding.directionTextInputLayout.getText(),
+                this.binding.emailTextInputLayout.getText(),
+                this.binding.emailTextInputLayout.getText(),
+                hasAccount,
+                clientData.id,
+                listOf(
+                    mapOf(this.binding.phoneTextInputLayoutName1.getText() to this.binding.phoneTextInputLayoutPhone1.getText().toLong()),
+                    mapOf(this.binding.phoneTextInputLayoutName2.getText() to this.binding.phoneTextInputLayoutPhone2.getText().toLong()),
+                ),
+                this.binding.postalCodeTextInputLayout.getText().toLong(),
+                this.binding.provinceTextInputLayout.getText(),
+                null,
+                user,
+                clientData.documentId,
+            )
+            this.modifyClientViewModel.updateUser(newClientData)
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -83,12 +127,11 @@ class ModifyClientFragment : BaseFragment() {
             postalCodeTextInputLayout.setInputText(clientData.postalCode.toString())
             cifTextInputLayout.setInputText(clientData.cif)
             emailTextInputLayout.setInputText(clientData.email)
-            phoneTextInputLayoutPhone1.setInputText(phone1.key)
-            phoneTextInputLayoutName1.setInputText(phone1.value.toString())
-            phoneTextInputLayoutPhone2.setInputText(phone2.key)
-            phoneTextInputLayoutName2.setInputText(phone2.value.toString())
+            phoneTextInputLayoutPhone1.setInputText(phone1.value.toString())
+            phoneTextInputLayoutName1.setInputText(phone1.key)
+            phoneTextInputLayoutPhone2.setInputText(phone2.value.toString())
+            phoneTextInputLayoutName2.setInputText(phone2.key)
 
-            checkedTextView.isChecked = clientData.hasAccount
             userAccountTextInputLayout.isEnabled = checkedTextView.isChecked
             emailAccountTextInputLayout.isEnabled = checkedTextView.isChecked
         }
