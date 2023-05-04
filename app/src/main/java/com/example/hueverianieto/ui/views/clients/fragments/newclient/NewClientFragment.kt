@@ -183,7 +183,7 @@ class NewClientFragment : BaseFragment() {
                         direction,
                         email,
                         hasAccount,
-                        nextIdStr,
+                        nextIdStr.toLong(),
                         listOf(
                             mapOf(namePhone1 to phone1.toLong()),
                             mapOf(namePhone2 to phone2.toLong())

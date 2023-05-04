@@ -61,7 +61,7 @@ class AllClientsFragment : BaseFragment() {
                 for (clientData in clientDataList)  {
                     if (clientData != null) {
                         val componentClientModel = ComponentClientModel(
-                            clientData.id,
+                            clientData.id.toString(),
                             clientData.company,
                             clientData.cif
                         ) {
@@ -151,7 +151,7 @@ class AllClientsFragment : BaseFragment() {
                                 val clientData = ClientUtils.mapToParcelable(data, document.id)
                                 if (!clientData.deleted) {
                                     val componentClientModel = ComponentClientModel(
-                                        clientData.id,
+                                        clientData.id.toString(),
                                         clientData.company,
                                         clientData.cif
                                     ) {

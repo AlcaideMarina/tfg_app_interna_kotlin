@@ -46,7 +46,7 @@ class DeletedClientsFragment : BaseFragment() {
                 for (clientData in clientDataList)  {
                     if (clientData != null) {
                         val componentClientModel = ComponentClientModel(
-                            clientData.id,
+                            clientData.id.toString(),
                             clientData.company,
                             clientData.cif,
                             null
