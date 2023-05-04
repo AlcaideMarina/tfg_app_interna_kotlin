@@ -37,8 +37,8 @@ class LoginViewModel @Inject constructor (
     private var _navigateToMainActivity = MutableLiveData<Event<Boolean>>()
     val navigateToMainActivity: LiveData<Event<Boolean>> get() = _navigateToMainActivity
 
-    private var _internalUserData = MutableLiveData<InternalUserData>()
-    val internalUserData: LiveData<InternalUserData> get() = _internalUserData
+    private var _currentUserData = MutableLiveData<InternalUserData>()
+    val currentUserData: LiveData<InternalUserData> get() = _currentUserData
 
     private fun checkValidEmail(email: String) = Patterns.EMAIL_ADDRESS.matcher(email).matches()
 
@@ -58,7 +58,7 @@ class LoginViewModel @Inject constructor (
                                 _viewState.value = LoginViewState(false)
                             }
                             else -> {
-                                _internalUserData.value = internalUser!!
+                                _currentUserData.value = internalUser!!
                                 _navigateToMainActivity.value = Event(true)
                             }
                         }
@@ -74,9 +74,9 @@ class LoginViewModel @Inject constructor (
     }
 
 
-    fun navigateToMainActivity(context: Context, internalUserData: Parcelable) {
+    fun navigateToMainActivity(context: Context, currentUserData: Parcelable) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra("internal_user_data", internalUserData)
+        intent.putExtra("current_user_data", currentUserData)
         context.startActivity(intent)
         (context as BaseActivity).finish()
     }

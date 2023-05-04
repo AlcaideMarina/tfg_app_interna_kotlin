@@ -15,13 +15,13 @@ class UsersAndClientsViewModel @Inject constructor(val homeUseCase: HomeUseCase)
 
     fun navigateToAllClientsActivity(context: Context, internalUserData: InternalUserData) {
         val intent = Intent(context, AllClientsActivity::class.java)
-        intent.putExtra("internal_user_data", internalUserData)
+        intent.putExtra("current_user_data", internalUserData)
         context.startActivity(intent)
     }
 
     fun navigateToAllInternalUsersActivity(context: Context, internalUserData: InternalUserData) {
         val intent = Intent(context, AllInternalUsersActivity::class.java)
-        intent.putExtra("internal_user_data", internalUserData)
+        intent.putExtra("current_user_data", internalUserData)
         context.startActivity(intent)
     }
 

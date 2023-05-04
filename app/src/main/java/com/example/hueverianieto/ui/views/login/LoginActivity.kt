@@ -31,7 +31,7 @@ class LoginActivity : BaseActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var alertDialog: HNModalDialog
     private val loginViewModel: LoginViewModel by viewModels()
-    private lateinit var internalUserData: InternalUserData
+    private lateinit var currentUserData: InternalUserData
 
 
     override fun setUp() {
@@ -77,12 +77,12 @@ class LoginActivity : BaseActivity() {
                 setPopUp("Ha habido un error en el login. Por favor, revisa los datos y comprueba que tengas acceso a internet.")
             }
         }
-        loginViewModel.internalUserData.observe(this) { userData ->
-            this.internalUserData = userData
+        loginViewModel.currentUserData.observe(this) { userData ->
+            this.currentUserData = userData
         }
         loginViewModel.navigateToMainActivity.observe(this) { event ->
             event.getControlled()?.let {
-                this.loginViewModel.navigateToMainActivity(this, internalUserData)
+                this.loginViewModel.navigateToMainActivity(this, currentUserData)
             }
         }
     }

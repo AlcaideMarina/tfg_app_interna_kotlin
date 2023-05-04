@@ -27,9 +27,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     override fun setUp() {
         internalUserData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra("internal_user_data", InternalUserData::class.java)!!
+            intent.getParcelableExtra("current_user_data", InternalUserData::class.java)!!
         } else {
-            intent.getParcelableExtra<InternalUserData>("internal_user_data")!!
+            intent.getParcelableExtra<InternalUserData>("current_user_data")!!
         }
 
         binding = ActivityMainBinding.inflate(layoutInflater)
