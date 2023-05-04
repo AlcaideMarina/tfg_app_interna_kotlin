@@ -57,6 +57,7 @@ class AllClientsFragment : BaseFragment() {
             if (clientDataList == null) {
                 // TODO: ERROR
             } else {
+                clientList = mutableListOf()
                 for (clientData in clientDataList)  {
                     if (clientData != null) {
                         val componentClientModel = ComponentClientModel(
