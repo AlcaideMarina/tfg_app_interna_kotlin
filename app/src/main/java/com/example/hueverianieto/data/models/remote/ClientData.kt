@@ -1,4 +1,4 @@
-package com.example.hueverianieto.data
+package com.example.hueverianieto.data.models.remote
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

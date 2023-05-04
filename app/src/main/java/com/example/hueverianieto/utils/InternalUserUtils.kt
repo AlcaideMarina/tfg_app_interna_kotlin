@@ -1,10 +1,10 @@
 package com.example.hueverianieto.utils
 
-import com.example.hueverianieto.data.InternalUserData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 
 // TODO: Sacar constantes
 
-object UserUtils {
+object InternalUserUtils {
 
     fun checkErrorMap(data: MutableMap<String, Any?>?): String? {
         return if (data == null) {
