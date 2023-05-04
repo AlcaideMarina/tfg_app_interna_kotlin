@@ -15,7 +15,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.local.UserLoginData
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
 import com.example.hueverianieto.domain.usecases.LoginUseCase
-import com.example.hueverianieto.ui.views.home.MainActivity
+import com.example.hueverianieto.ui.views.MainActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -74,9 +74,9 @@ class LoginViewModel @Inject constructor (
     }
 
 
-    fun navigateToMainActivity(context: Context, clientData: Parcelable) {
+    fun navigateToMainActivity(context: Context, internalUserData: Parcelable) {
         val intent = Intent(context, MainActivity::class.java)
-        intent.putExtra("client_data", clientData)
+        intent.putExtra("internal_user_data", internalUserData)
         context.startActivity(intent)
         (context as BaseActivity).finish()
     }

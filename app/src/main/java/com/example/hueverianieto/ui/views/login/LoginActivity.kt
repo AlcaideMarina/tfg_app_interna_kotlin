@@ -10,7 +10,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
 import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.ui.views.home.MainActivity
+import com.example.hueverianieto.ui.views.MainActivity
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
