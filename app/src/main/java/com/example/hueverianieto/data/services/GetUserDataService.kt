@@ -14,7 +14,7 @@ class GetUserDataService @Inject constructor(
 
     suspend fun getUserData(uid: String) : InternalUserData? = runCatching {
         firebaseClient.db
-            .collection("client_info")
+            .collection("user_info")
             .whereEqualTo("uid", uid)
             .get()
             .await()
