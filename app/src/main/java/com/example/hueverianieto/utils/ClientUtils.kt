@@ -16,7 +16,7 @@ object ClientUtils {
         } else if (data.containsKey("cif") && data.containsKey("city") &&
             data.containsKey("created_by") && data.containsKey("deleted") &&
             data.containsKey("company") && data.containsKey("direction") && data.containsKey("email")
-            && data.containsKey("email_account") && data.containsKey("has_account") && data.containsKey("id") &&
+            && data.containsKey("has_account") && data.containsKey("id") &&
             data.containsKey("phone") && data.containsKey("postal_code") &&
             data.containsKey("province") && data.containsKey("uid") &&
             data.containsKey("user")

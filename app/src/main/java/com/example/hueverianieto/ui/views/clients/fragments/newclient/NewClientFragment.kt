@@ -46,12 +46,12 @@ class NewClientFragment : BaseFragment() {
         this.alertDialog = HNModalDialog(requireContext())
 
         this.binding.let {
-            it.saveButton.isEnabled = true
             it.saveButton.setText("Guardar")
-            it.cancelButton.isEnabled = true
-            it.cancelButton.setText("Eliminar")
+            it.cancelButton.setText("Cancelar")
 
-            it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.userAccountTextInputLayout.isEnabled = false
+
+            /*it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
             it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
@@ -62,10 +62,7 @@ class NewClientFragment : BaseFragment() {
             it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
             it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
             it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-
-            it.emailAccountTextInputLayout.isEnabled = false
-            it.userAccountTextInputLayout.isEnabled = false
+            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)*/
         }
 
     }
@@ -78,40 +75,37 @@ class NewClientFragment : BaseFragment() {
         this.binding.checkedTextView.setOnClickListener {
             this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
             this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
-            this.binding.emailAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
 
         }
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
         this.binding.saveButton.setOnClickListener {
 
             this.binding.let {
-                company = it.companyTextInputLayout.getText()
-                direction = it.directionTextInputLayout.getText()
-                city = it.cityTextInputLayout.getText()
-                province = it.provinceTextInputLayout.getText()
-                postalCode = it.postalCodeTextInputLayout.getText()
-                cif = it.cifTextInputLayout.getText()
-                email = it.emailTextInputLayout.getText()
-                phone1 = it.phoneTextInputLayoutPhone1.getText()
-                namePhone1 = it.phoneTextInputLayoutName1.getText()
-                phone2 = it.phoneTextInputLayoutPhone2.getText()
-                namePhone2 = it.phoneTextInputLayoutName1.getText()
+                company = it.companyTextInputLayout.text.toString()
+                direction = it.directionTextInputLayout.text.toString()
+                city = it.cityTextInputLayout.text.toString()
+                province = it.provinceTextInputLayout.text.toString()
+                postalCode = it.postalCodeTextInputLayout.text.toString()
+                cif = it.cifTextInputLayout.text.toString()
+                email = it.emailTextInputLayout.text.toString()
+                phone1 = it.phoneTextInputLayoutPhone1.text.toString()
+                namePhone1 = it.phoneTextInputLayoutName1.text.toString()
+                phone2 = it.phoneTextInputLayoutPhone2.text.toString()
+                namePhone2 = it.phoneTextInputLayoutName1.text.toString()
                 hasAccount = it.checkedTextView.isChecked
-                accountEmail = it.emailAccountTextInputLayout.getText()
-                accountUser = it.userAccountTextInputLayout.getText()
+                accountUser = it.userAccountTextInputLayout.text.toString()
             }
             if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
                 cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
                 namePhone2 != "") {
                 // TODO: Checkear tipos
                 if (!hasAccount) {
-                    accountEmail = null
                     accountUser = null
                 } else {
                     // TODO: Crear usuario en Auth
                     // TODO: Coger el uid
                 }
-                if (!Utils.isValidEmail(email) || (accountEmail != null && !Utils.isValidEmail(accountEmail))) {
+                if (!Utils.isValidEmail(email)) {
                     setPopUp(
                         "Email incorrecto",
                         "Hemos detectado que el formato del email introducido no es correcto. Por favor, revise los datos."
@@ -149,16 +143,6 @@ class NewClientFragment : BaseFragment() {
         )
         return this.binding.root
     }
-
-    /*private fun initRecyclerView() {
-        this.binding.newClientClientFieldsRecyclerView.layoutManager = LinearLayoutManager(context)
-        this.binding.newClientClientFieldsRecyclerView.adapter = TitleTextInputLayoutAdapter(fieldList)
-        this.binding.newClientClientFieldsRecyclerView.isNestedScrollingEnabled = false
-
-        this.binding.containerBorderCheckTitle.getBodyContainer().layoutManager = LinearLayoutManager(context)
-        this.binding.containerBorderCheckTitle.getBodyContainer().adapter = TitleTextInputLayoutAdapter(ClientUtils.createUserToClientFields())
-        this.binding.containerBorderCheckTitle.getBodyContainer().isNestedScrollingEnabled = false
-    }*/
 
     private fun setPopUp(title: String, message: String, listener: OnClickListener) {
 
