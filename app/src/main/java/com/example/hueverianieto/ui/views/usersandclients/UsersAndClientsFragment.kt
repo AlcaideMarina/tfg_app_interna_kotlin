@@ -1,25 +1,25 @@
 package com.example.hueverianieto.ui.views.usersandclients
 
-import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentUsersAndClientsBinding
-import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsActivity
-import com.example.hueverianieto.ui.views.usersandclients.users.AllInternalUsersActivity
+import com.example.hueverianieto.ui.views.MainActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Investigar cómo hacer para que no se carguen todos los clientes de golpe, sino que sea según se vaya bajando
-
+@AndroidEntryPoint
 class UsersAndClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentUsersAndClientsBinding
     private lateinit var view: View
-
+    private val usersAndClientsViewModel: UsersAndClientsViewModel by viewModels()
+    private lateinit var internalUserData: InternalUserData
 
     override fun configureUI() {
 
@@ -33,32 +33,22 @@ class UsersAndClientsFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        // TODO: sin implementar
+        // Not necessary
     }
 
     override fun setListeners() {
         this.binding.clientsButton.setOnClickListener {
-            activity?.let {
-                val intent = Intent(it, AllClientsActivity::class.java)
-                it.startActivity(intent)
-            } ?: Log.e(
-                UsersAndClientsFragment::class.simpleName,
-                "Error en la navegación en clientsButton"
-            )
+            this.usersAndClientsViewModel
+                .navigateToAllClientsActivity(requireContext(), internalUserData)
         }
         this.binding.internalUsersButton.setOnClickListener {
-            activity?.let {
-                val intent = Intent(it, AllInternalUsersActivity::class.java)
-                it.startActivity(intent)
-            } ?: Log.e(
-                UsersAndClientsFragment::class.simpleName,
-                "Error en la navegación en internalUsersButton"
-            )
+            this.usersAndClientsViewModel
+                .navigateToAllInternalUsersActivity(requireContext(), internalUserData)
         }
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun onCreateView(
@@ -66,6 +56,7 @@ class UsersAndClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        internalUserData = (activity as MainActivity).internalUserData
         this.binding = FragmentUsersAndClientsBinding
             .inflate(inflater, container, false)
         this.view = inflater.inflate(R.layout.fragment_users_and_clients, container, false)

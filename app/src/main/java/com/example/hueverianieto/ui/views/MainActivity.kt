@@ -14,7 +14,9 @@ import com.example.hueverianieto.databinding.ActivityMainBinding
 import com.example.hueverianieto.ui.views.home.HomeFragment
 import com.example.hueverianieto.ui.views.usersandclients.UsersAndClientsFragment
 import com.google.android.material.navigation.NavigationView
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedListener {
 
     private lateinit var binding: ActivityMainBinding
