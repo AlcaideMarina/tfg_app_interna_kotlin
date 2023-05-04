@@ -17,6 +17,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifyClientBinding
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +68,26 @@ class ModifyClientFragment : BaseFragment() {
 
     override fun setObservers() {
         this.modifyClientViewModel.alertDialog.observe(this) { alertErrorOkData ->
-            if (alertErrorOkData.finish) setPopUp(alertErrorOkData.title, alertErrorOkData.text)
+            if (alertErrorOkData.finish) {
+                if (alertErrorOkData.customCode == 1) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertErrorOkData.title,
+                        alertErrorOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    setPopUp(alertErrorOkData.title, alertErrorOkData.text)
+                }
+
+            }
         }
     }
 

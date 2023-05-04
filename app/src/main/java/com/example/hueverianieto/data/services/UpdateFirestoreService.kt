@@ -18,7 +18,7 @@ class UpdateFirestoreService @Inject constructor(
     }.toBooleanResult()
 
     private fun Result<Void>.toBooleanResult() = when (val result = getOrNull()) {
-        null -> false
+        null -> true
         else -> true
     }
 

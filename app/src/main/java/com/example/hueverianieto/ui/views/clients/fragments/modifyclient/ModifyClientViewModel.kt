@@ -70,13 +70,25 @@ class ModifyClientViewModel @Inject constructor(
                         updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
                         false -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = true)
+                            _alertDialog.value = AlertErrorOkData(
+                                "Error",
+                                "Se ha producido un error cuando se estaban actualizado los datos del cliente. Por favor, revise los datos e inténtelo de nuevo.",
+                                true
+                            )
                         }
                         true -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = false)
+                            _alertDialog.value = AlertErrorOkData(
+                                "Cliente actualizado",
+                                "Los datos del cliente se han actualizado correctamente.",
+                                true,
+                                1
+                            )
                         }
                     }
                 }
             } else {
+                _viewState.value = ModifyClientViewState(isLoading = true, error = true)
                 _alertDialog.value = AlertErrorOkData(
                     "Correo no válido",
                     "Por favor, revise el formato del correo.",
