@@ -33,7 +33,7 @@ object InternalUserUtils {
             data["direction"] as String,
             data["dni"] as String,
             data["email"] as String,
-            data["id"] as String,
+            data["id"] as Long,
             data["name"] as String,
             data["phone"] as Long,
             data["position"] as Long,

@@ -80,7 +80,7 @@ class AllInternalUsersFragment : BaseFragment() {
                                 val userData = InternalUserUtils.mapToParcelable(data, document.id)
                                 if (!userData.deleted) {
                                     val componentInternalUserModel = ComponentInternalUserModel(
-                                        userData.id,
+                                        userData.id.toString(),
                                         userData.name,
                                         userData.surname,
                                         userData.dni,
