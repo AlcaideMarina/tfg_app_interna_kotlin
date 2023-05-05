@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
@@ -12,8 +15,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifyInternalUserBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyInternalUserFragment : BaseFragment() {
@@ -22,6 +27,8 @@ class ModifyInternalUserFragment : BaseFragment() {
     private lateinit var currentUserData : InternalUserData
     private lateinit var internalUserData : InternalUserData
     private var dropdownRoleItems : MutableList<String> = mutableListOf()
+    private val modifyInternalUserViewModel: ModifyInternalUserViewModel by viewModels()
+    private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,6 +45,8 @@ class ModifyInternalUserFragment : BaseFragment() {
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
 
+        this.alertDialog = HNModalDialog(requireContext())
+
         return this.binding.root
 
     }
@@ -46,6 +55,12 @@ class ModifyInternalUserFragment : BaseFragment() {
         setButtons()
         setFieldText()
         setDropdownRoleOptions()
+
+        lifecycleScope.launchWhenStarted {
+            modifyInternalUserViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -57,7 +72,11 @@ class ModifyInternalUserFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyInternalUserViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun setButtons() {
