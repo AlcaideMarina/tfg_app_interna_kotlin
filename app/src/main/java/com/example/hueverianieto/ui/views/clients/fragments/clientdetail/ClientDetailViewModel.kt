@@ -11,7 +11,6 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
-import com.example.hueverianieto.domain.usecases.ClientDetailUseCase
 import com.example.hueverianieto.domain.usecases.DeleteClientUseCase
 import com.example.hueverianieto.domain.usecases.GetClientDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,7 +21,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClientDetailViewModel @Inject constructor(
-    val clientDetailUseCase: ClientDetailUseCase,
     val deleteClientUseCase: DeleteClientUseCase,
     val getClientDataUseCase: GetClientDataUseCase,
 ) : ViewModel() {
