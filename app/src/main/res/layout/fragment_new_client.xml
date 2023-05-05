@@ -15,410 +15,433 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/size24"
-            android:orientation="vertical">
+            android:layout_height="match_parent" >
 
             <LinearLayout
-                android:id="@+id/company_text_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/company_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Empresa:" />
-
-                <EditText
-                    android:id="@+id/company_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/direction_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/direction_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Dirección:" />
-
-                <EditText
-                    android:id="@+id/direction_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/city_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/city_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Ciudad:" />
-
-                <EditText
-                    android:id="@+id/city_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/province_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/province_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Provincia:" />
-
-                <EditText
-                    android:id="@+id/province_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/postal_code_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/postal_code_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Código postal:" />
-
-                <EditText
-                    android:id="@+id/postal_code_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="number"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/cif_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/cif_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="CIF:" />
-
-                <EditText
-                    android:id="@+id/cif_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="text"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/email_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/email_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Correo:" />
-
-                <EditText
-                    android:id="@+id/email_text_input_layout"
-                    android:layout_width="match_parent"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:inputType="textEmailAddress"
-                    android:textSize="16sp"
-                    android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="email"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/phone_text_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:padding="@dimen/size24"
                 android:orientation="vertical"
-                android:layout_marginBottom="@dimen/size16">
-
-                <TextView
-                    android:id="@+id/phone_text_view"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:text="Teléfono:" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
 
                 <LinearLayout
-                    android:id="@+id/phone_text_input_layout_1"
+                    android:id="@+id/company_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false" >
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/company_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Empresa:" />
 
                     <EditText
-                        android:id="@+id/phone_text_input_layout_name_1"
-                        android:layout_width="0dp"
+                        android:id="@+id/company_text_input_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
                         android:textSize="16sp"
                         android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
                         android:layout_marginTop="@dimen/size8"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginHorizontal="@dimen/size16"
                         android:autofillHints="name"/>
-
-                    <EditText
-                        android:id="@+id/phone_text_input_layout_phone_1"
-                        android:layout_width="0dp"
-                        android:layout_height="60dp"
-                        android:layout_weight="1"
-                        android:ems="10"
-                        android:inputType="phone"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
-                        android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="16dp"
-                        android:autofillHints="phone"/>
 
                 </LinearLayout>
 
                 <LinearLayout
-                    android:id="@+id/phone_text_input_layout_2"
+                    android:id="@+id/direction_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false" >
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/direction_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Dirección:" />
 
                     <EditText
-                        android:id="@+id/phone_text_input_layout_name_2"
-                        android:layout_width="0dp"
+                        android:id="@+id/direction_text_input_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_weight="1"
                         android:ems="10"
                         android:inputType="text"
                         android:textSize="16sp"
                         android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
                         android:layout_marginTop="@dimen/size8"
-                        android:layout_marginEnd="4dp"
-                        android:layout_marginStart="16dp"
+                        android:layout_marginHorizontal="@dimen/size16"
                         android:autofillHints="name"/>
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/city_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/city_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Ciudad:" />
+
                     <EditText
-                        android:id="@+id/phone_text_input_layout_phone_2"
-                        android:layout_width="0dp"
+                        android:id="@+id/city_text_input_layout"
+                        android:layout_width="match_parent"
                         android:layout_height="60dp"
-                        android:layout_weight="1"
                         android:ems="10"
-                        android:inputType="phone"
+                        android:inputType="text"
                         android:textSize="16sp"
                         android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
                         android:layout_marginTop="@dimen/size8"
-                        android:layout_marginStart="4dp"
-                        android:layout_marginEnd="16dp"
-                        android:autofillHints="phone"/>
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:autofillHints="name"/>
 
                 </LinearLayout>
 
-            </LinearLayout>
-
-            <RelativeLayout
-                android:id="@+id/container_border_check_title"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="15dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/body_container_recycler_view"
+                <LinearLayout
+                    android:id="@+id/province_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="15dp"
-                    android:layout_marginTop="15dp"
-                    android:background="@drawable/bg_border_container_border_check_title" >
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/province_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Provincia:" />
+
+                    <EditText
+                        android:id="@+id/province_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:textSize="16sp"
+                        android:background="@drawable/custom_input"
+                        android:paddingHorizontal="12dp"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:autofillHints="name"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/postal_code_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/postal_code_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Código postal:" />
+
+                    <EditText
+                        android:id="@+id/postal_code_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:ems="10"
+                        android:inputType="number"
+                        android:textSize="16sp"
+                        android:background="@drawable/custom_input"
+                        android:paddingHorizontal="12dp"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:autofillHints="name"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/cif_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/cif_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="CIF:" />
+
+                    <EditText
+                        android:id="@+id/cif_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:textSize="16sp"
+                        android:background="@drawable/custom_input"
+                        android:paddingHorizontal="12dp"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:autofillHints="name"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/email_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/email_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Correo:" />
+
+                    <EditText
+                        android:id="@+id/email_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:ems="10"
+                        android:inputType="textEmailAddress"
+                        android:textSize="16sp"
+                        android:background="@drawable/custom_input"
+                        android:paddingHorizontal="12dp"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:autofillHints="email"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/phone_text_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="@dimen/size16">
+
+                    <TextView
+                        android:id="@+id/phone_text_view"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="Teléfono:" />
 
                     <LinearLayout
+                        android:id="@+id/phone_text_input_layout_1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent">
+                        android:orientation="horizontal"
+                        android:baselineAligned="false" >
 
-                        <LinearLayout
-                            android:id="@+id/user_account_text_layout"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical" >
+                        <EditText
+                            android:id="@+id/phone_text_input_layout_name_1"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:textSize="16sp"
+                            android:background="@drawable/custom_input"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginTop="@dimen/size8"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginStart="16dp"
+                            android:autofillHints="name"/>
 
-                            <TextView
-                                android:id="@+id/user_account_text_view"
-                                android:layout_marginTop="@dimen/size8"
-                                android:layout_width="wrap_content"
-                                android:layout_height="match_parent"
-                                android:text="Usuario:" />
-
-                            <EditText
-                                android:id="@+id/user_account_text_input_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="60dp"
-                                android:ems="10"
-                                android:inputType="text"
-                                android:textSize="16sp"
-                                android:background="@drawable/custom_input"
-                                android:paddingHorizontal="12dp"
-                                android:layout_marginTop="@dimen/size8"
-                                android:layout_marginHorizontal="@dimen/size16"
-                                android:autofillHints="username"/>
-
-                        </LinearLayout>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="El usuario debe tener más de 6 dígitos."
-                            android:layout_marginTop="@dimen/size16"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña."
-                            android:layout_marginBottom="4dp"/>
+                        <EditText
+                            android:id="@+id/phone_text_input_layout_phone_1"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="phone"
+                            android:textSize="16sp"
+                            android:background="@drawable/custom_input"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginTop="@dimen/size8"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="16dp"
+                            android:autofillHints="phone"/>
 
                     </LinearLayout>
 
+                    <LinearLayout
+                        android:id="@+id/phone_text_input_layout_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:baselineAligned="false" >
+
+                        <EditText
+                            android:id="@+id/phone_text_input_layout_name_2"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="text"
+                            android:textSize="16sp"
+                            android:background="@drawable/custom_input"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginTop="@dimen/size8"
+                            android:layout_marginEnd="4dp"
+                            android:layout_marginStart="16dp"
+                            android:autofillHints="name"/>
+
+                        <EditText
+                            android:id="@+id/phone_text_input_layout_phone_2"
+                            android:layout_width="0dp"
+                            android:layout_height="60dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:inputType="phone"
+                            android:textSize="16sp"
+                            android:background="@drawable/custom_input"
+                            android:paddingHorizontal="12dp"
+                            android:layout_marginTop="@dimen/size8"
+                            android:layout_marginStart="4dp"
+                            android:layout_marginEnd="16dp"
+                            android:autofillHints="phone"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/container_border_check_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15dp">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/body_container_recycler_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="15dp"
+                        android:layout_marginTop="15dp"
+                        android:background="@drawable/bg_border_container_border_check_title" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent">
+
+                            <LinearLayout
+                                android:id="@+id/user_account_text_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" >
+
+                                <TextView
+                                    android:id="@+id/user_account_text_view"
+                                    android:layout_marginTop="@dimen/size8"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="match_parent"
+                                    android:text="Usuario:" />
+
+                                <EditText
+                                    android:id="@+id/user_account_text_input_layout"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:ems="10"
+                                    android:inputType="text"
+                                    android:textSize="16sp"
+                                    android:background="@drawable/custom_input"
+                                    android:paddingHorizontal="12dp"
+                                    android:layout_marginTop="@dimen/size8"
+                                    android:layout_marginHorizontal="@dimen/size16"
+                                    android:autofillHints="username"/>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="El usuario debe tener más de 6 dígitos."
+                                android:layout_marginTop="@dimen/size16"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña."
+                                android:layout_marginBottom="4dp"/>
+
+                        </LinearLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <CheckedTextView
+                        android:id="@+id/checked_text_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:gravity="center"
+                        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+                        android:text="Crear usuario para la app cliente"
+                        android:layout_marginStart="@dimen/size24"
+                        android:paddingStart="12dp"
+                        android:paddingEnd="16dp"
+                        android:background="@color/white_color"/>
+
+                </RelativeLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/buttons_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size16">
+
+                    <com.example.hueverianieto.ui.components.HNButton
+                        android:id="@+id/save_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.example.hueverianieto.ui.components.HNButton
+                        android:id="@+id/cancel_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/size8"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/save_button" />
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
-                <CheckedTextView
-                    android:id="@+id/checked_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:checked="false"
-                    android:gravity="center"
-                    android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-                    android:text="Crear usuario para la app cliente"
-                    android:layout_marginStart="@dimen/size24"
-                    android:paddingStart="12dp"
-                    android:paddingEnd="16dp"
-                    android:background="@color/white_color"/>
+            </LinearLayout>
 
-            </RelativeLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/buttons_container"
-                android:layout_width="match_parent"
+            <ProgressBar
+                android:id="@+id/loading_component"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="@dimen/size16">
+                android:layout_gravity="center"
+                android:layout_marginTop="64dp"
+                android:layout_marginBottom="64dp"
+                android:elevation="2dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.example.hueverianieto.ui.components.HNButton
-                    android:id="@+id/save_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <com.example.hueverianieto.ui.components.HNButton
-                    android:id="@+id/cancel_button"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/size8"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/save_button" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
 

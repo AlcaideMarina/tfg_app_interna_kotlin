@@ -15,17 +15,11 @@ data class ClientData(
     var direction: String,
     var email: String,
     var hasAccount: Boolean,
-    var id: Long,
+    var id: Long?,
     var phone: List<Map<String, Long>>,
     var postalCode: Long,
     var province: String,
     var uid: String?,
     var user: String?,
     var documentId: String?
-) : Parcelable {
-
-    fun setClientId(newClientId: Long) {
-        this.id = newClientId
-    }
-
-}
+) : Parcelable

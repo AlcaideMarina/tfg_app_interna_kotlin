@@ -9,6 +9,9 @@ import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.usecases.CreateAuthUserUseCase
 import com.example.hueverianieto.domain.usecases.GetClientIdUseCase
 import com.example.hueverianieto.domain.usecases.NewClientUseCase
+import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
+import com.example.hueverianieto.utils.ClientUtils
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +22,7 @@ import javax.inject.Inject
 class NewClientViewModel @Inject constructor(
     val newClientUseCase: NewClientUseCase,
     val getClientIdUseCase: GetClientIdUseCase,
-    val createAuthUserUseCase: CreateAuthUserUseCase
+    val createAuthUserUseCase: CreateAuthUserUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(NewClientViewState())
@@ -31,36 +34,64 @@ class NewClientViewModel @Inject constructor(
     fun addNewClient(clientData: ClientData) {
         viewModelScope.launch {
             _viewState.value = NewClientViewState(isLoading = true)
-            when(val clientId = getClientIdUseCase()) {
-                null -> {
-                    _viewState.value = NewClientViewState(isLoading = false, error = true)
-                }
-                else -> {
-                    clientData.setClientId(clientId)
-                    when(newClientUseCase(clientData)) {
-                        false -> {
-                            _viewState.value = NewClientViewState(
-                                isLoading = false,
-                                error = true)
+            if (Utils.isValidEmail(clientData.email)) {
+                if (clientData.hasAccount && clientData.user != null) {
+                    when(val newUid = createAuthUserUseCase(clientData.email, clientData.user!!)) {
+                        null -> {
+                            _viewState.value = NewClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
-                                title = "Error",
-                                text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo."
+                                "Error",
+                                "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres.",
+                                true
                             )
                         }
-                        true -> {
-                            _viewState.value = NewClientViewState(
-                                isLoading = false,
-                                error = false
-                            )
-                            _alertDialog.value = AlertOkData(
-                                title = "Cliente guardado",
-                                text = "El cliente ha sido guardado correctamente en la base de datos",
-                                customCode = 0
-                            )
+                        else -> {
+                            clientData.uid = newUid
+                            when(val clientId = getClientIdUseCase()) {
+                                null -> {
+                                    _viewState.value = NewClientViewState(isLoading = false, error = true)
+                                }
+                                else -> {
+                                    clientData.id = clientId
+                                    when(newClientUseCase(clientData)) {
+                                        false -> {
+                                            _viewState.value = NewClientViewState(
+                                                isLoading = false,
+                                                error = true)
+                                            _alertDialog.value = AlertOkData(
+                                                title = "Error",
+                                                text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",
+                                                true
+                                            )
+                                        }
+                                        true -> {
+                                            _viewState.value = NewClientViewState(
+                                                isLoading = false,
+                                                error = false
+                                            )
+                                            _alertDialog.value = AlertOkData(
+                                                title = "Cliente guardado",
+                                                text = "El cliente ha sido guardado correctamente en la base de datos.",
+                                                true,
+                                                customCode = 0
+                                            )
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+
+            } else {
+                _viewState.value = NewClientViewState(isLoading = false, error = true)
+                _alertDialog.value = AlertOkData(
+                    title = "Correo no válido",
+                    text = "El correo introducido no tiene un formato válido. Por favor, revise los datos e inténtelo de nuevo.",
+                    true
+                )
             }
+
         }
     }
 

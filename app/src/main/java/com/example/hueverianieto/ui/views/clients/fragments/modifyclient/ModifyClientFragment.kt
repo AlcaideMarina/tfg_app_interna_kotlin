@@ -67,14 +67,14 @@ class ModifyClientFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        this.modifyClientViewModel.alertDialog.observe(this) { alertErrorOkData ->
-            if (alertErrorOkData.finish) {
-                if (alertErrorOkData.customCode == 1) {
+        this.modifyClientViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 1) {
                     Utils.setPopUp(
                         alertDialog,
                         requireContext(),
-                        alertErrorOkData.title,
-                        alertErrorOkData.text,
+                        alertOkData.title,
+                        alertOkData.text,
                         "De acuerdo",
                         null,
                         {
@@ -84,7 +84,7 @@ class ModifyClientFragment : BaseFragment() {
                         null
                     )
                 } else {
-                    setPopUp(alertErrorOkData.title, alertErrorOkData.text)
+                    setPopUp(alertOkData.title, alertOkData.text)
                 }
 
             }
