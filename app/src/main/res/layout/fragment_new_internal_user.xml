@@ -29,27 +29,27 @@
                     android:id="@+id/name_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/name_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Nombre:" />
 
                     <EditText
                         android:id="@+id/name_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="name"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="text"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="name"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -57,27 +57,27 @@
                     android:id="@+id/surname_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/surname_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Apellidos:" />
 
                     <EditText
                         android:id="@+id/surname_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="name"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="text"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="name"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -85,27 +85,27 @@
                     android:id="@+id/dni_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/dni_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="DNI:" />
 
                     <EditText
                         android:id="@+id/dni_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="name"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="text"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="name"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -113,27 +113,27 @@
                     android:id="@+id/phone_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/phone_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Teléfono:" />
 
                     <EditText
                         android:id="@+id/phone_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="phone"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="phone"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="phone"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -141,27 +141,27 @@
                     android:id="@+id/email_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/email_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Correo:" />
 
                     <EditText
                         android:id="@+id/email_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="emailAddress"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="textEmailAddress"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="emailAddress"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -169,27 +169,27 @@
                     android:id="@+id/direction_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/direction_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Dirección:" />
 
                     <EditText
                         android:id="@+id/direction_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="name"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="text"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="name"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -197,27 +197,27 @@
                     android:id="@+id/city_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/city_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Ciudad:" />
 
                     <EditText
                         android:id="@+id/city_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="name"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="text"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="name"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -225,27 +225,27 @@
                     android:id="@+id/province_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/province_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Provincia:" />
 
                     <EditText
                         android:id="@+id/province_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="phone"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="phone"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="phone"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -253,27 +253,27 @@
                     android:id="@+id/postal_code_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/postal_code_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Código postal:" />
 
                     <EditText
                         android:id="@+id/postal_code_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="postalCode"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="number"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="postalCode"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -281,27 +281,27 @@
                     android:id="@+id/ss_number_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/ss_number_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Nº Afiliación de la Seguridad Social:" />
 
                     <EditText
                         android:id="@+id/ss_number_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="phone"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="number"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="phone"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -309,27 +309,27 @@
                     android:id="@+id/bank_account_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/bank_account_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Cuenta bancaria:" />
 
                     <EditText
                         android:id="@+id/bank_account_text_input_layout"
                         android:layout_width="match_parent"
                         android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="phone"
+                        android:background="@drawable/custom_input"
                         android:ems="10"
                         android:inputType="number"
-                        android:textSize="16sp"
-                        android:background="@drawable/custom_input"
                         android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:autofillHints="phone"/>
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -337,31 +337,36 @@
                     android:id="@+id/role_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" >
+                    android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/role_text_view"
-                        android:layout_marginTop="@dimen/size8"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
                         android:text="Puesto:" />
 
+                    <!-- TODO: Revisar por qué se corta -->
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/text_input_layout"
+                        android:id="@+id/role_text_input_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        android:hint="-"
-                        android:textColorHint="@color/light_gray_color"
-                        android:background="@drawable/custom_input"
-                        android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
+                        android:layout_height="48dp"
                         android:layout_marginHorizontal="@dimen/size16"
+                        android:textColorHint="@color/light_gray_color"
                         app:boxCornerRadiusBottomEnd="@dimen/size16"
                         app:boxCornerRadiusBottomStart="@dimen/size16"
                         app:boxCornerRadiusTopEnd="@dimen/size16"
                         app:boxCornerRadiusTopStart="@dimen/size16"
-                        app:boxStrokeColor="@color/light_gray_color"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu" >
+                        app:boxStrokeColor="@color/light_gray_color">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/role_auto_complete_text_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:background="@drawable/custom_input"
+                            android:inputType="none"
+                            android:paddingTop="12dp" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
@@ -378,58 +383,58 @@
                         android:id="@+id/body_container_recycler_view"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="15dp"
                         android:layout_marginTop="15dp"
-                        android:background="@drawable/bg_border_container_border_check_title" >
+                        android:background="@drawable/bg_border_container_border_check_title"
+                        android:padding="15dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
-                            app:layout_constraintTop_toTopOf="parent"
                             app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent">
+                            app:layout_constraintTop_toTopOf="parent">
 
                             <LinearLayout
                                 android:id="@+id/user_account_text_layout"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:orientation="vertical" >
+                                android:orientation="vertical">
 
                                 <TextView
                                     android:id="@+id/user_account_text_view"
-                                    android:layout_marginTop="@dimen/size8"
                                     android:layout_width="wrap_content"
                                     android:layout_height="match_parent"
+                                    android:layout_marginTop="@dimen/size8"
                                     android:text="Usuario:" />
 
                                 <EditText
                                     android:id="@+id/user_account_text_input_layout"
                                     android:layout_width="match_parent"
                                     android:layout_height="40dp"
+                                    android:layout_marginHorizontal="@dimen/size16"
+                                    android:layout_marginTop="@dimen/size8"
+                                    android:autofillHints="username"
+                                    android:background="@drawable/custom_input"
                                     android:ems="10"
                                     android:inputType="text"
-                                    android:textSize="16sp"
-                                    android:background="@drawable/custom_input"
                                     android:paddingHorizontal="12dp"
-                                    android:layout_marginTop="@dimen/size8"
-                                    android:layout_marginHorizontal="@dimen/size16"
-                                    android:autofillHints="username"/>
+                                    android:textSize="16sp" />
 
                             </LinearLayout>
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="El usuario debe tener más de 6 dígitos."
-                                android:layout_marginTop="@dimen/size16"/>
+                                android:layout_marginTop="@dimen/size16"
+                                android:text="El usuario debe tener más de 6 dígitos." />
 
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña."
-                                android:layout_marginBottom="4dp"/>
+                                android:layout_marginBottom="4dp"
+                                android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña." />
 
                         </LinearLayout>
 
@@ -439,14 +444,14 @@
                         android:id="@+id/checked_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:checked="false"
-                        android:gravity="center"
-                        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-                        android:text="Crear usuario para la app cliente"
                         android:layout_marginStart="@dimen/size24"
+                        android:background="@color/white_color"
+                        android:checked="false"
+                        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+                        android:gravity="center"
                         android:paddingStart="12dp"
                         android:paddingEnd="16dp"
-                        android:background="@color/white_color"/>
+                        android:text="Crear usuario para la app cliente" />
 
                 </RelativeLayout>
 

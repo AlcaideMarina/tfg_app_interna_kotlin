@@ -40,6 +40,13 @@
     <string name="logo_image_description_content">Logo icon</string>
     <string name="content_description_error_icon">Error icon</string>
     <string name="login_button">Entrar</string>
+    
+    <!-- Roles -->
+    <string name="warehouse_job">Almacén</string>
+    <string name="boss_job">Jefe</string>
+    <string name="delivery_job">Repartidor</string>
+    <string name="office_job">Oficinista</string>
+    <string name="farm_job">Personal de granja</string>
 
 
 </resources>

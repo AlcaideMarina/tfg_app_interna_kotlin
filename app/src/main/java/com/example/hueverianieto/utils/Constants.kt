@@ -1,5 +1,7 @@
 package com.example.hueverianieto.utils
 
+import com.example.hueverianieto.R
+
 object Constants {
 
     const val loginNetworkError: String =
@@ -9,5 +11,13 @@ object Constants {
         "There is no user record corresponding to this identifier. The user may have been deleted."
     const val loginInvalidPasswordError: String =
         "The password is invalid or the user does not have a password."
+
+    val roles : Map<Int, Int> = mapOf(
+        R.string.warehouse_job to 0,
+        R.string.boss_job to 1,
+        R.string.delivery_job to 2,
+        R.string.office_job to 3,
+        R.string.farm_job to 4
+    )
 
 }

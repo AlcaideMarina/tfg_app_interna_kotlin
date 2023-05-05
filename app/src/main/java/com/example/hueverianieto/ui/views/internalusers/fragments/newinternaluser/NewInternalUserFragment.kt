@@ -4,13 +4,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewInternalUserBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +23,7 @@ class NewInternalUserFragment : BaseFragment() {
     private lateinit var binding: FragmentNewInternalUserBinding
     private lateinit var alertDialog: HNModalDialog
     private lateinit var currentUserData: InternalUserData
+    private var dropdownRoleItems : MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,6 +44,7 @@ class NewInternalUserFragment : BaseFragment() {
     override fun configureUI() {
 
         setButtons()
+        setDropdownRoleOptions()
         this.alertDialog = HNModalDialog(requireContext())
 
     }
@@ -48,7 +54,15 @@ class NewInternalUserFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.roleAutoCompleteTextView.setOnFocusChangeListener { v, hasFocus ->
+            if (hasFocus) {
+                v.hideSoftInput()
+            }
+        }
+        /*this.binding.roleAutoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
+            var itemSelected = adapterView.getItemAtPosition(position)
+
+        }*/
     }
 
     override fun updateUI(state: BaseState) {
@@ -58,6 +72,20 @@ class NewInternalUserFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.saveButton.setText("Guardar")
         this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setDropdownRoleOptions() {
+        val values = Constants.roles.entries.iterator()
+        for (v in values) {
+            dropdownRoleItems.add(requireContext().getString(v.key))
+        }
+
+        this.binding.roleAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                this.requireContext(), R.layout.component_dropdown_list_item,
+                dropdownRoleItems
+            ))
+
     }
 
 }
