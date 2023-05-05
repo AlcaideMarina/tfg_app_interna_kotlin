@@ -358,7 +358,6 @@
                         app:boxCornerRadiusBottomStart="@dimen/size16"
                         app:boxCornerRadiusTopEnd="@dimen/size16"
                         app:boxCornerRadiusTopStart="@dimen/size16"
-                        android:background="@drawable/custom_input"
                         app:boxStrokeColor="@color/light_gray_color">
 
                         <AutoCompleteTextView
