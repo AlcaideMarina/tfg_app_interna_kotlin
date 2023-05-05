@@ -9,6 +9,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrdersAndDeliveryBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +18,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
 
     private lateinit var binding : FragmentOrdersAndDeliveryBinding
     private lateinit var internalUserData: InternalUserData
+    private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +32,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
@@ -44,4 +46,11 @@ class OrderAndDeliveryFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.newOrderButton.setText("Nuevo pedido")
+        this.binding.seeAllOrdersButton.setText("Ver todo")
+    }
+
+
 }
