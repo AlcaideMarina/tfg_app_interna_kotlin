@@ -5,7 +5,7 @@
     app:startDestination="@id/allClientsFragment">
     <fragment
         android:id="@+id/allClientsFragment"
-        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsFragment"
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsFragment"
         android:label="Ver clientes" >
         <action
             android:id="@+id/action_allClientsFragment_to_newClientFragment"
@@ -19,19 +19,43 @@
     </fragment>
     <fragment
         android:id="@+id/newClientFragment"
-        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.NewClientFragment"
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment"
         android:label="Nuevo cliente" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
     <fragment
         android:id="@+id/deletedClientsFragment"
-        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.DeletedClientsFragment"
-        android:label="Clientes eliminados" />
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsFragment"
+        android:label="Clientes eliminados" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
     <fragment
         android:id="@+id/clientDetailFragment"
-        android:name="com.example.hueverianieto.ui.views.usersandclients.clients.ClientDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailFragment"
         android:label="Información de cliente" >
         <argument
             android:name="clientData"
             app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_clientDetailFragment_to_modifyClientFragment"
+            app:destination="@id/modifyClientFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyClientFragment"
+        android:name="com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientFragment"
+        android:label="Modificar cliente" >
+        <argument
+            android:name="clientData"
+            app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>

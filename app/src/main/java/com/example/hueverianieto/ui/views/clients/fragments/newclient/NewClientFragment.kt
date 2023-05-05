@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients.clients
+package com.example.hueverianieto.ui.views.clients.fragments.newclient
 
 import android.os.Bundle
 import android.text.InputType
@@ -7,23 +7,33 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
 import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
-// TODO: Loading
+
+@AndroidEntryPoint
 class NewClientFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewClientBinding
     private lateinit var alertDialog: HNModalDialog
+    private lateinit var currentUserData: InternalUserData
+    private val newClientViewModel : NewClientViewModel by viewModels()
 
     private var company : String = ""
     private var direction : String = ""
@@ -37,106 +47,8 @@ class NewClientFragment : BaseFragment() {
     private var phone2 : String = ""
     private var namePhone2 : String = ""
     private var hasAccount : Boolean = false
-    private var accountEmail : String? = ""
     private var accountUser : String? = ""
 
-
-    override fun configureUI() {
-
-        this.alertDialog = HNModalDialog(requireContext())
-
-        this.binding.let {
-            it.saveButton.isEnabled = true
-            it.saveButton.setText("Guardar")
-            it.cancelButton.isEnabled = true
-            it.cancelButton.setText("Eliminar")
-
-            it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
-            it.cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
-            it.emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-            it.phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-
-            it.emailAccountTextInputLayout.isEnabled = false
-            it.userAccountTextInputLayout.isEnabled = false
-        }
-
-    }
-
-    override fun setObservers() {
-        //
-    }
-
-    override fun setListeners() {
-        this.binding.checkedTextView.setOnClickListener {
-            this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
-            this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
-            this.binding.emailAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
-
-        }
-        this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
-        this.binding.saveButton.setOnClickListener {
-
-            this.binding.let {
-                company = it.companyTextInputLayout.getText()
-                direction = it.directionTextInputLayout.getText()
-                city = it.cityTextInputLayout.getText()
-                province = it.provinceTextInputLayout.getText()
-                postalCode = it.postalCodeTextInputLayout.getText()
-                cif = it.cifTextInputLayout.getText()
-                email = it.emailTextInputLayout.getText()
-                phone1 = it.phoneTextInputLayoutPhone1.getText()
-                namePhone1 = it.phoneTextInputLayoutName1.getText()
-                phone2 = it.phoneTextInputLayoutPhone2.getText()
-                namePhone2 = it.phoneTextInputLayoutName1.getText()
-                hasAccount = it.checkedTextView.isChecked
-                accountEmail = it.emailAccountTextInputLayout.getText()
-                accountUser = it.userAccountTextInputLayout.getText()
-            }
-            if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
-                cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
-                namePhone2 != "") {
-                // TODO: Checkear tipos
-                if (!hasAccount) {
-                    accountEmail = null
-                    accountUser = null
-                } else {
-                    // TODO: Crear usuario en Auth
-                    // TODO: Coger el uid
-                }
-                if (!Utils.isValidEmail(email) || (accountEmail != null && !Utils.isValidEmail(accountEmail))) {
-                    setPopUp(
-                        "Email incorrecto",
-                        "Hemos detectado que el formato del email introducido no es correcto. Por favor, revise los datos."
-                    ) {
-                        alertDialog.cancel()
-                    }
-                } else {
-                    // TODO: Sacar el id
-                    saveUser()
-                }
-            } else {
-                setPopUp(
-                    "Revise los datos",
-                    "Hemos detectado que no se han rellenado todos los campos solicitados o que son incorrectos. Por favor, revise el formulario. Recuerde que los campos de usuario son obligatorios si el la casilla de verificación está marcada."
-                ) {
-                    alertDialog.cancel()
-                }
-            }
-
-        }
-    }
-
-    override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -147,18 +59,85 @@ class NewClientFragment : BaseFragment() {
         this.binding = FragmentNewClientBinding.inflate(
             inflater, container, false
         )
+
+        val args : NewClientFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+
         return this.binding.root
     }
 
-    /*private fun initRecyclerView() {
-        this.binding.newClientClientFieldsRecyclerView.layoutManager = LinearLayoutManager(context)
-        this.binding.newClientClientFieldsRecyclerView.adapter = TitleTextInputLayoutAdapter(fieldList)
-        this.binding.newClientClientFieldsRecyclerView.isNestedScrollingEnabled = false
+    override fun configureUI() {
 
-        this.binding.containerBorderCheckTitle.getBodyContainer().layoutManager = LinearLayoutManager(context)
-        this.binding.containerBorderCheckTitle.getBodyContainer().adapter = TitleTextInputLayoutAdapter(ClientUtils.createUserToClientFields())
-        this.binding.containerBorderCheckTitle.getBodyContainer().isNestedScrollingEnabled = false
-    }*/
+        this.alertDialog = HNModalDialog(requireContext())
+
+        this.binding.let {
+            it.saveButton.setText("Guardar")
+            it.cancelButton.setText("Cancelar")
+
+            it.userAccountTextInputLayout.isEnabled = false
+
+            /*it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
+            it.postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
+            it.cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
+            it.emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+            it.phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
+            it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
+            it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)*/
+        }
+
+        lifecycleScope.launchWhenStarted {
+            newClientViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
+    }
+
+    override fun setObservers() {
+        this.newClientViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    setPopUp(alertOkData.title, alertOkData.text){ alertDialog.cancel() }
+                }
+            }
+        }
+    }
+
+    override fun setListeners() {
+        this.binding.checkedTextView.setOnClickListener {
+            this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
+            this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
+        }
+
+        this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
+        this.binding.saveButton.setOnClickListener { checkOrder() }
+    }
+
+    override fun updateUI(state: BaseState) {
+        with(state as NewClientViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
+    }
 
     private fun setPopUp(title: String, message: String, listener: OnClickListener) {
 
@@ -198,9 +177,8 @@ class NewClientFragment : BaseFragment() {
                         false,
                         direction,
                         email,
-                        accountEmail,
                         hasAccount,
-                        nextIdStr,
+                        nextIdStr.toLong(),
                         listOf(
                             mapOf(namePhone1 to phone1.toLong()),
                             mapOf(namePhone2 to phone2.toLong())
@@ -236,5 +214,59 @@ class NewClientFragment : BaseFragment() {
                 }
             }
         return nextIdStr
+    }
+
+    private fun checkOrder() {
+        variableAssignations()
+        if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
+            cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
+            namePhone2 != "") {
+            val clientData = ClientData(
+                cif,
+                city,
+                "user_${currentUserData.id}",
+                company,
+                false,
+                direction,
+                email,
+                hasAccount,
+                null,
+                listOf(
+                    mapOf(namePhone1 to phone1.toLong()),
+                    mapOf(namePhone2 to phone2.toLong())
+                ),
+                postalCode.toLong(),
+                province,
+                null,
+                accountUser,
+                null
+            )
+            this.newClientViewModel.addNewClient(clientData)
+        } else {
+            setPopUp(
+                "Revise los datos",
+                "Hemos detectado que no se han rellenado todos los campos solicitados o que son incorrectos. Por favor, revise el formulario. Recuerde que los campos de usuario son obligatorios si el la casilla de verificación está marcada."
+            ) {
+                alertDialog.cancel()
+            }
+        }
+    }
+
+    private fun variableAssignations() {
+        this.binding.let {
+            company = it.companyTextInputLayout.text.toString()
+            direction = it.directionTextInputLayout.text.toString()
+            city = it.cityTextInputLayout.text.toString()
+            province = it.provinceTextInputLayout.text.toString()
+            postalCode = it.postalCodeTextInputLayout.text.toString()
+            cif = it.cifTextInputLayout.text.toString()
+            email = it.emailTextInputLayout.text.toString()
+            phone1 = it.phoneTextInputLayoutPhone1.text.toString()
+            namePhone1 = it.phoneTextInputLayoutName1.text.toString()
+            phone2 = it.phoneTextInputLayoutPhone2.text.toString()
+            namePhone2 = it.phoneTextInputLayoutName2.text.toString()
+            hasAccount = it.checkedTextView.isChecked
+            accountUser = if (hasAccount) it.userAccountTextInputLayout.text.toString() else null
+        }
     }
 }

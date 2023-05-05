@@ -16,7 +16,7 @@ object ClientUtils {
         } else if (data.containsKey("cif") && data.containsKey("city") &&
             data.containsKey("created_by") && data.containsKey("deleted") &&
             data.containsKey("company") && data.containsKey("direction") && data.containsKey("email")
-            && data.containsKey("email_account") && data.containsKey("has_account") && data.containsKey("id") &&
+            && data.containsKey("has_account") && data.containsKey("id") &&
             data.containsKey("phone") && data.containsKey("postal_code") &&
             data.containsKey("province") && data.containsKey("uid") &&
             data.containsKey("user")
@@ -37,9 +37,8 @@ object ClientUtils {
             data["deleted"] as Boolean,
             data["direction"] as String,
             data["email"] as String,
-            data["email_account"] as String?,
             data["has_account"] as Boolean,
-            data["id"] as String,
+            data["id"] as Long,
             data["phone"] as List<Map<String, Long>>,
             data["postal_code"] as Long,
             data["province"] as String,
@@ -58,7 +57,6 @@ object ClientUtils {
         map["deleted"] = clientData.deleted
         map["direction"] = clientData.direction
         map["email"] = clientData.email
-        map["email_account"] = clientData.emailAccount
         map["has_account"] = clientData.hasAccount
         map["id"] = clientData.id
         map["phone"] = clientData.phone

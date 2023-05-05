@@ -15,7 +15,7 @@ import com.example.hueverianieto.ui.components.componentinternaluseradapter.Comp
 import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentAllInternalUsersBinding
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
-import com.example.hueverianieto.ui.views.usersandclients.clients.AllClientsFragment
+import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsFragment
 import com.example.hueverianieto.utils.InternalUserUtils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase

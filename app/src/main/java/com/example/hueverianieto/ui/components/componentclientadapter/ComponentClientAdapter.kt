@@ -6,7 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 
-class ComponentClientAdapter(private val componentClientModelList: List<ComponentClientModel>) : RecyclerView.Adapter<ComponentClientViewHolder>() {
+class ComponentClientAdapter(
+    private val componentClientModelList: List<ComponentClientModel>
+) : RecyclerView.Adapter<ComponentClientViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentClientViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
