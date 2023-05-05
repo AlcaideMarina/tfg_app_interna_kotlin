@@ -10,7 +10,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.DeleteInternalUserUseCase
+import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
+import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,7 +22,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InternalUserDetailViewModel @Inject constructor(
-    val deleteInternalUserUseCase : DeleteInternalUserUseCase
+    val deleteInternalUserUseCase : DeleteInternalUserUseCase,
+    val getUserDataUseCase: GetUserDataUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(InternalUserDetailViewState())
@@ -27,6 +31,9 @@ class InternalUserDetailViewModel @Inject constructor(
 
     private var _alertDialog = MutableLiveData(AlertOkData())
     val alertDialog: LiveData<AlertOkData> get() = _alertDialog
+
+    private var _internalUserData = MutableLiveData<InternalUserData>()
+    val internalUserData: LiveData<InternalUserData> get() = _internalUserData
 
     fun deleteInternalUser(documentId: String) {
         viewModelScope.launch {
@@ -59,6 +66,19 @@ class InternalUserDetailViewModel @Inject constructor(
                 InternalUserDetailViewModel::class.simpleName,
                 "Error en la navegación a Modificar usuario interno"
             )
+    }
+
+    fun getInternalUserData(documentId: String) {
+        viewModelScope.launch {
+            _viewState.value = InternalUserDetailViewState(isLoading = true)
+            when(val result = getUserDataUseCase(documentId, "user_info")) {
+                null -> _viewState.value = InternalUserDetailViewState(isLoading = false, error = true)
+                else -> {
+                    _viewState.value = InternalUserDetailViewState(isLoading = false)
+                    _internalUserData.value = result!! as InternalUserData
+                }
+            }
+        }
     }
 
 }

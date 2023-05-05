@@ -48,6 +48,9 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+
+        this.internalUserDetailViewModel.getInternalUserData(internalUserData.documentId!!)
+
         setButtons()
         setFieldText()
 
@@ -88,6 +91,10 @@ class InternalUserDetailFragment : BaseFragment() {
                     )
                 }
             }
+        }
+        this.internalUserDetailViewModel.internalUserData.observe(this) {
+            this.internalUserData = it
+            setFieldText()
         }
     }
 
