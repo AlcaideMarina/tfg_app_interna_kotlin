@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_allInternalUsersFragment_to_newInternalUserFragment"
             app:destination="@id/newInternalUserFragment" />
+        <action
+            android:id="@+id/action_allInternalUsersFragment_to_internalUserDetailFragment"
+            app:destination="@id/internalUserDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/deletedInternalUsersFragment"
@@ -28,6 +31,17 @@
         android:label="Nuev us. interno" >
         <argument
             android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+    <fragment
+        android:id="@+id/internalUserDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.internalusers.fragments.internaluserdetail.InternalUserDetailFragment"
+        android:label="Detalle de us. interno" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="internalUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>

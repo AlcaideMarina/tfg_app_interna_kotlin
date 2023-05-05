@@ -53,7 +53,7 @@ class AllInternalUsersViewModel @Inject constructor(
     fun navigateDeleteInternalUsers(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_deletedInternalUsersFragment, bundle)
             ?: Log.e(
-                AllInternalUsersFragment::class.simpleName,
+                AllInternalUsersViewModel::class.simpleName,
                 "Error en la navegación a Usuarios internos eliminados"
             )
     }
@@ -61,8 +61,17 @@ class AllInternalUsersViewModel @Inject constructor(
     fun navigateToNewInternalUsers(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_newInternalUserFragment, bundle)
             ?: Log.e(
-                AllInternalUsersFragment::class.simpleName,
+                AllInternalUsersViewModel::class.simpleName,
                 "Error en la navegación a Usuarios internos eliminados"
             )
     }
+
+    fun navigateToInternalUserDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_internalUserDetailFragment, bundle)
+            ?: Log.e(
+                AllInternalUsersViewModel::class.simpleName,
+                "Error en la navegacion a Detalle de usuario interno"
+            )
+    }
+
 }

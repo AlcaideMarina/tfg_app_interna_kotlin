@@ -81,8 +81,13 @@ class AllInternalUsersFragment : BaseFragment() {
                             internalUserData.dni,
                             "internalUserData.role"
                         ) {
-                            // TODO
-                            Log.v("NAVEGACIÓN", AllInternalUsersFragment::class.java.simpleName)
+                            this.allInternalUsersViewModel.navigateToInternalUserDetail(
+                                this.view,
+                                bundleOf(
+                                    "currentUserData" to currentUserData,
+                                    "internalUserData" to internalUserData
+                                )
+                            )
                         }
                         internalUserList.add(componentInternalUserModel)
                     }
