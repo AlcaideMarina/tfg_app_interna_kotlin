@@ -409,7 +409,7 @@
                     android:layout_marginHorizontal="@dimen/size16">
 
                     <com.example.hueverianieto.ui.components.HNButton
-                        android:id="@+id/save_button"
+                        android:id="@+id/modify_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -417,13 +417,13 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <com.example.hueverianieto.ui.components.HNButton
-                        android:id="@+id/cancel_button"
+                        android:id="@+id/delete_user_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/size8"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/save_button" />
+                        app:layout_constraintTop_toBottomOf="@id/modify_button" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

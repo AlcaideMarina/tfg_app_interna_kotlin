@@ -4,18 +4,25 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentInternalUserDetailBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class InternalUserDetailFragment : BaseFragment() {
 
     private lateinit var binding : FragmentInternalUserDetailBinding
     private lateinit var currentUserData : InternalUserData
     private lateinit var internalUserData : InternalUserData
+    private val internalUserDetailViewModel : InternalUserDetailViewModel by viewModels()
+    private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +38,8 @@ class InternalUserDetailFragment : BaseFragment() {
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
 
+        this.alertDialog = HNModalDialog(requireContext())
+
         return this.binding.root
     }
 
@@ -44,7 +53,23 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.deleteUserButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso importante",
+                "Esta acción es irreversible. ¿Está seguro de que quiere eliminar el usuario?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    this.internalUserDetailViewModel.deleteInternalUser(
+                        internalUserData.documentId!!
+                    )
+                }
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -52,8 +77,11 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar usuario")
+        this.binding.modifyButton.setText("Modificar")
+        this.binding.deleteUserButton.setText("Eliminar usuario")
+        if (currentUserData.documentId == internalUserData.documentId) {
+            this.binding.deleteUserButton.isEnabled = false
+        }
     }
 
     private fun setFieldText() {
