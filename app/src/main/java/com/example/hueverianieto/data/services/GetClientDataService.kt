@@ -11,9 +11,9 @@ class GetClientDataService @Inject constructor(
     val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getClientData(documentId: String) : ClientData? = runCatching {
+    suspend fun getClientData(documentId: String, collection: String) : ClientData? = runCatching {
         firebaseClient.db
-            .collection("client_info")
+            .collection(collection)
             .document(documentId)
             .get()
             .await()
