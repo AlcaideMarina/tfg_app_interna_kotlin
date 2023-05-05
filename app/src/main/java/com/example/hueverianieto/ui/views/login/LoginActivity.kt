@@ -43,7 +43,7 @@ class LoginActivity : BaseActivity() {
 
     override fun configureUI() {
 
-        this.binding.userTextInputLayout.hint = resources.getString(R.string.user_text_input_layout)
+        this.binding.userTextInputLayout.hint = "Correo"
         this.binding.userTextInputLayout.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
         this.binding.passwordTextInputLayout.hint = resources.getString(R.string.password_text_input_layout)
         this.binding.passwordTextInputLayout.transformationMethod = PasswordTransformationMethod.getInstance()
