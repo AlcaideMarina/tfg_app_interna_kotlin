@@ -50,7 +50,7 @@
     <fragment
         android:id="@+id/modifyInternalUserFragment"
         android:name="com.example.hueverianieto.ui.views.internalusers.fragments.modifyinternaluser.ModifyInternalUserFragment"
-        android:label="ModifyInternalUserFragment" >
+        android:label="Modificar us. interno" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
