@@ -38,7 +38,7 @@ class DeletedClientsViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = DeletedClientsViewState(isLoading = false)
-                    _clientList.value = result
+                    _clientList.value = result.sortedBy { it?.id }
                 }
             }
         }

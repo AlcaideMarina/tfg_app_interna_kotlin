@@ -35,7 +35,7 @@ class AllClientsViewModel @Inject constructor(
         _viewState.value = AllClientsViewState(isLoading = true)
         viewModelScope.launch {
             _viewState.value = AllClientsViewState(isLoading = true)
-            when (val result = getAllClientsUseCase(false)) {
+            when (val result : List<ClientData?>? = getAllClientsUseCase(false)) {
                 null -> {
                     _viewState.value = AllClientsViewState(isLoading = false, error = true)
                     _clientList.value = listOf()
@@ -46,7 +46,7 @@ class AllClientsViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = AllClientsViewState(isLoading = false)
-                    _clientList.value = result
+                    _clientList.value = result.sortedBy { it?.id }
                 }
             }
         }
