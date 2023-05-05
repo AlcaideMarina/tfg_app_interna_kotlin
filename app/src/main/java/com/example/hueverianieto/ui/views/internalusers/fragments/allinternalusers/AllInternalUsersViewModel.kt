@@ -57,4 +57,12 @@ class AllInternalUsersViewModel @Inject constructor(
                 "Error en la navegación a Usuarios internos eliminados"
             )
     }
+
+    fun navigateToNewInternalUsers(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_newInternalUserFragment, bundle)
+            ?: Log.e(
+                AllInternalUsersFragment::class.simpleName,
+                "Error en la navegación a Usuarios internos eliminados"
+            )
+    }
 }

@@ -108,6 +108,14 @@ class AllInternalUsersFragment : BaseFragment() {
                 )
             )
         }
+        this.binding.newInternalUserButton.setOnClickListener {
+            this.allInternalUsersViewModel.navigateToNewInternalUsers(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
