@@ -14,5 +14,9 @@
     <fragment
         android:id="@+id/deletedInternalUsersFragment"
         android:name="com.example.hueverianieto.ui.views.internalusers.fragments.deletedinternalusers.DeletedInternalUsersFragment"
-        android:label="Usuarios internos eliminados" />
+        android:label="Usuarios internos eliminados" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
 </navigation>
