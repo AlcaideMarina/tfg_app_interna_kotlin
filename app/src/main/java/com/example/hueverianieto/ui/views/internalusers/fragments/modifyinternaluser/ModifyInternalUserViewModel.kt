@@ -33,7 +33,7 @@ class ModifyInternalUserViewModel @Inject constructor(
             if(Utils.isValidEmail(internalUserData.email)) {
                 val internalUserDataMap = InternalUserUtils.parcelableToMap(internalUserData)
                 when (val result = updateFirestoreUserUseCase(
-                    internalUserDataMap, internalUserData.documentId!!, "user_data")) {
+                    internalUserDataMap, internalUserData.documentId!!, "user_info")) {
                     false -> {
                         _viewState.value = ModifyInternalUserViewState(isLoading = false, error = true)
                         _alertDialog.value = AlertOkData(

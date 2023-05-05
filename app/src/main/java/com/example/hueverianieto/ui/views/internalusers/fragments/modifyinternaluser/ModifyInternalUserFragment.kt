@@ -111,7 +111,7 @@ class ModifyInternalUserFragment : BaseFragment() {
                 requireContext().getString(R.string.delivery_job) -> R.string.delivery_job
                 else -> null
             }
-            var internalUserData = InternalUserData(
+            val internalUserData = InternalUserData(
                 this.binding.bankAccountTextInputLayout.text.toString(),
                 this.binding.cityTextInputLayout.text.toString(),
                 this.internalUserData.createdBy,
@@ -131,6 +131,7 @@ class ModifyInternalUserFragment : BaseFragment() {
                 this.binding.userAccountTextInputLayout.text.toString(),
                 this.internalUserData.documentId
             )
+            this.modifyInternalUserViewModel.updateUser(internalUserData)
         }
     }
 
