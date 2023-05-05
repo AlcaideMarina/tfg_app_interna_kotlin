@@ -42,7 +42,7 @@ class AllClientsActivity : BaseActivity() {
     }
 
     override fun configureUI() {
-        //
+        // Not necessary
     }
 
     override fun setListeners() {
@@ -50,7 +50,7 @@ class AllClientsActivity : BaseActivity() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     fun getToolbar() : Toolbar {
