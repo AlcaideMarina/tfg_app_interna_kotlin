@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.views.usersandclients.users.AllInternalUsersActivity"
+            android:name=".ui.views.internalusers.AllInternalUsersActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize">
 

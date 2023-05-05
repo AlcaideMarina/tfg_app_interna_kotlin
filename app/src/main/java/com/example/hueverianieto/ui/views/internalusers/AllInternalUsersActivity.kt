@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients.users
+package com.example.hueverianieto.ui.views.internalusers
 
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController

@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.usersandclients.users
+package com.example.hueverianieto.ui.views.internalusers.fragments.deletedinternalusers
 
 import android.os.Bundle
 import android.util.Log
