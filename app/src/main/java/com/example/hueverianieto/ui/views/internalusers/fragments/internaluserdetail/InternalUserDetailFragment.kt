@@ -57,7 +57,36 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.internalUserDetailViewModel.alertDialog.observe(this) { alertErrorOkData ->
+            if (alertErrorOkData.finish) {
+                if (alertErrorOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertErrorOkData.title,
+                        alertErrorOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertErrorOkData.title,
+                        alertErrorOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {
