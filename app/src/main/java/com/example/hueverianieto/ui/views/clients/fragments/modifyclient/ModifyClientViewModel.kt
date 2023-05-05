@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.hueverianieto.data.models.local.AlertErrorOkData
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.usecases.CreateAuthUserUseCase
 import com.example.hueverianieto.domain.usecases.UpdateFirestoreUserUseCase
@@ -25,8 +25,8 @@ class ModifyClientViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(ModifyClientViewState())
     val viewState: StateFlow<ModifyClientViewState> get() = _viewState
 
-    private var _alertDialog = MutableLiveData(AlertErrorOkData())
-    val alertDialog: LiveData<AlertErrorOkData> get() = _alertDialog
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun updateUser(clientData: ClientData) {
 
@@ -38,7 +38,7 @@ class ModifyClientViewModel @Inject constructor(
                     when (val result = createAuthUserUseCase(clientData.email, clientData.user!!)) {
                         null -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = true)
-                            _alertDialog.value = AlertErrorOkData(
+                            _alertDialog.value = AlertOkData(
                                 "Error",
                                 "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres.",
                                 true
@@ -52,7 +52,7 @@ class ModifyClientViewModel @Inject constructor(
                                 updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
                                 false -> {
                                     _viewState.value = ModifyClientViewState(isLoading = false, error = true)
-                                    _alertDialog.value = AlertErrorOkData(
+                                    _alertDialog.value = AlertOkData(
                                         "Error",
                                         "Se ha producido un error al guardar los cambios. Revise los datos e inténtelo de nuevo.",
                                         true
@@ -70,7 +70,7 @@ class ModifyClientViewModel @Inject constructor(
                         updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
                         false -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = true)
-                            _alertDialog.value = AlertErrorOkData(
+                            _alertDialog.value = AlertOkData(
                                 "Error",
                                 "Se ha producido un error cuando se estaban actualizado los datos del cliente. Por favor, revise los datos e inténtelo de nuevo.",
                                 true
@@ -78,7 +78,7 @@ class ModifyClientViewModel @Inject constructor(
                         }
                         true -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = false)
-                            _alertDialog.value = AlertErrorOkData(
+                            _alertDialog.value = AlertOkData(
                                 "Cliente actualizado",
                                 "Los datos del cliente se han actualizado correctamente.",
                                 true,
@@ -89,7 +89,7 @@ class ModifyClientViewModel @Inject constructor(
                 }
             } else {
                 _viewState.value = ModifyClientViewState(isLoading = true, error = true)
-                _alertDialog.value = AlertErrorOkData(
+                _alertDialog.value = AlertOkData(
                     "Correo no válido",
                     "Por favor, revise el formato del correo.",
                     true

@@ -1,8 +1,6 @@
 package com.example.hueverianieto.data.models.local
 
-import android.view.View.OnClickListener
-
-data class AlertErrorOkData (
+data class AlertOkData (
     var title: String = "",
     var text: String = "",
     var finish: Boolean = false,

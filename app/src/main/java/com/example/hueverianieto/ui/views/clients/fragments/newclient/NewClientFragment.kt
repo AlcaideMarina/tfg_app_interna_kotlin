@@ -18,8 +18,10 @@ import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import dagger.hilt.android.AndroidEntryPoint
 
-// TODO: Loading
+
+@AndroidEntryPoint
 class NewClientFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewClientBinding
@@ -37,9 +39,20 @@ class NewClientFragment : BaseFragment() {
     private var phone2 : String = ""
     private var namePhone2 : String = ""
     private var hasAccount : Boolean = false
-    private var accountEmail : String? = ""
     private var accountUser : String? = ""
+    
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        (activity as BaseActivity).configNav(true)
+        this.binding = FragmentNewClientBinding.inflate(
+            inflater, container, false
+        )
+        return this.binding.root
+    }
 
     override fun configureUI() {
 
@@ -130,18 +143,6 @@ class NewClientFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        (activity as BaseActivity).configNav(true)
-        this.binding = FragmentNewClientBinding.inflate(
-            inflater, container, false
-        )
-        return this.binding.root
     }
 
     private fun setPopUp(title: String, message: String, listener: OnClickListener) {

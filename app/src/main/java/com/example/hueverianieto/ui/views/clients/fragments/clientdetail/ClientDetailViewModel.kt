@@ -9,13 +9,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
-import com.example.hueverianieto.data.models.local.AlertErrorOkData
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.usecases.ClientDetailUseCase
 import com.example.hueverianieto.domain.usecases.DeleteClientUseCase
 import com.example.hueverianieto.domain.usecases.GetClientDataUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsViewState
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -32,8 +30,8 @@ class ClientDetailViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(ClientDetailViewState())
     val viewState: StateFlow<ClientDetailViewState> get() = _viewState
 
-    private var _alertDialog = MutableLiveData(AlertErrorOkData())
-    val alertDialog: LiveData<AlertErrorOkData> get() = _alertDialog
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     private var _clientData = MutableLiveData<ClientData>()
     val clientData: LiveData<ClientData> get() = _clientData
@@ -52,7 +50,7 @@ class ClientDetailViewModel @Inject constructor(
             when(val result = deleteClientUseCase(documentId)) {
                 false -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = true)
-                    _alertDialog.value = AlertErrorOkData(
+                    _alertDialog.value = AlertOkData(
                         "Error",
                         "Se ha producido un error al eliminar el cliente. Revise los datos e inténtelo de nuevo.",
                         true
@@ -60,7 +58,7 @@ class ClientDetailViewModel @Inject constructor(
                 }
                 true -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = false, correct = true)
-                    _alertDialog.value = AlertErrorOkData(
+                    _alertDialog.value = AlertOkData(
                         "Cliente eliminado",
                         "El cliente ha sido eliminado correctamente",
                         true,
