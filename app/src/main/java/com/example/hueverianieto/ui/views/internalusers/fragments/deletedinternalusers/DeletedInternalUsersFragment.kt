@@ -22,7 +22,9 @@ import com.example.hueverianieto.ui.views.clients.fragments.deletedclients.Delet
 import com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsFragmentArgs
 import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
 import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.InternalUserUtils
+import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -75,7 +77,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
                             internalUserData.name,
                             internalUserData.surname,
                             internalUserData.dni,
-                            "internalUserData.role",
+                            requireContext().getString(Utils.getKey(Constants.roles, internalUserData.position.toInt())!!),
                             null
                         )
                         internalUserList.add(componentInternalUserModel)

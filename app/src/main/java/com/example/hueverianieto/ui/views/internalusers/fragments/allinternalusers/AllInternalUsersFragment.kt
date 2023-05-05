@@ -24,7 +24,9 @@ import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAn
 import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsFragment
 import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsViewState
 import com.example.hueverianieto.ui.views.internalusers.AllInternalUsersActivity
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.InternalUserUtils
+import com.example.hueverianieto.utils.Utils
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -79,7 +81,7 @@ class AllInternalUsersFragment : BaseFragment() {
                             internalUserData.name,
                             internalUserData.surname,
                             internalUserData.dni,
-                            "internalUserData.role"
+                            requireContext().getString(Utils.getKey(Constants.roles, internalUserData.position.toInt())!!)
                         ) {
                             this.allInternalUsersViewModel.navigateToInternalUserDetail(
                                 this.view,
