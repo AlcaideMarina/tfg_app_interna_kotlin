@@ -77,7 +77,7 @@ class ClientDetailViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = ClientDetailViewState(isLoading = false)
-                    _clientData.value = result!!
+                    _clientData.value = result!! as ClientData
                 }
             }
         }
