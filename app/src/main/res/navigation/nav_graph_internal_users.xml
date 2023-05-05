@@ -17,7 +17,7 @@
     <fragment
         android:id="@+id/deletedInternalUsersFragment"
         android:name="com.example.hueverianieto.ui.views.internalusers.fragments.deletedinternalusers.DeletedInternalUsersFragment"
-        android:label="Usuarios internos eliminados" >
+        android:label="Us. internos eliminados" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/newInternalUserFragment"
         android:name="com.example.hueverianieto.ui.views.internalusers.fragments.newinternaluser.NewInternalUserFragment"
-        android:label="NewInternalUserFragment" >
+        android:label="Nuev us. interno" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />

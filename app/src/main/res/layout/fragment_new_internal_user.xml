@@ -372,88 +372,34 @@
 
                 </LinearLayout>
 
-                <RelativeLayout
-                    android:id="@+id/container_border_check_title"
+                <LinearLayout
+                    android:id="@+id/user_account_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginVertical="32dp">
+                    android:orientation="vertical"
+                    android:layout_marginBottom="56dp">
 
-                    <androidx.constraintlayout.widget.ConstraintLayout
-                        android:id="@+id/body_container_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:background="@drawable/bg_border_container_border_check_title"
-                        android:padding="15dp">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent">
-
-                            <LinearLayout
-                                android:id="@+id/user_account_text_layout"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-
-                                <TextView
-                                    android:id="@+id/user_account_text_view"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginTop="@dimen/size8"
-                                    android:text="Usuario:" />
-
-                                <EditText
-                                    android:id="@+id/user_account_text_input_layout"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="40dp"
-                                    android:layout_marginHorizontal="@dimen/size16"
-                                    android:layout_marginTop="@dimen/size8"
-                                    android:autofillHints="username"
-                                    android:background="@drawable/custom_input"
-                                    android:ems="10"
-                                    android:inputType="text"
-                                    android:paddingHorizontal="12dp"
-                                    android:textSize="16sp" />
-
-                            </LinearLayout>
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="@dimen/size16"
-                                android:text="El usuario debe tener más de 6 dígitos." />
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="4dp"
-                                android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña." />
-
-                        </LinearLayout>
-
-                    </androidx.constraintlayout.widget.ConstraintLayout>
-
-                    <CheckedTextView
-                        android:id="@+id/checked_text_view"
+                    <TextView
+                        android:id="@+id/user_account_text_view"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="@dimen/size24"
-                        android:background="@color/white_color"
-                        android:checked="false"
-                        android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-                        android:gravity="center"
-                        android:paddingStart="12dp"
-                        android:paddingEnd="16dp"
-                        android:text="Crear usuario para la app cliente" />
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="@dimen/size8"
+                        android:text="Usuario:" />
 
-                </RelativeLayout>
+                    <EditText
+                        android:id="@+id/user_account_text_input_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:layout_marginHorizontal="@dimen/size16"
+                        android:layout_marginTop="@dimen/size8"
+                        android:autofillHints="username"
+                        android:background="@drawable/custom_input"
+                        android:ems="10"
+                        android:inputType="text"
+                        android:paddingHorizontal="12dp"
+                        android:textSize="16sp" />
+
+                </LinearLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/buttons_container"

@@ -59,10 +59,6 @@ class NewInternalUserFragment : BaseFragment() {
                 v.hideSoftInput()
             }
         }
-        /*this.binding.roleAutoCompleteTextView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, position, id ->
-            var itemSelected = adapterView.getItemAtPosition(position)
-
-        }*/
     }
 
     override fun updateUI(state: BaseState) {
