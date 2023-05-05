@@ -34,7 +34,51 @@ class NewInternalUserViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = NewInternalUserViewState(isLoading = true)
             if (Utils.isValidEmail(internalUserData.email)) {
-
+                when(val newUid = createAuthUserUseCase(internalUserData.email, internalUserData.user)) {
+                    null -> {
+                        _viewState.value = NewInternalUserViewState(isLoading = false, error = true)
+                        _alertDialog.value = AlertOkData(
+                            "Error",
+                            "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres.",
+                            true
+                        )
+                    }
+                    else -> {
+                        internalUserData.uid = newUid
+                        when(val internalUserId = getInternalUserIdUseCase()) {
+                            null -> {
+                                _viewState.value = NewInternalUserViewState(isLoading = false, error = true)
+                            }
+                            else -> {
+                                internalUserData.id = internalUserId
+                                when(newInternalUserUseCase(internalUserData)) {
+                                    false -> {
+                                        _viewState.value = NewInternalUserViewState(
+                                            isLoading = false,
+                                            error = true)
+                                        _alertDialog.value = AlertOkData(
+                                            title = "Error",
+                                            text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",
+                                            true
+                                        )
+                                    }
+                                    true -> {
+                                        _viewState.value = NewInternalUserViewState(
+                                            isLoading = false,
+                                            error = false
+                                        )
+                                        _alertDialog.value = AlertOkData(
+                                            title = "Cliente guardado",
+                                            text = "El cliente ha sido guardado correctamente en la base de datos.",
+                                            true,
+                                            customCode = 0
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             } else {
                 _viewState.value = NewInternalUserViewState(isLoading = false, error = true)
                 _alertDialog.value = AlertOkData(
