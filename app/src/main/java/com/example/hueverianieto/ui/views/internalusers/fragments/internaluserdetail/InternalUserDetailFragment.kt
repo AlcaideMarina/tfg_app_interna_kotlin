@@ -21,7 +21,7 @@ class InternalUserDetailFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         (activity as BaseActivity).configNav(true)
         this.binding = FragmentInternalUserDetailBinding.inflate(
             inflater, container, false
@@ -35,7 +35,8 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setFieldText()
     }
 
     override fun setObservers() {
@@ -48,6 +49,43 @@ class InternalUserDetailFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Modificar")
+        this.binding.cancelButton.setText("Eliminar usuario")
+    }
+
+    private fun setFieldText() {
+        with(this.binding) {
+            nameTextInputLayout.setText(internalUserData.name)
+            nameTextInputLayout.isEnabled = false
+            surnameTextInputLayout.setText(internalUserData.surname)
+            surnameTextInputLayout.isEnabled = false
+            dniTextInputLayout.setText(internalUserData.dni)
+            dniTextInputLayout.isEnabled = false
+            phoneTextInputLayout.setText(internalUserData.phone.toString())
+            phoneTextInputLayout.isEnabled = false
+            emailTextInputLayout.setText(internalUserData.email)
+            emailTextInputLayout.isEnabled = false
+            directionTextInputLayout.setText(internalUserData.direction)
+            directionTextInputLayout.isEnabled = false
+            cityTextInputLayout.setText(internalUserData.city)
+            cityTextInputLayout.isEnabled = false
+            provinceTextInputLayout.setText(internalUserData.province)
+            provinceTextInputLayout.isEnabled = false
+            postalCodeTextInputLayout.setText(internalUserData.postalCode.toString())
+            postalCodeTextInputLayout.isEnabled = false
+            ssNumberTextInputLayout.setText(internalUserData.ssNumber.toString())
+            ssNumberTextInputLayout.isEnabled = false
+            bankAccountTextInputLayout.setText(internalUserData.bankAccount)
+            bankAccountTextInputLayout.isEnabled = false
+            roleAutoCompleteTextView.setText(internalUserData.position.toString())
+            roleAutoCompleteTextView.isEnabled = false
+            roleTextInputLayout.isEnabled = false
+            userAccountTextInputLayout.setText(internalUserData.user)
+            userAccountTextInputLayout.isEnabled = false
+        }
     }
 
 }
