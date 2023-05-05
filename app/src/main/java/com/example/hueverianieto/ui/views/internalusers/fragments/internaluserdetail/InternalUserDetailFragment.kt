@@ -31,7 +31,7 @@ class InternalUserDetailFragment : BaseFragment() {
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
 
-        return super.onCreateView(inflater, container, savedInstanceState)
+        return this.binding.root
     }
 
     override fun configureUI() {
