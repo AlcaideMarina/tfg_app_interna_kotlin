@@ -17,6 +17,8 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifyInternalUserBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
+import com.example.hueverianieto.utils.Utils.setPopUp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -64,7 +66,36 @@ class ModifyInternalUserFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.modifyInternalUserViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 1) {
+                    setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {
