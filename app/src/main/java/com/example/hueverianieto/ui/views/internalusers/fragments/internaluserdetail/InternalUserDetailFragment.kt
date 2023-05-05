@@ -15,6 +15,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentInternalUserDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -159,7 +160,9 @@ class InternalUserDetailFragment : BaseFragment() {
             ssNumberTextInputLayout.isEnabled = false
             bankAccountTextInputLayout.setText(internalUserData.bankAccount)
             bankAccountTextInputLayout.isEnabled = false
-            roleAutoCompleteTextView.setText(internalUserData.position.toString())
+            roleAutoCompleteTextView.setText(
+                Utils.getKey(Constants.roles, internalUserData.position.toInt())!!
+            )
             roleAutoCompleteTextView.isEnabled = false
             roleTextInputLayout.isEnabled = false
             userAccountTextInputLayout.setText(internalUserData.user)

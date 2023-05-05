@@ -99,7 +99,39 @@ class ModifyInternalUserFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.cancelButton.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.saveButton.setOnClickListener {
+            val positionSelected : Int? = when (this.binding.roleAutoCompleteTextView.text.toString()) {
+                requireContext().getString(R.string.warehouse_job) -> R.string.warehouse_job
+                requireContext().getString(R.string.boss_job) -> R.string.boss_job
+                requireContext().getString(R.string.farm_job) -> R.string.farm_job
+                requireContext().getString(R.string.office_job) -> R.string.office_job
+                requireContext().getString(R.string.delivery_job) -> R.string.delivery_job
+                else -> null
+            }
+            var internalUserData = InternalUserData(
+                this.binding.bankAccountTextInputLayout.text.toString(),
+                this.binding.cityTextInputLayout.text.toString(),
+                this.internalUserData.createdBy,
+                this.internalUserData.deleted,
+                this.binding.directionTextInputLayout.text.toString(),
+                this.binding.dniTextInputLayout.text.toString(),
+                this.binding.emailTextInputLayout.text.toString(),
+                this.internalUserData.id,
+                this.binding.nameTextInputLayout.text.toString(),
+                this.binding.phoneTextInputLayout.text.toString().toLong(),
+                Constants.roles[positionSelected]!!.toLong(),
+                this.binding.postalCodeTextInputLayout.text.toString().toLong(),
+                this.binding.provinceTextInputLayout.text.toString(),
+                this.binding.ssNumberTextInputLayout.text.toString().toLong(),
+                this.binding.surnameTextInputLayout.text.toString(),
+                this.internalUserData.uid,
+                this.binding.userAccountTextInputLayout.text.toString(),
+                this.internalUserData.documentId
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -116,6 +148,7 @@ class ModifyInternalUserFragment : BaseFragment() {
     }
 
     private fun setFieldText() {
+
         with(this.binding) {
             nameTextInputLayout.setText(internalUserData.name)
             surnameTextInputLayout.setText(internalUserData.surname)
@@ -128,7 +161,9 @@ class ModifyInternalUserFragment : BaseFragment() {
             postalCodeTextInputLayout.setText(internalUserData.postalCode.toString())
             ssNumberTextInputLayout.setText(internalUserData.ssNumber.toString())
             bankAccountTextInputLayout.setText(internalUserData.bankAccount)
-            roleAutoCompleteTextView.setText(internalUserData.position.toString())
+            roleAutoCompleteTextView.setText(
+                Utils.getKey(Constants.roles, internalUserData.position.toInt())!!
+            )
             userAccountTextInputLayout.setText(internalUserData.user)
             userAccountTextInputLayout.isEnabled = false
         }
