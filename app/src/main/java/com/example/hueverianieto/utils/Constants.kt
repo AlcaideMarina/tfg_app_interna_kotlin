@@ -20,4 +20,7 @@ object Constants {
         R.string.farm_job to 4
     )
 
+
+    const val dateFormat = "dd/MM/yyyy"
+
 }

@@ -1,11 +1,14 @@
 package com.example.hueverianieto.utils
 
 import android.content.Context
+import android.icu.text.SimpleDateFormat
 import android.text.TextUtils
 import android.util.Patterns
 import android.view.View
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.google.firebase.Timestamp
+import java.util.*
 
 
 object Utils {
@@ -45,4 +48,22 @@ object Utils {
         return null
     }
 
+    fun parseTimestampToString(timestamp: Timestamp?) : String? {
+        return if(timestamp == null) {
+            null
+        } else {
+            SimpleDateFormat(Constants.dateFormat).format(timestamp.toDate())
+        }
+    }
+
+    fun parseStringToTimestamp(dateStr : String, pattern : String? = Constants.dateFormat) :
+            Timestamp = Timestamp(SimpleDateFormat(pattern).parse(dateStr))
+
+    fun addToDate(date: Date, daysToAdd: Int = 0, monthsToAdd: Int = 0) : Date {
+        val c = Calendar.getInstance()
+        c.time = date
+        c.add(Calendar.DATE, daysToAdd)
+        c.add(Calendar.MONTH, monthsToAdd)
+        return c.time
+    }
 }
