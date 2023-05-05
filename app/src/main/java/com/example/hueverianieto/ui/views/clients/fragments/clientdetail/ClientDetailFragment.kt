@@ -142,7 +142,9 @@ class ClientDetailFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         with(state as ClientDetailViewState) {
-            Log.v(ClientDetailFragment::class.java.simpleName, "Actualizando")
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
         }
     }
 
