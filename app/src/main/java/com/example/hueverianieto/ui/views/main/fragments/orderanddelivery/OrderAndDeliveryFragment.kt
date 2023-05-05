@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -11,6 +12,8 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrdersAndDeliveryBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.main.MainActivity
+import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,6 +22,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
     private lateinit var binding : FragmentOrdersAndDeliveryBinding
     private lateinit var internalUserData: InternalUserData
     private lateinit var alertDialog: HNModalDialog
+    private val orderAndDeliveryViewModel : OrderAndDeliveryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,10 @@ class OrderAndDeliveryFragment : BaseFragment() {
 
     override fun configureUI() {
         setButtons()
+        this.binding.dateTextView.setText(
+            Utils.parseTimestampToString(Timestamp.now())
+        )
+        this.orderAndDeliveryViewModel.getTodayOrders()
     }
 
     override fun setObservers() {
