@@ -264,7 +264,7 @@ class NewClientFragment : BaseFragment() {
             phone1 = it.phoneTextInputLayoutPhone1.text.toString()
             namePhone1 = it.phoneTextInputLayoutName1.text.toString()
             phone2 = it.phoneTextInputLayoutPhone2.text.toString()
-            namePhone2 = it.phoneTextInputLayoutName1.text.toString()
+            namePhone2 = it.phoneTextInputLayoutName2.text.toString()
             hasAccount = it.checkedTextView.isChecked
             accountUser = if (hasAccount) it.userAccountTextInputLayout.text.toString() else null
         }

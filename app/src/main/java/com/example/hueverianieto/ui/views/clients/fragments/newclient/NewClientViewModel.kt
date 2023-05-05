@@ -81,6 +81,39 @@ class NewClientViewModel @Inject constructor(
                             }
                         }
                     }
+                } else {
+                    when(val clientId = getClientIdUseCase()) {
+                        null -> {
+                            _viewState.value = NewClientViewState(isLoading = false, error = true)
+                        }
+                        else -> {
+                            clientData.id = clientId
+                            when(newClientUseCase(clientData)) {
+                                false -> {
+                                    _viewState.value = NewClientViewState(
+                                        isLoading = false,
+                                        error = true)
+                                    _alertDialog.value = AlertOkData(
+                                        title = "Error",
+                                        text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",
+                                        true
+                                    )
+                                }
+                                true -> {
+                                    _viewState.value = NewClientViewState(
+                                        isLoading = false,
+                                        error = false
+                                    )
+                                    _alertDialog.value = AlertOkData(
+                                        title = "Cliente guardado",
+                                        text = "El cliente ha sido guardado correctamente en la base de datos.",
+                                        true,
+                                        customCode = 0
+                                    )
+                                }
+                            }
+                        }
+                    }
                 }
 
             } else {
