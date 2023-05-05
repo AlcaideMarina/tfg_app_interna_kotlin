@@ -6,6 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
@@ -16,6 +19,7 @@ import com.example.hueverianieto.databinding.FragmentNewInternalUserBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class NewInternalUserFragment : BaseFragment() {
@@ -24,6 +28,7 @@ class NewInternalUserFragment : BaseFragment() {
     private lateinit var alertDialog: HNModalDialog
     private lateinit var currentUserData: InternalUserData
     private var dropdownRoleItems : MutableList<String> = mutableListOf()
+    private val newInternalUserViewModel : NewInternalUserViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,6 +52,12 @@ class NewInternalUserFragment : BaseFragment() {
         setDropdownRoleOptions()
         this.alertDialog = HNModalDialog(requireContext())
 
+        lifecycleScope.launchWhenStarted {
+            newInternalUserViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
+
     }
 
     override fun setObservers() {
@@ -62,7 +73,11 @@ class NewInternalUserFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as NewInternalUserViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun setButtons() {
