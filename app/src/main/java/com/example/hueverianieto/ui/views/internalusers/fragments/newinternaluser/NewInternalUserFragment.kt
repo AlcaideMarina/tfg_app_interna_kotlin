@@ -18,6 +18,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewInternalUserBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
@@ -29,6 +30,20 @@ class NewInternalUserFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private var dropdownRoleItems : MutableList<String> = mutableListOf()
     private val newInternalUserViewModel : NewInternalUserViewModel by viewModels()
+
+    var name: String = ""
+    var surname: String = ""
+    var dni: String = ""
+    var phone: String = ""
+    var email: String = ""
+    var direction: String = ""
+    var city: String = ""
+    var province: String = ""
+    var postalCode: String = ""
+    var ssNumber: String = ""
+    var bankAccount: String = ""
+    var position: String = ""
+    var user: String = ""
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -70,6 +85,12 @@ class NewInternalUserFragment : BaseFragment() {
                 v.hideSoftInput()
             }
         }
+        this.binding.cancelButton.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.saveButton.setOnClickListener {
+            checkFields()
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -97,6 +118,77 @@ class NewInternalUserFragment : BaseFragment() {
                 dropdownRoleItems
             ))
 
+    }
+
+    private fun checkFields() {
+        variableAssignations()
+        if (name.isNotEmpty() && surname.isNotEmpty() && dni.isNotEmpty() && phone.isNotEmpty() &&
+                email.isNotEmpty() && direction.isNotEmpty() && city.isNotEmpty() &&
+                province.isNotEmpty() && postalCode.isNotEmpty() && ssNumber.isNotEmpty() &&
+                bankAccount.isNotEmpty() && position.isNotEmpty() && user.isNotEmpty()) {
+
+            val positionSelected : Int? = when (position) {
+                requireContext().getString(R.string.warehouse_job) -> R.string.warehouse_job
+                requireContext().getString(R.string.boss_job) -> R.string.boss_job
+                requireContext().getString(R.string.farm_job) -> R.string.farm_job
+                requireContext().getString(R.string.office_job) -> R.string.office_job
+                requireContext().getString(R.string.delivery_job) -> R.string.delivery_job
+                else -> null
+            }
+
+            // Crear objeto
+            val internalUserData = InternalUserData(
+                bankAccount,
+                city,
+                "user_${currentUserData.id }",
+                false,
+                direction,
+                dni,
+                email,
+                null,
+                name,
+                phone.toLong(),
+                Constants.roles[positionSelected]!!.toLong(),
+                postalCode.toLong(),
+                province,
+                ssNumber.toLong(),
+                surname,
+                null,
+                user,
+                null
+            )
+            // llamar a la función del VM
+            this.newInternalUserViewModel.addNewInternalUser(internalUserData)
+        } else {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Revise los datos",
+                "Hemos detectado que no se han rellenado todo slos campos solicitados o que son incorrectos. Por favor, revise el formulario.",
+                "De acuerdo",
+                null,
+                { alertDialog.cancel() },
+                null
+            )
+        }
+    }
+
+    private fun variableAssignations() {
+        with(this.binding) {
+            name = nameTextInputLayout.text.toString()
+            surname = surnameTextInputLayout.text.toString()
+            dni = dniTextInputLayout.text.toString()
+            phone = phoneTextInputLayout.text.toString()
+            email = emailTextInputLayout.text.toString()
+            direction = directionTextInputLayout.text.toString()
+            city = cityTextInputLayout.text.toString()
+            province = provinceTextInputLayout.text.toString()
+            postalCode = postalCodeTextInputLayout.text.toString()
+            ssNumber = ssNumberTextInputLayout.text.toString()
+            bankAccount = bankAccountTextInputLayout.text.toString()
+            position = roleAutoCompleteTextView.text.toString()
+            user = userAccountTextInputLayout.text.toString()
+        }
     }
 
 }

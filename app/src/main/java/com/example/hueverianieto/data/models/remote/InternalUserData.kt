@@ -20,7 +20,7 @@ data class InternalUserData(
     var province: String,
     var ssNumber: Long,
     var surname: String,
-    var uid: String,
+    var uid: String?,
     var user: String,
     var documentId: String?
 ) : Parcelable
