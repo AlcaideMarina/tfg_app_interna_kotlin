@@ -52,6 +52,7 @@
         </LinearLayout>
 
         <ImageView
+            android:id="@+id/arrow_icon"
             android:layout_width="16dp"
             android:layout_height="24dp"
             android:contentDescription="Ver usuario"

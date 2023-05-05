@@ -14,6 +14,11 @@ class ComponentInternalUserViewHolder(view: View) : RecyclerView.ViewHolder(view
         this.binding.nameText.text = "${componentInternalUserModel.name} ${componentInternalUserModel.surname}"
         this.binding.dniText.text = "DNI: ${componentInternalUserModel.dni}"
         this.binding.jobRoleText.text = "Puesto: ${componentInternalUserModel.jobRole}"
+        if (componentInternalUserModel.onClickListener == null) {
+            this.binding.arrowIcon.visibility = View.GONE
+        } else {
+            this.itemView.setOnClickListener(componentInternalUserModel.onClickListener)
+        }
     }
 
 }
