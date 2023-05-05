@@ -47,4 +47,28 @@ object InternalUserUtils {
         )
     }
 
+    fun parcelableToMap(internalUserData: InternalUserData): Map<String, Any?> {
+        val map = mutableMapOf<String, Any?>()
+
+        map["bank_account"] = internalUserData.bankAccount
+        map["city"] = internalUserData.city
+        map["created_by"] = internalUserData.createdBy
+        map["deleted"] = internalUserData.deleted
+        map["direction"] = internalUserData.direction
+        map["dni"] = internalUserData.dni
+        map["email"] = internalUserData.email
+        map["id"] = internalUserData.id
+        map["name"] = internalUserData.name
+        map["phone"] = internalUserData.phone
+        map["position"] = internalUserData.position
+        map["postal_code"] = internalUserData.postalCode
+        map["province"] = internalUserData.province
+        map["ss_number"] = internalUserData.ssNumber
+        map["surname"] = internalUserData.surname
+        map["uid"] = internalUserData.uid
+        map["user"] = internalUserData.user
+
+        return map
+    }
+
 }
