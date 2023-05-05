@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -25,6 +26,10 @@ class NewInternalUserFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
+
+        val args : NewInternalUserFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+
         this.binding = FragmentNewInternalUserBinding.inflate(
             inflater, container, false
         )
@@ -32,7 +37,10 @@ class NewInternalUserFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+
+        setButtons()
+        this.alertDialog = HNModalDialog(requireContext())
+
     }
 
     override fun setObservers() {
@@ -46,4 +54,10 @@ class NewInternalUserFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Guardar")
+        this.binding.cancelButton.setText("Cancelar")
+    }
+
 }
