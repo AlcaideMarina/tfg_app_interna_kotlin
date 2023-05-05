@@ -34,6 +34,7 @@ class ModifyClientViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyClientViewState(isLoading = true)
             if(Utils.isValidEmail(clientData.email)) {
+                // TODO: Hay que controlar si el cliente ya tenía cuenta de antes - Que venga como parámetro
                 if (clientData.hasAccount) {
                     when (val result = createAuthUserUseCase(clientData.email, clientData.user!!)) {
                         null -> {
@@ -49,7 +50,7 @@ class ModifyClientViewModel @Inject constructor(
                             clientData.uid = newUid
                             val clientDataMap = ClientUtils.parcelableToMap(clientData)
                             when (val result =
-                                updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
+                                updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!, "client_info")) {
                                 false -> {
                                     _viewState.value = ModifyClientViewState(isLoading = false, error = true)
                                     _alertDialog.value = AlertOkData(
@@ -67,7 +68,7 @@ class ModifyClientViewModel @Inject constructor(
                 } else {
                     val clientDataMap = ClientUtils.parcelableToMap(clientData)
                     when (val result =
-                        updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!)) {
+                        updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!, "client_info")) {
                         false -> {
                             _viewState.value = ModifyClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
