@@ -21,6 +21,9 @@
         android:id="@+id/newClientFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment"
         android:label="Nuevo cliente" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
     <fragment
         android:id="@+id/deletedClientsFragment"

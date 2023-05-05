@@ -69,4 +69,12 @@ class AllClientsViewModel @Inject constructor(
             )
     }
 
+    fun navigateToNewClient(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_newClientFragment, bundle)
+            ?: Log.e(
+                AllClientsFragment::class.simpleName,
+                "Error en la navegación en newClientButton"
+            )
+    }
+
 }

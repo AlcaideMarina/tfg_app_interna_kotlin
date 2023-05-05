@@ -89,7 +89,12 @@ class AllClientsFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        this.binding.newUserButton.setOnClickListener { navigateToNewClient() }
+        this.binding.newUserButton.setOnClickListener {
+            this.allClientsViewModel.navigateToNewClient(
+                this.view,
+                bundleOf("currentUserData" to currentUserData)
+            )
+        }
         this.binding.deletedUsersButton.setOnClickListener {
             this.allClientsViewModel.navigateDeleteClients(
                 this.view,
@@ -198,30 +203,6 @@ class AllClientsFragment : BaseFragment() {
         this.binding.clientsRecyclerView.layoutManager = LinearLayoutManager(context)
         this.binding.clientsRecyclerView.adapter = ComponentClientAdapter(clientList)
         this.binding.clientsRecyclerView.setHasFixedSize(false)
-    }
-
-    private fun navigateToClientDetails(clientData: ClientData) {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_clientDetailFragment, bundleOf("clientData" to clientData))
-            ?: Log.e(
-                AllClientsFragment::class.simpleName,
-                "Error en la navegación en newClientButton"
-            )
-    }
-
-    private fun navigateToNewClient() {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_newClientFragment)
-            ?: Log.e(
-            AllClientsFragment::class.simpleName,
-            "Error en la navegación en newClientButton"
-        )
-    }
-
-    private fun navigateDeleteClients() {
-        this.view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment)
-            ?: Log.e(
-                AllClientsFragment::class.simpleName,
-                "Error en la navegación en newClientButton"
-            )
     }
 
     companion object {
