@@ -80,6 +80,7 @@ class OrderDetailFragment : BaseFragment() {
             if (clientDataUseCase != null) {
                 clientData = clientDataUseCase
                 setTexts(clientData)
+                orderDetailViewModel.getOrder(clientData.documentId!!, orderData.documentId!!)
             } else {
                 Utils.setPopUp(
                     alertDialog,
@@ -122,6 +123,12 @@ class OrderDetailFragment : BaseFragment() {
                     )
                 }
             }
+        }
+        this.orderDetailViewModel.orderData.observe(this) {
+            this.orderData = it!!
+            setRecyclerView()
+            setTexts(clientData)
+            setButtons()
         }
     }
 

@@ -11,8 +11,10 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.DeleteOrderUseCase
 import com.example.hueverianieto.domain.usecases.GetClientWithIdUseCase
+import com.example.hueverianieto.domain.usecases.GetOrderUseCase
 import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,7 +25,8 @@ import javax.inject.Inject
 @HiltViewModel
 class OrderDetailViewModel @Inject constructor(
     val getClientWithIdUseCase: GetClientWithIdUseCase,
-    val deleteOrderUseCase: DeleteOrderUseCase
+    val deleteOrderUseCase: DeleteOrderUseCase,
+    val getOrderUseCase: GetOrderUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(OrderDetailViewState())
@@ -34,6 +37,9 @@ class OrderDetailViewModel @Inject constructor(
 
     private var _clientData = MutableLiveData<ClientData?>()
     val clientData: LiveData<ClientData?> get() = _clientData
+
+    private var _orderData = MutableLiveData<OrderData?>()
+    val orderData: LiveData<OrderData?> get() = _orderData
 
     fun getClientData(clientId: Long) {
         _viewState.value = OrderDetailViewState(isLoading = true)
@@ -71,6 +77,26 @@ class OrderDetailViewModel @Inject constructor(
                         true,
                         0
                     )
+                }
+            }
+        }
+    }
+
+    fun getOrder(clientDocumentId: String, orderDocumentId: String) {
+        viewModelScope.launch {
+            _viewState.value = OrderDetailViewState(isLoading = true)
+            when(val result = getOrderUseCase(clientDocumentId, orderDocumentId)) {
+                null -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false, error = true)
+                    _alertDialog.value = AlertOkData(
+                        "Error",
+                        "Se ha producido un error al intentar acceder a los datos del pedido. Por favor, inténtelo de nuevo.",
+                        true
+                    )
+                }
+                else -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false)
+                    _orderData.value = result!!
                 }
             }
         }

@@ -80,7 +80,7 @@ class ModifyOrderFragment : BaseFragment() {
         setRecyclerView()
         getPaymentMethodDropdownValues()
         getStatusDropdownValues()
-        
+
         lifecycleScope.launchWhenStarted {
             modifyOrderViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
