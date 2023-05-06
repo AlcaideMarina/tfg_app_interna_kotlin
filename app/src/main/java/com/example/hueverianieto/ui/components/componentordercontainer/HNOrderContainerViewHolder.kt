@@ -29,7 +29,7 @@ class HNOrderContainerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         if (statusStr == null) statusStr = R.string.unknown_status
 
         this.binding.dateText.text = dateStr
-        this.binding.orderIdText.text = "Pedido: " + orderContainerModel.orderId.toString()
+        this.binding.orderIdText.text = "ID Pedido: " + orderContainerModel.orderId.toString()
         this.binding.companyText.text = orderContainerModel.company
         this.binding.orderSummaryText.text = orderContainerModel.orderSummary
         this.binding.priceText.text = "Precio: " + priceStr + " €"
