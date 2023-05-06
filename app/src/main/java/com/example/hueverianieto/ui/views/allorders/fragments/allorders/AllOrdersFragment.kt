@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -20,6 +21,7 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.ui.views.main.MainActivity
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -91,7 +93,8 @@ class AllOrdersFragment : BaseFragment() {
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
                 for(orderData in orderDataList) {
-                    if (orderData != null) {
+                    if (orderData != null &&
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,

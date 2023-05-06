@@ -22,6 +22,7 @@ import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderCo
 import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
 import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import com.example.hueverianieto.ui.views.main.MainActivity
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
@@ -51,6 +52,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
         this.binding.dateTextView.text = Utils.parseTimestampToString(Timestamp.now())
         this.orderAndDeliveryViewModel.getTodayOrders()
         lifecycleScope.launchWhenStarted {
+            orderAndDeliveryViewModel.getTodayOrders()
             orderAndDeliveryViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -65,7 +67,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
 
                 val orderList = mutableListOf<OrderContainerModel>()
                 for (orderData in orderDataList) {
-                    if (orderData != null) {
+                    if (orderData != null &&
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -114,6 +117,12 @@ class OrderAndDeliveryFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e(TAG, e.message.toString(), e)
         }
+    }
+
+    override fun onResume() {
+        this.orderAndDeliveryViewModel.getTodayOrders()
+        this.binding.todayOrderRecyclerView.visibility = View.GONE
+        super.onResume()
     }
 
     private fun setButtons() {
