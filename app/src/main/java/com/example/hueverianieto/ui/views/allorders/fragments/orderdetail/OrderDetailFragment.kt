@@ -63,6 +63,7 @@ class OrderDetailFragment : BaseFragment() {
         this.orderDetailViewModel.getClientData(orderData.clientId)
         disableTextInputLayouts()
         setRecyclerView()
+        setButtons()
         lifecycleScope.launchWhenStarted {
             orderDetailViewModel.getClientData(orderData.clientId)
             orderDetailViewModel.viewState.collect { viewState ->
@@ -100,6 +101,11 @@ class OrderDetailFragment : BaseFragment() {
                 this.loadingComponent.isVisible = state.isLoading
             }
         }
+    }
+
+    private fun setButtons() {
+        this.binding.modifyButton.setText("Modificar")
+        this.binding.deleteButton.setText("Eliminar")
     }
 
     private fun disableTextInputLayouts() {
@@ -157,7 +163,7 @@ class OrderDetailFragment : BaseFragment() {
             orderDateTextInputLayout.setText(
                 Utils.parseTimestampToString(orderData.orderDatetime) ?: "")
             deliveryDateTextInputLayout.setText(deliveryDatetimeField)
-            //deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
+            //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
         }
