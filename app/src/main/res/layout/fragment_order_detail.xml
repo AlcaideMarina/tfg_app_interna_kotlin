@@ -157,6 +157,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_marginHorizontal="@dimen/size16"
                 android:baselineAligned="false" >
 
                 <EditText
@@ -168,11 +170,8 @@
                     android:inputType="phone"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:autofillHints="phone"/>
+                    android:autofillHints="phone"
+                    android:layout_marginEnd="4dp" />
 
                 <EditText
                     android:id="@+id/phone_text_input_layout_phone_2"
@@ -183,11 +182,8 @@
                     android:inputType="phone"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:autofillHints="phone"/>
+                    android:autofillHints="phone"
+                    android:layout_marginStart="4dp" />
 
             </LinearLayout>
 
@@ -223,7 +219,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/size16"
             app:layout_constraintTop_toBottomOf="@+id/order_text_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -238,7 +233,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:layout_marginTop="@dimen/size8" >
 
                 <EditText
                     android:id="@+id/total_price_text_input_layout"
@@ -249,11 +246,8 @@
                     android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
-                    android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginEnd="16dp"
-                    android:autofillHints="name"/>
+                    android:autofillHints="name"
+                    android:layout_marginEnd="12dp" />
 
                 <TextView
                     android:id="@+id/euro_text"
@@ -261,10 +255,7 @@
                     android:layout_height="match_parent"
                     android:text="€"
                     android:textSize="24sp"
-                    android:gravity="bottom"
-                    android:layout_marginBottom="@dimen/size16"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginEnd="16dp"/>
+                    android:gravity="center" />
 
             </LinearLayout>
 
@@ -352,7 +343,7 @@
                 android:text="Repartidor: " />
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/company_text_input_layout"
+                android:id="@+id/delivery_person_text_input_layout"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
@@ -363,7 +354,7 @@
                 app:boxStrokeWidthFocused="0dp" >
 
                 <androidx.appcompat.widget.AppCompatAutoCompleteTextView
-                    android:id="@+id/company_auto_complete_text_view"
+                    android:id="@+id/delivery_person_auto_complete_text_view"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
@@ -375,7 +366,6 @@
                     android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="10dp"
-                    android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size8"
                     android:layout_marginHorizontal="@dimen/size16"
                     android:singleLine="true"
