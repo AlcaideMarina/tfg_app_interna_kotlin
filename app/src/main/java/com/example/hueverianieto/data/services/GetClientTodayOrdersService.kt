@@ -46,7 +46,7 @@ class GetClientTodayOrdersService @Inject constructor(
                 for (item in result.documents) {
                     if (item.data != null) {
                         val data = item.data!!
-                        list.add(OrderUtils.mapToParcelable(data))
+                        list.add(OrderUtils.mapToParcelable(data, item.id))
                     }
                 }
             }

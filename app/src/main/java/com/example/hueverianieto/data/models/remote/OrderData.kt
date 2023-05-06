@@ -21,5 +21,6 @@ data class OrderData (
     val paid: Boolean,
     val paymentMethod: Long,
     val status: Long,
-    val totalPrice: Number?
+    val totalPrice: Number?,
+    val documentId: String?,
 ) : Parcelable

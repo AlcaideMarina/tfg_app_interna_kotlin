@@ -28,7 +28,7 @@ object OrderUtils {
         return map
     }
 
-    fun mapToParcelable(data: MutableMap<String, Any?>) : OrderData {
+    fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String) : OrderData {
         return OrderData(
             data["approximate_delivery_datetime"] as Timestamp,
             data["client_id"] as Long,
@@ -45,7 +45,8 @@ object OrderUtils {
             data["paid"] as Boolean,
             data["payment_method"] as Long,
             data["status"] as Long,
-            data["total_price"] as Number?
+            data["total_price"] as Number?,
+            documentId
         )
     }
 
