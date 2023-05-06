@@ -1,9 +1,14 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.orderdetail
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.usecases.DeleteOrderUseCase
@@ -69,6 +74,14 @@ class OrderDetailViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigateToModifyOrder(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_orderDetailFragment_to_modifyOrderFragment, bundle)
+            ?: Log.e(
+                OrderDetailViewModel::class.java.simpleName,
+                "Error en la navigación a Modificar pedido"
+            )
     }
 
 }
