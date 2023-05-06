@@ -24,7 +24,7 @@ class EcconomyFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentEcconomyBinding.bind(inflater.inflate(R.layout.fragment_ecconomy, container, false))
         return binding.root

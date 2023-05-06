@@ -23,7 +23,7 @@ class MaterialFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentMaterialBinding.bind(inflater.inflate(R.layout.fragment_material, container, false))
         return binding.root

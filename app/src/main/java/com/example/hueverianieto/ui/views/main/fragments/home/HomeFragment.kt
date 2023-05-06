@@ -36,7 +36,7 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentHomeBinding.bind(inflater.inflate(R.layout.fragment_home, container, false))
         return binding.root

@@ -23,7 +23,7 @@ class FarmFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentFarmBinding.bind(inflater.inflate(R.layout.fragment_farm, container, false))
         return binding.root

@@ -34,7 +34,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentOrdersAndDeliveryBinding.bind(inflater.inflate(R.layout.fragment_orders_and_delivery, container, false))
         return binding.root
