@@ -368,6 +368,7 @@
                         app:autoSizeMinTextSize="10sp"
                         app:autoSizeMaxTextSize="15sp"
                         app:autoSizeStepGranularity="1sp"
+                        android:enabled="false"
                         android:inputType="none"
                         android:maxLines="1"
                         android:paddingTop="8dp"
