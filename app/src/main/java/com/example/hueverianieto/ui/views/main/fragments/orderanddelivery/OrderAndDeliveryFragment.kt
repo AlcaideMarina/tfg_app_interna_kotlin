@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class OrderAndDeliveryFragment : BaseFragment() {
 
     private lateinit var binding : FragmentOrdersAndDeliveryBinding
-    private lateinit var internalUserData: InternalUserData
+    private lateinit var currentUserData: InternalUserData
     private lateinit var alertDialog: HNModalDialog
     private val orderAndDeliveryViewModel : OrderAndDeliveryViewModel by viewModels()
 
@@ -34,7 +35,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).currentUserData
+        currentUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentOrdersAndDeliveryBinding.bind(inflater.inflate(R.layout.fragment_orders_and_delivery, container, false))
         return binding.root
@@ -83,7 +84,11 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.seeAllOrdersButton.setOnClickListener {
+            this.orderAndDeliveryViewModel.navigateToAllOrdersActivity(
+                requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

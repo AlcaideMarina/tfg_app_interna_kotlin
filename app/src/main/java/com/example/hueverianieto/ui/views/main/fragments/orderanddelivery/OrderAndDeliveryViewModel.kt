@@ -1,6 +1,8 @@
 package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
 
-import android.util.Log
+import android.content.Context
+import android.content.Intent
+import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +11,7 @@ import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
 import com.example.hueverianieto.domain.usecases.GetClientTodayOrdersUseCase
+import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -57,10 +60,17 @@ class OrderAndDeliveryViewModel @Inject constructor(
                             }
                         }
                     }
+                    _viewState.value = OrderAndDeliveryViewState(isLoading = false)
                     _allOrderList.value = orderList
                 }
             }
         }
     }
 
+    fun navigateToAllOrdersActivity(context: Context, currentUserData: Parcelable) {
+        val intent = Intent(context, AllOrdersActivity::class.java)
+        intent.putExtra("current_user_data", currentUserData)
+        intent.putExtra("from_new_order", false)
+        context.startActivity(intent)
+    }
 }

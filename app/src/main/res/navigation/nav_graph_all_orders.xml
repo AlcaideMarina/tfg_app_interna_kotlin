@@ -7,5 +7,5 @@
     <fragment
         android:id="@+id/allOrdersFragment"
         android:name="com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersFragment"
-        android:label="AllOrdersFragment" />
+        android:label="Todos los pedidos" />
 </navigation>
