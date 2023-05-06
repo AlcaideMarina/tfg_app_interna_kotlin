@@ -58,8 +58,7 @@ class AllOrdersViewModel @Inject constructor(
                         }
                     }
                     _viewState.value = AllOrdersViewState(isLoading = false)
-                    orderList.sortedBy { it?.orderDatetime }.reversed()
-                    _allOrderList.value = orderList
+                    _allOrderList.value = orderList.sortedBy { it?.orderDatetime }.reversed()
                 }
             }
         }
