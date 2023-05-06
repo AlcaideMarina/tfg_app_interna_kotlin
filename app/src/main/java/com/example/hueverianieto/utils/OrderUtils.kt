@@ -1,6 +1,7 @@
 package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.local.DBOrderFieldData
+import com.example.hueverianieto.data.models.local.GridTextItemData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.google.firebase.Timestamp
 
@@ -120,6 +121,98 @@ object OrderUtils {
         }
 
         return dbOrderFieldData
+    }
+
+    fun getOrderDataGridModel(orderData: OrderData) : List<GridTextItemData> {
+
+        val dbOrderModel = orderDataToBDOrderModel(orderData)
+
+        return listOf(
+            GridTextItemData(0,
+                true, "XL"
+            ),
+            GridTextItemData(1,
+                true, "Docena:"
+            ),
+            GridTextItemData(2,
+                false, null, false, response = dbOrderModel.xlDozenQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(3,
+                true, (dbOrderModel.xlDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(4,
+                true, "Caja:"
+            ),
+            GridTextItemData(5,
+                false, null, false, response = dbOrderModel.xlBoxQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(6,
+                true, (dbOrderModel.xlBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(7,
+                true, "L"
+            ),
+            GridTextItemData(8,
+                true, "Docena:"
+            ),
+            GridTextItemData(9,
+                false, null, false, response = dbOrderModel.lDozenQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(10,
+                true, (dbOrderModel.lDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(11,
+                true, "Caja:"
+            ),
+            GridTextItemData(12,
+                false, null, false, response = dbOrderModel.lBoxQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(13,
+                true, (dbOrderModel.lBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(14,
+                true, "M"
+            ),
+            GridTextItemData(15,
+                true, "Docena:"
+            ),
+            GridTextItemData(16,
+                false, null, false, response = dbOrderModel.mDozenQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(17,
+                true, (dbOrderModel.mDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(18,
+                true, "Caja:"
+            ),
+            GridTextItemData(19,
+                false, null, false, response = dbOrderModel.mBoxQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(20,
+                true, (dbOrderModel.mBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(21,
+                true, "S"
+            ),
+            GridTextItemData(22,
+                true, "Docena:"
+            ),
+            GridTextItemData(23,
+                false, null, false, response = dbOrderModel.sDozenQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(24,
+                true, (dbOrderModel.sDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(25,
+                true, "Caja:"
+            ),
+            GridTextItemData(26,
+                false, null, false, response = dbOrderModel.sBoxQuantity.toString() + "   uds."
+            ),
+            GridTextItemData(27,
+                true, (dbOrderModel.sBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+        )
     }
 
 }
