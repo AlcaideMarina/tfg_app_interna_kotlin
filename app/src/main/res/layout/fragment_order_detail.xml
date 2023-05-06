@@ -460,7 +460,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
-                android:inputType="text"
+                android:inputType="number"
                 android:textSize="16sp"
                 android:background="@drawable/custom_input"
                 android:paddingHorizontal="12dp"

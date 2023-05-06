@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hueverianieto.R
@@ -30,6 +31,7 @@ import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -78,6 +80,12 @@ class ModifyOrderFragment : BaseFragment() {
         setRecyclerView()
         getPaymentMethodDropdownValues()
         getStatusDropdownValues()
+        
+        lifecycleScope.launchWhenStarted {
+            modifyOrderViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -248,7 +256,7 @@ class ModifyOrderFragment : BaseFragment() {
 
         with(this.binding) {
             orderIdTextView.text = "ID pedido: " + orderData.orderId.toString()
-            companyAutoCompleteTextView.setText(clientData.company)
+            companyAutoCompleteTextView.setText(clientData.company, false)
             directionTextInputLayout.setText(clientData.direction)
             cifTextInputLayout.setText(clientData.cif)
             phoneTextInputLayoutPhone1.setText(phone1.value.toString())
@@ -265,12 +273,10 @@ class ModifyOrderFragment : BaseFragment() {
             paidCheckedTextView.isChecked = orderData.paid
             paymentMethodAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
-            )
+                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!),false)
             statusAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!)
-            )
+                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!), false)
         }
 
     }
