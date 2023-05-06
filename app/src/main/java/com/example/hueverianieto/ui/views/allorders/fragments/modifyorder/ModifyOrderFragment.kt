@@ -190,12 +190,18 @@ class ModifyOrderFragment : BaseFragment() {
                     if (this.binding.deliveryNoteTextInputLayout.text.toString() == "") null
                     else this.binding.deliveryNoteTextInputLayout.text.toString().toLong()
 
+                val deliveryDatetime = if (listOf(3, 4, 5).contains(Constants.orderStatus[statusSelected]!!)) {
+                    Timestamp.now()
+                } else {
+                    orderData.deliveryDatetime
+                }
+
                 val orderData = OrderData(
                     approxDeliveryDatetime = approxDeliveryDatetimeSelected,
                     clientId = clientData.id!!,
                     company = clientData.company,
                     createdBy = orderData.createdBy,
-                    deliveryDatetime = orderData.deliveryDatetime,
+                    deliveryDatetime = deliveryDatetime,
                     deliveryDni = deliveryDniAux,
                     deliveryNote = deliveryNoteAux,
                     deliveryPerson = null,  // TODO
@@ -241,6 +247,9 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.orderDateTextInputLayout.isEnabled = false
         if (listOf<Long>(2, 3, 4, 5).contains(this.orderData.status)) {
             this.binding.deliveryDateTextInputLayout.isEnabled = false
+            if (this.orderData.status == (3).toLong()) {
+                this.binding.statusTextInputLayout.isEnabled = false
+            }
         }
 
         this.binding.totalPriceTextLayout.visibility = View.GONE
