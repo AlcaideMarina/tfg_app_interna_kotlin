@@ -11,7 +11,7 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
-import com.example.hueverianieto.domain.usecases.DeleteClientUseCase
+import com.example.hueverianieto.domain.usecases.DeleteDocumentFieldUseCase
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClientDetailViewModel @Inject constructor(
-    val deleteClientUseCase: DeleteClientUseCase,
+    val deleteDocumentFieldUseCase: DeleteDocumentFieldUseCase,
     val getUserDataUseCase: GetUserDataUseCase,
 ) : ViewModel() {
 
@@ -45,7 +45,7 @@ class ClientDetailViewModel @Inject constructor(
     fun deleteClient(documentId: String) {
         _viewState.value = ClientDetailViewState(isLoading = true)
         viewModelScope.launch {
-            when(val result = deleteClientUseCase(documentId)) {
+            when(val result = deleteDocumentFieldUseCase(documentId, "client_info")) {
                 false -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
