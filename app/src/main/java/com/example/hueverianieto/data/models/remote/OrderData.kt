@@ -7,6 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class OrderData (
     val approxDeliveryDatetime: Timestamp,
+    val clientId: Long,
+    val company: String,
     val createdBy: String,
     val deliveryDatetime: Timestamp?,
     val deliveryDni: String?,
