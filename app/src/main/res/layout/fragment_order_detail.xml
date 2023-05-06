@@ -37,7 +37,37 @@
                 android:layout_height="match_parent"
                 android:text="Empresa: " />
 
-            <!-- TODO: Dropdown -->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/company_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:background="@drawable/custom_input"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp" >
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/company_auto_complete_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="10dp"
+                    android:paddingHorizontal="12dp"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_marginHorizontal="@dimen/size16"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -61,7 +91,7 @@
             <EditText
                 android:id="@+id/direction_text_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="text"
                 android:textSize="16sp"
@@ -93,7 +123,7 @@
             <EditText
                 android:id="@+id/cif_text_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="text"
                 android:textSize="16sp"
@@ -132,7 +162,7 @@
                 <EditText
                     android:id="@+id/phone_text_input_layout_phone_1"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="phone"
@@ -147,7 +177,7 @@
                 <EditText
                     android:id="@+id/phone_text_input_layout_phone_2"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="phone"
@@ -213,7 +243,7 @@
                 <EditText
                     android:id="@+id/total_price_text_input_layout"
                     android:layout_width="0dp"
-                    android:layout_height="60dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
                     android:ems="10"
                     android:inputType="numberDecimal"
@@ -260,7 +290,7 @@
             <EditText
                 android:id="@+id/order_date_text_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="datetime"
                 android:textSize="16sp"
@@ -292,7 +322,7 @@
             <EditText
                 android:id="@+id/delivery_date_text_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="datetime"
                 android:textSize="16sp"
@@ -321,18 +351,37 @@
                 android:layout_height="match_parent"
                 android:text="Repartidor: " />
 
-            <!-- Esto debería ser un dropdown, para elegir entre los repartidores -->
-            <EditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/company_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:ems="10"
-                android:inputType="text"
-                android:textSize="16sp"
-                android:background="@drawable/custom_input"
-                android:paddingHorizontal="12dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="@dimen/size8"
                 android:layout_marginHorizontal="@dimen/size16"
-                android:autofillHints="name"/>
+                android:background="@drawable/custom_input"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp" >
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/company_auto_complete_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="10dp"
+                    android:paddingHorizontal="12dp"
+                    android:layout_marginTop="@dimen/size8"
+                    android:layout_marginHorizontal="@dimen/size16"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart" />
+
+            </com.google.android.material.textfield.TextInputLayout>
 
         </LinearLayout>
 
@@ -355,7 +404,7 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="text"
                 android:textSize="16sp"
@@ -387,7 +436,7 @@
             <EditText
                 android:id="@+id/delivery_dni_text_input_layout"
                 android:layout_width="match_parent"
-                android:layout_height="60dp"
+                android:layout_height="40dp"
                 android:ems="10"
                 android:inputType="text"
                 android:textSize="16sp"
