@@ -20,6 +20,15 @@ object Constants {
         R.string.farm_job to 4
     )
 
+    val orderStatus : Map<Int, Int> = mapOf(
+        R.string.price_pending to 0,
+        R.string.backordered to 1,
+        R.string.in_delivery to 2,
+        R.string.delivered to 3,
+        R.string.delivery_attempt to 4,
+        R.string.cancelled to 5
+    )
+
 
     const val dateFormat = "dd/MM/yyyy"
 
