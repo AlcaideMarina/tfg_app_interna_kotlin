@@ -8,16 +8,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentOrderDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -30,6 +34,10 @@ class OrderDetailFragment : BaseFragment() {
     private lateinit var orderData : OrderData
     private lateinit var currentUserData: InternalUserData
     private val orderDetailViewModel : OrderDetailViewModel by viewModels()
+
+    private val recyclerViewTitles = listOf(0, 7, 14, 21)
+    private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
+    private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,9 +62,9 @@ class OrderDetailFragment : BaseFragment() {
     override fun configureUI() {
         this.orderDetailViewModel.getClientData(orderData.clientId)
         disableTextInputLayouts()
-        //setTexts()
-        //setRecyclerView()
+        setRecyclerView()
         lifecycleScope.launchWhenStarted {
+            orderDetailViewModel.getClientData(orderData.clientId)
             orderDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -153,6 +161,25 @@ class OrderDetailFragment : BaseFragment() {
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
         }
+
+    }
+
+    private fun setRecyclerView() {
+
+        val list = OrderUtils.getOrderDataGridModel(orderData)
+
+        val manager = CustomGridLayoutManager(this.context, 4)
+        manager.setScrollEnabled(false)
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (recyclerViewTitles.contains(position)) 4
+                else if(recyclerViewTextInputLayouts.contains(position)) 2
+                else 1
+            }
+        }
+
+        this.binding.orderRecyclerView.layoutManager = manager
+        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
 
     }
 }
