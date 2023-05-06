@@ -1,9 +1,11 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.modifyorder
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hueverianieto.R
@@ -20,6 +22,8 @@ import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
+import java.util.*
 
 class ModifyOrderFragment : BaseFragment() {
 
@@ -32,6 +36,9 @@ class ModifyOrderFragment : BaseFragment() {
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
     private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
     private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
+
+    private lateinit var approxDeliveryDatetimeSelected : Timestamp
+    private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +66,7 @@ class ModifyOrderFragment : BaseFragment() {
         disableTextInputLayouts()
         setTexts()
         setRecyclerView()
+        getPaymentMethodDropdownValues()
     }
 
     override fun setObservers() {
@@ -94,6 +102,8 @@ class ModifyOrderFragment : BaseFragment() {
 
     private fun setTexts() {
 
+        this.binding.deliveryDateTextInputLayout.setOnClickListener { onClickScheduledDate() }
+
         val phone1 = clientData.phone[0].entries.iterator().next()
         val phone2 = clientData.phone[1].entries.iterator().next()
 
@@ -112,6 +122,12 @@ class ModifyOrderFragment : BaseFragment() {
             //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
+            lotTextInputLayout.setText(orderData.lot ?: "")
+            paidCheckedTextView.isChecked = orderData.paid
+            paymentMethodAutoCompleteTextView.setText(
+                requireContext().getString(
+                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
+            )
         }
 
     }
@@ -133,6 +149,37 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.orderRecyclerView.layoutManager = manager
         this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
 
+    }
+
+    private fun onClickScheduledDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { datepicker, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = m.toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.deliveryDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.datePicker.minDate = Utils.addToDate(Date(), 3).time
+        datePickerDialog.show()
+    }
+
+    private fun getPaymentMethodDropdownValues() {
+        val values = Constants.paymentMethod.entries.iterator()
+        for (v in values) {
+            dropdownPaymentMethodItems.add(requireContext().getString(v.key))
+        }
+        this.binding.paymentMethodAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
+        )
     }
 
 }
