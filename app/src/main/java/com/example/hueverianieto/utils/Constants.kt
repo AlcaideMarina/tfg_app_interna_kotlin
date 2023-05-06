@@ -29,6 +29,12 @@ object Constants {
         R.string.cancelled to 5
     )
 
+    val paymentMethod : Map<Int, Int> = mapOf(
+        R.string.in_cash to 0,
+        R.string.per_receipt to 1,
+        R.string.transfer to 2
+    )
+
 
     const val dateFormat = "dd/MM/yyyy"
 

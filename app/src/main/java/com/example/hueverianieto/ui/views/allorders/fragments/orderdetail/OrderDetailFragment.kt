@@ -183,6 +183,9 @@ class OrderDetailFragment : BaseFragment() {
         this.binding.deliveryPersonTextInputLayout.isEnabled = false
         this.binding.deliveryNoteTextInputLayout.isEnabled = false
         this.binding.deliveryDniTextInputLayout.isEnabled = false
+        this.binding.paidCheckedTextView.isEnabled = false
+        this.binding.paymentMethodTextInputLayout.isEnabled = false
+        this.binding.lotTextInputLayout.isEnabled = false
     }
 
     private fun setTexts(clientData : ClientData) {
@@ -229,6 +232,12 @@ class OrderDetailFragment : BaseFragment() {
             //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
+            paidCheckedTextView.isChecked = orderData.paid
+            paymentMethodAutoCompleteTextView.setText(
+                requireContext().getString(
+                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
+            )
+            lotTextInputLayout.setText(orderData.lot ?: "")
         }
 
     }
