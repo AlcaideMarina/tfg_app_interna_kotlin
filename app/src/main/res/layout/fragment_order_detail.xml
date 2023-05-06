@@ -269,6 +269,7 @@
             android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:text="Pagado"
             app:layout_constraintTop_toBottomOf="@id/total_price_text_layout"
             app:layout_constraintEnd_toEndOf="parent"/>
@@ -278,7 +279,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/size16"
             app:layout_constraintTop_toBottomOf="@+id/paid_checked_text_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
@@ -327,6 +327,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="16dp"
             app:layout_constraintTop_toBottomOf="@+id/payment_method_text_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
