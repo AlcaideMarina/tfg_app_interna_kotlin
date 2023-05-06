@@ -350,9 +350,9 @@
                         android:id="@+id/role_text_input_layout"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginStart="8dp"
                         android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/size8"
+                        android:layout_marginHorizontal="@dimen/size16"
                         android:background="@drawable/custom_input"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp" >
@@ -371,7 +371,6 @@
                             android:paddingTop="8dp"
                             android:paddingBottom="10dp"
                             android:singleLine="true"
-                            android:text="12"
                             android:textAlignment="viewStart" />
 
                     </com.google.android.material.textfield.TextInputLayout>
