@@ -2,11 +2,14 @@ package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
@@ -16,6 +19,8 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrdersAndDeliveryBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
+import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
+import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import com.example.hueverianieto.ui.views.main.MainActivity
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
@@ -43,10 +48,13 @@ class OrderAndDeliveryFragment : BaseFragment() {
 
     override fun configureUI() {
         setButtons()
-        this.binding.dateTextView.setText(
-            Utils.parseTimestampToString(Timestamp.now())
-        )
+        this.binding.dateTextView.text = Utils.parseTimestampToString(Timestamp.now())
         this.orderAndDeliveryViewModel.getTodayOrders()
+        lifecycleScope.launchWhenStarted {
+            orderAndDeliveryViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -92,12 +100,29 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        try {
+            with(state as OrderAndDeliveryViewState) {
+                with(binding) {
+                    this.loadingComponent.isVisible = state.isLoading
+                    if (state.error) {
+                        // TODO: Popup error
+                    } else if (state.isEmpty) {
+                        // TODO: Popup está vacío
+                    }
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, e.message.toString(), e)
+        }
     }
 
     private fun setButtons() {
         this.binding.newOrderButton.setText("Nuevo pedido")
         this.binding.seeAllOrdersButton.setText("Ver todo")
+    }
+
+    companion object {
+        private val TAG = OrderAndDeliveryFragment::class.java.simpleName
     }
 
 
