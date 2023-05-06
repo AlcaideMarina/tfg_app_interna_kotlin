@@ -534,6 +534,56 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/status_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@+id/delivery_dni_text_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/status_text_view"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Estado: " />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/status_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:background="@drawable/custom_input"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp" >
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/status_auto_complete_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:inputType="none"
+                    android:enabled="false"
+                    android:maxLines="1"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="@dimen/size8"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
         <com.example.hueverianieto.ui.components.HNButton
             android:id="@+id/modify_button"
             android:layout_width="match_parent"
@@ -541,7 +591,7 @@
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/delivery_dni_text_layout" />
+            app:layout_constraintTop_toBottomOf="@id/status_text_layout" />
 
         <com.example.hueverianieto.ui.components.HNButton
             android:id="@+id/delete_button"

@@ -39,6 +39,7 @@ class ModifyOrderFragment : BaseFragment() {
 
     private lateinit var approxDeliveryDatetimeSelected : Timestamp
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
+    private var dropdownStatusItems: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -67,6 +68,7 @@ class ModifyOrderFragment : BaseFragment() {
         setTexts()
         setRecyclerView()
         getPaymentMethodDropdownValues()
+        getStatusDropdownValues()
     }
 
     override fun setObservers() {
@@ -128,6 +130,10 @@ class ModifyOrderFragment : BaseFragment() {
                 requireContext().getString(
                     Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
             )
+            statusAutoCompleteTextView.setText(
+                requireContext().getString(
+                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!)
+            )
         }
 
     }
@@ -179,6 +185,17 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.paymentMethodAutoCompleteTextView.setAdapter(
             ArrayAdapter(
                 requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
+        )
+    }
+
+    private fun getStatusDropdownValues() {
+        val values = Constants.orderStatus.entries.iterator()
+        for (v in values) {
+            dropdownStatusItems.add(requireContext().getString(v.key))
+        }
+        this.binding.statusAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                requireContext(), R.layout.component_dropdown_list_item, dropdownStatusItems)
         )
     }
 

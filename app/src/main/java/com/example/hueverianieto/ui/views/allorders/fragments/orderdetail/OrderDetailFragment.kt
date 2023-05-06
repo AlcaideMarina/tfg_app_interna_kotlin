@@ -186,6 +186,7 @@ class OrderDetailFragment : BaseFragment() {
         this.binding.paidCheckedTextView.isEnabled = false
         this.binding.paymentMethodTextInputLayout.isEnabled = false
         this.binding.lotTextInputLayout.isEnabled = false
+        this.binding.statusTextInputLayout.isEnabled = false
     }
 
     private fun setTexts(clientData : ClientData) {
