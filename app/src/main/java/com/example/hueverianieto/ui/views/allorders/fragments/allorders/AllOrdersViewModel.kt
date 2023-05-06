@@ -1,9 +1,14 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.allorders
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
@@ -62,6 +67,14 @@ class AllOrdersViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigateToOrderDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_orderDetailFragment, bundle)
+            ?: Log.e(
+                AllOrdersViewState::class.java.simpleName,
+                "Error en la navegación a detalle de pedido"
+            )
     }
 
 }
