@@ -154,6 +154,10 @@ class OrderDetailFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.modifyButton.setText("Modificar")
         this.binding.deleteButton.setText("Eliminar")
+        if (this.orderData.status == Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+            this.binding.modifyButton.isEnabled = false
+            this.binding.deleteButton.isEnabled = false
+        }
     }
 
     private fun disableTextInputLayouts() {

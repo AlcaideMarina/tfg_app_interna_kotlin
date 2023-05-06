@@ -2,6 +2,7 @@ package com.example.hueverianieto.data.services
 
 import com.example.hueverianieto.R
 import com.example.hueverianieto.utils.Constants
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
@@ -12,7 +13,8 @@ class DeleteOrderService @Inject constructor(
 
     suspend fun deleteOrder(clientDocumentId: String, orderDocumentId: String) : Boolean {
         val deleted : Map<String, Any> = mapOf(
-            "status" to Constants.orderStatus[R.string.cancelled]!!.toLong()
+            "status" to Constants.orderStatus[R.string.cancelled]!!.toLong(),
+            "delivery_datetime" to Timestamp.now()
         )
         return runCatching {
             firebaseClient.db
