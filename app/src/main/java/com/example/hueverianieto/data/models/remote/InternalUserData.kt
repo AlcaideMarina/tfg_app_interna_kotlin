@@ -12,7 +12,7 @@ data class InternalUserData(
     var direction: String,
     var dni: String,
     var email: String,
-    var id: String,
+    var id: Long?,
     var name: String,
     var phone: Long,
     var position: Long,
@@ -20,7 +20,7 @@ data class InternalUserData(
     var province: String,
     var ssNumber: Long,
     var surname: String,
-    var uid: String,
+    var uid: String?,
     var user: String,
     var documentId: String?
 ) : Parcelable

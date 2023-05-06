@@ -19,9 +19,9 @@ class NewClientService @Inject constructor(
                 ClientUtils.parcelableToMap(clientData)
             )
             .await()
-    }.toBooleanResult(clientData)
+    }.toBooleanResult()
 
-    private fun Result<DocumentReference>.toBooleanResult(orderData: ClientData) = when(val result = getOrNull()) {
+    private fun Result<DocumentReference>.toBooleanResult() = when(val result = getOrNull()) {
         null -> false
         else -> true
     }

@@ -7,7 +7,7 @@ class UpdateFirestoreUserUseCase @Inject constructor(
     private var updateFirestoreService: UpdateFirestoreService
 ){
 
-    suspend operator fun invoke(clientDataMap: Map<String, Any?>, documentId: String) : Boolean =
-        updateFirestoreService.updateClientFirestore(clientDataMap, documentId)
+    suspend operator fun invoke(clientDataMap: Map<String, Any?>, documentId: String, collection: String) : Boolean =
+        updateFirestoreService.updateClientFirestore(clientDataMap, documentId, collection)
 
 }

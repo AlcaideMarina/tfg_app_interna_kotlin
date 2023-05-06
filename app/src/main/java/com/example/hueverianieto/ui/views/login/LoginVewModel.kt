@@ -13,7 +13,7 @@ import com.example.hueverianieto.base.core.Event
 import com.example.hueverianieto.data.models.local.LoginResponse
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.local.UserLoginData
-import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
+import com.example.hueverianieto.domain.usecases.GetUserDataWithUidUseCase
 import com.example.hueverianieto.domain.usecases.LoginUseCase
 import com.example.hueverianieto.ui.views.main.MainActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -25,7 +25,7 @@ import javax.inject.Inject
 @HiltViewModel
 class LoginViewModel @Inject constructor (
     val loginUseCase: LoginUseCase,
-    val getUserDataUseCase: GetUserDataUseCase
+    val getUserDataWithUidUseCase: GetUserDataWithUidUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(LoginViewState())
@@ -52,7 +52,7 @@ class LoginViewModel @Inject constructor (
                         _viewState.value = LoginViewState(false)
                     }
                     is LoginResponse.Success -> {
-                        when(val internalUser = getUserDataUseCase(result.uid)) {
+                        when(val internalUser = getUserDataWithUidUseCase(result.uid)) {
                             null -> {
                                 _alertDialog.value = UserLoginData(email, password, true)
                                 _viewState.value = LoginViewState(false)

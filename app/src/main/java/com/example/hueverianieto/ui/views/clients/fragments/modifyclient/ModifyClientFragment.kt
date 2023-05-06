@@ -137,7 +137,8 @@ class ModifyClientFragment : BaseFragment() {
                 user,
                 clientData.documentId,
             )
-            this.modifyClientViewModel.updateUser(newClientData)
+            val createAuthAccount = if (clientData.hasAccount) false else hasAccount
+            this.modifyClientViewModel.updateUser(newClientData, createAuthAccount)
         }
     }
 

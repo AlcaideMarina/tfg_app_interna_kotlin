@@ -9,11 +9,11 @@ class UpdateFirestoreService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun updateClientFirestore(clientDataMap: Map<String, Any?>, documentId: String) : Boolean = runCatching {
+    suspend fun updateClientFirestore(dataMap: Map<String, Any?>, documentId: String, collection: String) : Boolean = runCatching {
         firebaseClient.db
-            .collection("client_info")
+            .collection(collection)
             .document(documentId)
-            .set(clientDataMap, SetOptions.merge())
+            .set(dataMap, SetOptions.merge())
             .await()
     }.toBooleanResult()
 

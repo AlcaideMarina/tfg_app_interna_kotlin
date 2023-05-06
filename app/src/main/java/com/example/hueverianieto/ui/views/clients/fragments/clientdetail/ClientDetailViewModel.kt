@@ -11,9 +11,8 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
-import com.example.hueverianieto.domain.usecases.ClientDetailUseCase
 import com.example.hueverianieto.domain.usecases.DeleteClientUseCase
-import com.example.hueverianieto.domain.usecases.GetClientDataUseCase
+import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,9 +21,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ClientDetailViewModel @Inject constructor(
-    val clientDetailUseCase: ClientDetailUseCase,
     val deleteClientUseCase: DeleteClientUseCase,
-    val getClientDataUseCase: GetClientDataUseCase,
+    val getUserDataUseCase: GetUserDataUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ClientDetailViewState())
@@ -73,13 +71,13 @@ class ClientDetailViewModel @Inject constructor(
         _viewState.value = ClientDetailViewState(isLoading = true)
         viewModelScope.launch {
             _viewState.value = ClientDetailViewState(isLoading = true)
-            when (val result = getClientDataUseCase(documentId)) {
+            when (val result = getUserDataUseCase(documentId, "client_info")) {
                 null -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = true)
                 }
                 else -> {
                     _viewState.value = ClientDetailViewState(isLoading = false)
-                    _clientData.value = result!!
+                    _clientData.value = result!! as ClientData
                 }
             }
         }

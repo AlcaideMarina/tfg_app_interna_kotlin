@@ -10,10 +10,15 @@ class ComponentInternalUserViewHolder(view: View) : RecyclerView.ViewHolder(view
     val binding: ComponentInternalUserBinding = ComponentInternalUserBinding.bind(view)
 
     fun render(componentInternalUserModel: ComponentInternalUserModel) {
-        this.binding.idText.text = componentInternalUserModel.id
+        this.binding.idText.text = "ID: ${componentInternalUserModel.id}"
         this.binding.nameText.text = "${componentInternalUserModel.name} ${componentInternalUserModel.surname}"
         this.binding.dniText.text = "DNI: ${componentInternalUserModel.dni}"
         this.binding.jobRoleText.text = "Puesto: ${componentInternalUserModel.jobRole}"
+        if (componentInternalUserModel.onClickListener == null) {
+            this.binding.arrowIcon.visibility = View.GONE
+        } else {
+            this.itemView.setOnClickListener(componentInternalUserModel.onClickListener)
+        }
     }
 
 }

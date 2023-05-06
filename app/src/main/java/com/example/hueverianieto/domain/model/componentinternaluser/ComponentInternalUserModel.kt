@@ -9,5 +9,5 @@ class ComponentInternalUserModel (
     var surname: String,
     var dni: String,
     var jobRole: String,
-    var onClickListener: OnClickListener
+    var onClickListener: OnClickListener?
 ) : BaseModel
