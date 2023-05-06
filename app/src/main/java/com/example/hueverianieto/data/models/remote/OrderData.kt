@@ -14,6 +14,7 @@ data class OrderData (
     val deliveryDni: String?,
     val deliveryNote: Long?,
     val deliveryPerson: String?,
+    val lot: String?,
     val notes: String?,
     var order: Map<String, Map<String, Number?>>,
     val orderDatetime: Timestamp,

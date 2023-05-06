@@ -17,6 +17,7 @@ object OrderUtils {
         map["delivery_dni"] = orderData.deliveryDni
         map["delivery_note"] = orderData.deliveryNote
         map["delivery_person"] = orderData.deliveryPerson
+        map["lot"] = orderData.lot
         map["notes"] = orderData.notes
         map["order"] = orderData.order
         map["order_datetime"] = orderData.orderDatetime
@@ -38,6 +39,7 @@ object OrderUtils {
             data["delivery_dni"] as String?,
             data["delivery_note"] as Long?,
             data["delivery_person"] as String?,
+            data["lot"] as String?,
             data["notes"] as String?,
             data["order"] as Map<String, Map<String, Number>>,
             data["order_datetime"] as Timestamp,
