@@ -262,13 +262,72 @@
 
         </LinearLayout>
 
+        <CheckedTextView
+            android:id="@+id/paid_checked_text_view"
+            android:checked="false"
+            android:gravity="center"
+            android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pagado"
+            app:layout_constraintTop_toBottomOf="@id/total_price_text_layout"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <LinearLayout
+            android:id="@+id/payment_method_text_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/size16"
+            app:layout_constraintTop_toBottomOf="@+id/paid_checked_text_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <TextView
+                android:id="@+id/payment_method_text_view"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Método de pago: " />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/payment_method_text_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="@dimen/size8"
+                android:layout_marginHorizontal="@dimen/size16"
+                android:background="@drawable/custom_input"
+                app:boxStrokeWidth="0dp"
+                app:boxStrokeWidthFocused="0dp" >
+
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+                    android:id="@+id/payment_method_auto_complete_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@null"
+                    app:autoSizeTextType="uniform"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeMaxTextSize="15sp"
+                    app:autoSizeStepGranularity="1sp"
+                    android:inputType="none"
+                    android:maxLines="1"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="10dp"
+                    android:layout_marginTop="@dimen/size8"
+                    android:singleLine="true"
+                    android:textAlignment="viewStart" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </LinearLayout>
+
         <LinearLayout
             android:id="@+id/order_date_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginTop="@dimen/size16"
-            app:layout_constraintTop_toBottomOf="@+id/total_price_text_layout"
+            app:layout_constraintTop_toBottomOf="@+id/payment_method_text_layout"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent">
 
@@ -422,7 +481,7 @@
                 android:layout_marginTop="@dimen/size8"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:text="Albarán: " />
+                android:text="Lote: " />
 
             <EditText
                 android:id="@+id/lot_text_input_layout"
