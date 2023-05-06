@@ -85,6 +85,9 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.phoneTextInputLayoutPhone1.isEnabled = false
         this.binding.phoneTextInputLayoutPhone2.isEnabled = false
         this.binding.orderDateTextInputLayout.isEnabled = false
+        if (listOf<Long>(2, 3, 4, 5).contains(this.orderData.status)) {
+            this.binding.deliveryDateTextInputLayout.isEnabled = false
+        }
 
         this.binding.totalPriceTextLayout.visibility = View.GONE
     }
@@ -93,24 +96,6 @@ class ModifyOrderFragment : BaseFragment() {
 
         val phone1 = clientData.phone[0].entries.iterator().next()
         val phone2 = clientData.phone[1].entries.iterator().next()
-
-        val statusApproxDeliveryDatetimeList = listOf<Long>(0, 1, 2)
-        val deliveryDatetimeField : String = if (statusApproxDeliveryDatetimeList.contains(orderData.status)) {
-            requireContext().getString(
-                Utils.getKey(
-                    Constants.orderStatus, orderData.status.toInt())!!) + " - " +
-                    Utils.parseTimestampToString(orderData.approxDeliveryDatetime)
-        } else if (orderData.status == (4).toLong()) {
-            Utils.parseTimestampToString(orderData.deliveryDatetime) ?: ""
-        } else if (orderData.status == (5).toLong()) {
-            requireContext().getString(
-                Utils.getKey(
-                Constants.orderStatus, orderData.status.toInt())!!) + " - " +
-                    Utils.parseTimestampToString(orderData.deliveryDatetime)
-        } else {
-            Utils.parseTimestampToString(orderData.deliveryDatetime)
-                ?: Utils.parseTimestampToString(orderData.approxDeliveryDatetime)!!
-        }
 
         with(this.binding) {
             orderIdTextView.text = "ID pedido: " + orderData.orderId.toString()
@@ -121,7 +106,9 @@ class ModifyOrderFragment : BaseFragment() {
             phoneTextInputLayoutPhone2.setText(phone2.value.toString())
             orderDateTextInputLayout.setText(
                 Utils.parseTimestampToString(orderData.orderDatetime) ?: "")
-            deliveryDateTextInputLayout.setText(deliveryDatetimeField)
+            deliveryDateTextInputLayout.setText(
+                Utils.parseTimestampToString(
+                    orderData.deliveryDatetime ?: orderData.approxDeliveryDatetime))
             //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
