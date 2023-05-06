@@ -12,7 +12,7 @@ class DeleteDocumentFieldService @Inject constructor(
         val deleted : Map<String, Boolean> = mapOf("deleted" to true)
         return runCatching {
             firebaseClient.db
-                .collection("client_info")
+                .collection(collection)
                 .document(documentId)
                 .set(deleted,
                     SetOptions.merge()
