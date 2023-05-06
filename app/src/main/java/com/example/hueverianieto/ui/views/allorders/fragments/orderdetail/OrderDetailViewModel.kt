@@ -4,8 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.domain.usecases.DeleteOrderUseCase
 import com.example.hueverianieto.domain.usecases.GetClientWithIdUseCase
+import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -14,11 +17,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OrderDetailViewModel @Inject constructor(
-    val getClientWithIdUseCase: GetClientWithIdUseCase
+    val getClientWithIdUseCase: GetClientWithIdUseCase,
+    val deleteOrderUseCase: DeleteOrderUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(OrderDetailViewState())
     val viewState: StateFlow<OrderDetailViewState> get() = _viewState
+
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     private var _clientData = MutableLiveData<ClientData?>()
     val clientData: LiveData<ClientData?> get() = _clientData
@@ -34,6 +41,31 @@ class OrderDetailViewModel @Inject constructor(
                 else -> {
                     _viewState.value = OrderDetailViewState(isLoading = false)
                     _clientData.value = result!!
+                }
+            }
+        }
+    }
+
+    fun deleteOrder(clientDocumentId: String, orderDocumentId: String) {
+        _viewState.value = OrderDetailViewState(isLoading = true)
+        viewModelScope.launch {
+            when(val result = deleteOrderUseCase(clientDocumentId, orderDocumentId)) {
+                false -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false, error = true)
+                    _alertDialog.value = AlertOkData(
+                        "Error",
+                        "Se ha producido un error al eliminar el pedido. Revise los datos e inténtelo de nuevo.",
+                        true
+                    )
+                }
+                true -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false, error = false, correct = true)
+                    _alertDialog.value = AlertOkData(
+                        "Pedido eliminado",
+                        "El pedido ha sido eliminado correctamente",
+                        true,
+                        0
+                    )
                 }
             }
         }

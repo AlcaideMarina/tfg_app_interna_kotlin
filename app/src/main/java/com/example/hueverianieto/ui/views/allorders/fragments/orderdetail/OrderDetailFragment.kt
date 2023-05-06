@@ -10,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
@@ -32,6 +33,7 @@ class OrderDetailFragment : BaseFragment() {
     private lateinit var binding : FragmentOrderDetailBinding
     private lateinit var alertDialog : HNModalDialog
     private lateinit var orderData : OrderData
+    private lateinit var clientData : ClientData
     private lateinit var currentUserData: InternalUserData
     private val orderDetailViewModel : OrderDetailViewModel by viewModels()
 
@@ -73,8 +75,9 @@ class OrderDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        this.orderDetailViewModel.clientData.observe(this) { clientData ->
-            if (clientData != null) {
+        this.orderDetailViewModel.clientData.observe(this) { clientDataUseCase ->
+            if (clientDataUseCase != null) {
+                clientData = clientDataUseCase
                 setTexts(clientData)
             } else {
                 Utils.setPopUp(
@@ -89,10 +92,55 @@ class OrderDetailFragment : BaseFragment() {
                 )
             }
         }
+        this.orderDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.deleteButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso importante",
+                "Esta acción es irreversible. ¿Está seguro de que quiere eliminar el cliente?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    orderDetailViewModel.deleteOrder(
+                        clientData.documentId!!, orderData.documentId!!)
+                }
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
