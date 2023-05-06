@@ -190,33 +190,48 @@ class ModifyOrderFragment : BaseFragment() {
                     if (this.binding.deliveryNoteTextInputLayout.text.toString() == "") null
                     else this.binding.deliveryNoteTextInputLayout.text.toString().toLong()
 
-                val deliveryDatetime = if (listOf(3, 4, 5).contains(Constants.orderStatus[statusSelected]!!)) {
+                val statusInt = Constants.orderStatus[statusSelected]!!
+                val deliveryDatetime = if (listOf(3, 4, 5).contains(statusInt)) {
                     Timestamp.now()
                 } else {
                     orderData.deliveryDatetime
                 }
+                if (statusInt == 3 && deliveryDniAux != null) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Faltan el DNI de entrega",
+                        "No se puede marcar un pedido como entregado si falta el DNI que confirme la entrega",
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                } else {
+                    val orderData = OrderData(
+                        approxDeliveryDatetime = approxDeliveryDatetimeSelected,
+                        clientId = clientData.id!!,
+                        company = clientData.company,
+                        createdBy = orderData.createdBy,
+                        deliveryDatetime = deliveryDatetime,
+                        deliveryDni = deliveryDniAux,
+                        deliveryNote = deliveryNoteAux,
+                        deliveryPerson = null,  // TODO
+                        lot = this.binding.lotTextInputLayout.text.toString(),
+                        notes = null,
+                        order = orderFieldMap,
+                        orderDatetime = orderData.orderDatetime,
+                        orderId = orderData.orderId,
+                        paid = this.binding.paidCheckedTextView.isChecked,
+                        paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
+                        status = statusInt.toLong(),
+                        totalPrice = null,     // TODO
+                        documentId = this.orderData.documentId
+                    )
+                    modifyOrderViewModel.updateOrder(clientData.documentId!!, orderData)
+                }
 
-                val orderData = OrderData(
-                    approxDeliveryDatetime = approxDeliveryDatetimeSelected,
-                    clientId = clientData.id!!,
-                    company = clientData.company,
-                    createdBy = orderData.createdBy,
-                    deliveryDatetime = deliveryDatetime,
-                    deliveryDni = deliveryDniAux,
-                    deliveryNote = deliveryNoteAux,
-                    deliveryPerson = null,  // TODO
-                    lot = this.binding.lotTextInputLayout.text.toString(),
-                    notes = null,
-                    order = orderFieldMap,
-                    orderDatetime = orderData.orderDatetime,
-                    orderId = orderData.orderId,
-                    paid = this.binding.paidCheckedTextView.isChecked,
-                    paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
-                    status = Constants.orderStatus[statusSelected]!!.toLong(),
-                    totalPrice = null,     // TODO
-                    documentId = this.orderData.documentId
-                )
-                modifyOrderViewModel.updateOrder(clientData.documentId!!, orderData)
+
             }
         }
     }
@@ -249,6 +264,7 @@ class ModifyOrderFragment : BaseFragment() {
             this.binding.deliveryDateTextInputLayout.isEnabled = false
             if (this.orderData.status == (3).toLong()) {
                 this.binding.statusTextInputLayout.isEnabled = false
+                this.binding.deliveryDniTextInputLayout.isEnabled = false
             }
         }
 
