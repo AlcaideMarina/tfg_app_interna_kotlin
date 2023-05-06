@@ -39,7 +39,7 @@ class AllOrdersActivity : BaseActivity() {
         navController = binding.fragContViewCentre.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.allClientsFragment, R.id.newClientFragment)
+            setOf(R.id.allOrdersFragment)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
