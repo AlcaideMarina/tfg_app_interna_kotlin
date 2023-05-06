@@ -12,6 +12,7 @@ import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityAllOrdersBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class AllOrdersActivity : BaseActivity() {
@@ -21,6 +22,7 @@ class AllOrdersActivity : BaseActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     lateinit var currentUserData: InternalUserData
+    var fromNewOrderFragment by Delegates.notNull<Boolean>()
 
     override fun setUp() {
         currentUserData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -28,6 +30,7 @@ class AllOrdersActivity : BaseActivity() {
         } else {
             intent.getParcelableExtra<InternalUserData>("current_user_data")!!
         }
+        fromNewOrderFragment = intent.getBooleanExtra("from_new_order", false)
 
         this.binding = ActivityAllOrdersBinding.inflate(layoutInflater)
         setContentView(binding.root)
