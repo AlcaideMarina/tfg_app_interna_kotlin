@@ -61,9 +61,7 @@
                     android:maxLines="1"
                     android:paddingTop="8dp"
                     android:paddingBottom="10dp"
-                    android:paddingHorizontal="12dp"
                     android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
                     android:singleLine="true"
                     android:textAlignment="viewStart" />
 
@@ -169,6 +167,7 @@
                     android:ems="10"
                     android:inputType="phone"
                     android:textSize="16sp"
+                    android:paddingHorizontal="12dp"
                     android:background="@drawable/custom_input"
                     android:autofillHints="phone"
                     android:layout_marginEnd="4dp" />
@@ -181,6 +180,7 @@
                     android:ems="10"
                     android:inputType="phone"
                     android:textSize="16sp"
+                    android:paddingHorizontal="12dp"
                     android:background="@drawable/custom_input"
                     android:autofillHints="phone"
                     android:layout_marginStart="4dp" />
@@ -247,7 +247,8 @@
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:autofillHints="name"
-                    android:layout_marginEnd="12dp" />
+                    android:layout_marginEnd="12dp"
+                    android:paddingHorizontal="12dp" />
 
                 <TextView
                     android:id="@+id/euro_text"
@@ -367,7 +368,6 @@
                     android:paddingTop="8dp"
                     android:paddingBottom="10dp"
                     android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
                     android:singleLine="true"
                     android:textAlignment="viewStart" />
 
@@ -393,6 +393,7 @@
                 android:text="Albarán: " />
 
             <EditText
+                android:id="@+id/delivery_note_text_input_layout"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:ems="10"
@@ -455,6 +456,19 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/save_button" />
+
+        <ProgressBar
+            android:id="@+id/loading_component"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="64dp"
+            android:elevation="2dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
