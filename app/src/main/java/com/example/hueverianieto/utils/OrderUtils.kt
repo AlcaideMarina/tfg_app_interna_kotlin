@@ -1,8 +1,10 @@
 package com.example.hueverianieto.utils
 
+import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.data.models.local.DBOrderFieldData
 import com.example.hueverianieto.data.models.local.GridTextItemData
 import com.example.hueverianieto.data.models.remote.OrderData
+import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.google.firebase.Timestamp
 
 object OrderUtils {
@@ -216,6 +218,201 @@ object OrderUtils {
                 true, (dbOrderModel.sBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
             ),
         )
+    }
+
+    fun getOrderDataModifyGridModel(orderData: OrderData) : List<GridTextItemData> {
+
+        val dbOrderModel = orderDataToBDOrderModel(orderData)
+
+        return listOf(
+            GridTextItemData(0,
+                true, "XL"
+            ),
+            GridTextItemData(1,
+                true, "Docena:"
+            ),
+            GridTextItemData(2,
+                false, null, response = dbOrderModel.xlDozenQuantity.toString()
+            ),
+            GridTextItemData(3,
+                true, (dbOrderModel.xlDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(4,
+                true, "Caja:"
+            ),
+            GridTextItemData(5,
+                false, null, response = dbOrderModel.xlBoxQuantity.toString()
+            ),
+            GridTextItemData(6,
+                true, (dbOrderModel.xlBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(7,
+                true, "L"
+            ),
+            GridTextItemData(8,
+                true, "Docena:"
+            ),
+            GridTextItemData(9,
+                false, null, response = dbOrderModel.lDozenQuantity.toString()
+            ),
+            GridTextItemData(10,
+                true, (dbOrderModel.lDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(11,
+                true, "Caja:"
+            ),
+            GridTextItemData(12,
+                false, null, response = dbOrderModel.lBoxQuantity.toString()
+            ),
+            GridTextItemData(13,
+                true, (dbOrderModel.lBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(14,
+                true, "M"
+            ),
+            GridTextItemData(15,
+                true, "Docena:"
+            ),
+            GridTextItemData(16,
+                false, null, response = dbOrderModel.mDozenQuantity.toString()
+            ),
+            GridTextItemData(17,
+                true, (dbOrderModel.mDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(18,
+                true, "Caja:"
+            ),
+            GridTextItemData(19,
+                false, null, response = dbOrderModel.mBoxQuantity.toString()
+            ),
+            GridTextItemData(20,
+                true, (dbOrderModel.mBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(21,
+                true, "S"
+            ),
+            GridTextItemData(22,
+                true, "Docena:"
+            ),
+            GridTextItemData(23,
+                false, null, response = dbOrderModel.sDozenQuantity.toString()
+            ),
+            GridTextItemData(24,
+                true, (dbOrderModel.sDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(25,
+                true, "Caja:"
+            ),
+            GridTextItemData(26,
+                false, null, response = dbOrderModel.sBoxQuantity.toString()
+            ),
+            GridTextItemData(27,
+                true, (dbOrderModel.sBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+        )
+    }
+
+    fun parseDBOrderFieldDataToMap(dbOrderFieldData: DBOrderFieldData) :
+            Map<String, Map<String, Number?>> {
+        val map = mutableMapOf<String, Map<String, Number?>>()
+        if(dbOrderFieldData.xlBoxQuantity != null) {
+            map["xl_box"] = mapOf(
+                "price" to dbOrderFieldData.xlBoxPrice,
+                "quantity" to dbOrderFieldData.xlBoxQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.xlDozenQuantity != null) {
+            map["xl_dozen"] = mapOf(
+                "price" to dbOrderFieldData.xlDozenPrice,
+                "quantity" to dbOrderFieldData.xlDozenQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.lBoxQuantity != null) {
+            map["l_box"] = mapOf(
+                "price" to dbOrderFieldData.lBoxPrice,
+                "quantity" to dbOrderFieldData.lBoxQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.lDozenQuantity != null) {
+            map["l_dozen"] = mapOf(
+                "price" to dbOrderFieldData.lDozenPrice,
+                "quantity" to dbOrderFieldData.lDozenQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.mBoxQuantity != null) {
+            map["m_box"] = mapOf(
+                "price" to dbOrderFieldData.mBoxPrice,
+                "quantity" to dbOrderFieldData.mBoxQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.mDozenQuantity != null) {
+            map["m_dozen"] = mapOf(
+                "price" to dbOrderFieldData.mDozenPrice,
+                "quantity" to dbOrderFieldData.mDozenQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.sBoxQuantity != null) {
+            map["s_box"] = mapOf(
+                "price" to dbOrderFieldData.sBoxPrice,
+                "quantity" to dbOrderFieldData.sBoxQuantity as Int
+            )
+        }
+        if(dbOrderFieldData.sDozenQuantity != null) {
+            map["s_dozen"] = mapOf(
+                "price" to dbOrderFieldData.sDozenPrice,
+                "quantity" to dbOrderFieldData.sDozenQuantity as Int
+            )
+        }
+        return map
+    }
+
+    fun getOrderStructure(recyclerView: RecyclerView) : DBOrderFieldData? {
+        val xlDozenValue : Any?
+        val xlBoxValue : Any?
+        val lDozenValue : Any?
+        val lBoxValue : Any?
+        val mDozenValue : Any?
+        val mBoxValue : Any?
+        val sDozenValue : Any?
+        val sBoxValue : Any?
+        with(recyclerView.adapter as HNGridTextAdapter) {
+            xlDozenValue = this.getItemWithPosition(2).response.toString().toIntOrNull()
+            xlBoxValue = this.getItemWithPosition(4).response.toString().toIntOrNull()
+            lDozenValue = this.getItemWithPosition(7).response.toString().toIntOrNull()
+            lBoxValue = this.getItemWithPosition(9).response.toString().toIntOrNull()
+            mDozenValue = this.getItemWithPosition(12).response.toString().toIntOrNull()
+            mBoxValue = this.getItemWithPosition(14).response.toString().toIntOrNull()
+            sDozenValue = this.getItemWithPosition(17).response.toString().toIntOrNull()
+            sBoxValue = this.getItemWithPosition(19).response.toString().toIntOrNull()
+        }
+        if ((xlDozenValue != null && xlDozenValue != 0) || (xlBoxValue != null && xlBoxValue != 0) || (lDozenValue != null && lDozenValue != 0)
+            || (lBoxValue != null && lBoxValue != 0) || (mDozenValue != null && mDozenValue != 0) || (mBoxValue != null && mBoxValue != 0) ||
+            (sDozenValue != null && sDozenValue != 0) || (sBoxValue != null && sBoxValue != 0)) {
+            try {
+                return DBOrderFieldData(
+                    xlBoxPrice = null,
+                    xlBoxQuantity = xlBoxValue as Int?,
+                    xlDozenPrice = null,
+                    xlDozenQuantity = xlDozenValue as Int?,
+                    lBoxPrice = null,
+                    lBoxQuantity = lBoxValue as Int?,
+                    lDozenPrice = null,
+                    lDozenQuantity = lDozenValue as Int?,
+                    mBoxPrice = null,
+                    mBoxQuantity = mBoxValue as Int?,
+                    mDozenPrice = null,
+                    mDozenQuantity = mDozenValue as Int?,
+                    sBoxPrice = null,
+                    sBoxQuantity = sBoxValue as Int?,
+                    sDozenPrice = null,
+                    sDozenQuantity = sDozenValue as Int?,
+                )
+            } catch (e: Exception) {
+                return null
+            }
+        } else {
+            return null
+        }
     }
 
 }

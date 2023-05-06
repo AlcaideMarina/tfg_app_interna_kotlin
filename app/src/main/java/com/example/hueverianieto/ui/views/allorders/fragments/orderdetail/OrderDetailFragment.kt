@@ -239,6 +239,10 @@ class OrderDetailFragment : BaseFragment() {
                     Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
             )
             lotTextInputLayout.setText(orderData.lot ?: "")
+            statusAutoCompleteTextView.setText(
+                requireContext().getString(
+                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!)
+            )
         }
 
     }
