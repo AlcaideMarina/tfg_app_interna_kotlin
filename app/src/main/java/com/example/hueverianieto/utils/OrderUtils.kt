@@ -2,6 +2,7 @@ package com.example.hueverianieto.utils
 
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.data.models.local.DBOrderFieldData
+import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.local.GridTextItemData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
@@ -308,6 +309,95 @@ object OrderUtils {
             ),
             GridTextItemData(27,
                 true, (dbOrderModel.sBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+        )
+    }
+
+    fun getNewOrderGridModel(eggPricesData: EggPricesData) : List<GridTextItemData> {
+        return listOf(
+            GridTextItemData(0,
+                true, "XL"
+            ),
+            GridTextItemData(1,
+                true, "Docena:"
+            ),
+            GridTextItemData(2,
+                false, null
+            ),
+            GridTextItemData(3,
+                true, (eggPricesData.xlDozen ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(4,
+                true, "Caja:"
+            ),
+            GridTextItemData(5,
+                false, null
+            ),
+            GridTextItemData(6,
+                true,  (eggPricesData.xlBox ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(7,
+                true, "L"
+            ),
+            GridTextItemData(8,
+                true, "Docena:"
+            ),
+            GridTextItemData(9,
+                false, null
+            ),
+            GridTextItemData(10,
+                true, (eggPricesData.lDozen ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(11,
+                true, "Caja:"
+            ),
+            GridTextItemData(12,
+                false, null
+            ),
+            GridTextItemData(13,
+                true, (eggPricesData.lBox ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(14,
+                true, "M"
+            ),
+            GridTextItemData(15,
+                true, "Docena:"
+            ),
+            GridTextItemData(16,
+                false, null,
+            ),
+            GridTextItemData(17,
+                true, (eggPricesData.mDozen ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(18,
+                true, "Caja:"
+            ),
+            GridTextItemData(19,
+                false, null
+            ),
+            GridTextItemData(20,
+                true, (eggPricesData.mBox ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(21,
+                true, "S"
+            ),
+            GridTextItemData(22,
+                true, "Docena:"
+            ),
+            GridTextItemData(23,
+                false, null
+            ),
+            GridTextItemData(24,
+                true, (eggPricesData.sDozen ?: "-").toString() + " €/ud", isTextLeft = false
+            ),
+            GridTextItemData(25,
+                true, "Caja:"
+            ),
+            GridTextItemData(26,
+                false, null
+            ),
+            GridTextItemData(27,
+                true, (eggPricesData.sBox ?: "-").toString() + " €/ud", isTextLeft = false
             ),
         )
     }
