@@ -376,18 +376,34 @@ object OrderUtils {
         val sDozenValue : Any?
         val sBoxValue : Any?
         with(recyclerView.adapter as HNGridTextAdapter) {
-            xlDozenValue = this.getItemWithPosition(2).response.toString().toIntOrNull()
-            xlBoxValue = this.getItemWithPosition(5).response.toString().toIntOrNull()
-            lDozenValue = this.getItemWithPosition(9).response.toString().toIntOrNull()
-            lBoxValue = this.getItemWithPosition(12).response.toString().toIntOrNull()
-            mDozenValue = this.getItemWithPosition(16).response.toString().toIntOrNull()
-            mBoxValue = this.getItemWithPosition(19).response.toString().toIntOrNull()
-            sDozenValue = this.getItemWithPosition(23).response.toString().toIntOrNull()
-            sBoxValue = this.getItemWithPosition(26).response.toString().toIntOrNull()
+            xlDozenValue =
+                if(this.getItemWithPosition(2).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(2).response.toString().toIntOrNull()
+            xlBoxValue =
+                if(this.getItemWithPosition(5).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(5).response.toString().toIntOrNull()
+            lDozenValue =
+                if(this.getItemWithPosition(9).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(9).response.toString().toIntOrNull()
+            lBoxValue =
+                if(this.getItemWithPosition(12).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(12).response.toString().toIntOrNull()
+            mDozenValue =
+                if(this.getItemWithPosition(16).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(16).response.toString().toIntOrNull()
+            mBoxValue =
+                if(this.getItemWithPosition(19).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(19).response.toString().toIntOrNull()
+            sDozenValue =
+                if(this.getItemWithPosition(23).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(23).response.toString().toIntOrNull()
+            sBoxValue =
+                if(this.getItemWithPosition(26).response.toString().toIntOrNull() == 0) null
+                else this.getItemWithPosition(26).response.toString().toIntOrNull()
         }
-        if ((xlDozenValue != null && xlDozenValue != 0) || (xlBoxValue != null && xlBoxValue != 0) || (lDozenValue != null && lDozenValue != 0)
-            || (lBoxValue != null && lBoxValue != 0) || (mDozenValue != null && mDozenValue != 0) || (mBoxValue != null && mBoxValue != 0) ||
-            (sDozenValue != null && sDozenValue != 0) || (sBoxValue != null && sBoxValue != 0)) {
+        if (xlDozenValue != null || xlBoxValue != null || lDozenValue != null
+            || lBoxValue != null || mDozenValue != null || mBoxValue != null ||
+            sDozenValue != null || sBoxValue != null) {
             try {
                 return DBOrderFieldData(
                     xlBoxPrice = null,

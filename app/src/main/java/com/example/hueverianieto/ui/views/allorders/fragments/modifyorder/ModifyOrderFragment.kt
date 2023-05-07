@@ -196,7 +196,7 @@ class ModifyOrderFragment : BaseFragment() {
                 } else {
                     orderData.deliveryDatetime
                 }
-                if (statusInt == 3 && deliveryDniAux != null) {
+                if (statusInt == 3 && deliveryDniAux == null) {
                     Utils.setPopUp(
                         alertDialog,
                         requireContext(),
