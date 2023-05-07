@@ -126,7 +126,6 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.newOrderButton.setText("Nuevo pedido")
         this.binding.seeAllOrdersButton.setText("Ver todo")
     }
 
