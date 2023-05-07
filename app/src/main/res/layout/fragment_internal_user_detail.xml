@@ -346,27 +346,33 @@
                         android:layout_marginTop="@dimen/size8"
                         android:text="Puesto:" />
 
-                    <!-- TODO: Revisar por qué se corta -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/role_text_input_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                         android:layout_width="match_parent"
-                        android:layout_height="48dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="@dimen/size8"
                         android:layout_marginHorizontal="@dimen/size16"
-                        android:textColorHint="@color/light_gray_color"
-                        app:boxCornerRadiusBottomEnd="@dimen/size16"
-                        app:boxCornerRadiusBottomStart="@dimen/size16"
-                        app:boxCornerRadiusTopEnd="@dimen/size16"
-                        app:boxCornerRadiusTopStart="@dimen/size16"
-                        app:boxStrokeColor="@color/light_gray_color">
+                        android:background="@drawable/custom_input"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp" >
 
-                        <AutoCompleteTextView
+                        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                             android:id="@+id/role_auto_complete_text_view"
                             android:layout_width="match_parent"
-                            android:layout_height="40dp"
-                            android:background="@drawable/custom_input"
+                            android:layout_height="match_parent"
+                            android:background="@null"
+                            app:autoSizeTextType="uniform"
+                            app:autoSizeMinTextSize="10sp"
+                            app:autoSizeMaxTextSize="15sp"
+                            app:autoSizeStepGranularity="1sp"
+                            android:enabled="false"
                             android:inputType="none"
-                            android:paddingTop="12dp" />
+                            android:maxLines="1"
+                            android:paddingTop="8dp"
+                            android:paddingBottom="10dp"
+                            android:singleLine="true"
+                            android:textAlignment="viewStart" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 

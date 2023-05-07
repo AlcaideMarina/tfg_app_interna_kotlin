@@ -84,12 +84,6 @@
         android:layout_marginTop="32dp">
 
         <com.example.hueverianieto.ui.components.HNButton
-            android:id="@+id/new_order_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/size8"/>
-
-        <com.example.hueverianieto.ui.components.HNButton
             android:id="@+id/see_all_orders_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />

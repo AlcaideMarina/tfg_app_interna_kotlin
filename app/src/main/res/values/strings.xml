@@ -57,5 +57,9 @@
     <string name="unknown_status">Estado desconocido</string>
     <string name="cancelled">Cancelado</string>
 
+    <!-- Métodos de pago -->
+    <string name="in_cash">Al contado</string>
+    <string name="per_receipt">Por recibo</string>
+    <string name="transfer">Transferencia</string>
 
 </resources>

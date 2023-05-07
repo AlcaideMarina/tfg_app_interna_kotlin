@@ -14,6 +14,7 @@ data class OrderData (
     val deliveryDni: String?,
     val deliveryNote: Long?,
     val deliveryPerson: String?,
+    val lot: String?,
     val notes: String?,
     var order: Map<String, Map<String, Number?>>,
     val orderDatetime: Timestamp,
@@ -21,5 +22,6 @@ data class OrderData (
     val paid: Boolean,
     val paymentMethod: Long,
     val status: Long,
-    val totalPrice: Number?
+    val totalPrice: Number?,
+    val documentId: String?,         // Este campo no se guarda en BBDD, es sólo para localizar en local
 ) : Parcelable

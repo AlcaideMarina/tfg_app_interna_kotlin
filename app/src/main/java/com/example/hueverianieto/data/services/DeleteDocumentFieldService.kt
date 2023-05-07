@@ -4,15 +4,15 @@ import com.google.firebase.firestore.SetOptions
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 
-class DeleteClientService @Inject constructor(
+class DeleteDocumentFieldService @Inject constructor(
     private var firebaseClient: FirebaseClient
 ) {
 
-    suspend fun deleteClient(documentId: String) : Boolean {
+    suspend fun deleteDocumentField(documentId: String, collection: String) : Boolean {
         val deleted : Map<String, Boolean> = mapOf("deleted" to true)
         return runCatching {
             firebaseClient.db
-                .collection("client_info")
+                .collection(collection)
                 .document(documentId)
                 .set(deleted,
                     SetOptions.merge()

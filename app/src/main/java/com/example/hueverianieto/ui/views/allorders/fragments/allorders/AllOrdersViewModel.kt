@@ -1,17 +1,19 @@
-package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
+package com.example.hueverianieto.ui.views.allorders.fragments.allorders
 
-import android.content.Context
-import android.content.Intent
-import android.os.Parcelable
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
-import com.example.hueverianieto.domain.usecases.GetClientTodayOrdersUseCase
-import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
+import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
+import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -19,13 +21,13 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class OrderAndDeliveryViewModel @Inject constructor(
+class AllOrdersViewModel @Inject constructor(
     val getAllDocumentsIdUseCase: GetAllDocumentsIdUseCase,
-    val getClientTodayOrdersUseCase: GetClientTodayOrdersUseCase
+    val getAllClientOrdersUseCase: GetAllClientOrdersUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(OrderAndDeliveryViewState())
-    val viewState: StateFlow<OrderAndDeliveryViewState> get() = _viewState
+    private val _viewState = MutableStateFlow(AllOrdersViewState())
+    val viewState: StateFlow<AllOrdersViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
     val alertDialog: LiveData<AlertOkData> get() = _alertDialog
@@ -33,22 +35,22 @@ class OrderAndDeliveryViewModel @Inject constructor(
     private var _allOrderList = MutableLiveData<List<OrderData?>?>()
     val allOrderList: LiveData<List<OrderData?>?> get() = _allOrderList
 
-    fun getTodayOrders() {
+    fun getOrders() {
         viewModelScope.launch {
-            _viewState.value = OrderAndDeliveryViewState(isLoading = true)
+            _viewState.value = AllOrdersViewState(isLoading = true)
             when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
-                    _viewState.value = OrderAndDeliveryViewState(isLoading = false, error = true)
+                    _viewState.value = AllOrdersViewState(isLoading = false, error = true)
                 }
                 listOf<String>() -> {
-                    _viewState.value = OrderAndDeliveryViewState(isLoading = false, isEmpty = true)
+                    _viewState.value = AllOrdersViewState(isLoading = false, isEmpty = true)
                 }
                 else -> {
                     val clientIdList : List<String?> = resultQ1
                     val orderList : MutableList<OrderData?> = mutableListOf()
                     for (id in clientIdList) {
                         if (id != null) {
-                            when (val resultQ2 = getClientTodayOrdersUseCase(id)) {
+                            when (val resultQ2 = getAllClientOrdersUseCase(id)) {
                                 null -> {}
                                 else -> {
                                     for (order in resultQ2) {
@@ -60,17 +62,27 @@ class OrderAndDeliveryViewModel @Inject constructor(
                             }
                         }
                     }
-                    _viewState.value = OrderAndDeliveryViewState(isLoading = false)
-                    _allOrderList.value = orderList
+                    _viewState.value = AllOrdersViewState(isLoading = false)
+                    _allOrderList.value = orderList.sortedBy { it?.orderDatetime }.reversed()
                 }
             }
         }
     }
 
-    fun navigateToAllOrdersActivity(context: Context, currentUserData: Parcelable) {
-        val intent = Intent(context, AllOrdersActivity::class.java)
-        intent.putExtra("current_user_data", currentUserData)
-        intent.putExtra("from_new_order", false)
-        context.startActivity(intent)
+    fun navigateToOrderDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_orderDetailFragment, bundle)
+            ?: Log.e(
+                AllOrdersViewState::class.java.simpleName,
+                "Error en la navegación a detalle de pedido"
+            )
     }
+
+    fun navigateToNewOrder(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_newOrderFragment, bundle)
+            ?: Log.e(
+                AllOrdersViewState::class.java.simpleName,
+                "Error en la navegación a nuevo pedido"
+            )
+    }
+
 }

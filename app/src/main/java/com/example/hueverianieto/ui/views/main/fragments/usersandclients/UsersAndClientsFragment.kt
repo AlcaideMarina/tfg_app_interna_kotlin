@@ -56,7 +56,7 @@ class UsersAndClientsFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        internalUserData = (activity as MainActivity).internalUserData
+        internalUserData = (activity as MainActivity).currentUserData
         this.binding = FragmentUsersAndClientsBinding
             .inflate(inflater, container, false)
         this.view = inflater.inflate(R.layout.fragment_users_and_clients, container, false)

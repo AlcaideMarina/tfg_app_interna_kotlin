@@ -23,10 +23,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
 
-    lateinit var internalUserData: InternalUserData
+    lateinit var currentUserData: InternalUserData
 
     override fun setUp() {
-        internalUserData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        currentUserData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra("current_user_data", InternalUserData::class.java)!!
         } else {
             intent.getParcelableExtra<InternalUserData>("current_user_data")!!
