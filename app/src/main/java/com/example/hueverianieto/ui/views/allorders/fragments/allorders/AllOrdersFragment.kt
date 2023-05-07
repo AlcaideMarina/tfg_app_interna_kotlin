@@ -127,7 +127,14 @@ class AllOrdersFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // It is not necessary
+        this.binding.addButton.setOnClickListener {
+            this.allOrdersViewModel.navigateToNewOrder(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

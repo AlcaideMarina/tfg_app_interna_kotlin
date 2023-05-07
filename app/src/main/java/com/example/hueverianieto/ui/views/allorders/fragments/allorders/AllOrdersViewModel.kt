@@ -77,4 +77,12 @@ class AllOrdersViewModel @Inject constructor(
             )
     }
 
+    fun navigateToNewOrder(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_newOrderFragment, bundle)
+            ?: Log.e(
+                AllOrdersViewState::class.java.simpleName,
+                "Error en la navegación a nuevo pedido"
+            )
+    }
+
 }
