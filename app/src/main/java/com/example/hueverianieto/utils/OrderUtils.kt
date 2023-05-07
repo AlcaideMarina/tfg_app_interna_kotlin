@@ -377,13 +377,13 @@ object OrderUtils {
         val sBoxValue : Any?
         with(recyclerView.adapter as HNGridTextAdapter) {
             xlDozenValue = this.getItemWithPosition(2).response.toString().toIntOrNull()
-            xlBoxValue = this.getItemWithPosition(4).response.toString().toIntOrNull()
-            lDozenValue = this.getItemWithPosition(7).response.toString().toIntOrNull()
-            lBoxValue = this.getItemWithPosition(9).response.toString().toIntOrNull()
-            mDozenValue = this.getItemWithPosition(12).response.toString().toIntOrNull()
-            mBoxValue = this.getItemWithPosition(14).response.toString().toIntOrNull()
-            sDozenValue = this.getItemWithPosition(17).response.toString().toIntOrNull()
-            sBoxValue = this.getItemWithPosition(19).response.toString().toIntOrNull()
+            xlBoxValue = this.getItemWithPosition(5).response.toString().toIntOrNull()
+            lDozenValue = this.getItemWithPosition(9).response.toString().toIntOrNull()
+            lBoxValue = this.getItemWithPosition(12).response.toString().toIntOrNull()
+            mDozenValue = this.getItemWithPosition(16).response.toString().toIntOrNull()
+            mBoxValue = this.getItemWithPosition(19).response.toString().toIntOrNull()
+            sDozenValue = this.getItemWithPosition(23).response.toString().toIntOrNull()
+            sBoxValue = this.getItemWithPosition(26).response.toString().toIntOrNull()
         }
         if ((xlDozenValue != null && xlDozenValue != 0) || (xlBoxValue != null && xlBoxValue != 0) || (lDozenValue != null && lDozenValue != 0)
             || (lBoxValue != null && lBoxValue != 0) || (mDozenValue != null && mDozenValue != 0) || (mBoxValue != null && mBoxValue != 0) ||
