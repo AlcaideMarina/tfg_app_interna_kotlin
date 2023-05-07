@@ -99,6 +99,38 @@ class NewOrderFragment : BaseFragment() {
             clientData = it
             setClientText()
         }
+        this.newOrderViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode != null) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+
+
+        }
     }
 
     override fun setListeners() {
@@ -176,6 +208,7 @@ class NewOrderFragment : BaseFragment() {
                     totalPrice = null,     // TODO
                     documentId = null
                 )
+                this.newOrderViewModel.addNewOrder(clientDocumentId!!, orderData)
             }
         }
     }
