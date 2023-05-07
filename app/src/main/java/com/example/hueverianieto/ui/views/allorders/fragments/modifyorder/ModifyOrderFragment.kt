@@ -52,6 +52,9 @@ class ModifyOrderFragment : BaseFragment() {
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
     private var dropdownStatusItems: MutableList<String> = mutableListOf()
 
+    private var finished: Boolean = false
+    private var paid: Boolean = false
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -66,6 +69,7 @@ class ModifyOrderFragment : BaseFragment() {
         this.currentUserData = args.currentUserData
         this.clientData = args.clientData
         this.orderData = args.orderData
+        this.paid = orderData.paid
 
         this.alertDialog = HNModalDialog(requireContext())
 
@@ -263,9 +267,13 @@ class ModifyOrderFragment : BaseFragment() {
         if (listOf<Long>(2, 3, 4, 5).contains(this.orderData.status)) {
             this.binding.deliveryDateTextInputLayout.isEnabled = false
             if (this.orderData.status == (3).toLong()) {
-                this.binding.statusTextInputLayout.isEnabled = false
-                this.binding.deliveryDniTextInputLayout.isEnabled = false
+                finished = true
+                this.binding.statusTextInputLayout.isEnabled = !finished
+                this.binding.deliveryDniTextInputLayout.isEnabled = !finished
             }
+        }
+        if (paid) {
+            this.binding.paymentMethodTextInputLayout.isEnabled = false
         }
 
         this.binding.totalPriceTextLayout.visibility = View.GONE
@@ -308,7 +316,11 @@ class ModifyOrderFragment : BaseFragment() {
 
     private fun setRecyclerView() {
 
-        val list = OrderUtils.getOrderDataModifyGridModel(orderData)
+        val isEnabled = if (paid) {
+            false
+        } else !finished
+
+        val list = OrderUtils.getOrderDataModifyGridModel(orderData, isEnabled)
 
         val manager = CustomGridLayoutManager(this.context, 4)
         manager.setScrollEnabled(false)

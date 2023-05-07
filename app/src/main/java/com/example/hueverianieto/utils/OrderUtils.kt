@@ -220,7 +220,7 @@ object OrderUtils {
         )
     }
 
-    fun getOrderDataModifyGridModel(orderData: OrderData) : List<GridTextItemData> {
+    fun getOrderDataModifyGridModel(orderData: OrderData, isEnable: Boolean) : List<GridTextItemData> {
 
         val dbOrderModel = orderDataToBDOrderModel(orderData)
 
@@ -232,7 +232,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(2,
-                false, null, response = dbOrderModel.xlDozenQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.xlDozenQuantity.toString()
             ),
             GridTextItemData(3,
                 true, (dbOrderModel.xlDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -241,7 +241,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(5,
-                false, null, response = dbOrderModel.xlBoxQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.xlBoxQuantity.toString()
             ),
             GridTextItemData(6,
                 true, (dbOrderModel.xlBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -253,7 +253,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(9,
-                false, null, response = dbOrderModel.lDozenQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.lDozenQuantity.toString()
             ),
             GridTextItemData(10,
                 true, (dbOrderModel.lDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -262,7 +262,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(12,
-                false, null, response = dbOrderModel.lBoxQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.lBoxQuantity.toString()
             ),
             GridTextItemData(13,
                 true, (dbOrderModel.lBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -274,7 +274,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(16,
-                false, null, response = dbOrderModel.mDozenQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.mDozenQuantity.toString()
             ),
             GridTextItemData(17,
                 true, (dbOrderModel.mDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -283,7 +283,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(19,
-                false, null, response = dbOrderModel.mBoxQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.mBoxQuantity.toString()
             ),
             GridTextItemData(20,
                 true, (dbOrderModel.mBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -295,7 +295,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(23,
-                false, null, response = dbOrderModel.sDozenQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.sDozenQuantity.toString()
             ),
             GridTextItemData(24,
                 true, (dbOrderModel.sDozenPrice ?: "-").toString() + " €/ud", isTextLeft = false
@@ -304,7 +304,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(26,
-                false, null, response = dbOrderModel.sBoxQuantity.toString()
+                false, null, isEnable, response = dbOrderModel.sBoxQuantity.toString()
             ),
             GridTextItemData(27,
                 true, (dbOrderModel.sBoxPrice ?: "-").toString() + " €/ud", isTextLeft = false
