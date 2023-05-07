@@ -1,11 +1,13 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.neworder
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -22,7 +24,10 @@ import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayou
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
+import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class NewOrderFragment : BaseFragment() {
@@ -39,6 +44,8 @@ class NewOrderFragment : BaseFragment() {
     private val dropdownClientItems = mutableListOf<String>()
     private lateinit var clientData: ClientData
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
+
+    private lateinit var approxDeliveryDatetimeSelected : Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -65,6 +72,8 @@ class NewOrderFragment : BaseFragment() {
         disableTextInputLayouts()
         setRecyclerView(EggPricesData())
         getPaymentMethodDropdownValues()
+        setOrderDateText()
+        setButtons()
 
         lifecycleScope.launchWhenStarted {
             newOrderViewModel.viewState.collect { viewState ->
@@ -164,8 +173,8 @@ class NewOrderFragment : BaseFragment() {
         with(binding) {
             directionTextInputLayout.setText(clientData.direction)
             cifTextInputLayout.setText(clientData.cif)
-            phoneTextInputLayoutPhone1.setText(phone1.toString())
-            phoneTextInputLayoutPhone2.setText(phone2.toString())
+            phoneTextInputLayoutPhone1.setText(phone1.value.toString())
+            phoneTextInputLayoutPhone2.setText(phone2.value.toString())
         }
     }
 
@@ -178,6 +187,39 @@ class NewOrderFragment : BaseFragment() {
             ArrayAdapter(
                 requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
         )
+    }
+
+    private fun setOrderDateText() {
+        approxDeliveryDatetimeSelected = Timestamp(Utils.addToDate(Date(), 3))
+        this.binding.deliveryDateTextInputLayout.setText(
+            Utils.parseDateToString(approxDeliveryDatetimeSelected.toDate())
+        )
+        this.binding.deliveryDateTextInputLayout.setOnClickListener { onClickScheduledDate() }
+    }
+
+    private fun onClickScheduledDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { datepicker, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = m.toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.deliveryDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.datePicker.minDate = Utils.addToDate(Date(), 3).time
+        datePickerDialog.show()
+    }
+
+    private fun setButtons() {
+        this.binding.modifyButton.setText("Guardar")
+        this.binding.deleteButton.setText("Cancelar")
     }
 
 }
