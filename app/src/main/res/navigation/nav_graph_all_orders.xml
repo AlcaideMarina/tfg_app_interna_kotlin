@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/orderDetailFragment"
         android:name="com.example.hueverianieto.ui.views.allorders.fragments.orderdetail.OrderDetailFragment"
-        android:label="OrderDetailFragment" >
+        android:label="Detalle de pedido" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/modifyOrderFragment"
         android:name="com.example.hueverianieto.ui.views.allorders.fragments.modifyorder.ModifyOrderFragment"
-        android:label="ModifyOrderFragment" >
+        android:label="Modificar pedido" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
