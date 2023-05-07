@@ -176,7 +176,6 @@ class NewOrderFragment : BaseFragment() {
                     totalPrice = null,     // TODO
                     documentId = null
                 )
-                this.newOrderViewModel.
             }
         }
     }
