@@ -19,7 +19,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
+import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentOrderDetailBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.example.hueverianieto.utils.Constants
@@ -34,6 +36,7 @@ class NewOrderFragment : BaseFragment() {
 
     private lateinit var binding : FragmentOrderDetailBinding
     private lateinit var currentUserData : InternalUserData
+    private lateinit var alertDialog : HNModalDialog
     private val newOrderViewModel : NewOrderViewModel by viewModels()
 
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
@@ -44,6 +47,7 @@ class NewOrderFragment : BaseFragment() {
     private val dropdownClientItems = mutableListOf<String>()
     private lateinit var clientData: ClientData
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
+    private var clientDocumentId : String? = null
 
     private lateinit var approxDeliveryDatetimeSelected : Timestamp
 
@@ -60,6 +64,8 @@ class NewOrderFragment : BaseFragment() {
         )
         val args : NewOrderFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
+
+        this.alertDialog = HNModalDialog(requireContext())
 
         return this.binding.root
 
@@ -98,8 +104,80 @@ class NewOrderFragment : BaseFragment() {
     override fun setListeners() {
         this.binding.companyAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
             val listSelected = dropdownClientItems[position]
-            val clientDocumentId = dropdownClientItemsMap[listSelected]!!
-            this.newOrderViewModel.getClient(clientDocumentId)
+            clientDocumentId = dropdownClientItemsMap[listSelected]!!
+            this.newOrderViewModel.getClient(clientDocumentId!!)
+        }
+        this.binding.deleteButton.setOnClickListener {
+            it.hideSoftInput()
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.modifyButton.setOnClickListener {
+            it.hideSoftInput()
+            val paymentMethodSelected : Int? = when (this.binding.paymentMethodAutoCompleteTextView.text.toString()) {
+                requireContext().getString(R.string.in_cash) -> R.string.in_cash
+                requireContext().getString(R.string.per_receipt) -> R.string.per_receipt
+                requireContext().getString(R.string.transfer) -> R.string.transfer
+                else -> null
+            }
+            val dbOrderFieldData = OrderUtils.getOrderStructure(this.binding.orderRecyclerView)
+
+            if (clientDocumentId == null) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Seleccione un cliente",
+                    "Es necesario que seleccione un cliente al que asociar este pedido. Por favor, revise los datos y vuelva a intentarlo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            } else if (paymentMethodSelected == null) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Faltan datos",
+                    "El método de pago seleccionado no es válido. Por favor, revise los datos e inténtelo de nuevo",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            } else if (dbOrderFieldData == null) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Faltan datos",
+                    "Se debe seleccionar, al menos, un producto para realizar el pedido. Por favor, revise los datos e inténtelo de nuevo",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            } else {
+                val orderFieldMap = OrderUtils.parseDBOrderFieldDataToMap(dbOrderFieldData)
+                val orderData = OrderData(
+                    approxDeliveryDatetime = approxDeliveryDatetimeSelected,
+                    clientId = clientData.id!!,
+                    company = clientData.company,
+                    createdBy = "user_${currentUserData.createdBy}",
+                    deliveryDatetime = null,
+                    deliveryDni = null,
+                    deliveryNote = null,
+                    deliveryPerson = null,  // TODO
+                    lot = null,
+                    notes = null,
+                    order = orderFieldMap,
+                    orderDatetime = Timestamp(Date()),
+                    orderId = null,
+                    paid = false,
+                    paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
+                    status = 1,
+                    totalPrice = null,     // TODO
+                    documentId = null
+                )
+                this.newOrderViewModel.
+            }
         }
     }
 

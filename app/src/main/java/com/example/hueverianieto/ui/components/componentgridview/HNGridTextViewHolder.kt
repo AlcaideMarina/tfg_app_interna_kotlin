@@ -1,6 +1,8 @@
 package com.example.hueverianieto.ui.components.componentgridview
 
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.data.models.local.GridTextItemData
@@ -29,7 +31,6 @@ class HNGridTextViewHolder (view: View) :
             this.binding.textInputLayoutGrid.visibility = View.VISIBLE
             this.binding.textInputLayoutGrid.inputType = InputType.TYPE_CLASS_NUMBER
             this.binding.textInputLayoutGrid.isEnabled = gridTextItemModel.isEnabled
-            this.binding.textInputLayoutGrid.isEnabled = gridTextItemModel.isEnabled
             if(gridTextItemModel.response == null || gridTextItemModel.response == "") {
                 gridTextItemModel.response =
                     this.binding.textInputLayoutGrid.text.toString()
@@ -37,6 +38,15 @@ class HNGridTextViewHolder (view: View) :
                 this.binding.textInputLayoutGrid.setText(
                     gridTextItemModel.response.toString())
             }
+            this.binding.textInputLayoutGrid.addTextChangedListener(object : TextWatcher {
+                override fun afterTextChanged(s: Editable) {}
+                override fun beforeTextChanged(s: CharSequence, start: Int,
+                                               count: Int, after: Int) {}
+                override fun onTextChanged(s: CharSequence, start: Int,
+                                           before: Int, count: Int) {
+                    gridTextItemModel.response = s.toString()
+                }
+            })
         }
     }
 }

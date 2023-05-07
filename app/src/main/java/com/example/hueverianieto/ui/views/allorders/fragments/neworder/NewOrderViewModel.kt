@@ -22,6 +22,7 @@ class NewOrderViewModel @Inject constructor(
     val getPricesUseCase : GetPricesUseCase,
     val getAllClientsUseCase: GetAllClientsUseCase,
     val getUserDataUseCase: GetUserDataUseCase,
+    val getOrderIdUseCase: GetOrderIdUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(NewOrderViewState())

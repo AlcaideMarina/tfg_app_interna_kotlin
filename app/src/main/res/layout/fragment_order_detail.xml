@@ -14,6 +14,7 @@
         <TextView
             android:id="@+id/order_id_text_view"
             android:layout_marginTop="@dimen/size8"
+            android:layout_marginBottom="@dimen/size16"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:text="ID pedido:"

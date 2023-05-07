@@ -322,7 +322,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(2,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(3,
                 true, (eggPricesData.xlDozen ?: "-").toString() + " €/ud", isTextLeft = false
@@ -331,7 +331,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(5,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(6,
                 true,  (eggPricesData.xlBox ?: "-").toString() + " €/ud", isTextLeft = false
@@ -343,7 +343,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(9,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(10,
                 true, (eggPricesData.lDozen ?: "-").toString() + " €/ud", isTextLeft = false
@@ -352,7 +352,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(12,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(13,
                 true, (eggPricesData.lBox ?: "-").toString() + " €/ud", isTextLeft = false
@@ -364,7 +364,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(16,
-                false, null,
+                false, null, response = ""
             ),
             GridTextItemData(17,
                 true, (eggPricesData.mDozen ?: "-").toString() + " €/ud", isTextLeft = false
@@ -373,7 +373,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(19,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(20,
                 true, (eggPricesData.mBox ?: "-").toString() + " €/ud", isTextLeft = false
@@ -385,7 +385,7 @@ object OrderUtils {
                 true, "Docena:"
             ),
             GridTextItemData(23,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(24,
                 true, (eggPricesData.sDozen ?: "-").toString() + " €/ud", isTextLeft = false
@@ -394,7 +394,7 @@ object OrderUtils {
                 true, "Caja:"
             ),
             GridTextItemData(26,
-                false, null
+                false, null, response = ""
             ),
             GridTextItemData(27,
                 true, (eggPricesData.sBox ?: "-").toString() + " €/ud", isTextLeft = false
@@ -458,59 +458,91 @@ object OrderUtils {
 
     fun getOrderStructure(recyclerView: RecyclerView) : DBOrderFieldData? {
         val xlDozenValue : Any?
+        val xlDozenPrice : Any?
         val xlBoxValue : Any?
+        val xlBoxPrice : Any?
         val lDozenValue : Any?
+        val lDozenPrice : Any?
         val lBoxValue : Any?
+        val lBoxPrice : Any?
         val mDozenValue : Any?
+        val mDozenPrice : Any?
         val mBoxValue : Any?
+        val mBoxPrice : Any?
         val sDozenValue : Any?
+        val sDozenPrice : Any?
         val sBoxValue : Any?
+        val sBoxPrice : Any?
         with(recyclerView.adapter as HNGridTextAdapter) {
             xlDozenValue =
                 if(this.getItemWithPosition(2).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(2).response.toString().toIntOrNull()
+            xlDozenPrice =
+                if(this.getItemWithPosition(3).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(3).text!!.split(" ")[0].toDoubleOrNull()
             xlBoxValue =
                 if(this.getItemWithPosition(5).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(5).response.toString().toIntOrNull()
+            xlBoxPrice =
+                if(this.getItemWithPosition(6).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(6).text!!.split(" ")[0].toDoubleOrNull()
             lDozenValue =
                 if(this.getItemWithPosition(9).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(9).response.toString().toIntOrNull()
+            lDozenPrice =
+                if(this.getItemWithPosition(10).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(10).text!!.split(" ")[0].toDoubleOrNull()
             lBoxValue =
                 if(this.getItemWithPosition(12).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(12).response.toString().toIntOrNull()
+            lBoxPrice =
+                if(this.getItemWithPosition(13).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(13).text!!.split(" ")[0].toDoubleOrNull()
             mDozenValue =
                 if(this.getItemWithPosition(16).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(16).response.toString().toIntOrNull()
+            mDozenPrice =
+                if(this.getItemWithPosition(17).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(17).text!!.split(" ")[0].toDoubleOrNull()
             mBoxValue =
                 if(this.getItemWithPosition(19).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(19).response.toString().toIntOrNull()
+            mBoxPrice =
+                if(this.getItemWithPosition(20).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(20).text!!.split(" ")[0].toDoubleOrNull()
             sDozenValue =
                 if(this.getItemWithPosition(23).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(23).response.toString().toIntOrNull()
+            sDozenPrice =
+                if(this.getItemWithPosition(24).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(24).text!!.split(" ")[0].toDoubleOrNull()
             sBoxValue =
                 if(this.getItemWithPosition(26).response.toString().toIntOrNull() == 0) null
                 else this.getItemWithPosition(26).response.toString().toIntOrNull()
+            sBoxPrice =
+                if(this.getItemWithPosition(27).text!!.split(" ")[0].toDoubleOrNull() == 0.0) null
+                else this.getItemWithPosition(27).text!!.split(" ")[0].toDoubleOrNull()
         }
         if (xlDozenValue != null || xlBoxValue != null || lDozenValue != null
             || lBoxValue != null || mDozenValue != null || mBoxValue != null ||
             sDozenValue != null || sBoxValue != null) {
             try {
                 return DBOrderFieldData(
-                    xlBoxPrice = null,
+                    xlBoxPrice = xlBoxPrice as Double?,
                     xlBoxQuantity = xlBoxValue as Int?,
-                    xlDozenPrice = null,
+                    xlDozenPrice = xlDozenPrice as Double?,
                     xlDozenQuantity = xlDozenValue as Int?,
-                    lBoxPrice = null,
+                    lBoxPrice = lBoxPrice as Double?,
                     lBoxQuantity = lBoxValue as Int?,
-                    lDozenPrice = null,
+                    lDozenPrice = lDozenPrice as Double?,
                     lDozenQuantity = lDozenValue as Int?,
-                    mBoxPrice = null,
+                    mBoxPrice = mBoxPrice as Double?,
                     mBoxQuantity = mBoxValue as Int?,
-                    mDozenPrice = null,
+                    mDozenPrice = mDozenPrice as Double?,
                     mDozenQuantity = mDozenValue as Int?,
-                    sBoxPrice = null,
+                    sBoxPrice = sBoxPrice as Double?,
                     sBoxQuantity = sBoxValue as Int?,
-                    sDozenPrice = null,
+                    sDozenPrice = sDozenPrice as Double?,
                     sDozenQuantity = sDozenValue as Int?,
                 )
             } catch (e: Exception) {
