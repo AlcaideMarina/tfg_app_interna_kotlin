@@ -1,22 +1,26 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.neworder
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
+import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.EggPricesData
+import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrderDetailBinding
 import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -30,6 +34,11 @@ class NewOrderFragment : BaseFragment() {
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
     private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
     private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
+
+    private val dropdownClientItemsMap = mutableMapOf<String, String>()
+    private val dropdownClientItems = mutableListOf<String>()
+    private lateinit var clientData: ClientData
+    private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,9 +60,11 @@ class NewOrderFragment : BaseFragment() {
 
     override fun configureUI() {
         this.newOrderViewModel.getPrices()
+        this.newOrderViewModel.getClients()
         hideTextInputLayouts()
         disableTextInputLayouts()
         setRecyclerView(EggPricesData())
+        getPaymentMethodDropdownValues()
 
         lifecycleScope.launchWhenStarted {
             newOrderViewModel.viewState.collect { viewState ->
@@ -66,10 +77,21 @@ class NewOrderFragment : BaseFragment() {
         this.newOrderViewModel.eggPrices.observe(this) {
             setRecyclerView(it)
         }
+        this.newOrderViewModel.clientList.observe(this) {
+            setClientsDropdownValues(it)
+        }
+        this.newOrderViewModel.clientData.observe(this) {
+            clientData = it
+            setClientText()
+        }
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.companyAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            val listSelected = dropdownClientItems[position]
+            val clientDocumentId = dropdownClientItemsMap[listSelected]!!
+            this.newOrderViewModel.getClient(clientDocumentId)
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -93,7 +115,7 @@ class NewOrderFragment : BaseFragment() {
     private fun disableTextInputLayouts() {
         with(this.binding) {
             cifTextInputLayout.isEnabled = false
-            directionTextLayout.isEnabled = false
+            directionTextInputLayout.isEnabled = false
             phoneTextInputLayoutPhone1.isEnabled = false
             phoneTextInputLayoutPhone2.isEnabled = false
         }
@@ -116,6 +138,46 @@ class NewOrderFragment : BaseFragment() {
         this.binding.orderRecyclerView.layoutManager = manager
         this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
 
+    }
+
+    private fun setClientsDropdownValues(clientDataList: List<ClientData?>?) {
+        if (clientDataList != null) {
+            for (client in clientDataList) {
+                if (client != null) {
+                    dropdownClientItemsMap[client.id.toString() + " - " + client.company] = client.documentId!!
+                    dropdownClientItems.add(client.id.toString() + " - " + client.company)
+                }
+            }
+            this.binding.companyAutoCompleteTextView.setAdapter(
+                ArrayAdapter(
+                    requireContext(), R.layout.component_dropdown_list_item, dropdownClientItems
+                )
+            )
+        }
+    }
+
+    private fun setClientText() {
+
+        val phone1 = clientData.phone[0].entries.iterator().next()
+        val phone2 = clientData.phone[1].entries.iterator().next()
+
+        with(binding) {
+            directionTextInputLayout.setText(clientData.direction)
+            cifTextInputLayout.setText(clientData.cif)
+            phoneTextInputLayoutPhone1.setText(phone1.toString())
+            phoneTextInputLayoutPhone2.setText(phone2.toString())
+        }
+    }
+
+    private fun getPaymentMethodDropdownValues() {
+        val values = Constants.paymentMethod.entries.iterator()
+        for (v in values) {
+            dropdownPaymentMethodItems.add(requireContext().getString(v.key))
+        }
+        this.binding.paymentMethodAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
+        )
     }
 
 }
