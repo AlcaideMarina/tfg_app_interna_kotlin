@@ -7,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
@@ -104,7 +104,15 @@ class NewOrderFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        try {
+            with(state as NewOrderViewState) {
+                with(binding) {
+                    this.loadingComponent.isVisible = state.isLoading
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, e.message.toString())
+        }
     }
 
     private fun hideTextInputLayouts() {
@@ -220,6 +228,10 @@ class NewOrderFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.modifyButton.setText("Guardar")
         this.binding.deleteButton.setText("Cancelar")
+    }
+
+    companion object {
+        private val TAG = NewOrderFragment::class.java.simpleName
     }
 
 }
