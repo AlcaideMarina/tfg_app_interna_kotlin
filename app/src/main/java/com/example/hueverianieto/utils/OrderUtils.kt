@@ -7,6 +7,10 @@ import com.example.hueverianieto.data.models.local.GridTextItemData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.google.firebase.Timestamp
+import java.lang.Math.round
+import java.math.BigDecimal
+import java.math.RoundingMode
+import kotlin.math.roundToInt
 
 object OrderUtils {
 
@@ -551,6 +555,43 @@ object OrderUtils {
         } else {
             return null
         }
+    }
+
+    fun getTotalPrice(dbOrderFieldData: DBOrderFieldData) : Double {
+
+        var totalPrice: Double = 0.0
+        with(dbOrderFieldData) {
+            if (xlBoxQuantity != null && xlBoxPrice != null) {
+                totalPrice += (xlBoxQuantity!! as Int) * (xlBoxPrice!! as Double)
+            }
+            if (xlDozenQuantity != null && xlDozenPrice != null) {
+                totalPrice += (xlDozenQuantity!! as Int) * (xlDozenPrice!! as Double)
+            }
+            if (lBoxQuantity != null && lBoxPrice != null) {
+                totalPrice += (lBoxQuantity!! as Int) * (lBoxPrice!! as Double)
+            }
+            if (lDozenQuantity != null && lDozenPrice != null) {
+                totalPrice += (lDozenQuantity!! as Int) * (lDozenPrice!! as Double)
+            }
+            if (mBoxQuantity != null && mBoxPrice != null) {
+                totalPrice += (mBoxQuantity!! as Int) * (mBoxPrice!! as Double)
+            }
+            if (mDozenQuantity != null && mDozenPrice != null) {
+                totalPrice += (mDozenQuantity!! as Int) * (mDozenPrice!! as Double)
+            }
+            if (sBoxQuantity != null && sBoxPrice != null) {
+                totalPrice += (sBoxQuantity!! as Int) * (sBoxPrice!! as Double)
+            }
+            if (sDozenQuantity != null && sDozenPrice != null) {
+                totalPrice += (sDozenQuantity!! as Int) * (sDozenPrice!! as Double)
+            }
+        }
+        val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
+        println(decimal)
+
+        (totalPrice * 100).roundToInt() / 100
+
+        return ((totalPrice * 100).roundToInt()).toDouble() / 100
     }
 
 }

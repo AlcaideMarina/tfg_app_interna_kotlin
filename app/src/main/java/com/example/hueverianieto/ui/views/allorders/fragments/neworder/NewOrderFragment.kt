@@ -188,27 +188,25 @@ class NewOrderFragment : BaseFragment() {
                 )
             } else {
                 val orderFieldMap = OrderUtils.parseDBOrderFieldDataToMap(dbOrderFieldData)
-                val orderData = OrderData(
-                    approxDeliveryDatetime = approxDeliveryDatetimeSelected,
-                    clientId = clientData.id!!,
-                    company = clientData.company,
-                    createdBy = "user_${currentUserData.createdBy}",
-                    deliveryDatetime = null,
-                    deliveryDni = null,
-                    deliveryNote = null,
-                    deliveryPerson = null,  // TODO
-                    lot = null,
-                    notes = null,
-                    order = orderFieldMap,
-                    orderDatetime = Timestamp(Date()),
-                    orderId = null,
-                    paid = false,
-                    paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
-                    status = 1,
-                    totalPrice = null,     // TODO
-                    documentId = null
+                val totalPrice = OrderUtils.getTotalPrice(dbOrderFieldData)
+
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Precio final",
+                    "El precio total del pedido será de $totalPrice €. ¿Desea continuar?",
+                    "Atrás",
+                    "Continuar",
+                    { alertDialog.cancel() },
+                    {
+                        alertDialog.cancel()
+                        continueOrder(
+                            orderFieldMap,
+                            paymentMethodSelected,
+                            totalPrice
+                        )
+                    }
                 )
-                this.newOrderViewModel.addNewOrder(clientDocumentId!!, orderData)
             }
         }
     }
@@ -338,6 +336,34 @@ class NewOrderFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.modifyButton.setText("Guardar")
         this.binding.deleteButton.setText("Cancelar")
+    }
+
+    private fun continueOrder(
+        orderFieldMap: Map<String, Map<String, Number?>>,
+        paymentMethodSelected: Int,
+        totalPrice: Double
+    ) {
+        val orderData = OrderData(
+            approxDeliveryDatetime = approxDeliveryDatetimeSelected,
+            clientId = clientData.id!!,
+            company = clientData.company,
+            createdBy = "user_${currentUserData.createdBy}",
+            deliveryDatetime = null,
+            deliveryDni = null,
+            deliveryNote = null,
+            deliveryPerson = null,  // TODO
+            lot = null,
+            notes = null,
+            order = orderFieldMap,
+            orderDatetime = Timestamp(Date()),
+            orderId = null,
+            paid = false,
+            paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
+            status = 1,
+            totalPrice = totalPrice,
+            documentId = null
+        )
+        this.newOrderViewModel.addNewOrder(clientDocumentId!!, orderData)
     }
 
     companion object {
