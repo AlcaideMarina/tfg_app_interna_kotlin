@@ -16,6 +16,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
@@ -84,10 +85,10 @@ class ModifyOrderFragment : BaseFragment() {
         this.modifyOrderViewModel.getAllDeliveryPerson()
         if (orderData.deliveryPerson != null)
             this.modifyOrderViewModel.getDeliveryPerson(orderData.deliveryPerson!!)
+        this.modifyOrderViewModel.getPrices()
         setButtons()
         disableTextInputLayouts()
         setTexts()
-        setRecyclerView()
         getPaymentMethodDropdownValues()
         getStatusDropdownValues()
 
@@ -138,6 +139,9 @@ class ModifyOrderFragment : BaseFragment() {
                     "${deliveryPerson.id} - ${deliveryPerson.name} ${deliveryPerson.surname}"
                 this.binding.deliveryPersonAutoCompleteTextView.setText(text, false)
             }
+        }
+        this.modifyOrderViewModel.eggPrices.observe(this) {
+            setRecyclerView(it)
         }
     }
 
@@ -342,13 +346,13 @@ class ModifyOrderFragment : BaseFragment() {
 
     }
 
-    private fun setRecyclerView() {
+    private fun setRecyclerView(eggPricesData: EggPricesData) {
 
         val isEnabled = if (paid) {
             false
         } else !finished
 
-        val list = OrderUtils.getOrderDataModifyGridModel(orderData, isEnabled)
+        val list = OrderUtils.getOrderDataModifyGridModel(orderData, eggPricesData, isEnabled)
 
         val manager = CustomGridLayoutManager(this.context, 4)
         manager.setScrollEnabled(false)
