@@ -56,7 +56,7 @@ class ClientOrdersViewModel @Inject constructor(
     }
 
     fun navigateToOrderDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_orderDetailFragment, bundle)
+        view?.findNavController()?.navigate(R.id.action_clientOrdersFragment_to_orderDetailFragment2, bundle)
             ?: Log.e(
                 AllOrdersViewState::class.java.simpleName,
                 "Error en la navegación a detalle de pedido"

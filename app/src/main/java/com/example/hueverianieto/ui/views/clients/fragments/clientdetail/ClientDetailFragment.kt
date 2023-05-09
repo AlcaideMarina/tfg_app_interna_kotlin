@@ -138,13 +138,13 @@ class ClientDetailFragment : BaseFragment() {
                             orderData.status,
                             orderData.deliveryDni
                         ) {
-                            /*this.clientDetailViewModel.navigateToOrderDetail(
+                            this.clientDetailViewModel.navigateToOrderDetail(
                                 this.view,
                                 bundleOf(
                                     "orderData" to orderData,
                                     "currentUserData" to currentUserData
                                 )
-                            )*/
+                            )
                         }
                         orderList.add(orderContainerModel)
                     }

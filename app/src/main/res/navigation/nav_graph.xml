@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_clientDetailFragment_to_clientOrdersFragment"
             app:destination="@id/clientOrdersFragment" />
+        <action
+            android:id="@+id/action_clientDetailFragment_to_orderDetailFragment2"
+            app:destination="@id/orderDetailFragment2" />
     </fragment>
     <fragment
         android:id="@+id/modifyClientFragment"
@@ -68,6 +71,20 @@
         <argument
             android:name="clientData"
             app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_clientOrdersFragment_to_orderDetailFragment2"
+            app:destination="@id/orderDetailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/orderDetailFragment2"
+        android:name="com.example.hueverianieto.ui.views.allorders.fragments.orderdetail.OrderDetailFragment"
+        android:label="OrderDetailFragment" >
+        <argument
+            android:name="orderData"
+            app:argType="com.example.hueverianieto.data.models.remote.OrderData" />
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />

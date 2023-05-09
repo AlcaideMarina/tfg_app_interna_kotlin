@@ -15,6 +15,7 @@ import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.DeleteDocumentFieldUseCase
 import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
+import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -115,6 +116,16 @@ class ClientDetailViewModel @Inject constructor(
             ?: Log.e(
                 ClientDetailViewModel::class.simpleName,
                 "Error en la navegación a todos los pedidos del cliente"
+            )
+    }
+
+
+
+    fun navigateToOrderDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_orderDetailFragment2, bundle)
+            ?: Log.e(
+                ClientDetailViewModel::class.java.simpleName,
+                "Error en la navegación a detalle de pedido"
             )
     }
 

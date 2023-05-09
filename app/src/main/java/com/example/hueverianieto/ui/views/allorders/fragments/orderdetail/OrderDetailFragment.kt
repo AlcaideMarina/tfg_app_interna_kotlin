@@ -21,7 +21,6 @@ import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentOrderDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
-import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
@@ -47,7 +46,7 @@ class OrderDetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        (activity as AllOrdersActivity).configNav(true)
+        (activity as BaseActivity).configNav(true)
         this.binding = FragmentOrderDetailBinding.inflate(
             inflater, container, false
         )
