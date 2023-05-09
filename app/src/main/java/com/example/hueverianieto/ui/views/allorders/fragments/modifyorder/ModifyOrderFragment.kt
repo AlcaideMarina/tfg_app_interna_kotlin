@@ -82,6 +82,8 @@ class ModifyOrderFragment : BaseFragment() {
 
     override fun configureUI() {
         this.modifyOrderViewModel.getAllDeliveryPerson()
+        if (orderData.deliveryPerson != null)
+            this.modifyOrderViewModel.getDeliveryPerson(orderData.deliveryPerson!!)
         setButtons()
         disableTextInputLayouts()
         setTexts()
@@ -129,6 +131,13 @@ class ModifyOrderFragment : BaseFragment() {
         }
         this.modifyOrderViewModel.deliveryPersonList.observe(this) {
             setDeliveryPersonDropdownValues(it)
+        }
+        this.modifyOrderViewModel.deliveryPerson.observe(this) { deliveryPerson ->
+            if (deliveryPerson != null) {
+                val text =
+                    "${deliveryPerson.id} - ${deliveryPerson.name} ${deliveryPerson.surname}"
+                this.binding.deliveryPersonAutoCompleteTextView.setText(text, false)
+            }
         }
     }
 
@@ -197,6 +206,7 @@ class ModifyOrderFragment : BaseFragment() {
                     null
                 )
             } else {
+                var a = this.binding.deliveryPersonAutoCompleteTextView
                 val orderFieldMap = OrderUtils.parseDBOrderFieldDataToMap(dbOrderFieldData)
                 val totalPrice = OrderUtils.getTotalPrice(dbOrderFieldData)
                 val deliveryDniAux =
@@ -209,7 +219,7 @@ class ModifyOrderFragment : BaseFragment() {
                     if (this.binding.lotTextInputLayout.text.toString() == "") null
                     else this.binding.lotTextInputLayout.text.toString()
                 val deliveryPersonAux =
-                    if (this.binding.deliveryPersonAutoCompleteTextView.text.toString() == "") null
+                    if (this.binding.deliveryPersonAutoCompleteTextView.text.toString() == "") orderData.deliveryPerson
                     else deliveryPersonDocumentId
 
                 val statusInt = Constants.orderStatus[statusSelected]!!
