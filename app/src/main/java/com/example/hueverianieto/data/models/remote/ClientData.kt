@@ -9,8 +9,8 @@ import java.sql.Timestamp
 data class ClientData(
     var cif: String,
     var city: String,
-    var createdBy: String,
     var company: String,
+    var createdBy: String,
     var deleted: Boolean,
     var direction: String,
     var email: String,

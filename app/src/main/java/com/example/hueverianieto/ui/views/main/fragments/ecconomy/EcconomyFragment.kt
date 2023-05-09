@@ -31,11 +31,11 @@ class EcconomyFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-      //TODO("Not yet implemented")
+      setButtons()
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
@@ -43,6 +43,11 @@ class EcconomyFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
+    }
+
+    private fun setButtons() {
+        this.binding.clientsBillingButton.setText("Facturación de clientes")
+        this.binding.companyAccountsButton.setText("Contabilidad")
     }
 }
