@@ -11,18 +11,27 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.local.OrderContainerModel
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
+import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentClientDetailBinding
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
+import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
+import com.example.hueverianieto.ui.components.componentordercontainer.componentordercontainertopthree.HNOrderContainerTopThreeContainerAdapter
 import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
 import com.example.hueverianieto.utils.ClientUtils
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import com.example.hueverianieto.utils.Utils.setPopUp
 import com.google.firebase.firestore.ktx.firestore
@@ -64,6 +73,7 @@ class ClientDetailFragment : BaseFragment() {
         // TODO: Habrá que controlar la parte de pedidos -> ordersLinearLayout.visibility = View.VISIBLE -> por ahora lo dejo seteado para que se muestre siempre
 
         clientDetailViewModel.getClientData(clientData.documentId!!)
+        clientDetailViewModel.getOrders(clientData.documentId!!)
 
         setFieldTexts()
         setUserInfo()
@@ -110,6 +120,45 @@ class ClientDetailFragment : BaseFragment() {
             setFieldTexts()
             setUserInfo()
         }
+        this.clientDetailViewModel.allOrderList.observe(this) { orderDataList ->
+            if (orderDataList == null || orderDataList.isEmpty()) {
+                this.binding.ordersLinearLayout.visibility = View.GONE
+                // Error
+            } else {
+                val orderList = mutableListOf<OrderContainerModel>()
+                for(orderData in orderDataList) {
+                    if (orderData != null &&
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        val orderContainerModel = OrderContainerModel(
+                            orderData.orderDatetime,
+                            orderData.orderId!!,
+                            orderData.clientId.toString() + " - " + orderData.company,
+                            OrderUtils.getOrderSummary(OrderUtils.orderDataToBDOrderModel(orderData)),
+                            orderData.totalPrice ?: -1,
+                            orderData.status,
+                            orderData.deliveryDni
+                        ) {
+                            this.clientDetailViewModel.navigateToOrderDetail(
+                                this.view,
+                                bundleOf(
+                                    "orderData" to orderData,
+                                    "currentUserData" to currentUserData
+                                )
+                            )
+                        }
+                        orderList.add(orderContainerModel)
+                    }
+                }
+                if (orderList.isEmpty()) {
+                    // TODO: Vacío
+                } else {
+                    this.binding.orderRecyclerView.layoutManager = LinearLayoutManager(context)
+                    this.binding.orderRecyclerView.adapter =
+                        HNOrderContainerTopThreeContainerAdapter(orderList)
+                    this.binding.orderRecyclerView.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun setListeners() {
@@ -136,6 +185,16 @@ class ClientDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.clientDetailViewModel.deleteClient(clientData.documentId!!)
                 }
+            )
+        }
+
+        this.binding.seeAllButton.setOnClickListener {
+            this.clientDetailViewModel.navigateToAllClientOrders(
+                this.view,
+                bundleOf(
+                    "clientData" to clientData,
+                    "currentUserData" to currentUserData
+                )
             )
         }
     }
