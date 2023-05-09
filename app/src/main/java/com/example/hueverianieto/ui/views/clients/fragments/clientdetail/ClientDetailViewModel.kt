@@ -110,4 +110,12 @@ class ClientDetailViewModel @Inject constructor(
         }
     }
 
+    fun navigateToAllClientOrders(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_clientOrdersFragment, bundle)
+            ?: Log.e(
+                ClientDetailViewModel::class.simpleName,
+                "Error en la navegación a todos los pedidos del cliente"
+            )
+    }
+
 }

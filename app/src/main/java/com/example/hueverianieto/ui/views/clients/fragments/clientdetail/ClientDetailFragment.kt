@@ -187,6 +187,16 @@ class ClientDetailFragment : BaseFragment() {
                 }
             )
         }
+
+        this.binding.seeAllButton.setOnClickListener {
+            this.clientDetailViewModel.navigateToAllClientOrders(
+                this.view,
+                bundleOf(
+                    "clientData" to clientData,
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
