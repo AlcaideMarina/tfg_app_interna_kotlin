@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/clientsBillingFragment"
         android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.clientsbilling.ClientsBillingFragment"
-        android:label="ClientsBillingFragment" />
+        android:label="ClientsBillingFragment" >
+        <action
+            android:id="@+id/action_clientsBillingFragment_to_billingPerMonthFragment"
+            app:destination="@id/billingPerMontFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingPerMontFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.billingpermonth.BillingPerMonthFragment"
+        android:label="BillingPerMontFragment" >
+        <argument
+            android:name="clientData"
+            app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
 </navigation>
