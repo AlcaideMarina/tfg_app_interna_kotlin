@@ -72,13 +72,13 @@ class ClientsBillingFragment : BaseFragment() {
                             clientData.id.toString(),
                             clientData.company,
                         ) {
-                            /*this.clientsBillingViewModel.navigateToClientDetails(
+                            this.clientsBillingViewModel.navigateToClientBillingPerMonth(
                                 this.view,
                                 bundleOf(
                                     "clientData" to clientData,
                                     "currentUserData" to currentUserData
                                 )
-                            )*/
+                            )
                         }
                         clientList.add(componentBillingClientModel)
                     }
