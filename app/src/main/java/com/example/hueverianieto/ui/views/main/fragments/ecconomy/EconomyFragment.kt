@@ -44,6 +44,11 @@ class EconomyFragment : BaseFragment() {
             this.economyViewModel.navigateToClientsBilling(
                 requireContext(), this.internalUserData)
         }
+        this.binding.companyAccountsButton.setOnClickListener {
+            this.economyViewModel.navigateToSellingPrice(
+                requireContext(), this.internalUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
