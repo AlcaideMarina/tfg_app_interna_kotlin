@@ -8,8 +8,11 @@ import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
+import com.example.hueverianieto.domain.usecases.GetAllDeliveryPersonUseCase
 import com.example.hueverianieto.domain.usecases.UpdateOrderUseCase
+import com.example.hueverianieto.ui.views.allorders.fragments.neworder.NewOrderViewState
 import com.example.hueverianieto.ui.views.internalusers.fragments.modifyinternaluser.ModifyInternalUserViewState
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.InternalUserUtils
@@ -25,7 +28,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ModifyOrderViewModel @Inject constructor(
-    val updateOrderUseCase : UpdateOrderUseCase
+    val updateOrderUseCase : UpdateOrderUseCase,
+    val getAllDeliveryPersonUseCase: GetAllDeliveryPersonUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ModifyOrderViewState())
@@ -33,6 +37,10 @@ class ModifyOrderViewModel @Inject constructor(
 
     private var _alertDialog = MutableLiveData(AlertOkData())
     val alertDialog: LiveData<AlertOkData> get() = _alertDialog
+
+    private var _deliveryPersonList = MutableLiveData<List<InternalUserData?>>()
+    val deliveryPersonList: LiveData<List<InternalUserData?>> get() = _deliveryPersonList
+
 
     fun updateOrder(clientDocumentId: String, orderData: OrderData) {
         viewModelScope.launch {
@@ -55,6 +63,21 @@ class ModifyOrderViewModel @Inject constructor(
                         true,
                         1
                     )
+                }
+            }
+        }
+    }
+
+    fun getAllDeliveryPerson() {
+        viewModelScope.launch {
+            _viewState.value = ModifyOrderViewState(isLoading = true)
+            when(val result = getAllDeliveryPersonUseCase()) {
+                null -> {
+                    _viewState.value = ModifyOrderViewState(isLoading = false, error = true)
+                }
+                else -> {
+                    _viewState.value = ModifyOrderViewState(isLoading = false)
+                    _deliveryPersonList.value = result!!
                 }
             }
         }

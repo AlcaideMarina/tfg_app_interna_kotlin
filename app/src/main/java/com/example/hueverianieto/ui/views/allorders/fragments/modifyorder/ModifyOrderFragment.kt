@@ -51,6 +51,9 @@ class ModifyOrderFragment : BaseFragment() {
     private lateinit var approxDeliveryDatetimeSelected : Timestamp
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
     private var dropdownStatusItems: MutableList<String> = mutableListOf()
+    private var dropdownDeliveryPersonItemMap = mutableMapOf<String, String>()
+    private var dropdownDeliveryPersonItem = mutableListOf<String>()
+    private var deliveryPersonDocumentId : String? = null
 
     private var finished: Boolean = false
     private var paid: Boolean = false
@@ -78,6 +81,7 @@ class ModifyOrderFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.modifyOrderViewModel.getAllDeliveryPerson()
         setButtons()
         disableTextInputLayouts()
         setTexts()
@@ -123,6 +127,9 @@ class ModifyOrderFragment : BaseFragment() {
                 }
             }
         }
+        this.modifyOrderViewModel.deliveryPersonList.observe(this) {
+            setDeliveryPersonDropdownValues(it)
+        }
     }
 
     override fun setListeners() {
@@ -132,6 +139,10 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.deleteButton.setOnClickListener {
             it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.deliveryPersonAutoCompleteTextView.setOnItemClickListener { parent, view, position, id ->
+            val listSelected = dropdownDeliveryPersonItem[position]
+            deliveryPersonDocumentId = dropdownDeliveryPersonItemMap[listSelected]!!
         }
         this.binding.modifyButton.setOnClickListener {
             it.hideSoftInput()
@@ -187,12 +198,19 @@ class ModifyOrderFragment : BaseFragment() {
                 )
             } else {
                 val orderFieldMap = OrderUtils.parseDBOrderFieldDataToMap(dbOrderFieldData)
+                val totalPrice = OrderUtils.getTotalPrice(dbOrderFieldData)
                 val deliveryDniAux =
                     if (this.binding.deliveryDniTextInputLayout.text.toString() == "") null
                     else this.binding.deliveryDniTextInputLayout.text.toString()
                 val deliveryNoteAux =
                     if (this.binding.deliveryNoteTextInputLayout.text.toString() == "") null
                     else this.binding.deliveryNoteTextInputLayout.text.toString().toLong()
+                val deliveryLotAux =
+                    if (this.binding.lotTextInputLayout.text.toString() == "") null
+                    else this.binding.lotTextInputLayout.text.toString()
+                val deliveryPersonAux =
+                    if (this.binding.deliveryPersonAutoCompleteTextView.text.toString() == "") null
+                    else deliveryPersonDocumentId
 
                 val statusInt = Constants.orderStatus[statusSelected]!!
                 val deliveryDatetime = if (listOf(3, 4, 5).contains(statusInt)) {
@@ -220,8 +238,8 @@ class ModifyOrderFragment : BaseFragment() {
                         deliveryDatetime = deliveryDatetime,
                         deliveryDni = deliveryDniAux,
                         deliveryNote = deliveryNoteAux,
-                        deliveryPerson = null,  // TODO
-                        lot = this.binding.lotTextInputLayout.text.toString(),
+                        deliveryPerson = deliveryPersonAux,
+                        lot = deliveryLotAux,
                         notes = null,
                         order = orderFieldMap,
                         orderDatetime = orderData.orderDatetime,
@@ -229,7 +247,7 @@ class ModifyOrderFragment : BaseFragment() {
                         paid = this.binding.paidCheckedTextView.isChecked,
                         paymentMethod = Constants.paymentMethod[paymentMethodSelected]!!.toLong(),
                         status = statusInt.toLong(),
-                        totalPrice = null,     // TODO
+                        totalPrice = totalPrice,
                         documentId = this.orderData.documentId
                     )
                     modifyOrderViewModel.updateOrder(clientData.documentId!!, orderData)
@@ -376,6 +394,20 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.statusAutoCompleteTextView.setAdapter(
             ArrayAdapter(
                 requireContext(), R.layout.component_dropdown_list_item, dropdownStatusItems)
+        )
+    }
+
+    private fun setDeliveryPersonDropdownValues(internalUserDataList: List<InternalUserData?>) {
+        for (deliveryPerson in internalUserDataList) {
+            if (deliveryPerson != null) {
+                dropdownDeliveryPersonItemMap[deliveryPerson.id.toString() + " - " + deliveryPerson.name + " " + deliveryPerson.surname] = deliveryPerson.documentId!!
+                dropdownDeliveryPersonItem.add(deliveryPerson.id.toString() + " - " + deliveryPerson.name + " " + deliveryPerson.surname)
+            }
+        }
+        this.binding.deliveryPersonAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                requireContext(), R.layout.component_dropdown_list_item, dropdownDeliveryPersonItem
+            )
         )
     }
 
