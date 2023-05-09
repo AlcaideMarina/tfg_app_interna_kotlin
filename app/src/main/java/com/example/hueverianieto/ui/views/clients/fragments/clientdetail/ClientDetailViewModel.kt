@@ -11,7 +11,9 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.DeleteDocumentFieldUseCase
+import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,6 +25,7 @@ import javax.inject.Inject
 class ClientDetailViewModel @Inject constructor(
     val deleteDocumentFieldUseCase: DeleteDocumentFieldUseCase,
     val getUserDataUseCase: GetUserDataUseCase,
+    val getAllClientOrdersUseCase: GetAllClientOrdersUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ClientDetailViewState())
@@ -33,6 +36,9 @@ class ClientDetailViewModel @Inject constructor(
 
     private var _clientData = MutableLiveData<ClientData>()
     val clientData: LiveData<ClientData> get() = _clientData
+
+    private var _allOrderList = MutableLiveData<List<OrderData?>?>()
+    val allOrderList: LiveData<List<OrderData?>?> get() = _allOrderList
 
     fun navigateToModifyClient(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_modifyClientFragment, bundle)
@@ -78,6 +84,27 @@ class ClientDetailViewModel @Inject constructor(
                 else -> {
                     _viewState.value = ClientDetailViewState(isLoading = false)
                     _clientData.value = result!! as ClientData
+                }
+            }
+        }
+    }
+
+    fun getOrders(documentId: String) {
+        viewModelScope.launch {
+            _viewState.value = ClientDetailViewState(isLoading = true)
+            when(val result = getAllClientOrdersUseCase(documentId)) {
+                null -> {
+                    _viewState.value = ClientDetailViewState(isLoading = false, error = true)
+                }
+                else -> {
+                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    for (order in result) {
+                        if (order != null) {
+                            orderList.add(order)
+                        }
+                    }
+                    _allOrderList.value = orderList
+                    _viewState.value = ClientDetailViewState(isLoading = false)
                 }
             }
         }
