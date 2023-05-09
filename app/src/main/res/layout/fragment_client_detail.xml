@@ -294,7 +294,7 @@
                             android:textSize="16sp"
                             android:background="@drawable/custom_input"
                             android:paddingHorizontal="12dp"
-                            android:layout_marginTop="@dimen/size24"
+                            android:layout_marginTop="@dimen/size8"
                             android:layout_marginEnd="4dp"
                             android:layout_marginStart="16dp"
                             android:autofillHints="name"/>
@@ -309,7 +309,7 @@
                             android:textSize="16sp"
                             android:background="@drawable/custom_input"
                             android:paddingHorizontal="12dp"
-                            android:layout_marginTop="@dimen/size24"
+                            android:layout_marginTop="@dimen/size8"
                             android:layout_marginStart="4dp"
                             android:layout_marginEnd="16dp"
                             android:autofillHints="phone"/>

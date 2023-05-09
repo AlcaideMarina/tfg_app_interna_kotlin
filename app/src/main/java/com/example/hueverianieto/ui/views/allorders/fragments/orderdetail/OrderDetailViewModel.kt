@@ -11,9 +11,11 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ClientData
+import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.DeleteOrderUseCase
 import com.example.hueverianieto.domain.usecases.GetClientWithIdUseCase
+import com.example.hueverianieto.domain.usecases.GetInternalUserWithIdUseCase
 import com.example.hueverianieto.domain.usecases.GetOrderUseCase
 import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,7 +28,8 @@ import javax.inject.Inject
 class OrderDetailViewModel @Inject constructor(
     val getClientWithIdUseCase: GetClientWithIdUseCase,
     val deleteOrderUseCase: DeleteOrderUseCase,
-    val getOrderUseCase: GetOrderUseCase
+    val getOrderUseCase: GetOrderUseCase,
+    val getInternalUserWithIdUseCase: GetInternalUserWithIdUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(OrderDetailViewState())
@@ -40,6 +43,9 @@ class OrderDetailViewModel @Inject constructor(
 
     private var _orderData = MutableLiveData<OrderData?>()
     val orderData: LiveData<OrderData?> get() = _orderData
+
+    private var _deliveryPerson = MutableLiveData<InternalUserData?>()
+    val deliveryPerson: LiveData<InternalUserData?> get() = _deliveryPerson
 
     fun getClientData(clientId: Long) {
         _viewState.value = OrderDetailViewState(isLoading = true)
@@ -97,6 +103,22 @@ class OrderDetailViewModel @Inject constructor(
                 else -> {
                     _viewState.value = OrderDetailViewState(isLoading = false)
                     _orderData.value = result!!
+                }
+            }
+        }
+    }
+
+    fun getDeliveryPerson(documentId: String) {
+        viewModelScope.launch {
+            _viewState.value = OrderDetailViewState(isLoading = true)
+            when(val result = getInternalUserWithIdUseCase(documentId)) {
+                null -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false)
+                }
+                else -> {
+                    _viewState.value = OrderDetailViewState(isLoading = false)
+                    _deliveryPerson.value = result
+
                 }
             }
         }

@@ -129,6 +129,15 @@ class OrderDetailFragment : BaseFragment() {
             setRecyclerView()
             setTexts(clientData)
             setButtons()
+            if (orderData.deliveryPerson != null)
+                this.orderDetailViewModel.getDeliveryPerson(orderData.deliveryPerson!!)
+        }
+        this.orderDetailViewModel.deliveryPerson.observe(this) { deliveryPerson ->
+            if (deliveryPerson != null) {
+                val text =
+                    "${deliveryPerson.id} - ${deliveryPerson.name} ${deliveryPerson.surname}"
+                this.binding.deliveryPersonAutoCompleteTextView.setText(text)
+            }
         }
     }
 
@@ -237,7 +246,6 @@ class OrderDetailFragment : BaseFragment() {
             orderDateTextInputLayout.setText(
                 Utils.parseTimestampToString(orderData.orderDatetime) ?: "")
             deliveryDateTextInputLayout.setText(deliveryDatetimeField)
-            //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
             paidCheckedTextView.isChecked = orderData.paid

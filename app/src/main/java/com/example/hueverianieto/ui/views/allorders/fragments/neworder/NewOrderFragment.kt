@@ -351,7 +351,7 @@ class NewOrderFragment : BaseFragment() {
             deliveryDatetime = null,
             deliveryDni = null,
             deliveryNote = null,
-            deliveryPerson = null,  // TODO
+            deliveryPerson = null,
             lot = null,
             notes = null,
             order = orderFieldMap,

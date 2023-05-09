@@ -18,8 +18,7 @@ class UpdateOrderService @Inject constructor(
             .collection("orders")
             .document(orderData.documentId!!)
             .set(
-                OrderUtils.parcelableToMap(orderData),
-                SetOptions.merge()
+                OrderUtils.parcelableToMap(orderData)
             )
             .await()
     }.toBooleanResult()
