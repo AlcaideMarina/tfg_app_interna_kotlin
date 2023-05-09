@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_clients_billing"
+    app:startDestination="@id/clientsBillingFragment">
+
+    <fragment
+        android:id="@+id/clientsBillingFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.clientsbilling.ClientsBillingFragment"
+        android:label="Facturación de clientes" >
+        <action
+            android:id="@+id/action_clientsBillingFragment_to_billingPerMonthFragment"
+            app:destination="@id/billingPerMontFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/billingPerMontFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.billingpermonth.BillingPerMonthFragment"
+        android:label="Facturación de clientes" >
+        <argument
+            android:name="clientData"
+            app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_billingPerMontFragment_to_monthlyBillingDetailFragment"
+            app:destination="@id/monthlyBillingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/monthlyBillingDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.montlybillingdetail.MonthlyBillingDetailFragment"
+        android:label="Detalle de facturación" >
+        <argument
+            android:name="billingModel"
+            app:argType="com.example.hueverianieto.domain.model.billingmodel.BillingModel" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+</navigation>
