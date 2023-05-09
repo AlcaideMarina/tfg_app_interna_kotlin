@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_clients_billing">
+    android:id="@+id/nav_graph_clients_billing"
+    app:startDestination="@id/clientsBillingFragment">
 
+    <fragment
+        android:id="@+id/clientsBillingFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.clientsbilling.ClientsBillingFragment"
+        android:label="ClientsBillingFragment" />
 </navigation>

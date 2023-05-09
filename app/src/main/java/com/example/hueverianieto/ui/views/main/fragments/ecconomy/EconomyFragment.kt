@@ -4,20 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentEcconomyBinding
-import com.example.hueverianieto.databinding.FragmentHomeBinding
 import com.example.hueverianieto.ui.views.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EcconomyFragment : BaseFragment() {
+class EconomyFragment : BaseFragment() {
 
     private lateinit var binding: FragmentEcconomyBinding
     private lateinit var internalUserData: InternalUserData
+    private val economyViewModel: EconomyViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +40,10 @@ class EcconomyFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.clientsBillingButton.setOnClickListener {
+            this.economyViewModel.navigateToClientsBilling(
+                requireContext(), this.internalUserData)
+        }
     }
 
     override fun updateUI(state: BaseState) {

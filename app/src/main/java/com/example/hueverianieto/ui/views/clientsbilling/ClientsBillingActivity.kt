@@ -10,7 +10,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityClientsBillingBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ClientsBillingActivity : BaseActivity() {
 
     private lateinit var binding: ActivityClientsBillingBinding

@@ -32,8 +32,8 @@ object ClientUtils {
         return ClientData(
             data["cif"] as String,
             data["city"] as String,
-            data["created_by"] as String,
             data["company"] as String,
+            data["created_by"] as String,
             data["deleted"] as Boolean,
             data["direction"] as String,
             data["email"] as String,

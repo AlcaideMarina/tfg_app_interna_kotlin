@@ -8,7 +8,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityMainBinding
-import com.example.hueverianieto.ui.views.main.fragments.ecconomy.EcconomyFragment
+import com.example.hueverianieto.ui.views.main.fragments.ecconomy.EconomyFragment
 import com.example.hueverianieto.ui.views.main.fragments.farm.FarmFragment
 import com.example.hueverianieto.ui.views.main.fragments.home.HomeFragment
 import com.example.hueverianieto.ui.views.main.fragments.material.MaterialFragment
@@ -180,7 +180,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.orders_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, OrderAndDeliveryFragment()).commit()
             R.id.economy_bottom_menu -> supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, EcconomyFragment()).commit()
+                .replace(R.id.fragment_container, EconomyFragment()).commit()
             R.id.farm_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, FarmFragment()).commit()
             R.id.material_bottom_menu -> supportFragmentManager.beginTransaction()
