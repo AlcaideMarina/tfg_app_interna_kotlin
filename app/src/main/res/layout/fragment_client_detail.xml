@@ -409,25 +409,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:itemCount="3"
-                        tools:listitem="@layout/component_order_container"/>
-
-                    <!-- <com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainer
-                        android:id="@+id/order_1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"/>
-
-                    <com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainer
-                        android:id="@+id/order_2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"/>
-
-                    <com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainer
-                        android:id="@+id/order_3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"/> -->
+                        android:nestedScrollingEnabled="false"
+                        tools:listitem="@layout/component_order_container" />
 
                     <com.example.hueverianieto.ui.components.HNButton
                         android:id="@+id/see_all_button"
