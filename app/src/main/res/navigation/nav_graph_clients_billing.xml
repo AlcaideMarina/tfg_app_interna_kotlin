@@ -22,5 +22,19 @@
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_billingPerMontFragment_to_monthlyBillingDetailFragment"
+            app:destination="@id/monthlyBillingDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/monthlyBillingDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.clientsbilling.fragments.montlybillingdetail.MonthlyBillingDetailFragment"
+        android:label="MonthlyBillingDetailFragment" >
+        <argument
+            android:name="billingModel"
+            app:argType="com.example.hueverianieto.domain.model.billingmodel.BillingModel" />
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
