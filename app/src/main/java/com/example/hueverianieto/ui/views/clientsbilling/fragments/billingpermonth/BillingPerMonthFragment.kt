@@ -68,12 +68,13 @@ class BillingPerMonthFragment : BaseFragment() {
                         var billingContainerItemModel = BillingContainerItemModel(
                             item
                         ) {
-                            /*this.billingViewModel.navigateToBillingDetail(
+                            this.billingViewModel.navigateToMonthlyBillingDetail(
                                 this.view,
                                 bundleOf(
-                                    "billingModel" to item.billingModel!!
+                                    "billingModel" to item.billingModel!!,
+                                    "currentUserData" to currentUserData
                                 )
-                            )*/
+                            )
                         }
                         billingList.add(billingContainerItemModel)
                     }
@@ -91,7 +92,7 @@ class BillingPerMonthFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
@@ -109,7 +110,6 @@ class BillingPerMonthFragment : BaseFragment() {
         } catch (e: Exception) {
             Log.e(TAG, e.message.toString(), e)
         }
-        //TODO("Not yet implemented")
     }
 
     companion object {

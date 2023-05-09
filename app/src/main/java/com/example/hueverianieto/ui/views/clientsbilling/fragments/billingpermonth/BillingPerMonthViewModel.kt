@@ -180,4 +180,12 @@ class BillingPerMonthViewModel  @Inject constructor(
         return list
     }
 
+    fun navigateToMonthlyBillingDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_billingPerMontFragment_to_monthlyBillingDetailFragment, bundle)
+            ?: Log.e(
+                BillingPerMonthViewModel::class.simpleName,
+                "Error en la navegación a detalle de facturación mensual"
+            )
+    }
+
 }
