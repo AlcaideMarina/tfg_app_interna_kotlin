@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -23,6 +24,7 @@ class SellingPriceFragment : BaseFragment() {
     private lateinit var binding : FragmentSellingPriceBinding
     private lateinit var currentUserData: InternalUserData
     private val sellingPriceViewModel: SellingPriceViewModel by viewModels()
+    private var eggPricesData: EggPricesData? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,12 +57,25 @@ class SellingPriceFragment : BaseFragment() {
 
     override fun setObservers() {
         this.sellingPriceViewModel.eggPrices.observe(this) { eggPriceData ->
+            this.eggPricesData = eggPriceData
             setEditTextInfo(eggPriceData)
         }
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.modifyButton.setOnClickListener {
+            if (eggPricesData == null) {
+                eggPricesData = EggPricesData(
+                    0, 0, 0, 0, 0, 0, 0, 0)
+            }
+            this.sellingPriceViewModel.navigateToModifySellingPrice(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "eggPricesData" to eggPricesData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

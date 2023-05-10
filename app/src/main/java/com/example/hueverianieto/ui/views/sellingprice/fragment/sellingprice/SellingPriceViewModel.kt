@@ -1,9 +1,14 @@
 package com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.domain.usecases.GetPricesUseCase
 import com.example.hueverianieto.ui.views.allorders.fragments.modifyorder.ModifyOrderViewState
@@ -39,6 +44,14 @@ class SellingPriceViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigateToModifySellingPrice(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_sellingPriceFragment_to_modifySellingPriceFragment, bundle)
+            ?: Log.e(
+                SellingPriceViewModel::class.simpleName,
+                "Error en la navegación a modificar precios de venta"
+            )
     }
 
 }
