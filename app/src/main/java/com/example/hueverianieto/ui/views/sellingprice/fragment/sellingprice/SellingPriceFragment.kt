@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentSellingPriceBinding
 import com.example.hueverianieto.ui.views.sellingprice.SellingPriceActivity
@@ -15,6 +17,7 @@ class SellingPriceFragment : BaseFragment() {
 
     private lateinit var binding : FragmentSellingPriceBinding
     private lateinit var currentUserData: InternalUserData
+    private val sellingPriceViewModel: SellingPriceViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,12 +38,15 @@ class SellingPriceFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.sellingPriceViewModel.getPrices()
         setButton()
         disableAllEditTexts()
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.sellingPriceViewModel.eggPrices.observe(this) { eggPriceData ->
+            setEditTextInfo(eggPriceData)
+        }
     }
 
     override fun setListeners() {
@@ -65,6 +71,19 @@ class SellingPriceFragment : BaseFragment() {
             mDozenEditText.isEnabled = false
             sBoxEditText.isEnabled = false
             sDozenEditText.isEnabled = false
+        }
+    }
+
+    private fun setEditTextInfo(eggPricesData: EggPricesData) {
+        with(this.binding) {
+            xlBoxEditText.setText(eggPricesData.xlBox.toString())
+            xlDozenEditText.setText(eggPricesData.xlDozen.toString())
+            lBoxEditText.setText(eggPricesData.lBox.toString())
+            lDozenEditText.setText(eggPricesData.lDozen.toString())
+            mBoxEditText.setText(eggPricesData.mBox.toString())
+            mDozenEditText.setText(eggPricesData.mDozen.toString())
+            sBoxEditText.setText(eggPricesData.sBox.toString())
+            sDozenEditText.setText(eggPricesData.sDozen.toString())
         }
     }
 
