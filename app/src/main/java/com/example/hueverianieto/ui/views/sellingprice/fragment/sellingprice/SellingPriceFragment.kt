@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.sellingprice.fragment
+package com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice
 
 import android.os.Bundle
 import android.view.LayoutInflater

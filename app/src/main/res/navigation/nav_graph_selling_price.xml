@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/sellingPriceFragment"
-        android:name="com.example.hueverianieto.ui.views.sellingprice.fragment.SellingPriceFragment"
+        android:name="com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice.SellingPriceFragment"
         android:label="SellingPriceFragment" />
 </navigation>
