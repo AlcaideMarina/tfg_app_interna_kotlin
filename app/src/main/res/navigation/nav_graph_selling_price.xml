@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/sellingPriceFragment"
         android:name="com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice.SellingPriceFragment"
-        android:label="SellingPriceFragment" />
+        android:label="SellingPriceFragment" >
+        <action
+            android:id="@+id/action_sellingPriceFragment_to_modifySellingPriceFragment"
+            app:destination="@id/modifySellingPriceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifySellingPriceFragment"
+        android:name="com.example.hueverianieto.ui.views.sellingprice.fragment.modifysellingprice.ModifySellingPriceFragment"
+        android:label="ModifySellingPriceFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="eggPricesData"
+            app:argType="com.example.hueverianieto.data.models.local.EggPricesData" />
+    </fragment>
 </navigation>

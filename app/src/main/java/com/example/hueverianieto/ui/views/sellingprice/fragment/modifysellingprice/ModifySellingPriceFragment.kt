@@ -24,6 +24,9 @@ class ModifySellingPriceFragment  : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
+        val args : ModifySellingPriceFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.eggPricesData = args.eggPricesData
 
         this.binding = FragmentModifySellingPriceBinding.inflate(
             inflater, container, false
