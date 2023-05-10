@@ -11,6 +11,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifySellingPriceBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 class ModifySellingPriceFragment  : BaseFragment() {
 
@@ -36,7 +37,8 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     override fun configureUI() {
-        // TODO
+        setButton()
+        setEditTextInfo(eggPricesData)
     }
 
     override fun setObservers() {
@@ -52,7 +54,7 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     private fun setButton() {
-        this.binding.modifyButton.setText("Guardar")
+        //this.binding.modifyButton.setText("Guardar")
     }
 
     private fun setEditTextInfo(eggPricesData: EggPricesData) {
