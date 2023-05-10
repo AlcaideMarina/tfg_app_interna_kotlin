@@ -1,5 +1,9 @@
 package com.example.hueverianieto.data.models.local
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 class EggPricesData (
     val xlBox : Number? = null,
     val xlDozen : Number? = null,
@@ -9,4 +13,4 @@ class EggPricesData (
     val mDozen : Number? = null,
     val sBox : Number? = null,
     val sDozen : Number? = null
-)
+) : Parcelable
