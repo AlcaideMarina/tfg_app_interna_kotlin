@@ -1,30 +1,22 @@
 package com.example.hueverianieto.ui.views.sellingprice.fragment.modifysellingprice
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentModifySellingPriceBinding
-import com.example.hueverianieto.databinding.FragmentSellingPriceBinding
-import com.example.hueverianieto.ui.views.sellingprice.SellingPriceActivity
-import com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice.SellingPriceFragment
-import com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice.SellingPriceViewModel
-import com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice.SellingPriceViewState
 
 class ModifySellingPriceFragment  : BaseFragment() {
 
     private lateinit var binding : FragmentModifySellingPriceBinding
     private lateinit var currentUserData: InternalUserData
-    private val sellingPriceViewModel: SellingPriceViewModel by viewModels()
+    private lateinit var eggPricesData: EggPricesData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,19 +33,11 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.sellingPriceViewModel.getPrices()
-        setButton()
-        lifecycleScope.launchWhenStarted {
-            sellingPriceViewModel.viewState.collect { viewState ->
-                updateUI(viewState)
-            }
-        }
+        // TODO
     }
 
     override fun setObservers() {
-        this.sellingPriceViewModel.eggPrices.observe(this) { eggPriceData ->
-            setEditTextInfo(eggPriceData)
-        }
+        // TODO
     }
 
     override fun setListeners() {
@@ -61,15 +45,7 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        try {
-            with(state as SellingPriceViewState) {
-                with(binding) {
-                    this.loadingComponent.isVisible = state.isLoading
-                }
-            }
-        } catch (e: java.lang.Exception) {
-            Log.e(TAG, e.message.toString())
-        }
+        // TODO
     }
 
     private fun setButton() {
@@ -90,7 +66,7 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     companion object {
-        private val TAG = SellingPriceFragment::class.java.simpleName
+        private val TAG = ModifySellingPriceFragment::class.java.simpleName
     }
 
 }
