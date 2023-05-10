@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -15,6 +17,7 @@ import com.example.hueverianieto.databinding.FragmentModifySellingPriceBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifySellingPriceFragment  : BaseFragment() {
@@ -47,6 +50,12 @@ class ModifySellingPriceFragment  : BaseFragment() {
     override fun configureUI() {
         setButton()
         setEditTextInfo(eggPricesData)
+
+        lifecycleScope.launchWhenStarted {
+            modifySellingPriceViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -106,7 +115,11 @@ class ModifySellingPriceFragment  : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        // TODO
+        with(state as ModifySellingPriceViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun setButton() {
