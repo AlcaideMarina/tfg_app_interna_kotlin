@@ -57,6 +57,6 @@ class EconomyFragment : BaseFragment() {
 
     private fun setButtons() {
         this.binding.clientsBillingButton.setText("Facturación de clientes")
-        this.binding.companyAccountsButton.setText("Contabilidad")
+        this.binding.companyAccountsButton.setText("Precio de venta")
     }
 }
