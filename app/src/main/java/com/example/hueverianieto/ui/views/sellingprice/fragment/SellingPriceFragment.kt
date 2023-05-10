@@ -35,7 +35,8 @@ class SellingPriceFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButton()
+        disableAllEditTexts()
     }
 
     override fun setObservers() {
@@ -48,6 +49,23 @@ class SellingPriceFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButton() {
+        this.binding.modifyButton.setText("Modificar precios")
+    }
+
+    private fun disableAllEditTexts() {
+        with(this.binding) {
+            xlBoxEditText.isEnabled = false
+            xlDozenEditText.isEnabled = false
+            lBoxEditText.isEnabled = false
+            lDozenEditText.isEnabled = false
+            mBoxEditText.isEnabled = false
+            mDozenEditText.isEnabled = false
+            sBoxEditText.isEnabled = false
+            sDozenEditText.isEnabled = false
+        }
     }
 
 }
