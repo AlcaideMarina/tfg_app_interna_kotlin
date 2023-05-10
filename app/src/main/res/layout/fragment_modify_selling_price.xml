@@ -48,7 +48,7 @@
                     android:autofillHints="name"
                     android:background="@drawable/custom_input"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
                     android:textSize="16sp" />
 
@@ -79,7 +79,7 @@
                     android:layout_column="1"
                     android:layout_height="40dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -127,7 +127,7 @@
                     android:autofillHints="name"
                     android:background="@drawable/custom_input"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
                     android:textSize="16sp" />
 
@@ -158,7 +158,7 @@
                     android:layout_column="1"
                     android:layout_height="40dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -206,7 +206,7 @@
                     android:autofillHints="name"
                     android:background="@drawable/custom_input"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
                     android:textSize="16sp" />
 
@@ -237,7 +237,7 @@
                     android:layout_column="1"
                     android:layout_height="40dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -285,7 +285,7 @@
                     android:autofillHints="name"
                     android:background="@drawable/custom_input"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:paddingHorizontal="12dp"
                     android:textSize="16sp" />
 
@@ -316,7 +316,7 @@
                     android:layout_column="1"
                     android:layout_height="40dp"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="numberDecimal"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
