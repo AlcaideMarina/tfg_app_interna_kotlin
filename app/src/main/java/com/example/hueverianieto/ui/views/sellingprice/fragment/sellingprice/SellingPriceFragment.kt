@@ -1,10 +1,13 @@
 package com.example.hueverianieto.ui.views.sellingprice.fragment.sellingprice
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -41,6 +44,11 @@ class SellingPriceFragment : BaseFragment() {
         this.sellingPriceViewModel.getPrices()
         setButton()
         disableAllEditTexts()
+        lifecycleScope.launchWhenStarted {
+            sellingPriceViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -54,7 +62,15 @@ class SellingPriceFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        try {
+            with(state as SellingPriceViewState) {
+                with(binding) {
+                    this.loadingComponent.isVisible = state.isLoading
+                }
+            }
+        } catch (e: java.lang.Exception) {
+            Log.e(TAG, e.message.toString())
+        }
     }
 
     private fun setButton() {
@@ -85,6 +101,10 @@ class SellingPriceFragment : BaseFragment() {
             sBoxEditText.setText(eggPricesData.sBox.toString())
             sDozenEditText.setText(eggPricesData.sDozen.toString())
         }
+    }
+
+    companion object {
+        private val TAG = SellingPriceFragment::class.java.simpleName
     }
 
 }
