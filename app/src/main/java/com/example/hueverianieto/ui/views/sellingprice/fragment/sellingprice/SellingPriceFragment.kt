@@ -15,7 +15,9 @@ import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentSellingPriceBinding
 import com.example.hueverianieto.ui.views.sellingprice.SellingPriceActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SellingPriceFragment : BaseFragment() {
 
     private lateinit var binding : FragmentSellingPriceBinding

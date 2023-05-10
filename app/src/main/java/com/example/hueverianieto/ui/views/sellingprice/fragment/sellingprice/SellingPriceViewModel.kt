@@ -8,11 +8,13 @@ import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.domain.usecases.GetPricesUseCase
 import com.example.hueverianieto.ui.views.allorders.fragments.modifyorder.ModifyOrderViewState
 import com.example.hueverianieto.ui.views.allorders.fragments.neworder.NewOrderViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class SellingPriceViewModel @Inject constructor(
     val getPricesUseCase: GetPricesUseCase
 ) : ViewModel() {
