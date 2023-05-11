@@ -30,7 +30,7 @@ class MaterialFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
@@ -44,4 +44,20 @@ class MaterialFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        with(this.binding) {
+            this.seeAllButton.setText("Ver todo")
+            this.workersButton.setText("Trabajadores y sueldos")
+            this.machinesButton.setText("Maquinaria")
+            this.hensButton.setText("Gallinas")
+            this.electricityWaterGasButton.setText("Luz, agua, gas")
+            this.feedButton.setText("Pienso")
+            this.petrolButton.setText("Gasolina")
+            this.boxesCartonsButton.setText("Cajas y cartones")
+            this.trucksButton.setText("Camiones")
+            this.othersButton.setText("Otros")
+        }
+    }
+
 }

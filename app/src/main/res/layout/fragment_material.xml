@@ -1,15 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:scrollbars="none"
     tools:context=".ui.views.main.fragments.home.HomeFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Material Fragment"
-        android:textSize="30sp"
-        android:layout_centerInParent="true"/>
-</RelativeLayout>
+        android:orientation="vertical"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="32dp" >
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/see_all_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/workers_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/machines_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/hens_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/electricity_water_gas_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/feed_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/petrol_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/boxes_cartons_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/trucks_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/others_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
