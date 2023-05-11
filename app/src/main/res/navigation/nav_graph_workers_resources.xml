@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_workers_resources">
+    android:id="@+id/nav_graph_workers_resources"
+    app:startDestination="@id/allWorkersResourcesFragment">
 
+    <fragment
+        android:id="@+id/allWorkersResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.workersresources.fragment.AllWorkersResourcesFragment"
+        android:label="AllWorkersResourcesFragment" />
 </navigation>
