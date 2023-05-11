@@ -39,6 +39,7 @@ object InternalUserUtils {
             data["position"] as Long,
             data["postal_code"] as Long,
             data["province"] as String,
+            data["salary"] as Long?,
             data["ss_number"] as Long,
             data["surname"] as String,
             data["uid"] as String,
@@ -63,6 +64,7 @@ object InternalUserUtils {
         map["position"] = internalUserData.position
         map["postal_code"] = internalUserData.postalCode
         map["province"] = internalUserData.province
+        map["salary"] = internalUserData.salary
         map["ss_number"] = internalUserData.ssNumber
         map["surname"] = internalUserData.surname
         map["uid"] = internalUserData.uid

@@ -40,6 +40,7 @@ class NewInternalUserFragment : BaseFragment() {
     var city: String = ""
     var province: String = ""
     var postalCode: String = ""
+    var salary: String = ""
     var ssNumber: String = ""
     var bankAccount: String = ""
     var position: String = ""
@@ -180,6 +181,7 @@ class NewInternalUserFragment : BaseFragment() {
                 Constants.roles[positionSelected]!!.toLong(),
                 postalCode.toLong(),
                 province,
+                null,
                 ssNumber.toLong(),
                 surname,
                 null,

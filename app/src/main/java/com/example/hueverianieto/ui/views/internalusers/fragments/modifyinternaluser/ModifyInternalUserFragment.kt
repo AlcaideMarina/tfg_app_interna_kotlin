@@ -125,6 +125,7 @@ class ModifyInternalUserFragment : BaseFragment() {
                 Constants.roles[positionSelected]!!.toLong(),
                 this.binding.postalCodeTextInputLayout.text.toString().toLong(),
                 this.binding.provinceTextInputLayout.text.toString(),
+                this.internalUserData.salary,
                 this.binding.ssNumberTextInputLayout.text.toString().toLong(),
                 this.binding.surnameTextInputLayout.text.toString(),
                 this.internalUserData.uid,
