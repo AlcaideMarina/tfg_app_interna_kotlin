@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -16,14 +17,16 @@ import dagger.hilt.android.AndroidEntryPoint
 class MaterialFragment : BaseFragment() {
 
     private lateinit var binding : FragmentMaterialBinding
-    private lateinit var internalUserData : InternalUserData
+    private lateinit var currentUserData : InternalUserData
+
+    private val materialViewModel: MaterialViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).currentUserData
+        currentUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentMaterialBinding.bind(inflater.inflate(R.layout.fragment_material, container, false))
         return binding.root
@@ -38,7 +41,11 @@ class MaterialFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.workersButton.setOnClickListener {
+            this.materialViewModel.navigateToWorkersResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
