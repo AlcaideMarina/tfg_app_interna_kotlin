@@ -49,7 +49,7 @@ class MaterialFragment : BaseFragment() {
         with(this.binding) {
             this.seeAllButton.setText("Ver todo")
             this.workersButton.setText("Trabajadores y sueldos")
-            this.machinesButton.setText("Maquinaria")
+            this.machinesButton.setText("Maquinaria")       // TODO: Pensar estructura BBDD
             this.hensButton.setText("Gallinas")
             this.electricityWaterGasButton.setText("Luz, agua, gas")
             this.feedButton.setText("Pienso")
