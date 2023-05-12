@@ -7,7 +7,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.componentworkers.ComponentWorkersModel
 
 class HNComponentWorkerAdapter (
-    private val  workersModelList: List<ComponentWorkersModel>
+    private val workersModelList: List<ComponentWorkersModel>
 ) : RecyclerView.Adapter<HNComponentWorkerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HNComponentWorkerViewHolder {

@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/allWorkersResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesFragment"
-        android:label="AllWorkersResourcesFragment" />
+        android:label="AllWorkersResourcesFragment" >
+        <action
+            android:id="@+id/action_allWorkersResourcesFragment_to_pendingWorkersResourcesFragment"
+            app:destination="@id/pendingWorkersResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/pendingWorkersResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.workersresources.fragment.pendingworkersresources.PendingWorkersResourcesFragment"
+        android:label="PendingWorkersResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
 </navigation>
