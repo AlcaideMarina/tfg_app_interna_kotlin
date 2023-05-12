@@ -70,7 +70,7 @@ class PendingWorkersResourcesFragment : BaseFragment() {
                 }
                 if (pendingWorkersList.isEmpty()) {
                     this.binding.workersRecyclerView.visibility = View.GONE
-                    this.binding.workersRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
                     this.binding.containerWaringNoWorkers.setTitle("No hay usuarios con sueldo pendiente")
                     this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios a los que le falte el sueldo en la base de datos")
                 } else {

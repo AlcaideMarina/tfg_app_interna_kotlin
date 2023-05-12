@@ -87,7 +87,7 @@ class AllWorkersResourcesFragment : BaseFragment() {
                 }
                 if (workerList.isEmpty()) {
                     this.binding.workersRecyclerView.visibility = View.GONE
-                    this.binding.workersRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
                     this.binding.containerWaringNoWorkers.setTitle("No hay usuarios internos")
                     this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios internos en la base de datos")
                 } else {
