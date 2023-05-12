@@ -18,6 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size16"
+            android:layout_marginBottom="@dimen/size16"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -26,7 +27,6 @@
             android:id="@+id/workers_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size16"
             android:nestedScrollingEnabled="false"/>
 
         <com.example.hueverianieto.ui.components.HNWarningContainer
