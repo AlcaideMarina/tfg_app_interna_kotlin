@@ -8,11 +8,13 @@ import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetAllInternalUsersUseCase
 import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewState
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class PendingWorkersResourcesViewModel @Inject constructor(
     val getAllInternalUsersUseCase: GetAllInternalUsersUseCase
 ) : ViewModel() {
