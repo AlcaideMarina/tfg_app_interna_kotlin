@@ -14,7 +14,7 @@
         android:layout_marginVertical="@dimen/size16">
 
         <com.example.hueverianieto.ui.components.HNButton
-            android:id="@+id/new_workers_button"
+            android:id="@+id/pending_workers_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/size16"

@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -19,6 +21,7 @@ import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActiv
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllWorkersResourcesFragment : BaseFragment() {
@@ -49,7 +52,13 @@ class AllWorkersResourcesFragment : BaseFragment() {
 
     override fun configureUI() {
         this.allWorkersResourcesViewModel.getAllWorkers()
-        this.binding.newWorkersButton.setText("Sueldos pendientes")
+        this.binding.pendingWorkersButton.setText("Sueldos pendientes")
+        lifecycleScope.launchWhenStarted {
+            allWorkersResourcesViewModel.getAllWorkers()
+            allWorkersResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -83,6 +92,13 @@ class AllWorkersResourcesFragment : BaseFragment() {
                 } else {
                     initRecyclerView()
                 }
+                if (pendingWorkersList.isEmpty()) {
+                    this.binding.pendingWorkersButton.visibility = View.GONE
+                } else {
+                    this.binding.pendingWorkersButton.setOnClickListener {
+                        // TODO Navegación
+                    }
+                }
             }
         }
     }
@@ -92,7 +108,11 @@ class AllWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as AllWorkersResourcesViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun initRecyclerView() {
