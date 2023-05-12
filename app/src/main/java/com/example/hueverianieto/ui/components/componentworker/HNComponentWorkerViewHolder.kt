@@ -12,7 +12,7 @@ class HNComponentWorkerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     fun render(componentWorkersModel: ComponentWorkersModel){
         this.binding.idText.text = componentWorkersModel.id
         this.binding.nameText.text = componentWorkersModel.name + " " + componentWorkersModel.surname
-        this.binding.salaryText.text = componentWorkersModel.salary.toString() + " €"
+        this.binding.salaryText.text = (componentWorkersModel.salary ?: "-").toString()  + " €"
         this.binding.baseComponentOrderContainer.setOnClickListener(
             componentWorkersModel.onClickListener )
     }

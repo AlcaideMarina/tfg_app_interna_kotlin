@@ -7,6 +7,6 @@ class ComponentWorkersModel (
     var id: String,
     var name: String,
     var surname: String,
-    var salary: Long,
+    var salary: Long?,
     var onClickListener: View.OnClickListener?
 ) : BaseModel
