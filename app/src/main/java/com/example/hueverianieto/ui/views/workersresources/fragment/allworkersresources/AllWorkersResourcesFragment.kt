@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -96,7 +97,12 @@ class AllWorkersResourcesFragment : BaseFragment() {
                     this.binding.pendingWorkersButton.visibility = View.GONE
                 } else {
                     this.binding.pendingWorkersButton.setOnClickListener {
-                        // TODO Navegación
+                        this.allWorkersResourcesViewModel.navigateToPendingWorkers(
+                            this.view,
+                            bundleOf(
+                                "currentUserData" to currentUserData
+                            )
+                        )
                     }
                 }
             }
