@@ -44,6 +44,7 @@ class PendingWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.pendingWorkersResourcesViewModel.getAllWorkers()
         this.binding.pendingWorkersButton.visibility = View.GONE
     }
 
