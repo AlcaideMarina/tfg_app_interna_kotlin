@@ -63,7 +63,7 @@ class PendingWorkersResourcesFragment : BaseFragment() {
                         ) {
                             // TODO navegación
                         }
-                        if (internalUserData.salary !== null) {
+                        if (internalUserData.salary == null) {
                             pendingWorkersList.add(componentWorkersModel)
                         }
                     }
