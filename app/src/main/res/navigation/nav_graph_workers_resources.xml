@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/allWorkersResourcesFragment"
-        android:name="com.example.hueverianieto.ui.views.workersresources.fragment.AllWorkersResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesFragment"
         android:label="AllWorkersResourcesFragment" />
 </navigation>
