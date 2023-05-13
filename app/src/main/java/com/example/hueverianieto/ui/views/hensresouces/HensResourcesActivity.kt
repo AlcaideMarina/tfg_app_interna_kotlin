@@ -1,11 +1,13 @@
 package com.example.hueverianieto.ui.views.hensresouces
 
 import android.os.Build
+import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityHensResourcesBinding
@@ -34,7 +36,7 @@ class HensResourcesActivity : BaseActivity() {
         navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()         //TODO
+            setOf(R.layout.fragment_all_hens_resources)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -50,6 +52,10 @@ class HensResourcesActivity : BaseActivity() {
 
     override fun setObservers() {
         // Not necessary
+    }
+
+    fun getToolbar() : Toolbar {
+        return this.binding.topBar
     }
 
 }
