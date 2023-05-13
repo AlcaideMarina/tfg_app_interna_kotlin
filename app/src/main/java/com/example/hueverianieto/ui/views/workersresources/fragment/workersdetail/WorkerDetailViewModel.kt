@@ -7,12 +7,13 @@ import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.InternalUserData
+import com.example.hueverianieto.domain.usecases.GetInternalUserWithIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class WorkerDetailViewModel @Inject constructor(
-    val getInternalUserData: InternalUserData
+    val getInternalUserWithIdUseCase: GetInternalUserWithIdUseCase
 ) : ViewModel() {
 
     fun navigateToModifyWorker(view: View?, bundle: Bundle) {
