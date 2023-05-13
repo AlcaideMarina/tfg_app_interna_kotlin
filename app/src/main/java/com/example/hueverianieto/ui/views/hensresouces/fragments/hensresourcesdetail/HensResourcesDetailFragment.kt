@@ -14,6 +14,7 @@ import com.example.hueverianieto.databinding.ComponentTicketBinding
 import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,8 @@ class HensResourcesDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -56,6 +58,20 @@ class HensResourcesDetailFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Modificar")
+        this.binding.cancelButton.setText("Eliminar")
+    }
+
+    private fun setText() {
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(hensResourcesData.expenseDatetime)
+            this.quantityTextView.text = hensResourcesData.hensNumber.toString()
+            this.totalPriceTextInputLayout.setText(hensResourcesData.totalPrice.toString())
+            this.totalPriceTextInputLayout.isEnabled = false
+        }
     }
 
 }
