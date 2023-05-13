@@ -39,7 +39,7 @@ object InternalUserUtils {
             data["position"] as Long,
             data["postal_code"] as Long,
             data["province"] as String,
-            data["salary"] as Long?,
+            data["salary"] as Number?,
             data["ss_number"] as Long,
             data["surname"] as String,
             data["uid"] as String,
