@@ -22,5 +22,19 @@
         <argument
             android:name="hensResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.HensResourcesData" />
+        <action
+            android:id="@+id/action_hensResourcesDetailFragment_to_modifyHensResourcesFragment"
+            app:destination="@id/modifyHensResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyHensResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragment"
+        android:label="ModifyHensResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="hensResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.HensResourcesData" />
     </fragment>
 </navigation>
