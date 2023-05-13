@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -50,6 +52,11 @@ class ModifyWorkerFragment : BaseFragment() {
     override fun configureUI() {
         this.setTexts()
         this.setButtons()
+        lifecycleScope.launchWhenStarted {
+            modifyWorkerViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -93,7 +100,11 @@ class ModifyWorkerFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyWorkerViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
     private fun setTexts() {
