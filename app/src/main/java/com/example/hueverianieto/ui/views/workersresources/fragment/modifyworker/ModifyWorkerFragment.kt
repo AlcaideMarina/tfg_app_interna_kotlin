@@ -4,21 +4,28 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.workersresources.fragment.workersdetail.WorkerDetailFragmentArgs
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ModifyWorkerFragment : BaseFragment() {
 
     private lateinit var binding: FragmentWorkersDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var internalUserData: InternalUserData
+    private val modifyWorkerViewModel: ModifyWorkerViewModel by viewModels()
+
+    private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,6 +38,8 @@ class ModifyWorkerFragment : BaseFragment() {
         val args: ModifyWorkerFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
+
+        this.alertDialog = HNModalDialog(requireContext())
 
         this.binding = FragmentWorkersDetailBinding
             .inflate(inflater, container, false)
@@ -48,7 +57,8 @@ class ModifyWorkerFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        //TODO Botón guardar
+        //TODO botón cancelar
     }
 
     override fun updateUI(state: BaseState) {
