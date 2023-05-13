@@ -53,7 +53,7 @@ class WorkerDetailFragment : BaseFragment() {
         this.setTexts()
         this.setButtons()
         lifecycleScope.launchWhenStarted {
-            workerDetailViewModel.getInternalUser(internalUserData.documentId)
+            workerDetailViewModel.getInternalUser(internalUserData.documentId!!)
             workerDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -61,7 +61,7 @@ class WorkerDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        
+
     }
 
     override fun setListeners() {
