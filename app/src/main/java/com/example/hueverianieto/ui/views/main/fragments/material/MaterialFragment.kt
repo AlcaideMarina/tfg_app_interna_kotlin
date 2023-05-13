@@ -37,7 +37,7 @@ class MaterialFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
@@ -46,10 +46,15 @@ class MaterialFragment : BaseFragment() {
                 this.requireContext(), currentUserData
             )
         }
+        this.binding.hensButton.setOnClickListener {
+            this.materialViewModel.navigateToHensResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     private fun setButtons() {
