@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -16,12 +18,16 @@ import com.example.hueverianieto.ui.views.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class WorkerDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentWorkersDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var internalUserData: InternalUserData
+
+    private val workerDetailViewModel: WorkerDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +57,15 @@ class WorkerDetailFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.saveButton.setOnClickListener {
+            this.workerDetailViewModel.navigateToModifyWorker(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "internalUserData" to internalUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
