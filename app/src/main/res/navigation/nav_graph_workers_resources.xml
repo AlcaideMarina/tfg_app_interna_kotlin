@@ -35,5 +35,19 @@
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
         <argument android:name="internalUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <action
+            android:id="@+id/action_workerDetailFragment_to_modifyWorkerFragment"
+            app:destination="@id/modifyWorkerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyWorkerFragment"
+        android:name="com.example.hueverianieto.ui.views.workersresources.fragment.modifyworker.ModifyWorkerFragment"
+        android:label="ModifyWorkerFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="internalUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
