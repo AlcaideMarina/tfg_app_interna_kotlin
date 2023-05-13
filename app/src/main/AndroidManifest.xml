@@ -87,7 +87,8 @@
         <activity
             android:name=".ui.views.workersresources.WorkersResourcesActivity"
             android:exported="true"
-            android:configChanges="orientation|screenSize">
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
 
             <!-- Default Intent Filter -->
             <intent-filter>
