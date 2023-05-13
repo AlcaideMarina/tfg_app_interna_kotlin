@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -62,7 +63,13 @@ class PendingWorkersResourcesFragment : BaseFragment() {
                             internalUserData.surname,
                             internalUserData.salary
                         ) {
-                            // TODO navegación
+                            this.pendingWorkersResourcesViewModel.navigateToWorkerDetail(
+                                this.view,
+                                bundleOf(
+                                    "currentUserData" to currentUserData,
+                                    "internalUserData" to internalUserData
+                                )
+                            )
                         }
                         if (internalUserData.salary == null) {
                             pendingWorkersList.add(componentWorkersModel)

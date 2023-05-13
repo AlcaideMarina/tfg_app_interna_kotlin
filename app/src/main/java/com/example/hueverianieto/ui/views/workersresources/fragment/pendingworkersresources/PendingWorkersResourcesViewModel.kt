@@ -1,12 +1,18 @@
 package com.example.hueverianieto.ui.views.workersresources.fragment.pendingworkersresources
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetAllInternalUsersUseCase
+import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewModel
 import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -44,5 +50,13 @@ class PendingWorkersResourcesViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigateToWorkerDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_pendingWorkersResourcesFragment_to_workerDetailFragment, bundle)
+            ?: Log.e(
+                AllWorkersResourcesViewModel::class.simpleName,
+                "Error en la navegación a trabajadores pendientes"
+            )
     }
 }
