@@ -57,7 +57,36 @@ class ModifyWorkerFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO Botón guardar
+        this.binding.saveButton.setOnClickListener {
+            if (this.binding.salaryTextInputLayout.text != null) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Aviso",
+                    "Esta acción cambiará el salario del trabajador con DNI ${this.internalUserData.dni}, pasando de ser de ${this.internalUserData.salary ?: "-"} € mensuales, a ${this.binding.salaryTextInputLayout.text}.\n¿Está seguro de que quiere continuar?",
+                    "Atrás",
+                    "Continuar",
+                    { alertDialog.cancel() },
+                    {
+                        alertDialog.cancel()
+                        val a =this.binding.salaryTextInputLayout.text
+                        internalUserData.salary = this.binding.salaryTextInputLayout.text.toString().toDouble()
+                        this.modifyWorkerViewModel.updateUser(internalUserData)
+                    }
+                )
+            } else {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Introduzca un salario",
+                    "Debe introducir el salario que asociar al trabajador. Por favor, revise los datos e inténtelo de nuevo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            }
+        }
         //TODO botón cancelar
     }
 
