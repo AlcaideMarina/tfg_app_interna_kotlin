@@ -49,7 +49,7 @@ class ModifyWorkerViewModel @Inject constructor(
                             "Sueldo actualizado",
                             "El sueldo del trabajador ha sido modificado correctamente.",
                             true,
-                            1
+                            0
                         )
                     }
                 }
