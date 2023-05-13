@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -23,6 +25,8 @@ class HensResourcesDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentHensResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var hensResourcesData: HensResourcesData
+
+    private val hensResourcesDetailViewModel: HensResourcesDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,7 +57,15 @@ class HensResourcesDetailFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.saveButton.setOnClickListener {
+            this.hensResourcesDetailViewModel.navigateToModifyHensResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "hensResourcesData" to hensResourcesData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
