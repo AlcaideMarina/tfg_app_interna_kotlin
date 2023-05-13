@@ -1,9 +1,14 @@
 package com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetHensUseCase
@@ -44,6 +49,14 @@ class AllHensResourcesViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigationToHensResourcesDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allHensResourcesFragment_to_hensResourcesDetailFragment, bundle)
+            ?: Log.e(
+                AllHensResourcesViewModel::class.simpleName,
+                "Error en la navegación a detalle de recursos (gallinas)"
+            )
     }
 
 }

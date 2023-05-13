@@ -74,13 +74,13 @@ class AllHensResourcesFragment : BaseFragment() {
                             "gallinas",
                             hensResourcesData.totalPrice
                         ) {
-                            /*this.allHensResourcesViewModel.navigateToClientBillingPerMonth(
+                            this.allHensResourcesViewModel.navigationToHensResourcesDetail(
                                 this.view,
                                 bundleOf(
-                                    "clientData" to clientData,
-                                    "currentUserData" to currentUserData
+                                    "currentUserData" to currentUserData,
+                                    "hensResourcesData" to hensResourcesData
                                 )
-                            )*/
+                            )
                         }
                         hensDataList.add(componentTicketModel)
                     }
