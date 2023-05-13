@@ -14,6 +14,8 @@ import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
 import com.example.hueverianieto.ui.views.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 
 class WorkerDetailFragment : BaseFragment() {
 
@@ -40,7 +42,8 @@ class WorkerDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        this.setTexts()
+        this.setButtons()
     }
 
     override fun setObservers() {
@@ -53,6 +56,27 @@ class WorkerDetailFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setTexts() {
+        with(this.binding) {
+            this.idTextView.text = internalUserData.id.toString()
+            this.nameTextView.text = internalUserData.name
+            this.surnameTextView.text = internalUserData.surname
+            this.dniTextView.text = internalUserData.dni
+            this.accountTextView.text = internalUserData.bankAccount
+            this.positionTextView.text = resources.getString(Utils.getKey(
+                Constants.roles, internalUserData.position.toInt())!!)
+            this.salaryTextInputLayout.setText((internalUserData.salary ?: "").toString())
+            this.salaryTextInputLayout.isEnabled = false
+        }
+    }
+
+    private fun setButtons() {
+        with(this.binding) {
+            this.saveButton.setText("Modificar")
+            this.cancelButton.visibility = View.GONE
+        }
     }
 
 }
