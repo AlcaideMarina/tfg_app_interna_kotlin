@@ -72,7 +72,7 @@ class ModifyWorkerFragment : BaseFragment() {
 
     private fun setButtons() {
         with(this.binding) {
-            this.saveButton.setText("Modificar")
+            this.saveButton.setText("Guardar")
             this.cancelButton.setText("Cancelar")
         }
     }
