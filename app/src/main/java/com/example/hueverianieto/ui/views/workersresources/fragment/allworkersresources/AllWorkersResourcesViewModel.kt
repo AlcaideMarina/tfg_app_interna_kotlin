@@ -57,4 +57,12 @@ class AllWorkersResourcesViewModel @Inject constructor(
             )
     }
 
+    fun navigateToWorkerDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allWorkersResourcesFragment_to_workerDetailFragment, bundle)
+            ?: Log.e(
+                AllWorkersResourcesViewModel::class.simpleName,
+                "Error en la navegación a trabajadores pendientes"
+            )
+    }
+
 }

@@ -76,7 +76,13 @@ class AllWorkersResourcesFragment : BaseFragment() {
                             internalUserData.surname,
                             internalUserData.salary
                         ) {
-                            // TODO navegación
+                            this.allWorkersResourcesViewModel.navigateToWorkerDetail(
+                                this.view,
+                                bundleOf(
+                                    "currentUserData" to currentUserData,
+                                    "internalUserData" to internalUserData
+                                )
+                            )
                         }
                         if (internalUserData.salary != null) {
                             workerList.add(componentWorkersModel)
