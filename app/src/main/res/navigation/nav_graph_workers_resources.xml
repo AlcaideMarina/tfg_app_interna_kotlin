@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/allWorkersResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesFragment"
-        android:label="AllWorkersResourcesFragment" >
+        android:label="Trabajadores y sueldos" >
         <action
             android:id="@+id/action_allWorkersResourcesFragment_to_pendingWorkersResourcesFragment"
             app:destination="@id/pendingWorkersResourcesFragment" />
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/workerDetailFragment"
         android:name="com.example.hueverianieto.ui.views.workersresources.fragment.workersdetail.WorkerDetailFragment"
-        android:label="WorkerDetailFragment" >
+        android:label="Detalle de trabajador" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -42,7 +42,7 @@
     <fragment
         android:id="@+id/modifyWorkerFragment"
         android:name="com.example.hueverianieto.ui.views.workersresources.fragment.modifyworker.ModifyWorkerFragment"
-        android:label="ModifyWorkerFragment" >
+        android:label="Modificar sueldo" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
