@@ -61,7 +61,9 @@ class WorkerDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-
+        this.workerDetailViewModel.worker.observe(this) {
+            this.setTexts()
+        }
     }
 
     override fun setListeners() {
