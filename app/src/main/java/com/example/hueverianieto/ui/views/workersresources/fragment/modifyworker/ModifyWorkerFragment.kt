@@ -87,7 +87,9 @@ class ModifyWorkerFragment : BaseFragment() {
                 )
             }
         }
-        //TODO botón cancelar
+        this.binding.cancelButton.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     override fun updateUI(state: BaseState) {
