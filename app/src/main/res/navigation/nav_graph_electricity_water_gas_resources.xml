@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/allElectricityWaterGasFragment"
         android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergasresources.AllElectricityWaterGasFragment"
-        android:label="AllElectricityWaterGasFragment" />
+        android:label="AllElectricityWaterGasFragment" >
+        <action
+            android:id="@+id/action_allElectricityWaterGasFragment_to_electricityWaterGasResourcesDetail"
+            app:destination="@id/electricityWaterGasResourcesDetail" />
+    </fragment>
+    <fragment
+        android:id="@+id/electricityWaterGasResourcesDetail"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.electricitywatergasresourcesdetail.ElectricityWaterGasResourcesDetail"
+        android:label="ElectricityWaterGasResourcesDetail" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="ewgResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
+    </fragment>
 </navigation>

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -11,7 +12,9 @@ import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResources
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentElectricityWaterGasResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ElectricityWaterGasResourcesDetail : BaseFragment() {
 
     private lateinit var binding: FragmentElectricityWaterGasResourcesDetailBinding
@@ -29,6 +32,10 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
+        val args: ElectricityWaterGasResourcesDetailArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.ewgResourcesData = args.ewgResourcesData
+
         this.binding = FragmentElectricityWaterGasResourcesDetailBinding.inflate(
             inflater, container, false
         )
@@ -40,15 +47,15 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     private fun setButtons() {
