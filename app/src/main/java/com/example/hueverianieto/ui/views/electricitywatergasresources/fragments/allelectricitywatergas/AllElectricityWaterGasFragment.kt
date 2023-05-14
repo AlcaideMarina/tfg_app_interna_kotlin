@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -20,6 +23,7 @@ class AllElectricityWaterGasFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllElectricityWaterGasResourcesBinding
     private lateinit var currentUserData: InternalUserData
+    private val allEWGViewModel: AllElectricityWaterGasViewModel by viewModels()
 
     private var ewgDataList: MutableList<ComponentTicketModel> = mutableListOf()
 
@@ -41,7 +45,13 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        this.allEWGViewModel.getEWG()
+        lifecycleScope.launchWhenStarted {
+            allEWGViewModel.getEWG()
+            allEWGViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -53,7 +63,11 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as AllElectricityWaterGasViewState) {
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
+            }
+        }
     }
 
 }
