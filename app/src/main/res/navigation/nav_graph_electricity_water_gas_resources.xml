@@ -22,5 +22,19 @@
         <argument
             android:name="ewgResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
+        <action
+            android:id="@+id/action_electricityWaterGasResourcesDetail_to_modifyElectricityWaterGasResourcesFragment"
+            app:destination="@id/modifyElectricityWaterGasResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyElectricityWaterGasResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.modifyelectricitywatergasresources.ModifyElectricityWaterGasResourcesFragment"
+        android:label="ModifyElectricityWaterGasResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="ewgResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
     </fragment>
 </navigation>

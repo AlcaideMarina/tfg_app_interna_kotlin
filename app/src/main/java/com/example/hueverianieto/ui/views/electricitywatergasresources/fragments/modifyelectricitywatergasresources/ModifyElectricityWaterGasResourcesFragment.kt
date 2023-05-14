@@ -31,6 +31,9 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
+        val args: ModifyElectricityWaterGasResourcesFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.ewgResourcesData = args.ewgResourcesData
 
         this.binding = FragmentElectricityWaterGasResourcesDetailBinding
             .inflate(inflater, container, false)
