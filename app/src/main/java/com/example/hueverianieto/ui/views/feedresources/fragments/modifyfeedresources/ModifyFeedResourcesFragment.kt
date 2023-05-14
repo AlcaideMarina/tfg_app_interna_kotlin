@@ -95,9 +95,11 @@ class ModifyFeedResourcesFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
+            it.hideSoftInput()
             Utils.setPopUp(
                 alertDialog,
                 requireContext(),
