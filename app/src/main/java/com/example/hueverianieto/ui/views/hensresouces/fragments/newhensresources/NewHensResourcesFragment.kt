@@ -1,6 +1,8 @@
 package com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -43,6 +45,7 @@ class NewHensResourcesFragment : BaseFragment() {
 
     override fun configureUI() {
         setButtons()
+        setFields()
     }
 
     override fun setObservers() {
@@ -62,6 +65,49 @@ class NewHensResourcesFragment : BaseFragment() {
             this.cancelButton.setText("Cancelar")
             this.saveButton.setText("Guardar")
         }
+    }
+
+    private fun setFields() {
+        with(this.binding) {
+            this.shedATextInputLayout.isEnabled = false
+            this.shedBTextInputLayout.isEnabled = false
+            this.quantityTextInputLayout.addTextChangedListener(watcherHensNumber)
+        }
+    }
+
+    private val watcherHensNumber: TextWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            if (this@NewHensResourcesFragment.binding.quantityTextInputLayout.text.toString().isEmpty()) {
+                this@NewHensResourcesFragment.binding.shedATextInputLayout.setText("")
+                this@NewHensResourcesFragment.binding.shedATextInputLayout.isEnabled = false
+                this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText("")
+                this@NewHensResourcesFragment.binding.shedBTextInputLayout.isEnabled = false
+            } else {
+                try {
+                    val hensNumber = s.toString().toInt()
+                    this@NewHensResourcesFragment.binding.shedATextInputLayout.isEnabled = true
+                    this@NewHensResourcesFragment.binding.shedBTextInputLayout.isEnabled = true
+                    if (hensNumber % 2 == 0) {
+                        this@NewHensResourcesFragment.binding.shedATextInputLayout.setText(
+                            (hensNumber / 2).toString())
+                    } else {
+                        this@NewHensResourcesFragment.binding.shedATextInputLayout.setText(
+                            ((hensNumber / 2) + 1).toString())
+                    }
+                    this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText(
+                        ((hensNumber / 2)).toString())
+                } catch (e: Exception) {
+                    this@NewHensResourcesFragment.binding.shedATextInputLayout.setText("")
+                    this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText("")
+                    this@NewHensResourcesFragment.binding.shedATextInputLayout.isEnabled = false
+                    this@NewHensResourcesFragment.binding.shedBTextInputLayout.isEnabled = false
+                }
+            }
+        }
+
     }
 
 }
