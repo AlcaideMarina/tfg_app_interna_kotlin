@@ -32,7 +32,7 @@ class AllFeedResourcesFragment : BaseFragment() {
         (activity as FeedResourcesActivity).getToolbar().setNavigationOnClickListener {
             (activity as BaseActivity).goBackFragments()
         }
-        currentUserData = (activity as HensResourcesActivity).currentUserData
+        currentUserData = (activity as FeedResourcesActivity).currentUserData
 
         this.binding = FragmentAllFeedResourcesBinding.inflate(
             inflater, container, false
