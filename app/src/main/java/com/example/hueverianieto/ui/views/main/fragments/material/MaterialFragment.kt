@@ -56,6 +56,11 @@ class MaterialFragment : BaseFragment() {
                 this.requireContext(), currentUserData
             )
         }
+        this.binding.feedButton.setOnClickListener {
+            this.materialViewModel.navigateToFeedResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

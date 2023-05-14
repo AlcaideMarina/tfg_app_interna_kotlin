@@ -6,6 +6,7 @@ import android.os.Parcelable
 import androidx.lifecycle.ViewModel
 import com.example.hueverianieto.domain.usecases.HomeUseCase
 import com.example.hueverianieto.ui.views.electricitywatergasresources.ElectricityWaterGasResourcesActivity
+import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,6 +31,12 @@ class MaterialViewModel @Inject constructor(
 
     fun navigateToEWGResources(context: Context, currentUserData: Parcelable) {
         val intent = Intent(context, ElectricityWaterGasResourcesActivity::class.java)
+        intent.putExtra("current_user_data", currentUserData)
+        context.startActivity(intent)
+    }
+
+    fun navigateToFeedResources(context: Context, currentUserData: Parcelable) {
+        val intent = Intent(context, FeedResourcesActivity::class.java)
         intent.putExtra("current_user_data", currentUserData)
         context.startActivity(intent)
     }
