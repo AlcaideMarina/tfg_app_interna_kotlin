@@ -12,5 +12,6 @@ class ElectricityWaterGasResourcesData (
     var documentId: String?,
     var expenseDatetime: Timestamp,
     var notes: String,
-    var totalPrice: Number
+    var totalPrice: Number,
+    var type: Long
 ) : Parcelable
