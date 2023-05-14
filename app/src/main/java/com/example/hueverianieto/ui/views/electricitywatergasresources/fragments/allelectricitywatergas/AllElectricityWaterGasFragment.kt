@@ -19,6 +19,8 @@ import com.example.hueverianieto.domain.model.componentticket.ComponentTicketMod
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
 import com.example.hueverianieto.ui.views.electricitywatergasresources.ElectricityWaterGasResourcesActivity
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -65,9 +67,15 @@ class AllElectricityWaterGasFragment : BaseFragment() {
                 ewgDataList = mutableListOf()
                 for (ewgResourcesData in ewgResourcesDataList)  {
                     if (ewgResourcesData != null) {
+                        val key = Utils.getKey(Constants.ewgTypes, ewgResourcesData.type.toInt())
+                        val type: String = if (key == null) {
+                            ""
+                        } else {
+                            resources.getString(key)
+                        }
                         val componentTicketModel = ComponentTicketModel(
                             ewgResourcesData.expenseDatetime,
-                            ewgResourcesData.type.toString(),       // TOOD: ESTO HAY QUE PASARLO POR UN MAP
+                            type,
                             "",
                             ewgResourcesData.totalPrice
                         ) {
