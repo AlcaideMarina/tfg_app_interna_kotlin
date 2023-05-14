@@ -57,6 +57,7 @@ class FeedResourcesDetailFragment : BaseFragment() {
         setText()
 
         lifecycleScope.launchWhenStarted {
+            feedResourcesDetailViewModel.getFeedResource(feedResourcesData.documentId!!)
             feedResourcesDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -64,7 +65,12 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.feedResourcesDetailViewModel.feedResource.observe(this) { feedResurcesDataObserver ->
+            if (feedResurcesDataObserver != null) {
+                feedResourcesData = feedResurcesDataObserver
+                setText()
+            }
+        }
     }
 
     override fun setListeners() {
