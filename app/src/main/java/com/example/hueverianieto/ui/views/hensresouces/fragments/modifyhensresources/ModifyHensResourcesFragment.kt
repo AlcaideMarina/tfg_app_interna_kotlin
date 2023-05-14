@@ -13,6 +13,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,8 @@ class ModifyHensResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -57,4 +59,18 @@ class ModifyHensResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Guardar")
+        this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setText() {
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(hensResourcesData.expenseDatetime)
+            this.quantityTextView.text = hensResourcesData.hensNumber.toString()
+            this.totalPriceTextInputLayout.setText(hensResourcesData.totalPrice.toString())
+        }
+    }
+
 }
