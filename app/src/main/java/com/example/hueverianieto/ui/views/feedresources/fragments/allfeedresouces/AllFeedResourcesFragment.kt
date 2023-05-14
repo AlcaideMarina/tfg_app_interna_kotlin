@@ -4,6 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -14,12 +17,14 @@ import com.example.hueverianieto.domain.model.componentticket.ComponentTicketMod
 import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllFeedResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllFeedResourcesBinding
     private lateinit var currentUserData: InternalUserData
+    private val allFeedResourcesViewModel: AllFeedResourcesViewModel by viewModels()
 
     private var feedDataList: MutableList<ComponentTicketModel> = mutableListOf()
 
@@ -41,7 +46,13 @@ class AllFeedResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        this.allFeedResourcesViewModel.getFeed()
+        lifecycleScope.launchWhenStarted {
+            allFeedResourcesViewModel.getFeed()
+            allFeedResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -53,6 +64,8 @@ class AllFeedResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as AllFeedResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 }
