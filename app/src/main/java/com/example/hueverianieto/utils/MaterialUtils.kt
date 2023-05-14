@@ -1,6 +1,7 @@
 package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
+import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.google.firebase.Timestamp
 
@@ -37,7 +38,7 @@ object MaterialUtils {
 
     fun ewgMapToParcelable(data: MutableMap<String, Any?>, documentId: String?) : ElectricityWaterGasResourcesData {
         return ElectricityWaterGasResourcesData(
-            data["create_by"] as String,
+            data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
             data["deleted"] as Boolean,
             documentId,
@@ -51,13 +52,37 @@ object MaterialUtils {
     fun ewgParcelableToMap(electricityWaterGasResourcesData: ElectricityWaterGasResourcesData) : Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
-        map["create_by"] = electricityWaterGasResourcesData.createBy
+        map["created_by"] = electricityWaterGasResourcesData.createBy
         map["creation_datetime"] = electricityWaterGasResourcesData.creationDatatime
         map["deleted"] = electricityWaterGasResourcesData.deleted
         map["expense_datetime"] = electricityWaterGasResourcesData.expenseDatetime
         map["notes"] = electricityWaterGasResourcesData.notes
         map["total_price"] = electricityWaterGasResourcesData.totalPrice
         map["type"] = electricityWaterGasResourcesData.type
+
+        return map
+    }
+
+    fun feedMapToParcelable(data: Map<String, Any?>, documentId: String?) : FeedResourcesData {
+        return FeedResourcesData(
+            data["created_by"] as String,
+            data["creation_datetime"] as Timestamp,
+            data["deleted"] as Boolean,
+            documentId,
+            data["expense_datetime"] as Timestamp,
+            data["kilos"] as Number,
+            data["total_price"] as Long)
+    }
+
+    fun feedParcelableToMap(feedResourcesData: FeedResourcesData) : Map<String, Any?> {
+        val map = mutableMapOf<String, Any?>()
+
+        map["created_by"] = feedResourcesData.createdBy
+        map["creation_datetime"] = feedResourcesData.creationDatetime
+        map["deleted"] = feedResourcesData.deleted
+        map["expense_datetime"] = feedResourcesData.expenseDatetime
+        map["kilos"] = feedResourcesData.kilos
+        map["total_price"] = feedResourcesData.totalPrice
 
         return map
     }
