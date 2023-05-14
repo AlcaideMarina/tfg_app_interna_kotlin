@@ -21,8 +21,10 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragmentArgs
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
 
+@AndroidEntryPoint
 class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentElectricityWaterGasResourcesDetailBinding
