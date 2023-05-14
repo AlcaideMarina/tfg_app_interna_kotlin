@@ -10,13 +10,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.ActivityElectricityGasWaterResourcesBinding
+import com.example.hueverianieto.databinding.ActivityElectricityWaterGasResourcesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class ElectricityWaterGasResourcesActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityElectricityGasWaterResourcesBinding
+    private lateinit var binding: ActivityElectricityWaterGasResourcesBinding
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
@@ -29,7 +29,7 @@ class ElectricityWaterGasResourcesActivity : BaseActivity() {
             intent.getParcelableExtra<InternalUserData>("current_user_data")!!
         }
 
-        this.binding = ActivityElectricityGasWaterResourcesBinding.inflate(layoutInflater)
+        this.binding = ActivityElectricityWaterGasResourcesBinding.inflate(layoutInflater)
         setContentView(this.binding.root)
 
         setSupportActionBar(this.binding.topBar)
