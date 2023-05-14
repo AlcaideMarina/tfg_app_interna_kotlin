@@ -19,10 +19,9 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class ElectricityWaterGasResourcesDetail : BaseFragment() {
+class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentElectricityWaterGasResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData

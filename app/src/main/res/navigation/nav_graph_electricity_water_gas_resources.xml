@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/electricityWaterGasResourcesDetail"
-        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.electricitywatergasresourcesdetail.ElectricityWaterGasResourcesDetail"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.electricitywatergasresourcesdetail.ElectricityWaterGasResourcesDetailFragment"
         android:label="ElectricityWaterGasResourcesDetail" >
         <argument
             android:name="currentUserData"
