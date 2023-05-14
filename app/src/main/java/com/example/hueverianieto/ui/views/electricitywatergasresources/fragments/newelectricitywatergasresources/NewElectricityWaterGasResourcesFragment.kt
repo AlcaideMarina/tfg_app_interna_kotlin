@@ -6,6 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
@@ -25,6 +28,7 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewElectricityWaterGasResourcesBinding
     private lateinit var currentUserData: InternalUserData
+    private val newElectricityWaterGasResourcesViewModel: NewElectricityWaterGasResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -53,6 +57,12 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
         setButtons()
         setFields()
         setDropdownTypesOptions()
+
+        lifecycleScope.launchWhenStarted {
+            newElectricityWaterGasResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -64,7 +74,9 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as NewElectricityWaterGasResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
