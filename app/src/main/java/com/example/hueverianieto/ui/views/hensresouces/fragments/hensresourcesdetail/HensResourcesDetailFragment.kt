@@ -96,7 +96,9 @@ class HensResourcesDetailFragment : BaseFragment() {
                 { alertDialog.cancel() },
                 {
                     alertDialog.cancel()
-                    // TODO: Eliminar - VM
+                    this.hensResourcesDetailViewModel
+                        .deleteHenResources(hensResourcesData.documentId!!)
+                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }
