@@ -61,6 +61,12 @@ class ModifyClientViewModel @Inject constructor(
                                 }
                                 true -> {
                                     _viewState.value = ModifyClientViewState(isLoading = false, error = false, correct = true)
+                                    _alertDialog.value = AlertOkData(
+                                        "Cliente actualizado",
+                                        "Los datos del cliente se han actualizado correctamente.",
+                                        true,
+                                        1
+                                    )
                                 }
                             }
                         }
