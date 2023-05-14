@@ -18,7 +18,7 @@ class FeedResourcesDetailViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(FeedResourcesDetailViewState())
     val viewState: StateFlow<FeedResourcesDetailViewState> get() = _viewState
 
-    fun deleteHenResources(documentId: String) {
+    fun deleteFeedResources(documentId: String) {
         viewModelScope.launch {
             _viewState.value = FeedResourcesDetailViewState(isLoading = true)
             deleteFeedResourcesUseCase(documentId)
