@@ -82,11 +82,8 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
             this.dateTextView.text = Utils.parseTimestampToString(ewgResourcesData.expenseDatetime)
             this.typeAutoCompleteTextView.setText(type)
             this.typeAutoCompleteTextView.isEnabled = false
-            this.typeTextInputLayout.isEnabled = false
             this.totalPriceTextInputLayout.setText(ewgResourcesData.totalPrice.toString())
-            this.totalPriceTextInputLayout.isEnabled = false
             this.notesTextInputLayout.setText(ewgResourcesData.notes)
-            this.notesTextInputLayout.isEnabled = false
         }
     }
 
