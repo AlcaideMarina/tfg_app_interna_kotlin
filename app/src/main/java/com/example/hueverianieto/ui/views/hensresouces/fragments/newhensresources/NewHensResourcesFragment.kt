@@ -62,6 +62,47 @@ class NewHensResourcesFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
+        this.binding.saveButton.setOnClickListener {
+            if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
+                this.binding.quantityTextInputLayout.text != null && this.binding.quantityTextInputLayout.text.toString() != "" &&
+                this.binding.shedATextInputLayout.text != null && this.binding.shedATextInputLayout.text.toString() != "" &&
+                this.binding.shedBTextInputLayout.text != null && this.binding.shedBTextInputLayout.text.toString() != "") {
+
+                val quantity = this.binding.quantityTextInputLayout.text.toString().toInt()
+                val shedAStr = (this.binding.shedATextInputLayout.text ?: 0).toString()
+                val shedBStr = (this.binding.shedBTextInputLayout.text ?: 0).toString()
+
+                val shedA = if (shedAStr == "") 0 else shedAStr.toInt()
+                val shedB = if (shedBStr == "") 0 else shedBStr.toInt()
+
+                if (quantity != (shedA + shedB)) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Distribución de gallinas",
+                        "La distribución de las gallinas es incorrecta. Recuerde que las gallinas totales deben resultar de la suma de las que se introducen en cada nave.",
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                } else {
+                    // TODO: añadir a bbdd
+                }
+
+            } else {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Formulario incompleto",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            }
+        }
     }
 
     override fun updateUI(state: BaseState) {
