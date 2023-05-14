@@ -88,7 +88,7 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     private fun setDropdownRoleOptions() {
-        val values = Constants.roles.entries.iterator()
+        val values = Constants.ewgTypes.entries.iterator()
         for (v in values) {
             dropdownTypesItems.add(requireContext().getString(v.key))
         }
