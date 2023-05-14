@@ -38,7 +38,7 @@ class NewHensResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
@@ -51,6 +51,13 @@ class NewHensResourcesFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        with(this.binding) {
+            this.cancelButton.setText("Cancelar")
+            this.saveButton.setText("Guardar")
+        }
     }
 
 }
