@@ -147,7 +147,7 @@
                         android:textSize="16sp" />
 
                     <EditText
-                        android:id="@+id/quantity_text_input_layout"
+                        android:id="@+id/notes_text_input_layout"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

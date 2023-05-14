@@ -12,6 +12,8 @@ import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResources
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentElectricityWaterGasResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +46,7 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
 
     override fun configureUI() {
         setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -61,6 +64,26 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
     private fun setButtons() {
         this.binding.saveButton.setText("Modificar")
         this.binding.cancelButton.setText("Eliminar")
+    }
+
+    private fun setText() {
+        val key = Utils.getKey(Constants.ewgTypes, ewgResourcesData.type.toInt())
+        val type: String = if (key == null) {
+            ""
+        } else {
+            resources.getString(key)
+        }
+
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(ewgResourcesData.expenseDatetime)
+            this.typeAutoCompleteTextView.setText(type)
+            this.typeAutoCompleteTextView.isEnabled = false
+            this.typeTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setText(ewgResourcesData.totalPrice.toString())
+            this.totalPriceTextInputLayout.isEnabled = false
+            this.notesTextInputLayout.setText(ewgResourcesData.notes)
+            this.notesTextInputLayout.isEnabled = false
+        }
     }
 
 }
