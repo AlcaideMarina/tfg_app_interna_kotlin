@@ -1,5 +1,6 @@
 package com.example.hueverianieto.utils
 
+import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.google.firebase.Timestamp
 
@@ -30,6 +31,33 @@ object MaterialUtils {
         map["shed_a"] = hensResourcesData.shedA
         map["shed_b"] = hensResourcesData.shedB
         map["total_price"] = hensResourcesData.totalPrice
+
+        return map
+    }
+
+    fun ewgMapToParcelable(data: MutableMap<String, Any?>, documentId: String?) : ElectricityWaterGasResourcesData {
+        return ElectricityWaterGasResourcesData(
+            data["create_by"] as String,
+            data["creation_datetime"] as Timestamp,
+            data["deleted"] as Boolean,
+            documentId,
+            data["expense_datetime"] as Timestamp,
+            data["notes"] as String,
+            data["total_price"] as Number,
+            data["type"] as Long
+        )
+    }
+
+    fun ewgParcelableToMap(electricityWaterGasResourcesData: ElectricityWaterGasResourcesData) : Map<String, Any?> {
+        val map = mutableMapOf<String, Any?>()
+
+        map["create_by"] = electricityWaterGasResourcesData.createBy
+        map["creation_datetime"] = electricityWaterGasResourcesData.creationDatatime
+        map["deleted"] = electricityWaterGasResourcesData.deleted
+        map["expense_datetime"] = electricityWaterGasResourcesData.expenseDatetime
+        map["notes"] = electricityWaterGasResourcesData.notes
+        map["total_price"] = electricityWaterGasResourcesData.totalPrice
+        map["type"] = electricityWaterGasResourcesData.type
 
         return map
     }
