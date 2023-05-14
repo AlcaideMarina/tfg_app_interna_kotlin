@@ -59,4 +59,12 @@ class AllHensResourcesViewModel @Inject constructor(
             )
     }
 
+    fun navigateToNewHensResources(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allHensResourcesFragment_to_newHensResourcesFragment, bundle)
+            ?: Log.e(
+                AllHensResourcesViewModel::class.simpleName,
+                "Error en la navegación a añadir nuevo recurso (gallinas)"
+            )
+    }
+
 }
