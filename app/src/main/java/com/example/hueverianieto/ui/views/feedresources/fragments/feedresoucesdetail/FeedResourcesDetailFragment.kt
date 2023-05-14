@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -89,6 +90,15 @@ class FeedResourcesDetailFragment : BaseFragment() {
                         .deleteFeedResources(feedResourcesData.documentId!!)
                     activity?.onBackPressedDispatcher?.onBackPressed()
                 }
+            )
+        }
+        this.binding.saveButton.setOnClickListener {
+            this.feedResourcesDetailViewModel.navigateToModifyFeedResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "feedResourcesData" to feedResourcesData
+                )
             )
         }
     }

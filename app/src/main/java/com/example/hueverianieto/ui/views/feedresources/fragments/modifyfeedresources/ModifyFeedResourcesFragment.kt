@@ -44,18 +44,18 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }
