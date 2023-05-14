@@ -14,6 +14,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewElectricityWaterGasResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
@@ -66,12 +67,106 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.newElectricityWaterGasResourcesViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.saveButton.setOnClickListener {
+            if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
+                    this.binding.typeAutoCompleteTextView.text != null && this.binding.typeAutoCompleteTextView.text.toString() != "" &&
+                    this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                it.hideSoftInput()
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Aviso",
+                    "Va a modificar este ticket. ¿Quiere continuar con el proceso?",
+                    "Cancelar",
+                    "Continuar",
+                    { alertDialog.cancel() },
+                    {
+                        alertDialog.cancel()
+                        val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
+                            resources.getString(R.string.electricity) -> R.string.electricity
+                            resources.getString(R.string.water) -> R.string.water
+                            resources.getString(R.string.gas) -> R.string.gas
+                            else -> null
+                        }
+                        if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
+                            this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                            val ewgResourcesData = ElectricityWaterGasResourcesData(
+                                this.currentUserData.documentId!!,
+                                Timestamp.now(),
+                                false,
+                                null,
+                                datetimeSelected,
+                                (this.binding.notesTextInputLayout.text ?: "").toString(),
+                                this.binding.totalPriceTextInputLayout.text.toString().toDouble(),
+                                Constants.ewgTypes[typeSelected]!!.toLong()
+                            )
+
+                            this.newElectricityWaterGasResourcesViewModel.addEWGResource(
+                                ewgResourcesData
+                            )
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        } else {
+                            Utils.setPopUp(
+                                alertDialog,
+                                requireContext(),
+                                "Formulario incorrecto",
+                                "Es obligatorio introducir el tipo de gasto y el precio total. Por favor, revise los datos y vuelva a intentarlo.",
+                                "De acuerdo",
+                                null,
+                                { alertDialog.cancel() },
+                                null
+                            )
+                        }
+                    }
+                )
+            } else {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Formulario incompleto",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            }
         }
     }
 
