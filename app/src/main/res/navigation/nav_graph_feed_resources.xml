@@ -22,5 +22,19 @@
         <argument
             android:name="feedResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.FeedResourcesData" />
+        <action
+            android:id="@+id/action_feedResourcesDetailFragment_to_modifyFeedResourcesFragment"
+            app:destination="@id/modifyFeedResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFeedResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources.ModifyFeedResourcesFragment"
+        android:label="ModifyFeedResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="feedResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.FeedResourcesData" />
     </fragment>
 </navigation>

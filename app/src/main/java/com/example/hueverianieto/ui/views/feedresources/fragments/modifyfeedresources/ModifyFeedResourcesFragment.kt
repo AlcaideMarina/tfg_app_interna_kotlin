@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -32,6 +33,9 @@ class ModifyFeedResourcesFragment : BaseFragment() {
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
+        val args: ModifyFeedResourcesFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.feedResourcesData = args.feedResourcesData
 
         this.binding = FragmentFeedResourcesDetailBinding
             .inflate(inflater, container, false)
