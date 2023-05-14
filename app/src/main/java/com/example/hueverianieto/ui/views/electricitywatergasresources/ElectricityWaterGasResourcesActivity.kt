@@ -7,6 +7,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityElectricityGasWaterResourcesBinding
@@ -35,7 +36,7 @@ class ElectricityWaterGasResourcesActivity : BaseActivity() {
         navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()         // TODO
+            setOf(R.layout.fragment_all_electricity_water_gas_resources)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
