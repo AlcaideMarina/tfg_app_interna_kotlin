@@ -74,6 +74,48 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
+        this.binding.saveButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso",
+                "Va a modificar este ticket. ¿Quiere continuar con el proceso?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
+                        resources.getString(R.string.electricity) -> R.string.electricity
+                        resources.getString(R.string.water) -> R.string.water
+                        resources.getString(R.string.gas) -> R.string.gas
+                        else -> null
+                    }
+                    if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
+                            this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                        this.ewgResourcesData.type = Constants.ewgTypes[typeSelected]!!.toLong()
+                        this.ewgResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                        this.ewgResourcesData.notes = (this.binding.notesTextInputLayout.text ?: "").toString()
+
+                        this.modifyElectricityWaterGasResourcesViewModel.updateEWG(
+                            this.ewgResourcesData
+                        )
+                        activity?.onBackPressedDispatcher?.onBackPressed()
+                    } else {
+                        Utils.setPopUp(
+                            alertDialog,
+                            requireContext(),
+                            "Formulario incorrecto",
+                            "Es obligatorio introducir el tipo de gasto y el precio total. Por favor, revise los datos y vuelva a intentarlo.",
+                            "De acuerdo",
+                            null,
+                            { alertDialog.cancel() },
+                            null
+                        )
+                    }
+                }
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
