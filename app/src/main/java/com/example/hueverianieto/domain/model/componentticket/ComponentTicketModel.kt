@@ -6,7 +6,7 @@ import com.google.firebase.Timestamp
 
 class ComponentTicketModel (
     var expenseDate: Timestamp,
-    var quantity: Number,
+    var quantity: String,
     var units: String?,
     var price: Number,
     var onClickListener: OnClickListener

@@ -70,7 +70,7 @@ class AllHensResourcesFragment : BaseFragment() {
                     if (hensResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             hensResourcesData.expenseDatetime,
-                            hensResourcesData.hensNumber,
+                            hensResourcesData.hensNumber.toString(),
                             "gallinas",
                             hensResourcesData.totalPrice
                         ) {

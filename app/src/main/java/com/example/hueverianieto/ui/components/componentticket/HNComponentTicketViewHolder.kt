@@ -12,7 +12,7 @@ class HNComponentTicketViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     fun render(componentTicketModel: ComponentTicketModel) {
         this.binding.dateText.text = Utils.parseTimestampToString(componentTicketModel.expenseDate)
-        this.binding.quantityText.text = componentTicketModel.quantity.toString()
+        this.binding.quantityText.text = componentTicketModel.quantity
         this.binding.unitsText.text = componentTicketModel.units
         this.binding.priceText.text = componentTicketModel.price.toString() + " €"
         this.binding.baseComponentContainer.setOnClickListener(
