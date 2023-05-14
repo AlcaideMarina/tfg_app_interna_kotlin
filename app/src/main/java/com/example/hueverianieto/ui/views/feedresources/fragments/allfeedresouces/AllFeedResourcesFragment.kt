@@ -13,7 +13,9 @@ import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AllFeedResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentAllFeedResourcesBinding
