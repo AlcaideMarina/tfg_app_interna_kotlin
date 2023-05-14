@@ -53,7 +53,7 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
         setButtons()
         setText()
         lifecycleScope.launchWhenStarted {
-            // TODO: Recargar EWGData
+            ewgResourcesDetailViewModel.getEWGResource(ewgResourcesData.documentId!!)
             ewgResourcesDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -61,7 +61,12 @@ class ElectricityWaterGasResourcesDetail : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.ewgResourcesDetailViewModel.ewgResource.observe(this) { ewgResourcesDataObserver ->
+            if (ewgResourcesDataObserver != null) {
+                ewgResourcesData = ewgResourcesDataObserver
+                setText()
+            }
+        }
     }
 
     override fun setListeners() {
