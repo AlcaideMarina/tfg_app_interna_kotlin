@@ -8,6 +8,7 @@ import kotlinx.parcelize.Parcelize
 data class HensResourcesData (
     var createdBy: String,
     var creationDatetime: Timestamp,
+    var delete: Boolean,
     var documentId: String?,
     var expenseDatetime: Timestamp,
     var hensNumber: Long,
