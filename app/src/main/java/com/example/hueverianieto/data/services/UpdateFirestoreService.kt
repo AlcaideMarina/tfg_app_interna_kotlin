@@ -9,7 +9,7 @@ class UpdateFirestoreService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun updateClientFirestore(dataMap: Map<String, Any?>, documentId: String, collection: String) : Boolean = runCatching {
+    suspend fun updateDocumentFirestore(dataMap: Map<String, Any?>, documentId: String, collection: String) : Boolean = runCatching {
         firebaseClient.db
             .collection(collection)
             .document(documentId)
