@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -11,11 +12,14 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewHensResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class NewHensResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewHensResourcesBinding
     private lateinit var currentUserData: InternalUserData
+    private val newHensResourcesViewModel: NewHensResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
