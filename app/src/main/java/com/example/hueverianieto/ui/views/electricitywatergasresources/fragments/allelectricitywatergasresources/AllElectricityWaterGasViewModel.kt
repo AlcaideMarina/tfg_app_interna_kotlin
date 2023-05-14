@@ -58,4 +58,12 @@ class AllElectricityWaterGasViewModel @Inject constructor(
             )
     }
 
+    fun navigateToNewEWGResources(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allElectricityWaterGasFragment_to_newElectricityWaterGasResourcesFragment, bundle)
+            ?: Log.e(
+                AllElectricityWaterGasViewModel::class.simpleName,
+                "Error en la navegación a nuevo EWG"
+            )
+    }
+
 }

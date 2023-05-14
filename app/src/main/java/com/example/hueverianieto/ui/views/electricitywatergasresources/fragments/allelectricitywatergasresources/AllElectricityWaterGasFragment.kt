@@ -101,7 +101,14 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.addButton.setOnClickListener {
+            this.allEWGViewModel.navigateToNewEWGResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
