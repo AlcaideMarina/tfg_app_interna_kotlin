@@ -36,6 +36,10 @@ class FeedResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
+        val args : FeedResourcesDetailFragmentArgs by navArgs()
+        this.feedResourcesData = args.feedResourcesData
+        this.currentUserData = args.currentUserData
+
         this.binding = FragmentFeedResourcesDetailBinding.inflate(
             inflater, container, false
         )

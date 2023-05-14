@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/allFeedResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesFragment"
-        android:label="AllFeedResourcesFragment" />
+        android:label="AllFeedResourcesFragment" >
+        <action
+            android:id="@+id/action_allFeedResourcesFragment_to_feedResourcesDetailFragment"
+            app:destination="@id/feedResourcesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedResourcesDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail.FeedResourcesDetailFragment"
+        android:label="FeedResourcesDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="feedResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.FeedResourcesData" />
+    </fragment>
 </navigation>
