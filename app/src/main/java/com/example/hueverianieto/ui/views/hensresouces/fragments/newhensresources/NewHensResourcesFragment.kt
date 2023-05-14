@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewHensResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
@@ -29,7 +30,7 @@ class NewHensResourcesFragment : BaseFragment() {
 
     private lateinit var alertDialog: HNModalDialog
 
-    private lateinit var approxDeliveryDatetimeSelected : Timestamp
+    private lateinit var datetimeSelected : Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,7 +88,19 @@ class NewHensResourcesFragment : BaseFragment() {
                         null
                     )
                 } else {
-                    // TODO: añadir a bbdd
+                    this.newHensResourcesViewModel.addHensResource(
+                        HensResourcesData(
+                            this.currentUserData.documentId!!,
+                            Timestamp.now(),
+                            false,
+                            null,
+                            datetimeSelected,
+                            quantity.toLong(),
+                            shedA.toLong(),
+                            shedB.toLong(),
+                            this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                        )
+                    )
                 }
 
             } else {
@@ -122,9 +135,9 @@ class NewHensResourcesFragment : BaseFragment() {
             this.shedBTextInputLayout.isEnabled = false
             this.quantityTextInputLayout.addTextChangedListener(watcherHensNumber)
 
-            approxDeliveryDatetimeSelected = Timestamp(Date())
+            datetimeSelected = Timestamp(Date())
             this.dateTextInputLayout.setText(
-                Utils.parseDateToString(approxDeliveryDatetimeSelected.toDate())
+                Utils.parseDateToString(datetimeSelected.toDate())
             )
             this.dateTextInputLayout.setOnClickListener { onClickScheduledDate() }
         }
@@ -178,7 +191,7 @@ class NewHensResourcesFragment : BaseFragment() {
             if (monthStr.length < 2) monthStr = "0$monthStr"
             if (yearStr.length < 4) yearStr = "0$yearStr"
             this.binding.dateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
-            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+            datetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
         }
         val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
         datePickerDialog.datePicker.maxDate = Date().time
