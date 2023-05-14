@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -16,6 +19,7 @@ import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyFeedResourcesFragment : BaseFragment() {
@@ -23,6 +27,7 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     private lateinit var binding: FragmentFeedResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var feedResourcesData: FeedResourcesData
+    private val modifyFeedResourcesViewModel: ModifyFeedResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -47,6 +52,11 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setText()
+        lifecycleScope.launchWhenStarted {
+            modifyFeedResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -58,7 +68,9 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyFeedResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
