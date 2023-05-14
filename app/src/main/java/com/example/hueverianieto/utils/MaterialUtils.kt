@@ -9,7 +9,7 @@ object MaterialUtils {
         return HensResourcesData(
             data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
-            data["delete"] as Boolean,
+            data["deleted"] as Boolean,
             documentId,
             data["expense_datetime"] as Timestamp,
             data["hens_number"] as Long,
@@ -24,7 +24,7 @@ object MaterialUtils {
 
         map["created_by"] = hensResourcesData.createdBy
         map["creation_datetime"] = hensResourcesData.creationDatetime
-        map["delete"] = hensResourcesData.delete
+        map["deleted"] = hensResourcesData.deleted
         map["expense_datetime"] = hensResourcesData.expenseDatetime
         map["hens_number"] = hensResourcesData.hensNumber
         map["shed_a"] = hensResourcesData.shedA
