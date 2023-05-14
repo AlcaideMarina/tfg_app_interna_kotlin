@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -14,6 +16,8 @@ import com.example.hueverianieto.databinding.FragmentElectricityWaterGasResource
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragmentArgs
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 
 class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
 
@@ -22,6 +26,8 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     private lateinit var ewgResourcesData: ElectricityWaterGasResourcesData
 
     private lateinit var alertDialog: HNModalDialog
+
+    private var dropdownTypesItems : MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +48,9 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
+        setDropdownRoleOptions()
     }
 
     override fun setObservers() {
@@ -55,6 +63,46 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Guardar")
+        this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setText() {
+        val key = Utils.getKey(Constants.ewgTypes, ewgResourcesData.type.toInt())
+        val type: String = if (key == null) {
+            ""
+        } else {
+            resources.getString(key)
+        }
+
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(ewgResourcesData.expenseDatetime)
+            this.typeAutoCompleteTextView.setText(type)
+            this.typeAutoCompleteTextView.isEnabled = false
+            this.typeTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setText(ewgResourcesData.totalPrice.toString())
+            this.totalPriceTextInputLayout.isEnabled = false
+            this.notesTextInputLayout.setText(ewgResourcesData.notes)
+            this.notesTextInputLayout.isEnabled = false
+        }
+    }
+
+    private fun setDropdownRoleOptions() {
+        val values = Constants.roles.entries.iterator()
+        for (v in values) {
+            dropdownTypesItems.add(requireContext().getString(v.key))
+        }
+
+        this.binding.typeAutoCompleteTextView.setAdapter(
+            ArrayAdapter(
+                this.requireContext(), R.layout.component_dropdown_list_item,
+                dropdownTypesItems
+            )
+        )
+
     }
 
 }
