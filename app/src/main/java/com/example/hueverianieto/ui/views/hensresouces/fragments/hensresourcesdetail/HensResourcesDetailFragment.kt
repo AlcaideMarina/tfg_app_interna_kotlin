@@ -18,6 +18,7 @@ import com.example.hueverianieto.databinding.ComponentTicketBinding
 import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
@@ -31,6 +32,8 @@ class HensResourcesDetailFragment : BaseFragment() {
 
     private val hensResourcesDetailViewModel: HensResourcesDetailViewModel by viewModels()
 
+    private lateinit var alertDialog: HNModalDialog
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,6 +41,8 @@ class HensResourcesDetailFragment : BaseFragment() {
     ): View {
 
         (activity as BaseActivity).configNav(true)
+
+        this.alertDialog = HNModalDialog(requireContext())
 
         val args : HensResourcesDetailFragmentArgs by navArgs()
         this.hensResourcesData = args.hensResourcesData
@@ -78,6 +83,21 @@ class HensResourcesDetailFragment : BaseFragment() {
                     "currentUserData" to currentUserData,
                     "hensResourcesData" to hensResourcesData
                 )
+            )
+        }
+        this.binding.cancelButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso importante",
+                "Esta acción es irreversible. Va a eliminar este ticket, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
+                "Atrás",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    // TODO: Eliminar - VM
+                }
             )
         }
     }
