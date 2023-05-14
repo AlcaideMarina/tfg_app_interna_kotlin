@@ -51,6 +51,11 @@ class MaterialFragment : BaseFragment() {
                 this.requireContext(), currentUserData
             )
         }
+        this.binding.electricityWaterGasButton.setOnClickListener {
+            this.materialViewModel.navigateToEWGResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
