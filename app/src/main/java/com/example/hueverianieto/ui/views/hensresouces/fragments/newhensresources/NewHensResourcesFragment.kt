@@ -80,18 +80,18 @@ class NewHensResourcesFragment : BaseFragment() {
                         },
                         null
                     )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
                 }
-            } else {
-                Utils.setPopUp(
-                    alertDialog,
-                    requireContext(),
-                    alertOkData.title,
-                    alertOkData.text,
-                    "De acuerdo",
-                    null,
-                    { alertDialog.cancel() },
-                    null
-                )
             }
         }
     }
