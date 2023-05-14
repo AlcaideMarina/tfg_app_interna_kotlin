@@ -9,8 +9,8 @@ class FeedResourcesData (
     var createdBy: String,
     var creationDatetime: Timestamp,
     var deleted: Boolean,
-    val documentId: String?,
+    var documentId: String?,
     var expenseDatetime: Timestamp,
     var kilos: Number,
-    val totalPrice: Number
+    var totalPrice: Number
 ) : Parcelable
