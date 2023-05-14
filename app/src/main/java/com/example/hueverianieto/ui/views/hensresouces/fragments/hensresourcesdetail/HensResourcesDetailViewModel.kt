@@ -10,6 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.HensResourcesData
+import com.example.hueverianieto.domain.usecases.DeleteHensResourcesUseCase
 import com.example.hueverianieto.domain.usecases.GetHenResourcesWithIdUseCase
 import com.example.hueverianieto.domain.usecases.HomeUseCase
 import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HensResourcesDetailViewModel @Inject constructor(
-    val getHenResourcesWithIdUseCase: GetHenResourcesWithIdUseCase
+    val getHenResourcesWithIdUseCase: GetHenResourcesWithIdUseCase,
+    val deleteHensResourcesUseCase: DeleteHensResourcesUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HensResourcesDetailViewState())
@@ -44,6 +46,14 @@ class HensResourcesDetailViewModel @Inject constructor(
 
                 }
             }
+        }
+    }
+
+    fun deleteHenResources(documentId: String) {
+        viewModelScope.launch {
+            _viewState.value = HensResourcesDetailViewState(isLoading = true)
+            deleteHensResourcesUseCase(documentId)
+            _viewState.value = HensResourcesDetailViewState(isLoading = false)
         }
     }
 
