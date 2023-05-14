@@ -32,7 +32,7 @@ class AllElectricityWaterGasFragment : BaseFragment() {
         (activity as ElectricityWaterGasResourcesActivity).getToolbar().setNavigationOnClickListener {
             (activity as BaseActivity).goBackFragments()
         }
-        currentUserData = (activity as HensResourcesActivity).currentUserData
+        currentUserData = (activity as ElectricityWaterGasResourcesActivity).currentUserData
 
         this.binding = FragmentAllElectricityWaterGasResourcesBinding.inflate(
             inflater, container, false
@@ -41,19 +41,19 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
 }
