@@ -14,6 +14,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,7 +45,8 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -58,4 +60,18 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Guardar")
+        this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setText() {
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(feedResourcesData.expenseDatetime)
+            this.kilosTextInputLayout.setText(feedResourcesData.kilos.toString())
+            this.totalPriceTextInputLayout.setText(feedResourcesData.totalPrice.toString())
+        }
+    }
+
 }
