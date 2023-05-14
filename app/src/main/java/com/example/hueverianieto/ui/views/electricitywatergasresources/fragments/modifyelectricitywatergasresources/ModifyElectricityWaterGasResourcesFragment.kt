@@ -57,7 +57,7 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setText()
-        setDropdownRoleOptions()
+        setDropdownTypesOptions()
 
         lifecycleScope.launchWhenStarted {
             modifyElectricityWaterGasResourcesViewModel.viewState.collect { viewState ->
@@ -148,7 +148,7 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
         }
     }
 
-    private fun setDropdownRoleOptions() {
+    private fun setDropdownTypesOptions() {
         val values = Constants.ewgTypes.entries.iterator()
         for (v in values) {
             dropdownTypesItems.add(requireContext().getString(v.key))
