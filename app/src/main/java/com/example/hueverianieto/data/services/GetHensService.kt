@@ -13,6 +13,7 @@ class GetHensService @Inject constructor(
     suspend fun getHens() : List<HensResourcesData?>? = runCatching {
         firebaseClient.db
             .collection("material_hens")
+            .whereEqualTo("deleted", false)
             .get()
             .await()
     }.toHensResourcesData()
