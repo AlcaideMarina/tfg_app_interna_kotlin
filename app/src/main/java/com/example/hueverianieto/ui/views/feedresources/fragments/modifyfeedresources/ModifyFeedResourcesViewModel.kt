@@ -20,19 +20,19 @@ class ModifyFeedResourcesViewModel @Inject constructor(
     val updateFeedUseCase: UpdateFeedUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(ModifyHensResourcesViewState())
-    val viewState: StateFlow<ModifyHensResourcesViewState> get() = _viewState
+    private val _viewState = MutableStateFlow(ModifyFeedResourcesViewState())
+    val viewState: StateFlow<ModifyFeedResourcesViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
     val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun updateFeed(feedResourcesData: FeedResourcesData) {
         viewModelScope.launch {
-            _viewState.value = ModifyHensResourcesViewState(isLoading = true)
+            _viewState.value = ModifyFeedResourcesViewState(isLoading = true)
             val hensResourcesMap = MaterialUtils.feedParcelableToMap(feedResourcesData)
             when(val result = updateFeedUseCase(hensResourcesMap, feedResourcesData.documentId!!)) {
                 false -> {
-                    _viewState.value = ModifyHensResourcesViewState(isLoading = false, error = true)
+                    _viewState.value = ModifyFeedResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         "Error",
                         "Se ha producido un error cuando se estaban actualizado los datos del recurso. Por favor, revise los datos e inténtelo de nuevo.",
@@ -40,7 +40,7 @@ class ModifyFeedResourcesViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ModifyHensResourcesViewState(isLoading = false, error = false)
+                    _viewState.value = ModifyFeedResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
                         "Cliente actualizado",
                         "Los datos del recurso se han actualizado correctamente.",
