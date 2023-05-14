@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergas
+package com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergasresources
 
 import com.example.hueverianieto.base.BaseState
 

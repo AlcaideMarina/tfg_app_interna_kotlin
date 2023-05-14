@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/allElectricityWaterGasFragment"
-        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergas.AllElectricityWaterGasFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergasresources.AllElectricityWaterGasFragment"
         android:label="AllElectricityWaterGasFragment" />
 </navigation>

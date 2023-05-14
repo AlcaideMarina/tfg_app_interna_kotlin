@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergas
+package com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergasresources
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.GetEWGUseCase
-import com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources.AllHensResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
