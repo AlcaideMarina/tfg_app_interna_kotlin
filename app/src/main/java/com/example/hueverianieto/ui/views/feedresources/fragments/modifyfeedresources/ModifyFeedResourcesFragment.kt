@@ -97,6 +97,23 @@ class ModifyFeedResourcesFragment : BaseFragment() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
+        this.binding.saveButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso",
+                "Va a modificar este ticket. ¿Quiere continuar con el proceso?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    feedResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                    feedResourcesData.kilos = this.binding.kilosTextInputLayout.text.toString().toDouble()
+                    this.modifyFeedResourcesViewModel.updateFeed(feedResourcesData)
+                }
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
