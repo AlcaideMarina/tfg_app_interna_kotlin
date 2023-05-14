@@ -10,11 +10,13 @@ import com.example.hueverianieto.data.services.UpdateFirestoreService
 import com.example.hueverianieto.domain.usecases.UpdateHensUseCase
 import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import com.example.hueverianieto.utils.MaterialUtils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ModifyHensResourcesViewModel @Inject constructor(
     val updateHensUseCase: UpdateHensUseCase
 ) : ViewModel() {
