@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -14,7 +15,10 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewHensResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class NewHensResourcesFragment : BaseFragment() {
@@ -24,6 +28,8 @@ class NewHensResourcesFragment : BaseFragment() {
     private val newHensResourcesViewModel: NewHensResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
+
+    private lateinit var approxDeliveryDatetimeSelected : Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -74,6 +80,12 @@ class NewHensResourcesFragment : BaseFragment() {
             this.shedATextInputLayout.isEnabled = false
             this.shedBTextInputLayout.isEnabled = false
             this.quantityTextInputLayout.addTextChangedListener(watcherHensNumber)
+
+            approxDeliveryDatetimeSelected = Timestamp(Date())
+            this.dateTextInputLayout.setText(
+                Utils.parseDateToString(approxDeliveryDatetimeSelected.toDate())
+            )
+            this.dateTextInputLayout.setOnClickListener { onClickScheduledDate() }
         }
     }
 
@@ -110,6 +122,26 @@ class NewHensResourcesFragment : BaseFragment() {
             }
         }
 
+    }
+
+    private fun onClickScheduledDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = (m + 1).toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.dateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.datePicker.maxDate = Date().time
+        datePickerDialog.show()
     }
 
 }

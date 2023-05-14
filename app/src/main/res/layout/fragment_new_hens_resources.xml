@@ -53,6 +53,10 @@
                         android:paddingHorizontal="12dp"
                         android:layout_marginTop="@dimen/size8"
                         android:layout_marginHorizontal="@dimen/size16"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         android:autofillHints="name"/>
 
                 </TableRow>
