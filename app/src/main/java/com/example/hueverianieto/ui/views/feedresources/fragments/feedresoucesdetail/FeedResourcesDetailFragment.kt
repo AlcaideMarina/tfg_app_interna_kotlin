@@ -31,7 +31,6 @@ class FeedResourcesDetailFragment : BaseFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
@@ -48,18 +47,18 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }

@@ -1,12 +1,18 @@
 package com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.GetFeedUseCase
+import com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources.AllHensResourcesViewModel
 import com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources.AllHensResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -45,6 +51,14 @@ class AllFeedResourcesViewModel @Inject constructor(
                 }
             }
         }
+    }
+
+    fun navigationToFeedResourcesDetail(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allFeedResourcesFragment_to_feedResourcesDetailFragment, bundle)
+            ?: Log.e(
+                AllFeedResourcesViewModel::class.simpleName,
+                "Error en la navegación a detalle de recursos (pienso)"
+            )
     }
 
 }

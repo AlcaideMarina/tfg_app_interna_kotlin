@@ -64,15 +64,21 @@ class AllFeedResourcesFragment : BaseFragment() {
                 // TODO: ERROR
             } else {
                 feedDataList = mutableListOf()
-                for (hensResourcesData in feedResourcesDataList)  {
-                    if (hensResourcesData != null) {
+                for (feedResourcesData in feedResourcesDataList)  {
+                    if (feedResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
-                            hensResourcesData.expenseDatetime,
-                            hensResourcesData.kilos.toString(),
+                            feedResourcesData.expenseDatetime,
+                            feedResourcesData.kilos.toString(),
                             "kg",
-                            hensResourcesData.totalPrice
+                            feedResourcesData.totalPrice
                         ) {
-                            // TODO: Navegación
+                            this.allFeedResourcesViewModel.navigationToFeedResourcesDetail(
+                                this.view,
+                                bundleOf(
+                                    "currentUserData" to currentUserData,
+                                    "feedResourcesData" to feedResourcesData
+                                )
+                            )
                         }
                         feedDataList.add(componentTicketModel)
                     }
