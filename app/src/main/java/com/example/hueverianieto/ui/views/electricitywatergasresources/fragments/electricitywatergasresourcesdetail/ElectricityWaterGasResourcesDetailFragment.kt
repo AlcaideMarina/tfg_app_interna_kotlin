@@ -39,7 +39,7 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args: ElectricityWaterGasResourcesDetailArgs by navArgs()
+        val args: ElectricityWaterGasResourcesDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.ewgResourcesData = args.ewgResourcesData
 
