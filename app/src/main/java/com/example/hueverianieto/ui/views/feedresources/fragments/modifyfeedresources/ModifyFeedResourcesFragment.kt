@@ -94,7 +94,9 @@ class ModifyFeedResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.cancelButton.setOnClickListener {
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     override fun updateUI(state: BaseState) {
