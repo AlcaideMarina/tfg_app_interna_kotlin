@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -27,12 +28,15 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
 
+        val args: NewElectricityWaterGasResourcesFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        
         this.binding = FragmentNewElectricityWaterGasResourcesBinding.inflate(
             inflater, container, false
         )

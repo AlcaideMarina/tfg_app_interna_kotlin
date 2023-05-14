@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_allElectricityWaterGasFragment_to_electricityWaterGasResourcesDetail"
             app:destination="@id/electricityWaterGasResourcesDetail" />
+        <action
+            android:id="@+id/action_allElectricityWaterGasFragment_to_newElectricityWaterGasResourcesFragment"
+            app:destination="@id/newElectricityWaterGasResourcesFragment" />
     </fragment>
     <fragment
         android:id="@+id/electricityWaterGasResourcesDetail"
@@ -36,5 +39,13 @@
         <argument
             android:name="ewgResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newElectricityWaterGasResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.newelectricitywatergasresources.NewElectricityWaterGasResourcesFragment"
+        android:label="NewElectricityWaterGasResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
