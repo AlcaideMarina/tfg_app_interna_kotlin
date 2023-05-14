@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -26,6 +27,9 @@ class NewHensResourcesFragment : BaseFragment() {
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
+
+        val args : NewHensResourcesFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
 
         this.binding = FragmentNewHensResourcesBinding.inflate(
             inflater, container, false

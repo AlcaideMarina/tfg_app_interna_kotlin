@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_allHensResourcesFragment_to_hensResourcesDetailFragment"
             app:destination="@id/hensResourcesDetailFragment" />
+        <action
+            android:id="@+id/action_allHensResourcesFragment_to_newHensResourcesFragment"
+            app:destination="@id/newHensResourcesFragment" />
     </fragment>
     <fragment
         android:id="@+id/hensResourcesDetailFragment"
@@ -36,5 +39,13 @@
         <argument
             android:name="hensResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.HensResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newHensResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesFragment"
+        android:label="NewHensResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
