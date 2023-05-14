@@ -104,7 +104,8 @@ class NewHensResourcesFragment : BaseFragment() {
             if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
                 this.binding.quantityTextInputLayout.text != null && this.binding.quantityTextInputLayout.text.toString() != "" &&
                 this.binding.shedATextInputLayout.text != null && this.binding.shedATextInputLayout.text.toString() != "" &&
-                this.binding.shedBTextInputLayout.text != null && this.binding.shedBTextInputLayout.text.toString() != "") {
+                this.binding.shedBTextInputLayout.text != null && this.binding.shedBTextInputLayout.text.toString() != "" &&
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
 
                 val quantity = this.binding.quantityTextInputLayout.text.toString().toInt()
                 val shedAStr = (this.binding.shedATextInputLayout.text ?: 0).toString()
