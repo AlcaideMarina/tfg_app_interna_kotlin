@@ -80,7 +80,8 @@ class HensResourcesDetailFragment : BaseFragment() {
     private fun setText() {
         with(this.binding) {
             this.dateTextView.text = Utils.parseTimestampToString(hensResourcesData.expenseDatetime)
-            this.quantityTextView.text = hensResourcesData.hensNumber.toString()
+            this.quantityTextInputLayout.setText(hensResourcesData.hensNumber.toString())
+            this.quantityTextInputLayout.isEnabled = false
             this.totalPriceTextInputLayout.setText(hensResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false
         }

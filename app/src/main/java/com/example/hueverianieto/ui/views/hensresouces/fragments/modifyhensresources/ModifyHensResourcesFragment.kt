@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -22,6 +23,7 @@ class ModifyHensResourcesFragment : BaseFragment() {
     private lateinit var binding: FragmentHensResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var hensResourcesData: HensResourcesData
+    private val modifyHensResourcesViewModel: ModifyHensResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -49,12 +51,59 @@ class ModifyHensResourcesFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.modifyHensResourcesViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            (activity as BaseActivity).goBackFragments()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+
+            }
+        }
     }
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.saveButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso",
+                "Va a modificar este ticket. ¿Quiere continuar con el proceso?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    hensResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                    hensResourcesData.hensNumber = this.binding.quantityTextInputLayout.text.toString().toLong()
+                    this.modifyHensResourcesViewModel.updateHens(hensResourcesData)
+                }
+            )
         }
     }
 
@@ -70,7 +119,7 @@ class ModifyHensResourcesFragment : BaseFragment() {
     private fun setText() {
         with(this.binding) {
             this.dateTextView.text = Utils.parseTimestampToString(hensResourcesData.expenseDatetime)
-            this.quantityTextView.text = hensResourcesData.hensNumber.toString()
+            this.quantityTextInputLayout.setText(hensResourcesData.hensNumber.toString())
             this.totalPriceTextInputLayout.setText(hensResourcesData.totalPrice.toString())
         }
     }
