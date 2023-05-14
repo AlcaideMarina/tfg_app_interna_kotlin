@@ -5,6 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
@@ -18,12 +21,14 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragmentArgs
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
+import kotlinx.coroutines.flow.collect
 
 class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentElectricityWaterGasResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var ewgResourcesData: ElectricityWaterGasResourcesData
+    private val modifyElectricityWaterGasResourcesViewModel: ModifyElectricityWaterGasResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -51,6 +56,12 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
         setButtons()
         setText()
         setDropdownRoleOptions()
+
+        lifecycleScope.launchWhenStarted {
+            modifyElectricityWaterGasResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -62,7 +73,9 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyElectricityWaterGasResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
