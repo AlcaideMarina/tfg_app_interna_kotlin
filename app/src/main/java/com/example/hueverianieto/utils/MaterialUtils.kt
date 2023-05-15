@@ -1,5 +1,6 @@
 package com.example.hueverianieto.utils
 
+import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
@@ -83,6 +84,30 @@ object MaterialUtils {
         map["expense_datetime"] = feedResourcesData.expenseDatetime
         map["kilos"] = feedResourcesData.kilos
         map["total_price"] = feedResourcesData.totalPrice
+
+        return map
+    }
+
+    fun boxesAndCartonsMapToParcelable(data: Map<String, Any?>, documentId: String?) : BoxesAndCartonsResourcesData {
+        return BoxesAndCartonsResourcesData(
+            data["created_by"] as String,
+            data["creation_datetime"] as Timestamp,
+            data["deleted"] as Boolean,
+            documentId,
+            data["expense_datetime"] as Timestamp,
+            data["order"] as Map<String, Map<String, Number>>,
+            data["total_price"] as Double)
+    }
+
+    fun boxesAndCartonsParcelableToMap(boxesAndCartonsResourcesData: BoxesAndCartonsResourcesData) : Map<String, Any?> {
+        val map = mutableMapOf<String, Any?>()
+
+        map["created_by"] = boxesAndCartonsResourcesData.createdBy
+        map["creation_datetime"] = boxesAndCartonsResourcesData.creationDatetime
+        map["deleted"] = boxesAndCartonsResourcesData.deleted
+        map["expense_datetime"] = boxesAndCartonsResourcesData.expenseDatetime
+        map["order"] = boxesAndCartonsResourcesData.order
+        map["total_price"] = boxesAndCartonsResourcesData.totalPrice
 
         return map
     }
