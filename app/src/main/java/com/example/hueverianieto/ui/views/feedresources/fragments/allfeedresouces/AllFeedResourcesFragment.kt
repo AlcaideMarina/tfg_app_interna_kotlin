@@ -96,7 +96,14 @@ class AllFeedResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.addButton.setOnClickListener {
+            this.allFeedResourcesViewModel.navigationToNewFeedResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

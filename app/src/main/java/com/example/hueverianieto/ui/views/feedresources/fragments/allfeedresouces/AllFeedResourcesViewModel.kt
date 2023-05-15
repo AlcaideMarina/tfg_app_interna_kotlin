@@ -61,4 +61,12 @@ class AllFeedResourcesViewModel @Inject constructor(
             )
     }
 
+    fun navigationToNewFeedResources(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allFeedResourcesFragment_to_newFeedResourcesFragment, bundle)
+            ?: Log.e(
+                AllFeedResourcesViewModel::class.simpleName,
+                "Error en la navegación a detalle de recursos (pienso)"
+            )
+    }
+
 }
