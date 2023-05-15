@@ -161,19 +161,19 @@ object MaterialUtils {
     fun parseDBBoxesAndCartonsOrderFieldDataToMap(data: DBBoxesAndCartonsOrderFieldData) :
             Map<String, Number?> {
         val map = mutableMapOf<String, Number?>()
-        if(data.box != null) {
+        if(data.box != null && data.box!!.toInt() != 0) {
             map["box"] = data.box
         }
-        if(data.xlCarton != null) {
+        if(data.xlCarton != null && data.xlCarton!!.toInt() != 0) {
             map["xl_carton"] = data.xlCarton
         }
-        if(data.lCarton != null) {
+        if(data.lCarton != null && data.lCarton!!.toInt() != 0) {
             map["l_carton"] = data.lCarton
         }
-        if(data.mCarton != null) {
+        if(data.mCarton != null && data.mCarton!!.toInt() != 0) {
             map["m_carton"] = data.mCarton
         }
-        if(data.sCarton != null) {
+        if(data.sCarton != null && data.sCarton!!.toInt() != 0) {
             map["s_carton"] = data.sCarton
         }
         return map
