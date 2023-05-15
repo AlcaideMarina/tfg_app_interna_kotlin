@@ -99,7 +99,14 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.addButton.setOnClickListener {
+            this.allBoxesAndCartonsResourcesViewModel.navigationToNewBCResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to this.currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

@@ -55,8 +55,16 @@ class AllBoxesAndCartonsResourcesViewModel @Inject constructor(
     fun navigationToBCResourcesDetail(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_allBoxesAndCartonsResourcesFragment_to_boxesAndCartonsResourcesDetailFragment, bundle)
             ?: Log.e(
-                AllFeedResourcesViewModel::class.simpleName,
-                "Error en la navegación a detalle de recursos (pienso)"
+                AllBoxesAndCartonsResourcesViewModel::class.simpleName,
+                "Error en la navegación a detalle de recursos (cajas y cartones)"
+            )
+    }
+
+    fun navigationToNewBCResources(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_allBoxesAndCartonsResourcesFragment_to_newBoxesAndCartonsResourcesFragment, bundle)
+            ?: Log.e(
+                AllBoxesAndCartonsResourcesViewModel::class.simpleName,
+                "Error en la navegación a detalle de recursos (cajas y cartones)"
             )
     }
 
