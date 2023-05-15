@@ -69,4 +69,7 @@ object Utils {
         c.add(Calendar.MONTH, monthsToAdd)
         return c.time
     }
+
+    fun String.capitalizeFirstChar() = replaceFirstChar(Char::titlecase)
+
 }
