@@ -1,11 +1,21 @@
 package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol
 
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
+import android.os.Parcelable
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel
 import com.example.hueverianieto.domain.usecases.GetMonthlyFPCUseCase
+import com.example.hueverianieto.ui.views.boxesandcartonsresources.BoxesAndCartonsActivity
+import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,6 +41,14 @@ class MonthlyFinalProductControlViewModel @Inject constructor(
             _viewState.value = MonthlyFinalProductControlViewState(isLoading = false)
 
         }
+    }
+
+    fun navigateToDalyFPC(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_monthlyFinalProductControlFragment_to_dailyFinalProductControlFragment, bundle)
+            ?: Log.e(
+                AllInternalUsersViewModel::class.simpleName,
+                "Error en la navegación a FPC diario"
+            )
     }
 
 }
