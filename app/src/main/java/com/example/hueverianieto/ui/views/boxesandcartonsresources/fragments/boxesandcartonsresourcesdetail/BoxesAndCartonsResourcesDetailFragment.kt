@@ -14,6 +14,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBoxesAndCartonsResourcesDetailBinding
 import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -21,7 +22,7 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentBoxesAndCartonsResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
-    private lateinit var cbResourcesData: BoxesAndCartonsResourcesData
+    private lateinit var bcResourcesData: BoxesAndCartonsResourcesData
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -36,7 +37,7 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
 
         val args: BoxesAndCartonsResourcesDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
-        this.cbResourcesData = args.bcResourcesData
+        this.bcResourcesData = args.bcResourcesData
 
         this.binding = FragmentBoxesAndCartonsResourcesDetailBinding.inflate(
             inflater, container, false
@@ -45,7 +46,8 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -58,6 +60,29 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Modificar")
+        this.binding.cancelButton.setText("Eliminar")
+    }
+
+    private fun setText() {
+        with(this.binding) {
+            this.dateTextView.text = Utils.parseTimestampToString(bcResourcesData.expenseDatetime)
+            this.boxesTextInputLayout.setText((bcResourcesData.order["box"] ?: "").toString())
+            this.boxesTextInputLayout.isEnabled = false
+            this.xlCartonsTextInputLayout.setText((bcResourcesData.order["xl_carton"] ?: "").toString())
+            this.xlCartonsTextInputLayout.isEnabled = false
+            this.lCartonsTextInputLayout.setText((bcResourcesData.order["l_carton"] ?: "").toString())
+            this.lCartonsTextInputLayout.isEnabled = false
+            this.mCartonsTextInputLayout.setText((bcResourcesData.order["m_carton"] ?: "").toString())
+            this.mCartonsTextInputLayout.isEnabled = false
+            this.sCartonsTextInputLayout.setText((bcResourcesData.order["s_carton"] ?: "").toString())
+            this.sCartonsTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setText(bcResourcesData.totalPrice.toString())
+            this.totalPriceTextInputLayout.isEnabled = false
+        }
     }
 
 }
