@@ -133,4 +133,31 @@ object MaterialUtils {
         return summary
     }
 
+    fun bcOrderToDBBoxesAndCartonsOrderModel(bcData: BoxesAndCartonsResourcesData) : DBBoxesAndCartonsOrderFieldData {
+
+        val order = bcData.order
+        val data = DBBoxesAndCartonsOrderFieldData()
+
+        if (order.containsKey("box")) {
+            data.box =  order["box"]
+        }
+        if (order.containsKey("xl_carton")) {
+            data.xlCarton = order["xl_carton"]
+        }
+
+        if (order.containsKey("l_carton")) {
+            data.lCarton = order["l_carton"]
+        }
+        if (order.containsKey("m_carton")) {
+            data.mCarton = order["m_carton"]
+        }
+
+        if (order.containsKey("s_carton")) {
+            data.sCarton = order["s_carton"]
+        }
+
+        return data
+
+    }
+
 }
