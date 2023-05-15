@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -14,12 +16,14 @@ import com.example.hueverianieto.databinding.FragmentMonthlyFinalProductControlB
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.ui.views.finalproductcontrol.FinalProductControlActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MonthlyFinalProductControlFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMonthlyFinalProductControlBinding
     private lateinit var currentUserData: InternalUserData
+    private val monthlyFinalProductControlViewModel: MonthlyFinalProductControlViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,7 +44,11 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        lifecycleScope.launchWhenStarted {
+            monthlyFinalProductControlViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -52,7 +60,9 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as MonthlyFinalProductControlViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
 }
