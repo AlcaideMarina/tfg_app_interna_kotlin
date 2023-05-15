@@ -12,6 +12,7 @@ import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBoxesAndCartonsResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,7 +44,8 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
+        setText()
     }
 
     override fun setObservers() {
@@ -57,4 +59,31 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Guardar")
+        this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setText() {
+        with(this.binding) {
+            this.dateTextView.text =
+                com.example.hueverianieto.utils.Utils.parseTimestampToString(bcResourcesData.expenseDatetime)
+            this.boxesTextInputLayout.setText((bcResourcesData.order["box"] ?: "").toString())
+            this.xlCartonsTextInputLayout.setText(
+                (bcResourcesData.order["xl_carton"] ?: "").toString()
+            )
+            this.lCartonsTextInputLayout.setText(
+                (bcResourcesData.order["l_carton"] ?: "").toString()
+            )
+            this.mCartonsTextInputLayout.setText(
+                (bcResourcesData.order["m_carton"] ?: "").toString()
+            )
+            this.sCartonsTextInputLayout.setText(
+                (bcResourcesData.order["s_carton"] ?: "").toString()
+            )
+            this.totalPriceTextInputLayout.setText(bcResourcesData.totalPrice.toString())
+        }
+    }
+
 }
