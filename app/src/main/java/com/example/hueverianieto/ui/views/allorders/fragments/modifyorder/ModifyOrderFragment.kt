@@ -376,7 +376,7 @@ class ModifyOrderFragment : BaseFragment() {
         val day = selectedCalendar.get(Calendar.DATE)
         val listener = DatePickerDialog.OnDateSetListener { datepicker, y, m, d ->
             var dayStr = d.toString()
-            var monthStr = m.toString()
+            var monthStr = (m + 1).toString()
             var yearStr = y.toString()
             if (dayStr.length < 2) dayStr = "0$dayStr"
             if (monthStr.length < 2) monthStr = "0$monthStr"

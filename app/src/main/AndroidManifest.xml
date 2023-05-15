@@ -84,6 +84,61 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.views.workersresources.WorkersResourcesActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.views.hensresouces.HensResourcesActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.views.electricitywatergasresources.ElectricityWaterGasResourcesActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.views.feedresources.FeedResourcesActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.views.boxesandcartonsresources.BoxesAndCartonsActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_electricity_water_gas_resources"
+    app:startDestination="@id/allElectricityWaterGasFragment">
+
+    <fragment
+        android:id="@+id/allElectricityWaterGasFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.allelectricitywatergasresources.AllElectricityWaterGasFragment"
+        android:label="AllElectricityWaterGasFragment" >
+        <action
+            android:id="@+id/action_allElectricityWaterGasFragment_to_electricityWaterGasResourcesDetail"
+            app:destination="@id/electricityWaterGasResourcesDetail" />
+        <action
+            android:id="@+id/action_allElectricityWaterGasFragment_to_newElectricityWaterGasResourcesFragment"
+            app:destination="@id/newElectricityWaterGasResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/electricityWaterGasResourcesDetail"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.electricitywatergasresourcesdetail.ElectricityWaterGasResourcesDetailFragment"
+        android:label="ElectricityWaterGasResourcesDetail" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="ewgResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
+        <action
+            android:id="@+id/action_electricityWaterGasResourcesDetail_to_modifyElectricityWaterGasResourcesFragment"
+            app:destination="@id/modifyElectricityWaterGasResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyElectricityWaterGasResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.modifyelectricitywatergasresources.ModifyElectricityWaterGasResourcesFragment"
+        android:label="ModifyElectricityWaterGasResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="ewgResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newElectricityWaterGasResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.electricitywatergasresources.fragments.newelectricitywatergasresources.NewElectricityWaterGasResourcesFragment"
+        android:label="NewElectricityWaterGasResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+</navigation>

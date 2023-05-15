@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_hens_resources"
+    app:startDestination="@id/allHensResourcesFragment">
+
+    <fragment
+        android:id="@+id/allHensResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources.AllHensResourcesFragment"
+        android:label="AllHensResourcesFragment" >
+        <action
+            android:id="@+id/action_allHensResourcesFragment_to_hensResourcesDetailFragment"
+            app:destination="@id/hensResourcesDetailFragment" />
+        <action
+            android:id="@+id/action_allHensResourcesFragment_to_newHensResourcesFragment"
+            app:destination="@id/newHensResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hensResourcesDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.hensresourcesdetail.HensResourcesDetailFragment"
+        android:label="HensResourcesDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="hensResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.HensResourcesData" />
+        <action
+            android:id="@+id/action_hensResourcesDetailFragment_to_modifyHensResourcesFragment"
+            app:destination="@id/modifyHensResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyHensResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragment"
+        android:label="ModifyHensResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="hensResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.HensResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newHensResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesFragment"
+        android:label="NewHensResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+</navigation>

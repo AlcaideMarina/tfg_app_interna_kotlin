@@ -18,6 +18,7 @@ data class InternalUserData(
     var position: Long,
     var postalCode: Long,
     var province: String,
+    var salary: Number?,
     var ssNumber: Long,
     var surname: String,
     var uid: String?,

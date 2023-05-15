@@ -62,4 +62,9 @@
     <string name="per_receipt">Por recibo</string>
     <string name="transfer">Transferencia</string>
 
+    <!-- Tipos de EWG -->
+    <string name="electricity">Luz</string>
+    <string name="water">Agua</string>
+    <string name="gas">Gas</string>
+
 </resources>

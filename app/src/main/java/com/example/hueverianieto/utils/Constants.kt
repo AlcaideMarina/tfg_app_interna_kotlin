@@ -35,6 +35,12 @@ object Constants {
         R.string.transfer to 2
     )
 
+    val ewgTypes : Map<Int, Int> = mapOf(
+        R.string.electricity to 0,
+        R.string.water to 1,
+        R.string.gas to 2
+    )
+
 
     const val dateFormat = "dd/MM/yyyy"
 

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -16,32 +18,79 @@ import dagger.hilt.android.AndroidEntryPoint
 class MaterialFragment : BaseFragment() {
 
     private lateinit var binding : FragmentMaterialBinding
-    private lateinit var internalUserData : InternalUserData
+    private lateinit var currentUserData : InternalUserData
+
+    private val materialViewModel: MaterialViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).currentUserData
+        currentUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentMaterialBinding.bind(inflater.inflate(R.layout.fragment_material, container, false))
         return binding.root
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.workersButton.setOnClickListener {
+            this.materialViewModel.navigateToWorkersResources(
+                this.requireContext(), currentUserData
+            )
+        }
+        this.binding.hensButton.setOnClickListener {
+            this.materialViewModel.navigateToHensResources(
+                this.requireContext(), currentUserData
+            )
+        }
+        this.binding.electricityWaterGasButton.setOnClickListener {
+            this.materialViewModel.navigateToEWGResources(
+                this.requireContext(), currentUserData
+            )
+        }
+        this.binding.feedButton.setOnClickListener {
+            this.materialViewModel.navigateToFeedResources(
+                this.requireContext(), currentUserData
+            )
+        }
+        this.binding.boxesCartonsButton.setOnClickListener {
+            this.materialViewModel.navigateToBoxesAndCartonsResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
+
+    private fun setButtons() {
+        with(this.binding) {
+            this.seeAllButton.setText("Ver todo")
+            this.seeAllButton.visibility = View.GONE
+            this.workersButton.setText("Trabajadores y sueldos")
+            this.machinesButton.setText("Maquinaria")
+            this.machinesButton.visibility = View.GONE
+            this.hensButton.setText("Gallinas")
+            this.electricityWaterGasButton.setText("Luz, agua, gas")
+            this.feedButton.setText("Pienso")
+            this.petrolButton.setText("Gasolina")
+            this.petrolButton.visibility = View.GONE
+            this.boxesCartonsButton.setText("Cajas y cartones")
+            this.trucksButton.setText("Camiones")
+            this.trucksButton.visibility = View.GONE
+            this.othersButton.setText("Otros")
+            this.othersButton.visibility = View.GONE
+        }
+    }
+
 }

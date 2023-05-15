@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_boxes_and_cartons_resources"
+    app:startDestination="@id/allBoxesAndCartonsResourcesFragment">
+
+    <fragment
+        android:id="@+id/allBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.allboxesandcartonsresources.AllBoxesAndCartonsResourcesFragment"
+        android:label="AllBoxesAndCartonsResourcesFragment" >
+        <action
+            android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_boxesAndCartonsResourcesDetailFragment"
+            app:destination="@id/boxesAndCartonsResourcesDetailFragment" />
+        <action
+            android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_newBoxesAndCartonsResourcesFragment"
+            app:destination="@id/newBoxesAndCartonsResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxesAndCartonsResourcesDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.boxesandcartonsresourcesdetail.BoxesAndCartonsResourcesDetailFragment"
+        android:label="BoxesAndCartonsResourcesDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="bcResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
+        <action
+            android:id="@+id/action_boxesAndCartonsResourcesDetailFragment_to_modifyBoxesAndCartonsResourcesFragment"
+            app:destination="@id/modifyBoxesAndCartonsResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.modifyboxesandcartonsresources.ModifyBoxesAndCartonsResourcesFragment"
+        android:label="ModifyBoxesAndCartonsResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="bcResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.newboxesandcartonsresources.NewBoxesAndCartonsResourcesFragment"
+        android:label="NewBoxesAndCartonsResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+</navigation>

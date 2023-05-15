@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_feed_resources"
+    app:startDestination="@id/allFeedResourcesFragment">
+
+    <fragment
+        android:id="@+id/allFeedResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesFragment"
+        android:label="AllFeedResourcesFragment" >
+        <action
+            android:id="@+id/action_allFeedResourcesFragment_to_feedResourcesDetailFragment"
+            app:destination="@id/feedResourcesDetailFragment" />
+        <action
+            android:id="@+id/action_allFeedResourcesFragment_to_newFeedResourcesFragment"
+            app:destination="@id/newFeedResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedResourcesDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail.FeedResourcesDetailFragment"
+        android:label="FeedResourcesDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="feedResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.FeedResourcesData" />
+        <action
+            android:id="@+id/action_feedResourcesDetailFragment_to_modifyFeedResourcesFragment"
+            app:destination="@id/modifyFeedResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFeedResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources.ModifyFeedResourcesFragment"
+        android:label="ModifyFeedResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="feedResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.FeedResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newFeedResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.feedresources.fragments.newfeedresources.NewFeedResourcesFragment"
+        android:label="NewFeedResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
+</navigation>

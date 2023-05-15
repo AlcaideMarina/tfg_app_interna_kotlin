@@ -172,8 +172,8 @@ class NewClientFragment : BaseFragment() {
                     val userData = ClientData(
                         cif,
                         city,
-                        "TODO: created_by",
                         company,
+                        "TODO: created_by",
                         false,
                         direction,
                         email,
