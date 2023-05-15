@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
@@ -24,6 +25,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private lateinit var monthlyFPCContainerModel: MonthlyFPCContainerModel
     private val deletedList = mutableListOf<FPCData>()
+    private val dailyFinalProductControlViewModel: DailyFinalProductControlViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
