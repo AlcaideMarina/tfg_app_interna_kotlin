@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -23,8 +24,12 @@ class DailyFinalProductControlFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         (activity as BaseActivity).configNav(true)
+
+        val args: DailyFinalProductControlFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.monthlyFPCContainerModel = args.monthlyFPCContainerModel
 
         this.binding = FragmentDailyFinalProductControlBinding.inflate(
             inflater, container, false

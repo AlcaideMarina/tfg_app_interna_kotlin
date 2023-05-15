@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/monthlyFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol.MonthlyFinalProductControlFragment"
-        android:label="MonthlyFinalProductControlFragment" />
+        android:label="MonthlyFinalProductControlFragment" >
+        <action
+            android:id="@+id/action_monthlyFinalProductControlFragment_to_dailyFinalProductControlFragment"
+            app:destination="@id/dailyFinalProductControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailyfinalproductcontrol.DailyFinalProductControlFragment"
+        android:label="DailyFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monthlyFPCContainerModel"
+            app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
+    </fragment>
 </navigation>
