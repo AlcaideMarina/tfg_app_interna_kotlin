@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_boxes_and_cartons_resources">
+    android:id="@+id/nav_graph_boxes_and_cartons_resources"
+    app:startDestination="@id/allBoxesAndCartonsResourcesFragment">
 
+    <fragment
+        android:id="@+id/allBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.allboxesandcartonsresources.AllBoxesAndCartonsResourcesFragment"
+        android:label="AllBoxesAndCartonsResourcesFragment" />
 </navigation>

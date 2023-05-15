@@ -36,7 +36,7 @@ class BoxesAndCartonsActivity : BaseActivity() {
         navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()         // TODO
+            setOf(R.layout.fragment_all_boxes_and_cartons_resources)
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
