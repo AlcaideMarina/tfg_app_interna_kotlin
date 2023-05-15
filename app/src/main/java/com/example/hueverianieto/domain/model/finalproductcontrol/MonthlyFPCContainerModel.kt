@@ -6,5 +6,5 @@ import com.google.firebase.Timestamp
 data class MonthlyFPCContainerModel(
     val initDate: Timestamp,
     var endDate: Timestamp,
-    var fpcData: FPCData
+    var fpcDataList: List<FPCData>
 )
