@@ -9,12 +9,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
+import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewFeedResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,7 +97,41 @@ class NewFeedResourcesFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
+        }
+        this.binding.saveButton.setOnClickListener {
+            it.hideSoftInput()
+            if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
+                this.binding.kilosTextInputLayout.text != null && this.binding.kilosTextInputLayout.text.toString() != "" &&
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                it.hideSoftInput()
+                val feedResourcesData = FeedResourcesData(
+                    this.currentUserData.documentId!!,
+                    Timestamp.now(),
+                    false,
+                    null,
+                    datetimeSelected,
+                    this.binding.kilosTextInputLayout.text.toString().toDouble(),
+                    this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                )
+
+                this.newFeedResourcesViewModel.addFeedResource(
+                    feedResourcesData
+                )
+                activity?.onBackPressedDispatcher?.onBackPressed()
+            } else {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Formulario incompleto",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            }
         }
     }
 
