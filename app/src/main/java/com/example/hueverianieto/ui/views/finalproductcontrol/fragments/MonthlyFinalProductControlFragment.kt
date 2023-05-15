@@ -44,7 +44,9 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.monthlyFinalProductControlViewModel.getMonthlyFPCData()
         lifecycleScope.launchWhenStarted {
+            monthlyFinalProductControlViewModel.getMonthlyFPCData()
             monthlyFinalProductControlViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
