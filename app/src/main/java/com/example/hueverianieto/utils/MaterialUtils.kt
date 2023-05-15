@@ -74,7 +74,7 @@ object MaterialUtils {
             documentId,
             data["expense_datetime"] as Timestamp,
             data["kilos"] as Number,
-            data["total_price"] as Double)
+            data["total_price"] as Number)
     }
 
     fun feedParcelableToMap(feedResourcesData: FeedResourcesData) : Map<String, Any?> {
@@ -98,7 +98,7 @@ object MaterialUtils {
             documentId,
             data["expense_datetime"] as Timestamp,
             data["order"] as Map<String, Number?>,
-            data["total_price"] as Double)
+            data["total_price"] as Number)
     }
 
     fun boxesAndCartonsParcelableToMap(boxesAndCartonsResourcesData: BoxesAndCartonsResourcesData) : Map<String, Any?> {
