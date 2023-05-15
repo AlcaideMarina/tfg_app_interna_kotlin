@@ -42,22 +42,17 @@
                         android:text="Fecha:"
                         android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/date_text_input_layout"
-                        android:layout_width="0dp"
-                        android:layout_height="40dp"
-                        android:layout_weight="1"
-                        android:inputType="datetime"
+
+
+                    <TextView
+                        android:id="@+id/date_text_view"
+                        android:layout_height="wrap_content"
+                        android:layout_width="wrap_content"
+                        android:layout_column="0"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
                         android:textSize="16sp"
-                        android:background="@drawable/custom_input"
-                        android:paddingHorizontal="12dp"
-                        android:layout_marginTop="@dimen/size8"
-                        android:layout_marginHorizontal="@dimen/size16"
-                        android:clickable="false"
-                        android:cursorVisible="false"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        android:autofillHints="name"/>
+                        tools:text="date" />
 
                 </TableRow>
 
