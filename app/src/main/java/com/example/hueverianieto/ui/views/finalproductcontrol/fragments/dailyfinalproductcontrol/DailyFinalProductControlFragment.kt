@@ -69,6 +69,14 @@ class DailyFinalProductControlFragment : BaseFragment() {
                 )
             )
         }
+        this.binding.addButton.setOnClickListener {
+            this.dailyFinalProductControlViewModel.navigateToNewFPC(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

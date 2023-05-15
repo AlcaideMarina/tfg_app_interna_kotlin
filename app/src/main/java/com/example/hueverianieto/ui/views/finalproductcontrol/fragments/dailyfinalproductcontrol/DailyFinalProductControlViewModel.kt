@@ -24,4 +24,12 @@ class DailyFinalProductControlViewModel @Inject constructor(
             )
     }
 
+    fun navigateToNewFPC(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_dailyFinalProductControlFragment_to_newFinalProductControlFragment, bundle)
+            ?: Log.e(
+                DailyFinalProductControlViewModel::class.simpleName,
+                "Error en la navegación a FPC diario"
+            )
+    }
+
 }
