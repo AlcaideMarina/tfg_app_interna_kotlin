@@ -65,17 +65,23 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
                 // TODO: ERROR
             } else {
                 bcDataList = mutableListOf()
-                for (cbResourcesData in cbResourcesDataList)  {
-                    if (cbResourcesData != null) {
+                for (bcResourcesData in cbResourcesDataList)  {
+                    if (bcResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
-                            cbResourcesData.expenseDatetime,
+                            bcResourcesData.expenseDatetime,
                             MaterialUtils.getBCOrderSummary(
                                 MaterialUtils.bcOrderToDBBoxesAndCartonsOrderModel(
-                                    cbResourcesData)),
+                                    bcResourcesData)),
                             "",
-                            cbResourcesData.totalPrice
+                            bcResourcesData.totalPrice
                         ) {
-                            // TODO: Navegación
+                            this.allBoxesAndCartonsResourcesViewModel.navigationToBCResourcesDetail(
+                                this.view,
+                                bundleOf(
+                                    "currentUserData" to currentUserData,
+                                    "bcResourcesData" to bcResourcesData
+                                )
+                            )
                         }
                         bcDataList.add(componentTicketModel)
                     }
