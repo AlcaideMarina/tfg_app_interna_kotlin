@@ -1,6 +1,7 @@
 package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.local.DBBoxesAndCartonsOrderFieldData
+import com.example.hueverianieto.data.models.local.DBOrderFieldData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
@@ -96,7 +97,7 @@ object MaterialUtils {
             data["deleted"] as Boolean,
             documentId,
             data["expense_datetime"] as Timestamp,
-            data["order"] as Map<String, Map<String, Number>>,
+            data["order"] as Map<String, Number?>,
             data["total_price"] as Double)
     }
 

@@ -10,6 +10,6 @@ class BoxesAndCartonsResourcesData (
     var deleted: Boolean,
     var documentId: String?,
     var expenseDatetime: Timestamp,
-    var order: Map<String, Map<String, Number?>>,
+    var order: Map<String, Number?>,
     var totalPrice: Number
 ) : Parcelable
