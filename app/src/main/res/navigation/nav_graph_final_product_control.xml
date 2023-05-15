@@ -22,5 +22,19 @@
         <argument
             android:name="monthlyFPCContainerModel"
             app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_dailyDeletedFinalProductControlFragment"
+            app:destination="@id/dailyDeletedFinalProductControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyDeletedFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailydeletedfinalproductcontrol.DailyDeletedFinalProductControlFragment"
+        android:label="DailyDeletedFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monthlyDeletedFPCContainerModel"
+            app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
     </fragment>
 </navigation>

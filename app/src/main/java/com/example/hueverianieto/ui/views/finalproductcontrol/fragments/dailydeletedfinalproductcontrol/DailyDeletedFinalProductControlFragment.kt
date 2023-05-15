@@ -29,6 +29,10 @@ class DailyDeletedFinalProductControlFragment : BaseFragment() {
     ): View {
         (activity as BaseActivity).configNav(true)
 
+        val args: DailyDeletedFinalProductControlFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.monthlyDeletedFPCContainerModel = args.monthlyDeletedFPCContainerModel
+
         this.binding = FragmentDailyFinalProductControlBinding.inflate(
             inflater, container, false
         )
