@@ -30,7 +30,7 @@ class FarmFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
@@ -44,4 +44,11 @@ class FarmFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun setButtons() {
+        this.binding.finalProductControlButton.setText("Control prod. final")
+        this.binding.farmSituationMonitoringButton.setText("Seg. situación granja")
+        this.binding.stocksButton.setText("Existencias")
+    }
+
 }
