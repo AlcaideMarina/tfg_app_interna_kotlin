@@ -25,6 +25,9 @@
         <action
             android:id="@+id/action_dailyFinalProductControlFragment_to_dailyDeletedFinalProductControlFragment"
             app:destination="@id/dailyDeletedFinalProductControlFragment" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_newFinalProductControlFragment"
+            app:destination="@id/newFinalProductControlFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyDeletedFinalProductControlFragment"
@@ -36,5 +39,13 @@
         <argument
             android:name="monthlyDeletedFPCContainerModel"
             app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/newFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlFragment"
+        android:label="NewFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
