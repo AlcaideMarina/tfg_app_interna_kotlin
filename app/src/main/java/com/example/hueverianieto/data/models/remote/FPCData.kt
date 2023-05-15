@@ -11,6 +11,7 @@ class FPCData (
     var createdBy: String,
     var creationDatetime: Timestamp,
     var deleted: Boolean,
+    var documentId: String?,
     var issueDatetime: Timestamp,
     var layingDatetime: Timestamp,
     var lot: Long,
