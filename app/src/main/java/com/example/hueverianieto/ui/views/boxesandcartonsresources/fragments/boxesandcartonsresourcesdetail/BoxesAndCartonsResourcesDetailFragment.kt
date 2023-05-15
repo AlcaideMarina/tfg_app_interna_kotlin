@@ -36,7 +36,7 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
 
         val args: BoxesAndCartonsResourcesDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
-        this.cbResourcesData = args.cbResourcesData
+        this.cbResourcesData = args.bcResourcesData
 
         this.binding = FragmentBoxesAndCartonsResourcesDetailBinding.inflate(
             inflater, container, false

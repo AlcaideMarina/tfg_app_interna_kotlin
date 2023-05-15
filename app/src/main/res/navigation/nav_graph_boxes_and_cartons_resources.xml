@@ -20,7 +20,7 @@
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
         <argument
-            android:name="cbResourcesData"
+            android:name="bcResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
     </fragment>
 </navigation>
