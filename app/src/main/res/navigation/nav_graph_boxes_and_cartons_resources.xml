@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_boxesAndCartonsResourcesDetailFragment"
             app:destination="@id/boxesAndCartonsResourcesDetailFragment" />
+        <action
+            android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_newBoxesAndCartonsResourcesFragment"
+            app:destination="@id/newBoxesAndCartonsResourcesFragment" />
     </fragment>
     <fragment
         android:id="@+id/boxesAndCartonsResourcesDetailFragment"
@@ -36,5 +39,13 @@
         <argument
             android:name="bcResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
+    </fragment>
+    <fragment
+        android:id="@+id/newBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.newboxesandcartonsresources.NewBoxesAndCartonsResourcesFragment"
+        android:label="NewBoxesAndCartonsResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>
