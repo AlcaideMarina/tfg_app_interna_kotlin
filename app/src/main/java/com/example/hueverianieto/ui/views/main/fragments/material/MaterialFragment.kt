@@ -61,6 +61,11 @@ class MaterialFragment : BaseFragment() {
                 this.requireContext(), currentUserData
             )
         }
+        this.binding.boxesCartonsButton.setOnClickListener {
+            this.materialViewModel.navigateToBoxesAndCartonsResources(
+                this.requireContext(), currentUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
