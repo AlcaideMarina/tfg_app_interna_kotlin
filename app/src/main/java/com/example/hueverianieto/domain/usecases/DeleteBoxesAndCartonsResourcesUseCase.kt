@@ -8,6 +8,6 @@ class DeleteBoxesAndCartonsResourcesUseCase @Inject constructor(
 ) {
 
     suspend operator fun invoke(documentId: String) =
-        deleteDocumentWithDocIdService.deleteDocument("material_boxes_anc_cartons", documentId)
+        deleteDocumentWithDocIdService.deleteDocument("material_boxes_and_cartons", documentId)
 
 }
