@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.components.componentbillingpermonth
+package com.example.hueverianieto.ui.components.componentbillingpermonth.billing
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
