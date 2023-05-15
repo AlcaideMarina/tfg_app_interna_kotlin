@@ -30,8 +30,8 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(BoxesAndCartonsResourcesDetailViewState())
     val viewState: StateFlow<BoxesAndCartonsResourcesDetailViewState> get() = _viewState
 
-    private val _feedResource = MutableLiveData<BoxesAndCartonsResourcesData?>()
-    val feedResource: LiveData<BoxesAndCartonsResourcesData?> get() = _feedResource
+    private val _bcResource = MutableLiveData<BoxesAndCartonsResourcesData?>()
+    val bcResource: LiveData<BoxesAndCartonsResourcesData?> get() = _bcResource
 
     fun getBoxesAndCartonsResource(documentId: String) {
         viewModelScope.launch {
@@ -42,7 +42,7 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = false)
-                    _feedResource.value = result
+                    _bcResource.value = result
 
                 }
             }
