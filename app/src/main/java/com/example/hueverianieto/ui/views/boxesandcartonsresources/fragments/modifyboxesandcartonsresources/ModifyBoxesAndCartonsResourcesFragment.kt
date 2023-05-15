@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -53,7 +54,10 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     override fun updateUI(state: BaseState) {
