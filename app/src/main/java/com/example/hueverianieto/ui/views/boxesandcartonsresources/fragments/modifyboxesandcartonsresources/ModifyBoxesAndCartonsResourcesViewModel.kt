@@ -9,11 +9,13 @@ import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.domain.usecases.UpdateBoxesAndCartonsUseCase
 import com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources.ModifyFeedResourcesViewState
 import com.example.hueverianieto.utils.MaterialUtils
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+@HiltViewModel
 class ModifyBoxesAndCartonsResourcesViewModel @Inject constructor(
     val updateBoxesAndCartonsUseCase: UpdateBoxesAndCartonsUseCase
 ) : ViewModel() {
