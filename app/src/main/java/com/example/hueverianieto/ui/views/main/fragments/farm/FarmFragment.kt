@@ -40,7 +40,12 @@ class FarmFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // Not necessary
+        this.binding.finalProductControlButton.setOnClickListener {
+            this.farmViewModel.navigateToFinalProductControl(
+                requireContext(),
+                internalUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
