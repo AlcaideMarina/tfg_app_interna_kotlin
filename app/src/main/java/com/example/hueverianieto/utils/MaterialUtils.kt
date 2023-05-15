@@ -1,5 +1,6 @@
 package com.example.hueverianieto.utils
 
+import com.example.hueverianieto.data.models.local.DBBoxesAndCartonsOrderFieldData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
@@ -110,6 +111,25 @@ object MaterialUtils {
         map["total_price"] = boxesAndCartonsResourcesData.totalPrice
 
         return map
+    }
+
+    fun getBCOrderSummary(dbOrderFieldData: DBBoxesAndCartonsOrderFieldData) : String {
+
+        val list : MutableList<String> = mutableListOf()
+
+        if (dbOrderFieldData.box != 0) list.add(dbOrderFieldData.box.toString() + " cajas")
+        if (dbOrderFieldData.xlCarton != 0) list.add(dbOrderFieldData.xlCarton.toString() + " cartones XL")
+        if (dbOrderFieldData.lCarton != 0) list.add(dbOrderFieldData.lCarton.toString() + " cartones L")
+        if (dbOrderFieldData.mCarton != 0) list.add(dbOrderFieldData.mCarton.toString() + " cartones M")
+        if (dbOrderFieldData.sCarton != 0) list.add(dbOrderFieldData.sCarton.toString() + " cartones S")
+
+        var summary = ""
+        for (item in list) {
+            summary += item
+            if (item != list[list.size - 1]) summary += " - "
+        }
+
+        return summary
     }
 
 }
