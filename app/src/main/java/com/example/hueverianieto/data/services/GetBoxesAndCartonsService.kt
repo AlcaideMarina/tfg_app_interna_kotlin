@@ -12,7 +12,7 @@ class GetBoxesAndCartonsService @Inject constructor(
 
     suspend fun getBoxesAndCartons() : List<BoxesAndCartonsResourcesData?>? = runCatching {
         firebaseClient.db
-            .collection("material_feed")
+            .collection("material_boxes_and_cartons")
             .whereEqualTo("deleted", false)
             .get()
             .await()
