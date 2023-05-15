@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentDailyFinalProductControlBinding
 import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContainerItemModel
@@ -22,6 +23,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
     private lateinit var binding: FragmentDailyFinalProductControlBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var monthlyFPCContainerModel: MonthlyFPCContainerModel
+    private val deletedList = mutableListOf<FPCData>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,12 +61,16 @@ class DailyFinalProductControlFragment : BaseFragment() {
     private fun initRecyclerView() {
         val list = mutableListOf<FPCDailyContainerItemModel>()
         for (item in monthlyFPCContainerModel.fpcDataList) {
-            val fpcDailyContainerItemModel = FPCDailyContainerItemModel(
-                item
-            ) {
-                // TODO Navegación
+            if (!item.deleted) {
+                val fpcDailyContainerItemModel = FPCDailyContainerItemModel(
+                    item
+                ) {
+                    // TODO Navegación
+                }
+                list.add(fpcDailyContainerItemModel)
+            } else {
+                deletedList.add(item)
             }
-            list.add(fpcDailyContainerItemModel)
         }
         if (list.isEmpty()) {
             // TODO
