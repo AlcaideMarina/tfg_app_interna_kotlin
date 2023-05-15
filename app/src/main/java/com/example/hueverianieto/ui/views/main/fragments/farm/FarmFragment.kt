@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -17,6 +18,7 @@ class FarmFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFarmBinding
     private lateinit var internalUserData: InternalUserData
+    private val farmViewModel: FarmViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
