@@ -13,7 +13,7 @@ class UpdateFirestoreService @Inject constructor(
         firebaseClient.db
             .collection(collection)
             .document(documentId)
-            .set(dataMap, SetOptions.merge())
+            .set(dataMap)
             .await()
     }.toBooleanResult()
 
