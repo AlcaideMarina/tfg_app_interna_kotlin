@@ -16,5 +16,5 @@ class FPCData (
     var layingDatetime: Timestamp,
     var lot: Long,
     var packingDatetime: Timestamp,
-    var ejectedEggs: Long
+    var rejectedEggs: Long
 ) : Parcelable
