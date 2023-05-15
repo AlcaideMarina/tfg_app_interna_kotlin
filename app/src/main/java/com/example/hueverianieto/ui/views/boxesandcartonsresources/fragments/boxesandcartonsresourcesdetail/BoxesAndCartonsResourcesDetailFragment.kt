@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -23,6 +26,7 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     private lateinit var binding: FragmentBoxesAndCartonsResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var bcResourcesData: BoxesAndCartonsResourcesData
+    private val boxesAndCartonsResourcesDetailViewModel: BoxesAndCartonsResourcesDetailViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -48,6 +52,11 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setText()
+        lifecycleScope.launchWhenStarted {
+            boxesAndCartonsResourcesDetailViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -59,7 +68,9 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as BoxesAndCartonsResourcesDetailViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
