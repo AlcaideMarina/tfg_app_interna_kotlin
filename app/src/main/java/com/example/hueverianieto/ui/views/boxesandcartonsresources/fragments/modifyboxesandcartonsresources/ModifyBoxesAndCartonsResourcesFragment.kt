@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
@@ -15,6 +17,7 @@ import com.example.hueverianieto.databinding.FragmentBoxesAndCartonsResourcesDet
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
@@ -22,6 +25,7 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     private lateinit var binding: FragmentBoxesAndCartonsResourcesDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var bcResourcesData: BoxesAndCartonsResourcesData
+    private val modifyBoxesAndCartonsResourcesViewModel: ModifyBoxesAndCartonsResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
@@ -47,6 +51,11 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setText()
+        lifecycleScope.launchWhenStarted {
+            modifyBoxesAndCartonsResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -61,7 +70,9 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as ModifyBoxesAndCartonsResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
