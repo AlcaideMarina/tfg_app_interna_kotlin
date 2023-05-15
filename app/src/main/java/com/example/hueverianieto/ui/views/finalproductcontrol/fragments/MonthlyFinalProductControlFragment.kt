@@ -7,12 +7,15 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyFinalProductControlBinding
+import com.example.hueverianieto.domain.model.finalproductcontrol.FPCContainerItemModel
+import com.example.hueverianieto.ui.components.componentbillingpermonth.finalproductcontrol.ComponentMonthlyFPCAdapter
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.ui.views.finalproductcontrol.FinalProductControlActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -54,7 +57,30 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.monthlyFinalProductControlViewModel.monthlyFPCContainerModelList.observe(this) { monthlyFPCContainerModelList ->
+            if (monthlyFPCContainerModelList == null) {
+                // TODO
+            } else {
+                val list = mutableListOf<FPCContainerItemModel>()
+                for (item in monthlyFPCContainerModelList) {
+                    if (item != null) {
+                        val fpcContainerItemModel = FPCContainerItemModel(
+                            item
+                        ) {
+                            // TODO: Navegación
+                        }
+                        list.add(fpcContainerItemModel)
+                    }
+                }
+                if (list.isEmpty()) {
+                    // TODO
+                } else {
+                    this.binding.monthlyFpcRecyclerView.layoutManager = LinearLayoutManager(context)
+                    this.binding.monthlyFpcRecyclerView.adapter = ComponentMonthlyFPCAdapter(list)
+                    this.binding.monthlyFpcRecyclerView.visibility = View.VISIBLE
+                }
+            }
+        }
     }
 
     override fun setListeners() {
