@@ -59,7 +59,36 @@ class NewFeedResourcesFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.newFeedResourcesViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {
