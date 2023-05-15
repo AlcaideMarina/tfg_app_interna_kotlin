@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,7 +55,20 @@ class DailyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.deletedFpcButton.setOnClickListener {
+            this.dailyFinalProductControlViewModel.navigateToDailyDeletedFPC(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "monthlyDeletedFPCContainerModel" to
+                            MonthlyFPCContainerModel(
+                                initDate = monthlyFPCContainerModel.initDate,
+                                endDate = monthlyFPCContainerModel.endDate,
+                                fpcDataList = deletedList
+                            )
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
