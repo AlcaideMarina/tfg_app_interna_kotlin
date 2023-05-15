@@ -12,6 +12,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteBoxesAndCartonsResourcesUseCase
+import com.example.hueverianieto.domain.usecases.GetBoxesAndCartonsResourcesWithIdUseCase
 import com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesViewModel
 import com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail.FeedResourcesDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,6 +23,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
+    val getBoxesAndCartonsResourcesWithIdUseCase: GetBoxesAndCartonsResourcesWithIdUseCase,
     val deleteBoxesAndCartonsResourcesUseCase: DeleteBoxesAndCartonsResourcesUseCase
 ) : ViewModel() {
 
@@ -30,6 +32,22 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
 
     private val _feedResource = MutableLiveData<BoxesAndCartonsResourcesData?>()
     val feedResource: LiveData<BoxesAndCartonsResourcesData?> get() = _feedResource
+
+    fun getBoxesAndCartonsResource(documentId: String) {
+        viewModelScope.launch {
+            _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = true)
+            when(val result = getBoxesAndCartonsResourcesWithIdUseCase(documentId)) {
+                null -> {
+                    _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = false)
+                }
+                else -> {
+                    _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = false)
+                    _feedResource.value = result
+
+                }
+            }
+        }
+    }
 
     fun deleteBoxesAndCartonsResources(documentId: String) {
         viewModelScope.launch {
