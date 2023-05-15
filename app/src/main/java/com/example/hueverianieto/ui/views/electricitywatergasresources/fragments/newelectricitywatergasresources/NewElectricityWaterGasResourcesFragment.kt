@@ -108,53 +108,41 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
                     this.binding.typeAutoCompleteTextView.text != null && this.binding.typeAutoCompleteTextView.text.toString() != "" &&
                     this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
                 it.hideSoftInput()
-                Utils.setPopUp(
-                    alertDialog,
-                    requireContext(),
-                    "Aviso",
-                    "Va a modificar este ticket. ¿Quiere continuar con el proceso?",
-                    "Cancelar",
-                    "Continuar",
-                    { alertDialog.cancel() },
-                    {
-                        alertDialog.cancel()
-                        val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
-                            resources.getString(R.string.electricity) -> R.string.electricity
-                            resources.getString(R.string.water) -> R.string.water
-                            resources.getString(R.string.gas) -> R.string.gas
-                            else -> null
-                        }
-                        if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
-                            this.binding.totalPriceTextInputLayout.text.toString() != "") {
-                            val ewgResourcesData = ElectricityWaterGasResourcesData(
-                                this.currentUserData.documentId!!,
-                                Timestamp.now(),
-                                false,
-                                null,
-                                datetimeSelected,
-                                (this.binding.notesTextInputLayout.text ?: "").toString(),
-                                this.binding.totalPriceTextInputLayout.text.toString().toDouble(),
-                                Constants.ewgTypes[typeSelected]!!.toLong()
-                            )
+                val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
+                    resources.getString(R.string.electricity) -> R.string.electricity
+                    resources.getString(R.string.water) -> R.string.water
+                    resources.getString(R.string.gas) -> R.string.gas
+                    else -> null
+                }
+                if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
+                    this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                    val ewgResourcesData = ElectricityWaterGasResourcesData(
+                        this.currentUserData.documentId!!,
+                        Timestamp.now(),
+                        false,
+                        null,
+                        datetimeSelected,
+                        (this.binding.notesTextInputLayout.text ?: "").toString(),
+                        this.binding.totalPriceTextInputLayout.text.toString().toDouble(),
+                        Constants.ewgTypes[typeSelected]!!.toLong()
+                    )
 
-                            this.newElectricityWaterGasResourcesViewModel.addEWGResource(
-                                ewgResourcesData
-                            )
-                            activity?.onBackPressedDispatcher?.onBackPressed()
-                        } else {
-                            Utils.setPopUp(
-                                alertDialog,
-                                requireContext(),
-                                "Formulario incorrecto",
-                                "Es obligatorio introducir el tipo de gasto y el precio total. Por favor, revise los datos y vuelva a intentarlo.",
-                                "De acuerdo",
-                                null,
-                                { alertDialog.cancel() },
-                                null
-                            )
-                        }
-                    }
-                )
+                    this.newElectricityWaterGasResourcesViewModel.addEWGResource(
+                        ewgResourcesData
+                    )
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Formulario incorrecto",
+                        "Es obligatorio introducir el tipo de gasto y el precio total. Por favor, revise los datos y vuelva a intentarlo.",
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
             } else {
                 Utils.setPopUp(
                     alertDialog,
