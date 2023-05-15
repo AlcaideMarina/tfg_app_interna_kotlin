@@ -22,5 +22,19 @@
         <argument
             android:name="bcResourcesData"
             app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
+        <action
+            android:id="@+id/action_boxesAndCartonsResourcesDetailFragment_to_modifyBoxesAndCartonsResourcesFragment"
+            app:destination="@id/modifyBoxesAndCartonsResourcesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyBoxesAndCartonsResourcesFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.modifyboxesandcartonsresources.ModifyBoxesAndCartonsResourcesFragment"
+        android:label="ModifyBoxesAndCartonsResourcesFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="bcResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
     </fragment>
 </navigation>
