@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -15,6 +18,7 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -22,6 +26,7 @@ class NewFeedResourcesFragment : BaseFragment() {
 
     private lateinit var binding: FragmentNewFeedResourcesBinding
     private lateinit var currentUserData: InternalUserData
+    private val newFeedResourcesViewModel: NewFeedResourcesViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
     private lateinit var datetimeSelected: Timestamp
@@ -46,6 +51,11 @@ class NewFeedResourcesFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setFields()
+        lifecycleScope.launchWhenStarted {
+            newFeedResourcesViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -57,7 +67,9 @@ class NewFeedResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as NewFeedResourcesViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     private fun setButtons() {
