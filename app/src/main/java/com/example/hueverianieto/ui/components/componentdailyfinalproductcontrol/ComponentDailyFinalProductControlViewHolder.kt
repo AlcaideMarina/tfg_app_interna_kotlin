@@ -14,7 +14,7 @@ class ComponentDailyFinalProductControlViewHolder(view: View) : RecyclerView.Vie
     fun render(fpcDailyContainerItemModel: FPCDailyContainerItemModel) {
         this.binding.dateText.text = Utils.parseDateToString(
             fpcDailyContainerItemModel.fpcData.issueDatetime.toDate(),
-            "dd/MM/yyyy"
+            "dd/MM"
         )
         this.binding.acceptedEggsText.text = fpcDailyContainerItemModel.fpcData.acceptedEggs.toString() + " huevos"
         this.binding.rejectedEggsText.text = fpcDailyContainerItemModel.fpcData.rejectedEggs.toString() + " huevos"
