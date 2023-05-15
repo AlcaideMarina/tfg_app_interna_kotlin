@@ -43,6 +43,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.binding.deletedFpcButton.setText("Eliminados")
         initRecyclerView()
     }
 
