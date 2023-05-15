@@ -54,6 +54,8 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
         setButtons()
         setText()
         lifecycleScope.launchWhenStarted {
+            boxesAndCartonsResourcesDetailViewModel.getBoxesAndCartonsResource(
+                bcResourcesData.documentId!!)
             boxesAndCartonsResourcesDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -61,7 +63,12 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.boxesAndCartonsResourcesDetailViewModel.bcResource.observe(this) { bcResourcesDataObserver ->
+            if (bcResourcesDataObserver != null) {
+                bcResourcesData = bcResourcesDataObserver
+                setText()
+            }
+        }
     }
 
     override fun setListeners() {
