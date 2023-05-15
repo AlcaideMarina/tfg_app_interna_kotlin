@@ -33,21 +33,19 @@ class AllFeedResourcesViewModel @Inject constructor(
 
     fun getFeed() {
         viewModelScope.launch {
-            viewModelScope.launch {
-                _viewState.value = AllFeedResourcesViewState(isLoading = true)
-                when(val result: List<FeedResourcesData?>? = getFeedUseCase()) {
-                    null -> {
-                        _viewState.value = AllFeedResourcesViewState(isLoading = false, error = true)
-                        _feedList.value = listOf()
-                    }
-                    listOf<HensResourcesData>() -> {
-                        _viewState.value = AllFeedResourcesViewState(isLoading = false, error = false)
-                        _feedList.value = listOf()
-                    }
-                    else -> {
-                        _viewState.value = AllFeedResourcesViewState(isLoading = false, error = false)
-                        _feedList.value = result.sortedBy { it?.expenseDatetime }.reversed()
-                    }
+            _viewState.value = AllFeedResourcesViewState(isLoading = true)
+            when(val result: List<FeedResourcesData?>? = getFeedUseCase()) {
+                null -> {
+                    _viewState.value = AllFeedResourcesViewState(isLoading = false, error = true)
+                    _feedList.value = listOf()
+                }
+                listOf<HensResourcesData>() -> {
+                    _viewState.value = AllFeedResourcesViewState(isLoading = false, error = false)
+                    _feedList.value = listOf()
+                }
+                else -> {
+                    _viewState.value = AllFeedResourcesViewState(isLoading = false, error = false)
+                    _feedList.value = result.sortedBy { it?.expenseDatetime }.reversed()
                 }
             }
         }
