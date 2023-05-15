@@ -144,20 +144,39 @@ object MaterialUtils {
         if (order.containsKey("xl_carton")) {
             data.xlCarton = order["xl_carton"]
         }
-
         if (order.containsKey("l_carton")) {
             data.lCarton = order["l_carton"]
         }
         if (order.containsKey("m_carton")) {
             data.mCarton = order["m_carton"]
         }
-
         if (order.containsKey("s_carton")) {
             data.sCarton = order["s_carton"]
         }
 
         return data
 
+    }
+
+    fun parseDBBoxesAndCartonsOrderFieldDataToMap(data: DBBoxesAndCartonsOrderFieldData) :
+            Map<String, Number?> {
+        val map = mutableMapOf<String, Number?>()
+        if(data.box != null) {
+            map["box"] = data.box
+        }
+        if(data.xlCarton != null) {
+            map["xl_carton"] = data.xlCarton
+        }
+        if(data.lCarton != null) {
+            map["l_carton"] = data.lCarton
+        }
+        if(data.mCarton != null) {
+            map["m_carton"] = data.mCarton
+        }
+        if(data.sCarton != null) {
+            map["s_carton"] = data.sCarton
+        }
+        return map
     }
 
 }
