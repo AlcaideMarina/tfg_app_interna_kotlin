@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
@@ -75,15 +76,20 @@ class MaterialFragment : BaseFragment() {
     private fun setButtons() {
         with(this.binding) {
             this.seeAllButton.setText("Ver todo")
+            this.seeAllButton.visibility = View.GONE
             this.workersButton.setText("Trabajadores y sueldos")
-            this.machinesButton.setText("Maquinaria")       // TODO: Pensar estructura BBDD
+            this.machinesButton.setText("Maquinaria")
+            this.machinesButton.visibility = View.GONE
             this.hensButton.setText("Gallinas")
             this.electricityWaterGasButton.setText("Luz, agua, gas")
             this.feedButton.setText("Pienso")
             this.petrolButton.setText("Gasolina")
+            this.petrolButton.visibility = View.GONE
             this.boxesCartonsButton.setText("Cajas y cartones")
             this.trucksButton.setText("Camiones")
+            this.trucksButton.visibility = View.GONE
             this.othersButton.setText("Otros")
+            this.othersButton.visibility = View.GONE
         }
     }
 
