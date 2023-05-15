@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/allBoxesAndCartonsResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.allboxesandcartonsresources.AllBoxesAndCartonsResourcesFragment"
-        android:label="AllBoxesAndCartonsResourcesFragment" />
+        android:label="AllBoxesAndCartonsResourcesFragment" >
+        <action
+            android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_boxesAndCartonsResourcesDetailFragment"
+            app:destination="@id/boxesAndCartonsResourcesDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/boxesAndCartonsResourcesDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.boxesandcartonsresourcesdetail.BoxesAndCartonsResourcesDetailFragment"
+        android:label="BoxesAndCartonsResourcesDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="cbResourcesData"
+            app:argType="com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData" />
+    </fragment>
 </navigation>
