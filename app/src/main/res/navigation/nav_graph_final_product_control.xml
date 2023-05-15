@@ -6,6 +6,6 @@
 
     <fragment
         android:id="@+id/monthlyFinalProductControlFragment"
-        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.MonthlyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol.MonthlyFinalProductControlFragment"
         android:label="MonthlyFinalProductControlFragment" />
 </navigation>

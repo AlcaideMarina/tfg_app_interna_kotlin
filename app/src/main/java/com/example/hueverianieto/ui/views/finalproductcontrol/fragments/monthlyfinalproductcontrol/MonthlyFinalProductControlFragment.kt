@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.finalproductcontrol.fragments
+package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,15 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyFinalProductControlBinding
 import com.example.hueverianieto.domain.model.finalproductcontrol.FPCContainerItemModel
 import com.example.hueverianieto.ui.components.componentbillingpermonth.finalproductcontrol.ComponentMonthlyFPCAdapter
-import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
 import com.example.hueverianieto.ui.views.finalproductcontrol.FinalProductControlActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class MonthlyFinalProductControlFragment : BaseFragment() {
