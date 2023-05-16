@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -14,14 +17,18 @@ import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBi
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import java.util.*
 import kotlin.properties.Delegates
 
+@AndroidEntryPoint
 class NewFinalProductControlFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinalProductControlDetailBinding
     private lateinit var currentUserData: InternalUserData
     private var lastLot by Delegates.notNull<Long>()
+    private val newFinalProductControlViewModel: NewFinalProductControlViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
     private lateinit var layingDatetimeSelected: Timestamp
@@ -51,6 +58,11 @@ class NewFinalProductControlFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setFields()
+        lifecycleScope.launchWhenStarted {
+            newFinalProductControlViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -102,7 +114,9 @@ class NewFinalProductControlFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        with(state as NewFinalProductControlViewState) {
+            binding.loadingComponent.isVisible = state.isLoading
+        }
     }
 
     fun setButtons() {
