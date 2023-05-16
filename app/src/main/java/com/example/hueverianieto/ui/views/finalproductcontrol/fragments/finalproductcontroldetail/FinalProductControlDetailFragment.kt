@@ -14,6 +14,7 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlViewModel
+import com.example.hueverianieto.utils.Utils
 
 class FinalProductControlDetailFragment : BaseFragment() {
 
@@ -43,19 +44,48 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        setButtons()
+        setTexts()
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        this.binding.saveButton.setText("Modificar")
+        this.binding.cancelButton.setText("Eliminar")
+    }
+
+    private fun setTexts() {
+        with(this.binding) {
+            this.layingDateTextInputLayout.setText(Utils.parseTimestampToString(
+                fpcData.layingDatetime))
+            this.layingDateTextInputLayout.isEnabled = false
+            this.packingDateTextInputLayout.setText(Utils.parseTimestampToString(
+                fpcData.packingDatetime))
+            this.packingDateTextInputLayout.isEnabled = false
+            this.acceptedEggsTextInputLayout.setText(fpcData.acceptedEggs.toString())
+            this.acceptedEggsTextInputLayout.isEnabled = false
+            this.rejectedEggsTextInputLayout.setText(fpcData.rejectedEggs.toString())
+            this.rejectedEggsTextInputLayout.isEnabled = false
+            this.lotTextInputLayout.setText(fpcData.lot.toString())
+            this.lotTextInputLayout.isEnabled = false
+            this.bestBeforeDateTextInputLayout.setText(Utils.parseTimestampToString(
+                fpcData.bestBeforeDatetime))
+            this.bestBeforeDateTextInputLayout.isEnabled = false
+            this.issueDateTextInputLayout.setText(Utils.parseTimestampToString(
+                fpcData.issueDatetime))
+            this.issueDateTextInputLayout.isEnabled = false
+        }
     }
 
 }
