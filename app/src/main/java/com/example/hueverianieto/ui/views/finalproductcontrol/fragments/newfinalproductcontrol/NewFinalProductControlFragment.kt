@@ -62,6 +62,43 @@ class NewFinalProductControlFragment : BaseFragment() {
             it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
+        this.binding.saveButton.setOnClickListener {
+            it.hideSoftInput()
+            if (this.binding.layingDateTextInputLayout.text != null && this.binding.layingDateTextInputLayout.text.toString() != "" &&
+                    this.binding.packingDateTextInputLayout.text != null && this.binding.packingDateTextInputLayout.text.toString() != "" &&
+                    this.binding.acceptedEggsTextInputLayout.text != null && this.binding.acceptedEggsTextInputLayout.text.toString() != "" &&
+                    this.binding.rejectedEggsTextInputLayout.text != null && this.binding.rejectedEggsTextInputLayout.text.toString() != "" &&
+                    this.binding.lotTextInputLayout.text != null && this.binding.lotTextInputLayout.text.toString() != "" &&
+                    this.binding.bestBeforeDateTextInputLayout.text != null && this.binding.bestBeforeDateTextInputLayout.text.toString() != "" &&
+                    this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != "") {
+                if (layingDatetimeSelected <= packingDatetimeSelected && layingDatetimeSelected <= packingDatetimeSelected
+                        && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected) {
+                    // TODO Guardar - ViewModel
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Fechas incorrectas",
+                        "Las fechas introducidas no son correctas. Por favor, revise los datos e inténtelo de nuevo.",
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            } else {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    "Formulario incompleto",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "De acuerdo",
+                    null,
+                    { alertDialog.cancel() },
+                    null
+                )
+            }
+        }
     }
 
     override fun updateUI(state: BaseState) {
