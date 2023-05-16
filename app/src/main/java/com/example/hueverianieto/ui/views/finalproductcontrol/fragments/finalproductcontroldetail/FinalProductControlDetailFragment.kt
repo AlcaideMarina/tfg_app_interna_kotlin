@@ -61,7 +61,12 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.finalProductControlDetailViewModel.fpcData.observe(this) { fpcDataObserver ->
+            if (fpcDataObserver != null) {
+                this.fpcData = fpcDataObserver
+                setTexts()
+            }
+        }
     }
 
     override fun setListeners() {
