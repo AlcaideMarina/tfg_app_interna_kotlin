@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
@@ -18,6 +20,7 @@ import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContai
 import com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel
 import com.example.hueverianieto.ui.components.componentdailyfinalproductcontrol.ComponentDailyFinalProductControlAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DailyFinalProductControlFragment : BaseFragment() {
@@ -48,13 +51,27 @@ class DailyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.dailyFinalProductControlViewModel.getThisMonthDailyFPC(
+            monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
         this.binding.deletedFpcButton.setText("Eliminados")
         deletedList = mutableListOf<FPCData>()
         initRecyclerView()
+        lifecycleScope.launchWhenStarted {
+            dailyFinalProductControlViewModel.getThisMonthDailyFPC(
+                monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
+            dailyFinalProductControlViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.dailyFinalProductControlViewModel.monthlyFPCContainerModel.observe(this) { monthlyFPCContainerModelObserver ->
+            if (monthlyFPCContainerModelObserver != null) {
+                this.monthlyFPCContainerModel = monthlyFPCContainerModelObserver
+                initRecyclerView()
+            }
+        }
     }
 
     override fun setListeners() {
@@ -84,7 +101,8 @@ class DailyFinalProductControlFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as DailyFinalProductControlViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 
     private fun initRecyclerView() {
