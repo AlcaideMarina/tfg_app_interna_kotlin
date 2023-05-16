@@ -93,7 +93,13 @@ class DailyFinalProductControlFragment : BaseFragment() {
                 val fpcDailyContainerItemModel = FPCDailyContainerItemModel(
                     item
                 ) {
-                    // TODO Navegación
+                    this.dailyFinalProductControlViewModel.navigateToFPCDetail(
+                        this.view,
+                        bundleOf(
+                            "currentUserData" to currentUserData,
+                            "fpcData" to item
+                        )
+                    )
                 }
                 list.add(fpcDailyContainerItemModel)
                 if (item.lot > lastLot) lastLot = item.lot
