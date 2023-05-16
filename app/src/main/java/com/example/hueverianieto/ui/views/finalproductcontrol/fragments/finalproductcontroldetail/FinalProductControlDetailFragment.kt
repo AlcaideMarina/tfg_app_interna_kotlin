@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.detailfinalproductcontrol
+package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,7 +13,7 @@ import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBi
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlViewModel
 
-class DetailFinalProductControlFragment : BaseFragment() {
+class FinalProductControlDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinalProductControlDetailBinding
     private lateinit var currentUserData: InternalUserData
