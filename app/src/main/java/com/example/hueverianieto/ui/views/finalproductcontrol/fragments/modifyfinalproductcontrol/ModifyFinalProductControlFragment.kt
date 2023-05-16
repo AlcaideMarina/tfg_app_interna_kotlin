@@ -107,28 +107,26 @@ class ModifyFinalProductControlFragment : BaseFragment() {
         }
         this.binding.saveButton.setOnClickListener {
             it.hideSoftInput()
-            this.binding.saveButton.setOnClickListener {
-                Utils.setPopUp(
-                    alertDialog,
-                    requireContext(),
-                    "Aviso",
-                    "Va a modificar este producto. ¿Quiere continuar con el proceso?",
-                    "Cancelar",
-                    "Continuar",
-                    { alertDialog.cancel() },
-                    {
-                        alertDialog.cancel()
-                        fpcData.layingDatetime = layingDatetimeSelected
-                        fpcData.packingDatetime = packingDatetimeSelected
-                        fpcData.acceptedEggs = (this.binding.acceptedEggsTextInputLayout.text ?: "0").toString().toLong()
-                        fpcData.rejectedEggs = (this.binding.rejectedEggsTextInputLayout.text ?: "0").toString().toLong()
-                        fpcData.lot = (this.binding.lotTextInputLayout.text ?: "0").toString().toLong()
-                        fpcData.bestBeforeDatetime = bestBeforeDatetimeSelected
-                        fpcData.issueDatetime = issueDatetimeSelected
-                        this.modifyFinalProductControlViewModel.updateFPC(fpcData)
-                    }
-                )
-            }
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso",
+                "Va a modificar este producto. ¿Quiere continuar con el proceso?",
+                "Cancelar",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    fpcData.layingDatetime = layingDatetimeSelected
+                    fpcData.packingDatetime = packingDatetimeSelected
+                    fpcData.acceptedEggs = (this.binding.acceptedEggsTextInputLayout.text ?: "0").toString().toLong()
+                    fpcData.rejectedEggs = (this.binding.rejectedEggsTextInputLayout.text ?: "0").toString().toLong()
+                    fpcData.lot = (this.binding.lotTextInputLayout.text ?: "0").toString().toLong()
+                    fpcData.bestBeforeDatetime = bestBeforeDatetimeSelected
+                    fpcData.issueDatetime = issueDatetimeSelected
+                    this.modifyFinalProductControlViewModel.updateFPC(fpcData)
+                }
+            )
         }
     }
 
