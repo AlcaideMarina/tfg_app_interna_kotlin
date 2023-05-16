@@ -14,7 +14,7 @@ class GetFPCWithIdUseCase @Inject constructor(
             null -> null
             else -> {
                 if (result.data != null) {
-                    FarmUtils.fpcMapToParcelable(result.data!!m result.id)
+                    FarmUtils.fpcMapToParcelable(result.data!!, result.id)
                 } else null
             }
         }
