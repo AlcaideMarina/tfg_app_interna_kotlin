@@ -15,13 +15,15 @@ import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBi
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlViewModel
 import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class FinalProductControlDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinalProductControlDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var fpcData: FPCData
-    private val newFinalProductControlViewModel: NewFinalProductControlViewModel by viewModels()
+    private val finalProductControlDetailViewModel: FinalProductControlDetailViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
 
