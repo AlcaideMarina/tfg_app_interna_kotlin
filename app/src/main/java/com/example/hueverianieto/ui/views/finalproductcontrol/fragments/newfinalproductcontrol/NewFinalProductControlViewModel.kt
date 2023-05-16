@@ -19,18 +19,18 @@ class NewFinalProductControlViewModel @Inject constructor(
     val newFinalProductControlUseCase: NewFinalProductControlUseCase
 ) : ViewModel() {
 
-    private val _viewState = MutableStateFlow(NewHensResourcesViewState())
-    val viewState: StateFlow<NewHensResourcesViewState> get() = _viewState
+    private val _viewState = MutableStateFlow(NewFinalProductControlViewState())
+    val viewState: StateFlow<NewFinalProductControlViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
     val alertDialog : LiveData<AlertOkData> get() = _alertDialog
 
     fun addFPC(fpcData: FPCData) {
         viewModelScope.launch {
-            _viewState.value = NewHensResourcesViewState(isLoading = true)
+            _viewState.value = NewFinalProductControlViewState(isLoading = true)
             when(newFinalProductControlUseCase(fpcData)) {
                 false -> {
-                    _viewState.value = NewHensResourcesViewState(isLoading = false, error = true)
+                    _viewState.value = NewFinalProductControlViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
                         text = "Se ha producido un error al guardar el producto final. Por favor, revise los datos e inténtelo de nuevo.",
@@ -38,7 +38,7 @@ class NewFinalProductControlViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = NewHensResourcesViewState(isLoading = false)
+                    _viewState.value = NewFinalProductControlViewState(isLoading = false)
                     _alertDialog.value = AlertOkData(
                         title = "FPC guardado",
                         text = "El producto final ha sido guardado correctamente en la base de datos.",
