@@ -1,5 +1,6 @@
 package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.modifyfinalproductcontrol
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +18,10 @@ import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBi
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail.FinalProductControlDetailFragmentArgs
 import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
+import java.util.*
 
 @AndroidEntryPoint
 class ModifyFinalProductControlFragment : BaseFragment() {
@@ -29,6 +32,10 @@ class ModifyFinalProductControlFragment : BaseFragment() {
     private val modifyFinalProductControlViewModel: ModifyFinalProductControlViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
+    private lateinit var layingDatetimeSelected: Timestamp
+    private lateinit var packingDatetimeSelected: Timestamp
+    private lateinit var bestBeforeDatetimeSelected: Timestamp
+    private lateinit var issueDatetimeSelected: Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,19 +91,100 @@ class ModifyFinalProductControlFragment : BaseFragment() {
             this.layingDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                 fpcData.layingDatetime))
+            this.layingDateTextInputLayout.setOnClickListener { onClickScheduledLayingDate() }
             this.packingDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                 fpcData.packingDatetime))
+            this.packingDateTextInputLayout.setOnClickListener { onClickScheduledPackingDate() }
             this.acceptedEggsTextInputLayout.setText(fpcData.acceptedEggs.toString())
             this.rejectedEggsTextInputLayout.setText(fpcData.rejectedEggs.toString())
             this.lotTextInputLayout.setText(fpcData.lot.toString())
             this.bestBeforeDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                 fpcData.bestBeforeDatetime))
+            this.bestBeforeDateTextInputLayout.setOnClickListener { onClickScheduledBestBeforeDate() }
             this.issueDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                 fpcData.issueDatetime))
+            this.issueDateTextInputLayout.setOnClickListener { onClickScheduledIssueDate() }
         }
+    }
+
+    private fun onClickScheduledLayingDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = (m + 1).toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.layingDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            layingDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.datePicker.maxDate = Date().time
+        datePickerDialog.show()
+    }
+
+    private fun onClickScheduledPackingDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = (m + 1).toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.packingDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            packingDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.show()
+    }
+
+    private fun onClickScheduledBestBeforeDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = (m + 1).toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.bestBeforeDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            bestBeforeDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.show()
+    }
+
+    private fun onClickScheduledIssueDate() {
+        val selectedCalendar = Calendar.getInstance()
+        val year = selectedCalendar.get(Calendar.YEAR)
+        val month = selectedCalendar.get(Calendar.MONTH)
+        val day = selectedCalendar.get(Calendar.DATE)
+        val listener = DatePickerDialog.OnDateSetListener { _, y, m, d ->
+            var dayStr = d.toString()
+            var monthStr = (m + 1).toString()
+            var yearStr = y.toString()
+            if (dayStr.length < 2) dayStr = "0$dayStr"
+            if (monthStr.length < 2) monthStr = "0$monthStr"
+            if (yearStr.length < 4) yearStr = "0$yearStr"
+            this.binding.issueDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
+            issueDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+        }
+        val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
+        datePickerDialog.show()
     }
 
 }
