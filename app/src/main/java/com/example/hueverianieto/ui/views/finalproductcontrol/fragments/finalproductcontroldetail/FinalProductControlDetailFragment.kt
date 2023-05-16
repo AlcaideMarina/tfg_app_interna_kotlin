@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -85,6 +86,15 @@ class FinalProductControlDetailFragment : BaseFragment() {
                         fpcData.documentId!!)
                     activity?.onBackPressedDispatcher?.onBackPressed()
                 }
+            )
+        }
+        this.binding.saveButton.setOnClickListener {
+            this.finalProductControlDetailViewModel.navigateToModifyFPCResources(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "fpcData" to fpcData
+                )
             )
         }
     }

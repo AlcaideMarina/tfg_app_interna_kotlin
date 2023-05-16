@@ -1,9 +1,14 @@
 package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail
 
+import android.os.Bundle
+import android.util.Log
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.findNavController
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.domain.usecases.DeleteFinalProductControlUseCase
 import com.example.hueverianieto.domain.usecases.GetFPCWithIdUseCase
@@ -44,6 +49,14 @@ class FinalProductControlDetailViewModel @Inject constructor(
             deleteFPCUseCase(documentId)
             _viewState.value = FinalProductControlDetailViewState(isLoading = false)
         }
+    }
+
+    fun navigateToModifyFPCResources(view: View?, bundle: Bundle) {
+        view?.findNavController()?.navigate(R.id.action_finalProductControlDetailFragment_to_modifyFinalProductControlFragment, bundle)
+            ?: Log.e(
+                FinalProductControlDetailViewModel::class.simpleName,
+                "Error en la navegación a modificar fpc"
+            )
     }
 
 }
