@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_monitoring_company_situation">
+    android:id="@+id/nav_graph_monitoring_company_situation"
+    app:startDestination="@id/monthlyMonitoringCompanySituationFragment">
 
+    <fragment
+        android:id="@+id/monthlyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.monthlymonitoringcompanysituation.MonthlyMonitoringCompanySituationFragment"
+        android:label="MonthlyMonitoringCompanySituationFragment" />
 </navigation>
