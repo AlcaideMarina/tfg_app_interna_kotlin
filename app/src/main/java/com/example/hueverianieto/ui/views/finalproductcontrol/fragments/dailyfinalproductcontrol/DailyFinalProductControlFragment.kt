@@ -28,6 +28,8 @@ class DailyFinalProductControlFragment : BaseFragment() {
     private val deletedList = mutableListOf<FPCData>()
     private val dailyFinalProductControlViewModel: DailyFinalProductControlViewModel by viewModels()
 
+    private var lastLot = (0).toLong()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -73,7 +75,8 @@ class DailyFinalProductControlFragment : BaseFragment() {
             this.dailyFinalProductControlViewModel.navigateToNewFPC(
                 this.view,
                 bundleOf(
-                    "currentUserData" to currentUserData
+                    "currentUserData" to currentUserData,
+                    "lastLot" to lastLot
                 )
             )
         }
@@ -93,6 +96,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
                     // TODO Navegación
                 }
                 list.add(fpcDailyContainerItemModel)
+                if (item.lot > lastLot) lastLot = item.lot
             } else {
                 deletedList.add(item)
             }

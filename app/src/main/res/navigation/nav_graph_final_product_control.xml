@@ -47,5 +47,8 @@
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="lastLot"
+            app:argType="long" />
     </fragment>
 </navigation>
