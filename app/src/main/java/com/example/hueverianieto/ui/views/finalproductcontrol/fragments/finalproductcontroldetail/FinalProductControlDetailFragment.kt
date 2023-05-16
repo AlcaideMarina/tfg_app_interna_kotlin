@@ -5,9 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
@@ -17,6 +19,7 @@ class FinalProductControlDetailFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFinalProductControlDetailBinding
     private lateinit var currentUserData: InternalUserData
+    private lateinit var fpcData: FPCData
     private val newFinalProductControlViewModel: NewFinalProductControlViewModel by viewModels()
 
     private lateinit var alertDialog: HNModalDialog
@@ -29,6 +32,9 @@ class FinalProductControlDetailFragment : BaseFragment() {
         (activity as BaseActivity).configNav(true)
 
         this.alertDialog = HNModalDialog(requireContext())
+        val args: FinalProductControlDetailFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.fpcData = args.fpcData
 
         this.binding = FragmentFinalProductControlDetailBinding.inflate(
             inflater, container, false

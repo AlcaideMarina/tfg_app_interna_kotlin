@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_dailyFinalProductControlFragment_to_newFinalProductControlFragment"
             app:destination="@id/newFinalProductControlFragment" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_finalProductControlDetailFragment"
+            app:destination="@id/finalProductControlDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyDeletedFinalProductControlFragment"
@@ -50,5 +53,16 @@
         <argument
             android:name="lastLot"
             app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/finalProductControlDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail.FinalProductControlDetailFragment"
+        android:label="FinalProductControlDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="fpcData"
+            app:argType="com.example.hueverianieto.data.models.remote.FPCData" />
     </fragment>
 </navigation>
