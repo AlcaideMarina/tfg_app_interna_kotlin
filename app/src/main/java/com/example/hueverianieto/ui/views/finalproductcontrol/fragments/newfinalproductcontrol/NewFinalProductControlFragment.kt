@@ -12,6 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
@@ -85,7 +86,21 @@ class NewFinalProductControlFragment : BaseFragment() {
                     this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != "") {
                 if (layingDatetimeSelected <= packingDatetimeSelected && layingDatetimeSelected <= packingDatetimeSelected
                         && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected) {
-                    // TODO Guardar - ViewModel
+                    this.newFinalProductControlViewModel.addFPC(
+                        FPCData(
+                            this.binding.acceptedEggsTextInputLayout.text.toString().toLong(),
+                            bestBeforeDatetimeSelected,
+                            currentUserData.documentId!!,
+                            Timestamp.now(),
+                            false,
+                            null,
+                            issueDatetimeSelected,
+                            layingDatetimeSelected,
+                            this.binding.lotTextInputLayout.text.toString().toLong(),
+                            packingDatetimeSelected,
+                            this.binding.rejectedEggsTextInputLayout.text.toString().toLong()
+                        )
+                    )
                 } else {
                     Utils.setPopUp(
                         alertDialog,
