@@ -150,6 +150,17 @@
                 <action android:name="android.intent.action.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.views.monitoringcompanysituation.MonitoringCompanySituationActivity"
+            android:exported="true"
+            android:configChanges="orientation|screenSize"
+            android:windowSoftInputMode="adjustResize" >
+
+            <!-- Default Intent Filter -->
+            <intent-filter>
+                <action android:name="android.intent.action.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
