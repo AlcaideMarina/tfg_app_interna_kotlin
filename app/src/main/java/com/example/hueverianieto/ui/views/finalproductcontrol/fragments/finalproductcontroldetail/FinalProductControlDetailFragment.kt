@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -16,6 +19,7 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlViewModel
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FinalProductControlDetailFragment : BaseFragment() {
@@ -48,6 +52,12 @@ class FinalProductControlDetailFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setTexts()
+        lifecycleScope.launchWhenStarted {
+            finalProductControlDetailViewModel.getFinalProductControl(fpcData.documentId!!)
+            finalProductControlDetailViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -75,7 +85,8 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as FinalProductControlDetailViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 
     private fun setButtons() {
