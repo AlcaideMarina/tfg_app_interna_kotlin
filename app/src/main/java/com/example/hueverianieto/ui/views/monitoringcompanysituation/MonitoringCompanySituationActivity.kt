@@ -36,7 +36,7 @@ class MonitoringCompanySituationActivity : BaseActivity() {
         navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf(R.layout.fragment_all_feed_resources)
+            setOf()             // TODO
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
