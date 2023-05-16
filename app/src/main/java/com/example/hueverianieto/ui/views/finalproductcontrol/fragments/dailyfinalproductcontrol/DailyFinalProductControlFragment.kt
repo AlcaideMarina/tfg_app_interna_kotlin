@@ -25,7 +25,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
     private lateinit var binding: FragmentDailyFinalProductControlBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var monthlyFPCContainerModel: MonthlyFPCContainerModel
-    private val deletedList = mutableListOf<FPCData>()
+    private var deletedList = mutableListOf<FPCData>()
     private val dailyFinalProductControlViewModel: DailyFinalProductControlViewModel by viewModels()
 
     private var lastLot = (0).toLong()
@@ -49,6 +49,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
 
     override fun configureUI() {
         this.binding.deletedFpcButton.setText("Eliminados")
+        deletedList = mutableListOf<FPCData>()
         initRecyclerView()
     }
 
