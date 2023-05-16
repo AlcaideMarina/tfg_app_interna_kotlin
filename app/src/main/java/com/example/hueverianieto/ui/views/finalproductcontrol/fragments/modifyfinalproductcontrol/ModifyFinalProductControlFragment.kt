@@ -102,9 +102,11 @@ class ModifyFinalProductControlFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
+            it.hideSoftInput()
             this.binding.saveButton.setOnClickListener {
                 Utils.setPopUp(
                     alertDialog,
