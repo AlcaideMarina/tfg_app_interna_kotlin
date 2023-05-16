@@ -55,7 +55,23 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.cancelButton.setOnClickListener {
+            Utils.setPopUp(
+                alertDialog,
+                requireContext(),
+                "Aviso importante",
+                "Esta acción es irreversible. Va a eliminar este ticket, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
+                "Atrás",
+                "Continuar",
+                { alertDialog.cancel() },
+                {
+                    alertDialog.cancel()
+                    this.finalProductControlDetailViewModel.deleteFinalProductControl(
+                        fpcData.documentId!!)
+                    activity?.onBackPressedDispatcher?.onBackPressed()
+                }
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
