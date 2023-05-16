@@ -58,7 +58,10 @@ class NewFinalProductControlFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
+            activity?.onBackPressedDispatcher?.onBackPressed()
+        }
     }
 
     override fun updateUI(state: BaseState) {

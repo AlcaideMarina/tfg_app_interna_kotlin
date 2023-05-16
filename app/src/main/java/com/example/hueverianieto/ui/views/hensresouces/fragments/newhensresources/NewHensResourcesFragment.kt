@@ -98,9 +98,11 @@ class NewHensResourcesFragment : BaseFragment() {
 
     override fun setListeners() {
         this.binding.cancelButton.setOnClickListener {
+            it.hideSoftInput()
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
+            it.hideSoftInput()
             if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
                 this.binding.quantityTextInputLayout.text != null && this.binding.quantityTextInputLayout.text.toString() != "" &&
                 this.binding.shedATextInputLayout.text != null && this.binding.shedATextInputLayout.text.toString() != "" &&
