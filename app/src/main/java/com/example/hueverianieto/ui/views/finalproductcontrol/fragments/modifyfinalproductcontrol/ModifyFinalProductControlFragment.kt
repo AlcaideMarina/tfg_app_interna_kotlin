@@ -59,6 +59,7 @@ class ModifyFinalProductControlFragment : BaseFragment() {
     override fun configureUI() {
         setButtons()
         setTexts()
+        setVariables()
         lifecycleScope.launchWhenStarted {
             modifyFinalProductControlViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
@@ -137,6 +138,13 @@ class ModifyFinalProductControlFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.saveButton.setText("Guardar")
         this.binding.cancelButton.setText("Cancelar")
+    }
+
+    private fun setVariables() {
+        layingDatetimeSelected = this.fpcData.layingDatetime
+        packingDatetimeSelected = this.fpcData.packingDatetime
+        bestBeforeDatetimeSelected = this.fpcData.bestBeforeDatetime
+        issueDatetimeSelected = this.fpcData.issueDatetime
     }
 
     private fun setTexts() {
