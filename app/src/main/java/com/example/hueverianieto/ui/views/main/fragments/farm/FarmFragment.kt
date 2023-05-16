@@ -46,6 +46,12 @@ class FarmFragment : BaseFragment() {
                 internalUserData
             )
         }
+        this.binding.farmSituationMonitoringButton.setOnClickListener {
+            this.farmViewModel.navigateToFinalMonitoringCompanySituation(
+                requireContext(),
+                internalUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
