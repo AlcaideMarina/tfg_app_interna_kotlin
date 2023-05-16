@@ -34,6 +34,10 @@ class ModifyFinalProductControlFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
+        val args: ModifyFinalProductControlFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.fpcData = args.fpcData
+
         this.binding = FragmentFinalProductControlDetailBinding.inflate(
             inflater, container, false
         )

@@ -64,5 +64,19 @@
         <argument
             android:name="fpcData"
             app:argType="com.example.hueverianieto.data.models.remote.FPCData" />
+        <action
+            android:id="@+id/action_finalProductControlDetailFragment_to_modifyFinalProductControlFragment"
+            app:destination="@id/modifyFinalProductControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.modifyfinalproductcontrol.ModifyFinalProductControlFragment"
+        android:label="ModifyFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="fpcData"
+            app:argType="com.example.hueverianieto.data.models.remote.FPCData" />
     </fragment>
 </navigation>
