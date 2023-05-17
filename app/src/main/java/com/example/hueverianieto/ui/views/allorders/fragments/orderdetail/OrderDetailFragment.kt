@@ -184,6 +184,9 @@ class OrderDetailFragment : BaseFragment() {
             this.binding.modifyButton.isEnabled = false
             this.binding.deleteButton.isEnabled = false
         }
+        if (this.orderData.status == Constants.orderStatus[R.string.delivered]!!.toLong()) {
+            this.binding.deleteButton.isEnabled = false
+        }
     }
 
     private fun disableTextInputLayouts() {
