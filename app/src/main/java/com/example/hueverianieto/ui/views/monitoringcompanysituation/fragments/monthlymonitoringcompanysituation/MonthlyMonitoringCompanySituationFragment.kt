@@ -83,7 +83,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
         val year = calendar.get(Calendar.YEAR)
         val month = calendar.get(Calendar.MONTH)
 
-        var m = month.toString()
+        var m = (month + 1).toString()
         while (m.length < 2) m = "0" + m
         var y = year.toString()
         while (y.length < 4) y = "0" + y
@@ -92,7 +92,22 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
         this.binding.textDateFilter.text = Utils.parseDateToString(initFilterDatetime, "MMMM, yyyy").capitalizeFirstChar()
 
-        // TODO: Aquí habría que hacer una llamada
+        setRecyclerView()
+    }
+
+    private fun setRecyclerView() {
+        val initCalendar = Calendar.getInstance()
+        initCalendar.time = initFilterDatetime
+        val initDayOfWeek = initCalendar.get(Calendar.DAY_OF_WEEK)
+        val firstDate = Utils.addToDate(initFilterDatetime, 2 - initDayOfWeek)
+
+        val endCalendar = Calendar.getInstance()
+        endCalendar.time = endFilterDatetime
+        val endDayOfWeek = endCalendar.get(Calendar.DAY_OF_WEEK)
+        val endDate = Utils.addToDate(endFilterDatetime, 8 - endDayOfWeek)
+
+
+
     }
 
 }
