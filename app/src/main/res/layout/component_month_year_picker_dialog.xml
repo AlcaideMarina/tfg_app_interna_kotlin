@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/modal_dialog_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:backgroundTint="@color/red_gray_secondary_color"
+    app:cardCornerRadius="@dimen/size16">
+
+    <LinearLayout
+        android:id="@+id/modal_dialog_content_layout"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:background="@color/red_gray_secondary_color"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/modal_dialog_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/red_gray_secondary_color"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/black_color"
+            android:textSize="16sp"
+            android:text="Escoja mes y año"
+            app:autoSizeMaxTextSize="24dp"
+            app:autoSizeTextType="uniform" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <NumberPicker
+                android:id="@+id/month_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <NumberPicker
+                android:id="@+id/year_number_picker"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/horizontal_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red_primary_color" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/cancel_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:textColor="@color/black_color"
+                android:textSize="12sp"
+                android:text="Cancelar"
+                app:backgroundTint="@color/red_gray_secondary_color" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/vertical_divider"
+                android:layout_width="1dp"
+                android:layout_height="match_parent"
+                android:background="@color/red_primary_color"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/accept_button"
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textAllCaps="false"
+                android:textColor="@color/black_color"
+                android:textSize="12sp"
+                android:text="Aceptar"
+                app:backgroundTint="@color/red_gray_secondary_color" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
