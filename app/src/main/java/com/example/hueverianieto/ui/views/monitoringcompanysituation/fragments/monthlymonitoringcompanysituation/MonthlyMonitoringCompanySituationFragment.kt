@@ -9,12 +9,21 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyMonitoringCompanySituationBinding
+import com.example.hueverianieto.ui.components.HNMonthYearPickerDialog
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.MonitoringCompanySituationActivity
+import com.example.hueverianieto.utils.Utils
+import com.example.hueverianieto.utils.Utils.capitalizeFirstChar
+import java.util.*
 
 class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMonthlyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
+
+    private lateinit var alertDialog: HNMonthYearPickerDialog
+
+    private var initFilterDatetime = Date()
+    private var endFilterDatetime = Date()
     
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -27,6 +36,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
         }
         currentUserData = (activity as MonitoringCompanySituationActivity).currentUserData
 
+        this.alertDialog = HNMonthYearPickerDialog(requireContext())
         this.binding = FragmentMonthlyMonitoringCompanySituationBinding.inflate(
             inflater, container, false
         )
@@ -35,6 +45,8 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
 
     override fun configureUI() {
+
+        getDateFilterText()
         //TODO("Not yet implemented")
     }
 
@@ -43,10 +55,46 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.baseDateFilter.setOnClickListener {
+            alertDialog.show(
+                requireContext(),
+            ) {
+                val month = alertDialog.getMonthPicker().value
+                val year = alertDialog.getYearPicker().value
+
+                var m = month.toString()
+                while (m.length < 2) m = "0" + m
+                var y = year.toString()
+                while (y.length < 4) y = "0" + y
+
+                initFilterDatetime = Utils.parseStringToTimestamp("01/" + m + "/"+ y, "dd/MM/yyyy").toDate()
+                getDateFilterText()
+
+                alertDialog.cancel()
+            }
+        }
     }
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
     }
+
+    private fun getDateFilterText() {
+        val calendar = Calendar.getInstance()
+        calendar.time = initFilterDatetime
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+
+        var m = month.toString()
+        while (m.length < 2) m = "0" + m
+        var y = year.toString()
+        while (y.length < 4) y = "0" + y
+        initFilterDatetime = Utils.parseStringToTimestamp("01/" + m + "/"+ y, "dd/MM/yyyy").toDate()
+        endFilterDatetime = Utils.addToDate(initFilterDatetime, 0, 1)
+
+        this.binding.textDateFilter.text = Utils.parseDateToString(initFilterDatetime, "MMMM, yyyy").capitalizeFirstChar()
+
+        // TODO: Aquí habría que hacer una llamada
+    }
+
 }
