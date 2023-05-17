@@ -45,9 +45,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
 
     override fun configureUI() {
-
         getDateFilterText()
-        //TODO("Not yet implemented")
     }
 
     override fun setObservers() {
