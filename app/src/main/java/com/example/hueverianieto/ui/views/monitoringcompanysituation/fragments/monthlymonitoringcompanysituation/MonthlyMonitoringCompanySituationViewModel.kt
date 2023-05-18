@@ -3,14 +3,17 @@ package com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.usecases.HomeUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
+@HiltViewModel
 class MonthlyMonitoringCompanySituationViewModel @Inject constructor(
     val homeUseCase: HomeUseCase
-) {
+) : ViewModel() {
 
     private fun navigateToWeeklyMonitoringCompanySituation(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment, bundle)
