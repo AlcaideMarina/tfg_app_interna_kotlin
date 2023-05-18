@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -23,6 +24,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMonthlyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
+    private val monthlyMonitoringCompanySituationViewModel: MonthlyMonitoringCompanySituationViewModel by viewModels()
 
     private lateinit var alertDialog: HNMonthYearPickerDialog
 
