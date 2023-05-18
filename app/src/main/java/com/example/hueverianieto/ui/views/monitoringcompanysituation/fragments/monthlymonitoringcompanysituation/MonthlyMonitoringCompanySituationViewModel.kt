@@ -15,7 +15,7 @@ class MonthlyMonitoringCompanySituationViewModel @Inject constructor(
     val homeUseCase: HomeUseCase
 ) : ViewModel() {
 
-    private fun navigateToWeeklyMonitoringCompanySituation(view: View?, bundle: Bundle) {
+    fun navigateToWeeklyMonitoringCompanySituation(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(R.id.action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment, bundle)
             ?: Log.e(
                 MonthlyMonitoringCompanySituationViewModel::class.java.simpleName,
