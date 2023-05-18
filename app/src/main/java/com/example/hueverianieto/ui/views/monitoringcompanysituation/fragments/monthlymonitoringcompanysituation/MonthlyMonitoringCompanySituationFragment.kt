@@ -118,18 +118,18 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
         val list = mutableListOf<ComponentWeekDivisionModel>()
         while (firstDate < endDate) {
-            list.add(ComponentWeekDivisionModel(
+            val component = ComponentWeekDivisionDateFilter(
                 Timestamp(firstDate),
-                Timestamp(Utils.addToDate(firstDate, 6)),
+                Timestamp(Utils.addToDate(firstDate, 6))
+            )
+            list.add(ComponentWeekDivisionModel(
+                component
             ) {
                 this.monthlyMonitoringCompanySituationViewModel.navigateToWeeklyMonitoringCompanySituation(
                     this.view,
                     bundleOf(
                         "currentUserData" to this.currentUserData,
-                        "dateFilter" to ComponentWeekDivisionDateFilter(
-                            Timestamp(firstDate),
-                            Timestamp(Utils.addToDate(firstDate, 6))
-                        )
+                        "dateFilter" to component
                     )
                 )
             })

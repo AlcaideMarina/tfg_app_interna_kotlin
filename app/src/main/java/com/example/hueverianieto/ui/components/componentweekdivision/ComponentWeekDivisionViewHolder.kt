@@ -12,8 +12,8 @@ class ComponentWeekDivisionViewHolder(view: View) : RecyclerView.ViewHolder(view
 
     fun render(componentWeekDivisionModel: ComponentWeekDivisionModel) {
         this.binding.filterText.text =
-            Utils.parseTimestampToString(componentWeekDivisionModel.initTimestamp) + " - " +
-                    Utils.parseTimestampToString(componentWeekDivisionModel.endTimestamp)
+            Utils.parseTimestampToString(componentWeekDivisionModel.dateFilter.initTimestamp) + " - " +
+                    Utils.parseTimestampToString(componentWeekDivisionModel.dateFilter.endTimestamp)
         this.binding.baseComponentContainer.setOnClickListener(
             componentWeekDivisionModel.onClickListener)
     }
