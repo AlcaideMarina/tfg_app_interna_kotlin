@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyMonitoringCompanySituationBinding
+import com.example.hueverianieto.domain.model.ComponentWeekDivisionModel
 import com.example.hueverianieto.ui.components.HNMonthYearPickerDialog
+import com.example.hueverianieto.ui.components.componentweekdivision.ComponentWeekDivisionAdapter
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.MonitoringCompanySituationActivity
 import com.example.hueverianieto.utils.Utils
 import com.example.hueverianieto.utils.Utils.capitalizeFirstChar
+import com.google.firebase.Timestamp
 import java.util.*
 
 class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
@@ -99,14 +103,27 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
         val initCalendar = Calendar.getInstance()
         initCalendar.time = initFilterDatetime
         val initDayOfWeek = initCalendar.get(Calendar.DAY_OF_WEEK)
-        val firstDate = Utils.addToDate(initFilterDatetime, 2 - initDayOfWeek)
+        var firstDate = Utils.addToDate(initFilterDatetime, 2 - initDayOfWeek)
 
         val endCalendar = Calendar.getInstance()
         endCalendar.time = endFilterDatetime
         val endDayOfWeek = endCalendar.get(Calendar.DAY_OF_WEEK)
         val endDate = Utils.addToDate(endFilterDatetime, 8 - endDayOfWeek)
 
+        val list = mutableListOf<ComponentWeekDivisionModel>()
+        while (firstDate < endDate) {
+            list.add(ComponentWeekDivisionModel(
+                Timestamp(firstDate),
+                Timestamp(Utils.addToDate(firstDate, 6)),
+            ) {
+                // TODO: Navegación
+            })
+            firstDate = Utils.addToDate(firstDate, 7)
+        }
 
+        this.binding.weeksRecyclerView.layoutManager = LinearLayoutManager(requireContext())
+        this.binding.weeksRecyclerView.adapter = ComponentWeekDivisionAdapter(list)
+        this.binding.weeksRecyclerView.setHasFixedSize(false)
 
     }
 

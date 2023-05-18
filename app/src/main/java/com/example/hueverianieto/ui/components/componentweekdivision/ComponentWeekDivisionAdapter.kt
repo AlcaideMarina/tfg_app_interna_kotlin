@@ -9,6 +9,7 @@ import com.example.hueverianieto.domain.model.ComponentWeekDivisionModel
 class ComponentWeekDivisionAdapter(
     private val componentWeekDivisionModelList: List<ComponentWeekDivisionModel>
 ) : RecyclerView.Adapter<ComponentWeekDivisionViewHolder>() {
+
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -23,6 +24,5 @@ class ComponentWeekDivisionAdapter(
     override fun onBindViewHolder(holder: ComponentWeekDivisionViewHolder, position: Int) {
         holder.render(componentWeekDivisionModelList[position])
     }
-
 
 }
