@@ -4,16 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentWeeklyMonitoringCompanySituationBinding
+import com.google.firebase.Timestamp
 
 class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentWeeklyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
+    private lateinit var initTimestamp: Timestamp
+    private lateinit var endTimestamp: Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,6 +25,11 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
+
+        val args: WeeklyMonitoringCompanySituationFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.initTimestamp = args.dateFilter.initTimestamp
+        this.endTimestamp = args.dateFilter.endTimestamp
 
         this.binding = FragmentWeeklyMonitoringCompanySituationBinding.inflate(
             inflater, container, false

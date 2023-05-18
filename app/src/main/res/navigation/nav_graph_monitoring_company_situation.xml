@@ -7,5 +7,20 @@
     <fragment
         android:id="@+id/monthlyMonitoringCompanySituationFragment"
         android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.monthlymonitoringcompanysituation.MonthlyMonitoringCompanySituationFragment"
-        android:label="MonthlyMonitoringCompanySituationFragment" />
+        android:label="MonthlyMonitoringCompanySituationFragment" >
+        <action
+            android:id="@+id/action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment"
+            app:destination="@id/weeklyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weeklyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.weeklymonitoringcompanysituation.WeeklyMonitoringCompanySituationFragment"
+        android:label="WeeklyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="dateFilter"
+            app:argType="com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionDateFilter" />
+    </fragment>
 </navigation>
