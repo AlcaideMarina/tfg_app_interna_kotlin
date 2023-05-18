@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -14,6 +16,7 @@ import com.example.hueverianieto.databinding.FragmentWeeklyMonitoringCompanySitu
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
@@ -60,6 +63,12 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
                 Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)), "dd, MMMM, yyyy")
         this.binding.sundayText.text = "Domingo - " +
                 Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
+        lifecycleScope.launchWhenStarted {
+            weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(initTimestamp, endTimestamp)
+            weeklyMonitoringCompanySituationViewModel.viewState.collect() { stateView ->
+                updateUI(stateView)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -79,6 +88,7 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as WeeklyMonitoringCompanySituationViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 }
