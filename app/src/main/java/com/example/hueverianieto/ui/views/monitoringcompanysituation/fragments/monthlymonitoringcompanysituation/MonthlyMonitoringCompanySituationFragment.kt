@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
@@ -11,6 +12,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyMonitoringCompanySituationBinding
+import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionDateFilter
 import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionModel
 import com.example.hueverianieto.ui.components.HNMonthYearPickerDialog
 import com.example.hueverianieto.ui.components.componentweekdivision.ComponentWeekDivisionAdapter
@@ -18,8 +20,10 @@ import com.example.hueverianieto.ui.views.monitoringcompanysituation.MonitoringC
 import com.example.hueverianieto.utils.Utils
 import com.example.hueverianieto.utils.Utils.capitalizeFirstChar
 import com.google.firebase.Timestamp
+import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
+@AndroidEntryPoint
 class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentMonthlyMonitoringCompanySituationBinding
@@ -118,7 +122,16 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
                 Timestamp(firstDate),
                 Timestamp(Utils.addToDate(firstDate, 6)),
             ) {
-                // TODO: Navegación
+                this.monthlyMonitoringCompanySituationViewModel.navigateToWeeklyMonitoringCompanySituation(
+                    this.view,
+                    bundleOf(
+                        "currentUserData" to this.currentUserData,
+                        "dateFilter" to ComponentWeekDivisionDateFilter(
+                            Timestamp(initFilterDatetime),
+                            Timestamp(endFilterDatetime)
+                        )
+                    )
+                )
             })
             firstDate = Utils.addToDate(firstDate, 7)
         }
