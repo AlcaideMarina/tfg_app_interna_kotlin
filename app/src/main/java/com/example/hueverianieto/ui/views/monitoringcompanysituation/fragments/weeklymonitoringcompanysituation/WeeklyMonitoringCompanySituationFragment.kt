@@ -10,6 +10,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentWeeklyMonitoringCompanySituationBinding
+import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 
 class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
@@ -38,7 +39,20 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        this.binding.mondayText.text = "Lunes - " +
+                Utils.parseTimestampToString(initTimestamp, "dd, MMMM, yyyy")
+        this.binding.tuesdayText.text = "Martes - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)), "dd, MMMM, yyyy")
+        this.binding.wednesdayText.text = "Miércoles - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)), "dd, MMMM, yyyy")
+        this.binding.thursdayText.text = "Jueves - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)), "dd, MMMM, yyyy")
+        this.binding.fridayText.text = "Viernes - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)), "dd, MMMM, yyyy")
+        this.binding.saturdayDateText.text = "Sábado - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)), "dd, MMMM, yyyy")
+        this.binding.sundayText.text = "Domingo - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
     }
 
     override fun setObservers() {
