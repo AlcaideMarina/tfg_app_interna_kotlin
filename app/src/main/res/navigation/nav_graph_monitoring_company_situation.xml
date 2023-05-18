@@ -21,7 +21,7 @@
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
         <argument
             android:name="dateFilter"
-            app:argType="com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionDateFilter" />
+            app:argType="com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentWeekDivisionDateFilter" />
         <action
             android:id="@+id/action_weeklyMonitoringCompanySituationFragment_to_dailyMonitoringCompanySituationFragment"
             app:destination="@id/dailyMonitoringCompanySituationFragment" />
