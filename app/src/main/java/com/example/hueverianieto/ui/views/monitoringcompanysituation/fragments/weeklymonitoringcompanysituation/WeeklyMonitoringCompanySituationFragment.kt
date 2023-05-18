@@ -47,22 +47,8 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        // TODO: Llamada a servicio para datos semanales
         this.weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(initTimestamp, endTimestamp)
-        this.binding.mondayText.text = "Lunes - " +
-                Utils.parseTimestampToString(initTimestamp, "dd, MMMM, yyyy")
-        this.binding.tuesdayText.text = "Martes - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)), "dd, MMMM, yyyy")
-        this.binding.wednesdayText.text = "Miércoles - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)), "dd, MMMM, yyyy")
-        this.binding.thursdayText.text = "Jueves - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)), "dd, MMMM, yyyy")
-        this.binding.fridayText.text = "Viernes - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)), "dd, MMMM, yyyy")
-        this.binding.saturdayDateText.text = "Sábado - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)), "dd, MMMM, yyyy")
-        this.binding.sundayText.text = "Domingo - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
+        setDataTexts()
         lifecycleScope.launchWhenStarted {
             weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(initTimestamp, endTimestamp)
             weeklyMonitoringCompanySituationViewModel.viewState.collect() { stateView ->
@@ -84,11 +70,29 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
         state as WeeklyMonitoringCompanySituationViewState
         this.binding.loadingComponent.isVisible = state.isLoading
     }
+
+    private fun setDataTexts() {
+        this.binding.mondayText.text = "Lunes - " +
+                Utils.parseTimestampToString(initTimestamp, "dd, MMMM, yyyy")
+        this.binding.tuesdayText.text = "Martes - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)), "dd, MMMM, yyyy")
+        this.binding.wednesdayText.text = "Miércoles - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)), "dd, MMMM, yyyy")
+        this.binding.thursdayText.text = "Jueves - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)), "dd, MMMM, yyyy")
+        this.binding.fridayText.text = "Viernes - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)), "dd, MMMM, yyyy")
+        this.binding.saturdayDateText.text = "Sábado - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)), "dd, MMMM, yyyy")
+        this.binding.sundayText.text = "Domingo - " +
+                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
+    }
+
 }
