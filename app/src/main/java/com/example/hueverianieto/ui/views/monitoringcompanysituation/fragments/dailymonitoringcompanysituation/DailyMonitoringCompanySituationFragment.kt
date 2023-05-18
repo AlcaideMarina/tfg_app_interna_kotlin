@@ -27,7 +27,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
 
         val args: DailyMonitoringCompanySituationFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
-        this.date = args.date.situationDatetime
+        this.situationDatetime = args.date.situationDatetime
 
         this.binding = FragmentDailyFinalProductControlBinding.inflate(
             inflater, container, false
@@ -40,7 +40,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setListeners() {
