@@ -127,8 +127,8 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
                     bundleOf(
                         "currentUserData" to this.currentUserData,
                         "dateFilter" to ComponentWeekDivisionDateFilter(
-                            Timestamp(initFilterDatetime),
-                            Timestamp(endFilterDatetime)
+                            Timestamp(firstDate),
+                            Timestamp(Utils.addToDate(firstDate, 6))
                         )
                     )
                 )
