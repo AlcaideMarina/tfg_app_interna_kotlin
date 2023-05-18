@@ -3,7 +3,7 @@ package com.example.hueverianieto.ui.components.componentweekdivision
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.databinding.ComponentWeekDivisionBinding
-import com.example.hueverianieto.domain.model.ComponentWeekDivisionModel
+import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionModel
 import com.example.hueverianieto.utils.Utils
 
 class ComponentWeekDivisionViewHolder(view: View) : RecyclerView.ViewHolder(view) {

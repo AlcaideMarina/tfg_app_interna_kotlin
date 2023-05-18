@@ -1,4 +1,4 @@
-package com.example.hueverianieto.domain.model
+package com.example.hueverianieto.domain.model.componentweekdivisionmodel
 
 import android.view.View.OnClickListener
 import com.google.firebase.Timestamp
