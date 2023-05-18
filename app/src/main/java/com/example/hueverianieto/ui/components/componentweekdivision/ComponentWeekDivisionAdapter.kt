@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
-import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionModel
+import com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentWeekDivisionModel
 
 class ComponentWeekDivisionAdapter(
     private val componentWeekDivisionModelList: List<ComponentWeekDivisionModel>

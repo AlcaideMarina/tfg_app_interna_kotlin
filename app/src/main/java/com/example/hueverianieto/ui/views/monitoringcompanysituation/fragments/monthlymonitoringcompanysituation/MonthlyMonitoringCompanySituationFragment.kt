@@ -12,8 +12,8 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMonthlyMonitoringCompanySituationBinding
-import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionDateFilter
-import com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionModel
+import com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentWeekDivisionDateFilter
+import com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentWeekDivisionModel
 import com.example.hueverianieto.ui.components.HNMonthYearPickerDialog
 import com.example.hueverianieto.ui.components.componentweekdivision.ComponentWeekDivisionAdapter
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.MonitoringCompanySituationActivity

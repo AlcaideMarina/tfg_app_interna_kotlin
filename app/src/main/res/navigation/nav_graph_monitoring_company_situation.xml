@@ -22,5 +22,16 @@
         <argument
             android:name="dateFilter"
             app:argType="com.example.hueverianieto.domain.model.componentweekdivisionmodel.ComponentWeekDivisionDateFilter" />
+        <action
+            android:id="@+id/action_weeklyMonitoringCompanySituationFragment_to_dailyMonitoringCompanySituationFragment"
+            app:destination="@id/dailyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationFragment"
+        android:label="DailyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
     </fragment>
 </navigation>

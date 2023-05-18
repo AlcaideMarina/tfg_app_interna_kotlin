@@ -1,4 +1,4 @@
-package com.example.hueverianieto.domain.model.componentweekdivisionmodel
+package com.example.hueverianieto.domain.model.componentdatedivisionmodel
 
 import android.os.Parcelable
 import com.google.firebase.Timestamp
