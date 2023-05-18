@@ -48,11 +48,24 @@ object Utils {
         return null
     }
 
-    fun parseTimestampToString(timestamp: Timestamp?) : String? {
+    fun parseTimestampToString(timestamp: Timestamp?, format: String = Constants.dateFormat) : String? {
         return if(timestamp == null) {
             null
         } else {
-            SimpleDateFormat(Constants.dateFormat).format(timestamp.toDate())
+            SimpleDateFormat(format).format(timestamp.toDate())
+        }
+    }
+
+    fun getDayOfWeek(dayOfWeek: Int) : String {
+        return when(dayOfWeek) {
+            1 -> "Domingo"
+            2 -> "Lunes"
+            3 -> "Martes"
+            4 -> "Miércoles"
+            5 -> "Jueves"
+            6 -> "Viernes"
+            7 -> "Sábado"
+            else -> ""
         }
     }
 
