@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentWeeklyMonitoringCompanySituationBinding
+import com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentDailyDivisionDateFilter
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
@@ -70,7 +72,27 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // Not necessary
+        this.binding.mondayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(0)
+        }
+        this.binding.tuesdayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(1)
+        }
+        this.binding.wednesdayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(2)
+        }
+        this.binding.thursdayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(3)
+        }
+        this.binding.fridayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(4)
+        }
+        this.binding.saturdayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(5)
+        }
+        this.binding.sundayBaseComponentContainer.setOnClickListener {
+            navigateToDailyDetail(6)
+        }
     }
 
     override fun updateUI(state: BaseState) {
@@ -94,5 +116,19 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
         this.binding.sundayText.text = "Domingo - " +
                 Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
     }
+
+    private fun navigateToDailyDetail(daysToAdd: Int) {
+        this.weeklyMonitoringCompanySituationViewModel
+            .navigateToDailyMonitoringCompanySituation(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "date" to ComponentDailyDivisionDateFilter(
+                        Timestamp(Utils.addToDate(initTimestamp.toDate(), 1))
+                    )
+                )
+            )
+    }
+
 
 }
