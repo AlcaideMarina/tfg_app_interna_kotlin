@@ -55,6 +55,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
         this.dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
         setDate()
         setButtons()
+        disableFields()
         lifecycleScope.launchWhenStarted {
             dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
             dailyMonitoringCompanySituationViewModel.viewState.collect() { viewState ->
