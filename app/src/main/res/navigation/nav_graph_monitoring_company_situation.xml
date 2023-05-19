@@ -49,6 +49,7 @@
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
         <argument
             android:name="monitoringCompanySituationData"
-            app:argType="com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData" />
+            app:argType="com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData"
+            app:nullable="true" />
     </fragment>
 </navigation>

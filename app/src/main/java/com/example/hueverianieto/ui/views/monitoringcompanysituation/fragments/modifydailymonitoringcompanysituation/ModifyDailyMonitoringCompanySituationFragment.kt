@@ -11,12 +11,13 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
+import com.example.hueverianieto.utils.Utils
 
 class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentDailyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
-    private lateinit var monitoringCompanySituationData: MonitoringCompanySituationData
+    private lateinit var monitoringCompanySituationData: MonitoringCompanySituationData?
 
     override fun onCreateView(
         inflater: LayoutInflater,
