@@ -48,7 +48,7 @@
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
         <argument
-            android:name="monitoringComponentSituationData"
+            android:name="monitoringCompanySituationData"
             app:argType="com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData" />
     </fragment>
 </navigation>

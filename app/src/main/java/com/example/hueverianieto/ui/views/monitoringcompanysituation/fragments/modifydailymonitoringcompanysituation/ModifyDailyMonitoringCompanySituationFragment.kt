@@ -27,7 +27,7 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
 
         val args: ModifyDailyMonitoringCompanySituationFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
-        this.monitoringCompanySituationData = args.monitoringComponentSituationData
+        this.monitoringCompanySituationData = args.monitoringCompanySituationData
 
         this.binding = FragmentDailyMonitoringCompanySituationBinding.inflate(
             inflater, container, false
