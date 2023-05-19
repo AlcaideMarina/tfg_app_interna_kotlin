@@ -18,9 +18,8 @@ class GetDailyMonitoringCompanySituationUseCase @Inject constructor(
                     val doc = result.documents.first()
                     if (doc.data != null) {
                         FarmUtils.monitoringCompanySituationMapToParcelable(doc.data!!, doc.id)
-                    }
-                }
-                null
+                    } else null
+                } else null
             }
         }
 
