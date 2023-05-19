@@ -11,6 +11,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentDailyFinalProductControlBinding
 import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
+import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 
 class DailyMonitoringCompanySituationFragment : BaseFragment() {
@@ -37,7 +38,11 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        // TODO: Llamada para conseguir el doc
+            // TODO: Si el doc no existe -> seteamos todo a 0
+            // TODO: Si el doc existe -> seteamos los valores
+        setDate()
+        setButtons()
     }
 
     override fun setObservers() {
@@ -50,5 +55,16 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         //TODO("Not yet implemented")
+    }
+
+    private fun setButtons() {
+        // TODO: Si existe doc -> Modificar
+        // TODO: Si no existe -> Añadir
+        this.binding.saveButton.setText("Modificar")
+        this.binding.cancelButton.visibility = View.GONE
+    }
+
+    private fun setDate() {
+        this.binding.dateTextView.text = Utils.parseTimestampToString(situationDatetime)
     }
 }
