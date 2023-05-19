@@ -57,6 +57,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
         this.dailyMonitoringCompanySituationViewModel.monitoringCompanySituationData.observe(this) { data ->
             monitoringCompanySituationData = data
             setFields()
+            setButtons()
         }
     }
 
@@ -69,9 +70,11 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        // TODO: Si existe doc -> Modificar
-        // TODO: Si no existe -> Añadir
-        this.binding.saveButton.setText("Modificar")
+        if (monitoringCompanySituationData == null) {
+            this.binding.saveButton.setText("Añadir")
+        } else {
+            this.binding.saveButton.setText("Modificar")
+        }
         this.binding.cancelButton.visibility = View.GONE
     }
 
