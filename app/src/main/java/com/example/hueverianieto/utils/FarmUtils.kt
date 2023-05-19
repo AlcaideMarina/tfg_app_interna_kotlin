@@ -51,7 +51,7 @@ object FarmUtils {
             data["m_eggs"] as Map<String, Long>,
             data["s_eggs"] as Map<String, Long>,
             data["situation_datetime"] as Timestamp,
-            data["l_eggs"] as Map<String, Long>,
+            data["xl_eggs"] as Map<String, Long>,
         )
     }
 
