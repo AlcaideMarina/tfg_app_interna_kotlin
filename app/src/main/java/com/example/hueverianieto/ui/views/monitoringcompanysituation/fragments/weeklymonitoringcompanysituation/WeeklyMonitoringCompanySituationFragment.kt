@@ -124,7 +124,7 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
                 bundleOf(
                     "currentUserData" to currentUserData,
                     "date" to ComponentDailyDivisionDateFilter(
-                        Timestamp(Utils.addToDate(initTimestamp.toDate(), 1))
+                        Timestamp(Utils.addToDate(initTimestamp.toDate(), daysToAdd))
                     )
                 )
             )
