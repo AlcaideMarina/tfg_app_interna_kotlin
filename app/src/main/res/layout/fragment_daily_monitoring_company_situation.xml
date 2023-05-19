@@ -388,7 +388,7 @@
                         android:layout_column="0"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
-                        android:text="Cajas XL:"
+                        android:text="Huevos rotos:"
                         android:textSize="16sp" />
 
                     <EditText
