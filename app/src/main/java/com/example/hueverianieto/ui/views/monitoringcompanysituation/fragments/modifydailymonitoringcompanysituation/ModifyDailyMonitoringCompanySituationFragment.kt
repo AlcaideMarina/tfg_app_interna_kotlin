@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -21,8 +22,12 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         (activity as BaseActivity).configNav(true)
+
+        val args: ModifyDailyMonitoringCompanySituationFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
+        this.monitoringCompanySituationData = args.monitoringComponentSituationData
 
         this.binding = FragmentDailyMonitoringCompanySituationBinding.inflate(
             inflater, container, false

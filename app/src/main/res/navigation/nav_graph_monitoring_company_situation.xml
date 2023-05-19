@@ -36,5 +36,19 @@
         <argument
             android:name="date"
             app:argType="com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentDailyDivisionDateFilter" />
+        <action
+            android:id="@+id/action_dailyMonitoringCompanySituationFragment_to_modifyDailyMonitoringCompanySituationFragment"
+            app:destination="@id/modifyDailyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyDailyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.modifydailymonitoringcompanysituation.ModifyDailyMonitoringCompanySituationFragment"
+        android:label="ModifyDailyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monitoringComponentSituationData"
+            app:argType="com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData" />
     </fragment>
 </navigation>
