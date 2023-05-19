@@ -10,11 +10,12 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentDailyFinalProductControlBinding
+import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
 import com.google.firebase.Timestamp
 
 class DailyMonitoringCompanySituationFragment : BaseFragment() {
 
-    private lateinit var binding: FragmentDailyFinalProductControlBinding
+    private lateinit var binding: FragmentDailyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var situationDatetime: Timestamp
 
@@ -29,14 +30,14 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
         this.currentUserData = args.currentUserData
         this.situationDatetime = args.date.situationDatetime
 
-        this.binding = FragmentDailyFinalProductControlBinding.inflate(
+        this.binding = FragmentDailyMonitoringCompanySituationBinding.inflate(
             inflater, container, false
         )
         return this.binding.root
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun setObservers() {
@@ -44,10 +45,10 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        //TODO("Not yet implemented")
     }
 }
