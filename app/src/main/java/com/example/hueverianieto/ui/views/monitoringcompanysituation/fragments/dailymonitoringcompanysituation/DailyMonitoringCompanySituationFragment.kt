@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -16,6 +18,7 @@ import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySitua
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DailyMonitoringCompanySituationFragment : BaseFragment() {
@@ -51,6 +54,12 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
         this.dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
         setDate()
         setButtons()
+        lifecycleScope.launchWhenStarted {
+            dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
+            dailyMonitoringCompanySituationViewModel.viewState.collect() { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -66,7 +75,8 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as DailyMonitoringCompanySituationViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 
     private fun setButtons() {
