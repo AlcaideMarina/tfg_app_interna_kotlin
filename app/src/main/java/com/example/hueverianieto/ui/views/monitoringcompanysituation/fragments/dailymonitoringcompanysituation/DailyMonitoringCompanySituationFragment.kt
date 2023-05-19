@@ -148,4 +148,13 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
             this.binding.brokenEggsTextInputLayout.setText("0")
         }
     }
+
+    private fun disableFields() {
+        this.binding.xlBoxTextInputLayout.isEnabled = false
+        this.binding.lBoxTextInputLayout.isEnabled = false
+        this.binding.mBoxTextInputLayout.isEnabled = false
+        this.binding.sBoxTextInputLayout.isEnabled = false
+        this.binding.henLossesTextInputLayout.isEnabled = false
+        this.binding.brokenEggsTextInputLayout.isEnabled = false
+    }
 }
