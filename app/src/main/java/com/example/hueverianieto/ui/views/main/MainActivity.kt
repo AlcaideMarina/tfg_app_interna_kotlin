@@ -2,9 +2,12 @@ package com.example.hueverianieto.ui.views.main
 
 import android.os.Build
 import android.view.MenuItem
+import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
+import androidx.core.view.get
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -15,6 +18,8 @@ import com.example.hueverianieto.ui.views.main.fragments.home.HomeFragment
 import com.example.hueverianieto.ui.views.main.fragments.material.MaterialFragment
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryFragment
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
+import com.example.hueverianieto.utils.Constants
+import com.example.hueverianieto.utils.Utils
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -59,6 +64,12 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             FirebaseAuth.getInstance().signOut()
             this.mainViewModel.navigateToLogin(applicationContext, this)
         }
+
+        this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
+            currentUserData.name
+        this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.role_text).text =
+            applicationContext.getString(
+                Utils.getKey(Constants.roles, currentUserData.position.toInt())!!)
 
         /*if (savedInstanceState == null) {
             navigationView.setCheckedItem(R.id.nav_home)
