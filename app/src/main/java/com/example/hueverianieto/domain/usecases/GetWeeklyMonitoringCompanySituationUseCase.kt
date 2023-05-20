@@ -30,6 +30,7 @@ class GetWeeklyMonitoringCompanySituationUseCase @Inject constructor(
                 }
             }
             averageNumberHensWeek = totalNumberHensWeek / response.documents.size
+            averageNumberHensWeek = if (averageNumberHensWeek == (0).toLong()) 1 else averageNumberHensWeek
             weeklyLayingRate = weeklyLaying / response.documents.size / averageNumberHensWeek.toDouble()
         }
 
