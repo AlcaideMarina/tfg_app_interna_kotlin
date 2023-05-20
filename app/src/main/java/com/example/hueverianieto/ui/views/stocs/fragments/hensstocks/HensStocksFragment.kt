@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -21,6 +22,9 @@ class HensStocksFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
+
+        val args: HensStocksFragmentArgs by navArgs()
+        this.currentUserData = args.currentUserData
 
         this.binding = FragmentHensStocksBinding.inflate(
             inflater, container, false

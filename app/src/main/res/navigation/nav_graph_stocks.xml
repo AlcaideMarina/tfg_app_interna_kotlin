@@ -7,5 +7,17 @@
     <fragment
         android:id="@+id/stocksFragment"
         android:name="com.example.hueverianieto.ui.views.stocs.fragments.stocks.StocksFragment"
-        android:label="StocksFragment" />
+        android:label="StocksFragment" >
+        <action
+            android:id="@+id/action_stocksFragment_to_hensStocksFragment"
+            app:destination="@id/hensStocksFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/hensStocksFragment"
+        android:name="com.example.hueverianieto.ui.views.stocs.fragments.hensstocks.HensStocksFragment"
+        android:label="HensStocksFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+    </fragment>
 </navigation>
