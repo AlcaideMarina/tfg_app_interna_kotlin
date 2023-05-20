@@ -6,7 +6,9 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -19,6 +21,7 @@ import com.example.hueverianieto.utils.FarmUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
@@ -28,7 +31,7 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     private lateinit var monitoringCompanySituationData: MonitoringCompanySituationData
 
     private lateinit var alertDialog: HNModalDialog
-    private val modifyDailyMonitoringCompanySituationVewModel: ModifyDailyMonitoringCompanySituationVewModel by viewModels()
+    private val modifyDailyMonitoringCompanySituationViewModel: ModifyDailyMonitoringCompanySituationVewModel by viewModels()
 
     // TODO: Falta el alertdialog
 
@@ -54,10 +57,15 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
         setDate()
         setFields()
         setButtons()
+        lifecycleScope.launchWhenStarted {
+            modifyDailyMonitoringCompanySituationViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
-        this.modifyDailyMonitoringCompanySituationVewModel.alertDialog.observe(this) { alertOkData ->
+        this.modifyDailyMonitoringCompanySituationViewModel.alertDialog.observe(this) { alertOkData ->
             if (alertOkData.finish) {
                 if (alertOkData.customCode == 0) {
                     Utils.setPopUp(
@@ -123,11 +131,11 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
                 ),
             )
             if (monitoringCompanySituationData.documentId == null) {
-                this.modifyDailyMonitoringCompanySituationVewModel.addDailyMonitoringCompanySituation(
+                this.modifyDailyMonitoringCompanySituationViewModel.addDailyMonitoringCompanySituation(
                     data)
             } else {
                 // modificar
-                this.modifyDailyMonitoringCompanySituationVewModel.updateDailyMonitoringCompanySituation(
+                this.modifyDailyMonitoringCompanySituationViewModel.updateDailyMonitoringCompanySituation(
                     data, this.monitoringCompanySituationData.documentId!!
                 )
             }
@@ -135,7 +143,8 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as ModifyDailyMonitoringCompanySituationViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 
     private fun setDate() {
