@@ -66,7 +66,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         }
 
         this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
-            currentUserData.name
+            currentUserData.name + " " + currentUserData.surname
         this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.role_text).text =
             applicationContext.getString(
                 Utils.getKey(Constants.roles, currentUserData.position.toInt())!!)
