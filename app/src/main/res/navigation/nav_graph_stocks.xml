@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/nav_graph_stocks">
+    android:id="@+id/nav_graph_stocks"
+    app:startDestination="@id/stocksFragment">
 
+    <fragment
+        android:id="@+id/stocksFragment"
+        android:name="com.example.hueverianieto.ui.views.stocs.fragments.stocks.StocksFragment"
+        android:label="StocksFragment" />
 </navigation>

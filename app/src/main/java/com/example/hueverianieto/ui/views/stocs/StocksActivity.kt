@@ -35,7 +35,7 @@ class StocksActivity : BaseActivity() {
         navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()         // TODO
+            setOf(R.layout.fragment_stocks)
         )
     }
 
