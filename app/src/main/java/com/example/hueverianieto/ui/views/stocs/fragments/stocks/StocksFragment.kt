@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -18,6 +19,7 @@ class StocksFragment : BaseFragment() {
 
     private lateinit var binding: FragmentStocksBinding
     private lateinit var currentUserData: InternalUserData
+    private val stocksViewModel: StocksViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -47,7 +49,14 @@ class StocksFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        // TODO
+        this.binding.hensStockButton.setOnClickListener {
+            this.stocksViewModel.navigateToHensStocks(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
