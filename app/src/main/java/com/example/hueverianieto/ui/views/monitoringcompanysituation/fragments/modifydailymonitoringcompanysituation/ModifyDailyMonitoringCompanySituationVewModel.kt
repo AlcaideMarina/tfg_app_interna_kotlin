@@ -18,7 +18,8 @@ import javax.inject.Inject
 @HiltViewModel
 class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
     val updateDailyMonitoringCompanySituationUseCase: UpdateDailyMonitoringCompanySituationUseCase,
-    val newMonitoringCompanySituationUseCase: NewMonitoringCompanySituationUseCase
+    val newMonitoringCompanySituationUseCase: NewMonitoringCompanySituationUseCase,
+    val get
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ModifyDailyMonitoringCompanySituationViewState())
@@ -44,7 +45,7 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
             // TODO: Antes de guardar, hay que ver las gallinas vivas que hay
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
             newMonitoringCompanySituationUseCase(
-                FarmUtils.monitoringCompanySituationParcelableToMap(monitoringCompanySituationData)
+                monitoringCompanySituationData
             )
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
             // TODO: Falta el alertdialog
