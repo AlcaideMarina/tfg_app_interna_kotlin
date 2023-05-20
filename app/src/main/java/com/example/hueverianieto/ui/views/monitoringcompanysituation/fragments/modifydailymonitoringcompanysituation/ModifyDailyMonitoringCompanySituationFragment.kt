@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -12,12 +13,18 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
 import com.example.hueverianieto.utils.Utils
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
 
     private lateinit var binding: FragmentDailyMonitoringCompanySituationBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var monitoringCompanySituationData: MonitoringCompanySituationData
+
+    private val modifyDailyMonitoringCompanySituationVewModel: ModifyDailyMonitoringCompanySituationVewModel by viewModels()
+
+    // TODO: Falta el alertdialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
