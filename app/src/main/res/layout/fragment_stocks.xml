@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="none"
+    tools:context=".ui.views.main.fragments.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingHorizontal="48dp"
+        android:paddingVertical="32dp" >
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/hens_stock_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/boxes_stock_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/cartons_stock_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
