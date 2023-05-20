@@ -16,7 +16,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
-    val updateDailyMonitoringCompanySituationUseCase: UpdateDailyMonitoringCompanySituationUseCase
+    val updateDailyMonitoringCompanySituationUseCase: UpdateDailyMonitoringCompanySituationUseCase,
+    val newMonitoringCompanySituationUseCase: NewMonitoringCompanySituationUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ModifyDailyMonitoringCompanySituationViewState())
@@ -25,7 +26,7 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
     private val _monitoringCompanySituationData = MutableLiveData<MonitoringCompanySituationData?>()
     val monitoringCompanySituationData: LiveData<MonitoringCompanySituationData?> get() = _monitoringCompanySituationData
 
-    fun addDailyMonitoringCompanySituation(monitoringCompanySituationData: MonitoringCompanySituationData, documentId: String) {
+    fun updateDailyMonitoringCompanySituation(monitoringCompanySituationData: MonitoringCompanySituationData, documentId: String) {
         viewModelScope.launch {
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
             updateDailyMonitoringCompanySituationUseCase(
@@ -33,6 +34,18 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
                 documentId
             )
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = false)
+            // TODO: Falta el alertdialog
+        }
+    }
+
+    fun addDailyMonitoringCompanySituation(monitoringCompanySituationData: MonitoringCompanySituationData) {
+        viewModelScope.launch {
+            // TODO: Antes de guardar, hay que ver las gallinas vivas que hay
+            _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
+            newMonitoringCompanySituationUseCase(
+                FarmUtils.monitoringCompanySituationParcelableToMap(monitoringCompanySituationData)
+            )
+            _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
             // TODO: Falta el alertdialog
         }
     }
