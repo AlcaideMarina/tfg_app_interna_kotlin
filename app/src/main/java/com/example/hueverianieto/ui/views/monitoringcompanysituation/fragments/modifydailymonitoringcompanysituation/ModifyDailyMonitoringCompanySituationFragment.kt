@@ -12,6 +12,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.FarmUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
@@ -24,6 +25,7 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private lateinit var monitoringCompanySituationData: MonitoringCompanySituationData
 
+    private lateinit var alertDialog: HNModalDialog
     private val modifyDailyMonitoringCompanySituationVewModel: ModifyDailyMonitoringCompanySituationVewModel by viewModels()
 
     // TODO: Falta el alertdialog
@@ -35,6 +37,7 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     ): View {
         (activity as BaseActivity).configNav(true)
 
+        this.alertDialog = HNModalDialog(requireContext())
         val args: ModifyDailyMonitoringCompanySituationFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.monitoringCompanySituationData = args.monitoringCompanySituationData
@@ -52,7 +55,36 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.modifyDailyMonitoringCompanySituationVewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                if (alertOkData.customCode == 0) {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        {
+                            alertDialog.cancel()
+                            activity?.onBackPressedDispatcher?.onBackPressed()
+                        },
+                        null
+                    )
+                } else {
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        alertOkData.title,
+                        alertOkData.text,
+                        "De acuerdo",
+                        null,
+                        { alertDialog.cancel() },
+                        null
+                    )
+                }
+            }
+        }
     }
 
     override fun setListeners() {

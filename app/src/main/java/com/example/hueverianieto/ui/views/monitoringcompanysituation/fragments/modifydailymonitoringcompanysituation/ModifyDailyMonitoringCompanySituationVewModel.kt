@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.example.hueverianieto.domain.usecases.GetHensUseCase
 import com.example.hueverianieto.domain.usecases.NewMonitoringCompanySituationUseCase
@@ -25,18 +26,34 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
     private val _viewState = MutableStateFlow(ModifyDailyMonitoringCompanySituationViewState())
     val viewState: StateFlow<ModifyDailyMonitoringCompanySituationViewState> get() = _viewState
 
-    private val _monitoringCompanySituationData = MutableLiveData<MonitoringCompanySituationData?>()
-    val monitoringCompanySituationData: LiveData<MonitoringCompanySituationData?> get() = _monitoringCompanySituationData
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
 
     fun updateDailyMonitoringCompanySituation(monitoringCompanySituationData: MonitoringCompanySituationData, documentId: String) {
         viewModelScope.launch {
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
-            updateDailyMonitoringCompanySituationUseCase(
+            when (updateDailyMonitoringCompanySituationUseCase(
                 FarmUtils.monitoringCompanySituationParcelableToMap(monitoringCompanySituationData),
                 documentId
-            )
-            _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = false)
-            // TODO: Falta el alertdialog
+            )) {
+                false -> {
+                    _alertDialog.value = AlertOkData(
+                        title = "Error",
+                        text = "Se ha producido un error al guardar la situación de la empresa diaria. Por favor, revise los datos e inténtelo de nuevo.",
+                        true
+                    )
+                    _viewState.value =
+                        ModifyDailyMonitoringCompanySituationViewState(isLoading = false)
+                }
+                else -> {
+                    _alertDialog.value = AlertOkData(
+                        title = "Situación guardada",
+                        text = "Las información sobre la situación de la empresa diaría ha sido guardada correctamente en la base de datos.",
+                        true,
+                        customCode = 0
+                    )
+                }
+            }
         }
     }
 
@@ -44,11 +61,28 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
         viewModelScope.launch {
             // TODO: Antes de guardar, hay que ver las gallinas vivas que hay
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
-            newMonitoringCompanySituationUseCase(
+            when (newMonitoringCompanySituationUseCase(
                 monitoringCompanySituationData
-            )
+            )) {
+                false -> {
+                    _alertDialog.value = AlertOkData(
+                        title = "Error",
+                        text = "Se ha producido un error al guardar la situación de la empresa diaria. Por favor, revise los datos e inténtelo de nuevo.",
+                        true
+                    )
+                    _viewState.value =
+                        ModifyDailyMonitoringCompanySituationViewState(isLoading = false)
+                }
+                else -> {
+                    _alertDialog.value = AlertOkData(
+                        title = "Situación guardada",
+                        text = "Las información sobre la situación de la empresa diaría ha sido guardada correctamente en la base de datos.",
+                        true,
+                        customCode = 0
+                    )
+                }
+            }
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
-            // TODO: Falta el alertdialog
         }
     }
 
