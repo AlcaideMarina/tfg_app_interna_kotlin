@@ -36,18 +36,20 @@ class StocksFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        TODO("Not yet implemented")
+        this.binding.hensStockButton.setText("Gallinas")
+        this.binding.boxesStockButton.setText("Cajas")
+        this.binding.cartonsStockButton.setText("Cartones")
     }
 
     override fun setObservers() {
-        TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        TODO("Not yet implemented")
+        // TODO
     }
 
     override fun updateUI(state: BaseState) {
-        TODO("Not yet implemented")
+        // Not necessary
     }
 }
