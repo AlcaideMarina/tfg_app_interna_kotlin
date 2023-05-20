@@ -5,10 +5,12 @@ import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
+import com.example.hueverianieto.databinding.ActivityMonitoringCompanySituationBinding
 import com.example.hueverianieto.databinding.ActivityStocksBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -37,6 +39,8 @@ class StocksActivity : BaseActivity() {
         appBarConfiguration = AppBarConfiguration(
             setOf(R.layout.fragment_stocks)
         )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
     }
 
     override fun configureUI() {
