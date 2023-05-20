@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -22,12 +23,12 @@ class StocksFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         (activity as BaseActivity).configNav(true)
         (activity as StocksActivity).getToolbar().setNavigationOnClickListener {
             (activity as BaseActivity).goBackFragments()
         }
-
+        currentUserData = (activity as StocksActivity).currentUserData
 
         this.binding = FragmentStocksBinding.inflate(
             inflater, container, false
