@@ -54,6 +54,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
             // TODO: Si el doc existe -> seteamos los valores
         this.dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
         disableFields()
+        setDate()
         lifecycleScope.launchWhenStarted {
             dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
             dailyMonitoringCompanySituationViewModel.viewState.collect() { viewState ->
