@@ -66,7 +66,7 @@ object FarmUtils {
         map["m_eggs"] = monitoringCompanySituationData.mEggs
         map["s_eggs"] = monitoringCompanySituationData.sEggs
         map["situation_datetime"] = monitoringCompanySituationData.situationDatetime
-        map["l_eggs"] = monitoringCompanySituationData.lEggs
+        map["xl_eggs"] = monitoringCompanySituationData.xlEggs
 
         return map
     }
