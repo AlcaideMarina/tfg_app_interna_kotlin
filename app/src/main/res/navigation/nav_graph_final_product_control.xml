@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_final_product_control"
+    app:startDestination="@id/monthlyFinalProductControlFragment">
+
+    <fragment
+        android:id="@+id/monthlyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol.MonthlyFinalProductControlFragment"
+        android:label="MonthlyFinalProductControlFragment" >
+        <action
+            android:id="@+id/action_monthlyFinalProductControlFragment_to_dailyFinalProductControlFragment"
+            app:destination="@id/dailyFinalProductControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailyfinalproductcontrol.DailyFinalProductControlFragment"
+        android:label="DailyFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monthlyFPCContainerModel"
+            app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_dailyDeletedFinalProductControlFragment"
+            app:destination="@id/dailyDeletedFinalProductControlFragment" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_newFinalProductControlFragment"
+            app:destination="@id/newFinalProductControlFragment" />
+        <action
+            android:id="@+id/action_dailyFinalProductControlFragment_to_finalProductControlDetailFragment"
+            app:destination="@id/finalProductControlDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyDeletedFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailydeletedfinalproductcontrol.DailyDeletedFinalProductControlFragment"
+        android:label="DailyDeletedFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monthlyDeletedFPCContainerModel"
+            app:argType="com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel" />
+    </fragment>
+    <fragment
+        android:id="@+id/newFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlFragment"
+        android:label="NewFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="lastLot"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/finalProductControlDetailFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail.FinalProductControlDetailFragment"
+        android:label="FinalProductControlDetailFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="fpcData"
+            app:argType="com.example.hueverianieto.data.models.remote.FPCData" />
+        <action
+            android:id="@+id/action_finalProductControlDetailFragment_to_modifyFinalProductControlFragment"
+            app:destination="@id/modifyFinalProductControlFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyFinalProductControlFragment"
+        android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.modifyfinalproductcontrol.ModifyFinalProductControlFragment"
+        android:label="ModifyFinalProductControlFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="fpcData"
+            app:argType="com.example.hueverianieto.data.models.remote.FPCData" />
+    </fragment>
+</navigation>

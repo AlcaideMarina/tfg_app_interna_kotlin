@@ -15,12 +15,18 @@
         android:paddingVertical="32dp" >
 
         <com.example.hueverianieto.ui.components.HNButton
-            android:id="@+id/final_product_control_button"
+            android:id="@+id/hens_stock_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
         <com.example.hueverianieto.ui.components.HNButton
-            android:id="@+id/farm_situation_monitoring_button"
+            android:id="@+id/boxes_stock_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"/>
+
+        <com.example.hueverianieto.ui.components.HNButton
+            android:id="@+id/cartons_stock_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"/>

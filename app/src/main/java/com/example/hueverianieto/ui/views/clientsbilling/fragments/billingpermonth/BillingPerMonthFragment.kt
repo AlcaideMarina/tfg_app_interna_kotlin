@@ -18,9 +18,7 @@ import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBillingPerMonthBinding
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
-import com.example.hueverianieto.ui.components.componentbillingpermonth.ComponentBillingPerMonthAdapter
-import com.example.hueverianieto.ui.views.clientsbilling.ClientsBillingActivity
-import com.example.hueverianieto.ui.views.main.MainActivity
+import com.example.hueverianieto.ui.components.componentbillingpermonth.billing.ComponentBillingPerMonthAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

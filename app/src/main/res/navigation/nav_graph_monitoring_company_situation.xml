@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph_monitoring_company_situation"
+    app:startDestination="@id/monthlyMonitoringCompanySituationFragment">
+
+    <fragment
+        android:id="@+id/monthlyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.monthlymonitoringcompanysituation.MonthlyMonitoringCompanySituationFragment"
+        android:label="MonthlyMonitoringCompanySituationFragment" >
+        <action
+            android:id="@+id/action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment"
+            app:destination="@id/weeklyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/weeklyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.weeklymonitoringcompanysituation.WeeklyMonitoringCompanySituationFragment"
+        android:label="WeeklyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="dateFilter"
+            app:argType="com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentWeekDivisionDateFilter" />
+        <action
+            android:id="@+id/action_weeklyMonitoringCompanySituationFragment_to_dailyMonitoringCompanySituationFragment"
+            app:destination="@id/dailyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dailyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationFragment"
+        android:label="DailyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="date"
+            app:argType="com.example.hueverianieto.domain.model.componentdatedivisionmodel.ComponentDailyDivisionDateFilter" />
+        <action
+            android:id="@+id/action_dailyMonitoringCompanySituationFragment_to_modifyDailyMonitoringCompanySituationFragment"
+            app:destination="@id/modifyDailyMonitoringCompanySituationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/modifyDailyMonitoringCompanySituationFragment"
+        android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.modifydailymonitoringcompanysituation.ModifyDailyMonitoringCompanySituationFragment"
+        android:label="ModifyDailyMonitoringCompanySituationFragment" >
+        <argument
+            android:name="currentUserData"
+            app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
+        <argument
+            android:name="monitoringCompanySituationData"
+            app:argType="com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData" />
+    </fragment>
+</navigation>

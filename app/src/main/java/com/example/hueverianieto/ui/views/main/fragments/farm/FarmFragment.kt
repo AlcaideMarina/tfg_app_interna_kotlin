@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -17,6 +18,7 @@ class FarmFragment : BaseFragment() {
 
     private lateinit var binding: FragmentFarmBinding
     private lateinit var internalUserData: InternalUserData
+    private val farmViewModel: FarmViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,18 +32,35 @@ class FarmFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        setButtons()
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.finalProductControlButton.setOnClickListener {
+            this.farmViewModel.navigateToFinalProductControl(
+                requireContext(),
+                internalUserData
+            )
+        }
+        this.binding.farmSituationMonitoringButton.setOnClickListener {
+            this.farmViewModel.navigateToFinalMonitoringCompanySituation(
+                requireContext(),
+                internalUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
+
+    private fun setButtons() {
+        this.binding.finalProductControlButton.setText("Control prod. final")
+        this.binding.farmSituationMonitoringButton.setText("Seg. situación granja")
+    }
+
 }
