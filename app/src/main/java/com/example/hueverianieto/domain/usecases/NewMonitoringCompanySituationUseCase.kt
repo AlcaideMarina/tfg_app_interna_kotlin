@@ -9,7 +9,7 @@ class NewMonitoringCompanySituationUseCase @Inject constructor(
     val newDocumentService: NewDocumentService
 ) {
 
-    suspend operator fun invoke(monitoringCompanySituationData: MonitoringCompanySituationData) {
+    suspend operator fun invoke(monitoringCompanySituationData: MonitoringCompanySituationData) : Boolean {
         val dataMap = FarmUtils.monitoringCompanySituationParcelableToMap(monitoringCompanySituationData)
         return when(newDocumentService.newDocument("farm_situation", dataMap).getOrNull()) {
             null -> false
