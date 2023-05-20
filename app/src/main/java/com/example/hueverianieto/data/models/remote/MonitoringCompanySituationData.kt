@@ -7,8 +7,8 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class MonitoringCompanySituationData (
     var brokenEggs: Long,
-    var createdBy: String,
-    var creationDatetime: Timestamp,
+    var createdBy: String?,
+    var creationDatetime: Timestamp?,
     var documentId: String?,
     var hens: Map<String, Long>,
     var lEggs: Map<String, Long>,

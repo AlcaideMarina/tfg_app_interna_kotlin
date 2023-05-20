@@ -29,7 +29,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     private lateinit var situationDatetime: Timestamp
     private val dailyMonitoringCompanySituationViewModel: DailyMonitoringCompanySituationViewModel by viewModels()
 
-    private var monitoringCompanySituationData : MonitoringCompanySituationData? = null
+    private lateinit var monitoringCompanySituationData : MonitoringCompanySituationData
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,8 +53,6 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
             // TODO: Si el doc no existe -> seteamos todo a 0
             // TODO: Si el doc existe -> seteamos los valores
         this.dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
-        setDate()
-        setButtons()
         disableFields()
         lifecycleScope.launchWhenStarted {
             dailyMonitoringCompanySituationViewModel.getDailyMonitoringCompanySituation(situationDatetime)
@@ -66,7 +64,41 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
 
     override fun setObservers() {
         this.dailyMonitoringCompanySituationViewModel.monitoringCompanySituationData.observe(this) { data ->
-            monitoringCompanySituationData = data
+            if (data != null) {
+                monitoringCompanySituationData = data
+            } else {
+                monitoringCompanySituationData = MonitoringCompanySituationData(
+                    brokenEggs = 0,
+                    createdBy = null,
+                    creationDatetime = null,
+                    documentId = null,
+                    hens = mapOf(
+                        "alive" to 0,
+                        "losses" to 0
+                    ),
+                    lEggs = mapOf(
+                        "boxes" to 0,
+                        "cartons" to 0,
+                        "eggs" to 0
+                    ),
+                    mEggs = mapOf(
+                        "boxes" to 0,
+                        "cartons" to 0,
+                        "eggs" to 0
+                    ),
+                    sEggs = mapOf(
+                        "boxes" to 0,
+                        "cartons" to 0,
+                        "eggs" to 0
+                    ),
+                    situationDatetime = situationDatetime,
+                    xlEggs = mapOf(
+                        "boxes" to 0,
+                        "cartons" to 0,
+                        "eggs" to 0
+                    )
+                )
+            }
             setFields()
             setButtons()
         }
@@ -90,7 +122,7 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        if (monitoringCompanySituationData == null) {
+        if (monitoringCompanySituationData.documentId == null) {
             this.binding.saveButton.setText("Añadir")
         } else {
             this.binding.saveButton.setText("Modificar")
@@ -103,51 +135,33 @@ class DailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     private fun setFields() {
-        if (monitoringCompanySituationData != null) {
-            this.binding.xlBoxTextInputLayout.setText((monitoringCompanySituationData?.xlEggs?.get("boxes")
-                ?: "0").toString())
-            this.binding.xlEggsNumberTextView.text = (monitoringCompanySituationData?.xlEggs?.get("eggs")
-                ?: "0").toString()
-            this.binding.xlCartonsNumberTextView.text = (monitoringCompanySituationData?.xlEggs?.get("cartons")
-                ?: "0").toString()
-            this.binding.lBoxTextInputLayout.setText((monitoringCompanySituationData?.lEggs?.get("boxes")
-                ?: "0").toString())
-            this.binding.lEggsNumberTextView.text = (monitoringCompanySituationData?.lEggs?.get("eggs")
-                ?: "0").toString()
-            this.binding.lCartonsNumberTextView.text = (monitoringCompanySituationData?.lEggs?.get("cartons")
-                ?: "0").toString()
-            this.binding.mBoxTextInputLayout.setText((monitoringCompanySituationData?.mEggs?.get("boxes")
-                ?: "0").toString())
-            this.binding.mEggsNumberTextView.text = (monitoringCompanySituationData?.mEggs?.get("eggs")
-                ?: "0").toString()
-            this.binding.mCartonsNumberTextView.text = (monitoringCompanySituationData?.mEggs?.get("cartons")
-                ?: "0").toString()
-            this.binding.sBoxTextInputLayout.setText((monitoringCompanySituationData?.sEggs?.get("boxes")
-                ?: "0").toString())
-            this.binding.sEggsNumberTextView.text = (monitoringCompanySituationData?.sEggs?.get("eggs")
-                ?: "0").toString()
-            this.binding.sCartonsNumberTextView.text = (monitoringCompanySituationData?.sEggs?.get("cartons")
-                ?: "0").toString()
-            this.binding.henLossesTextInputLayout.setText((monitoringCompanySituationData?.hens?.get("loses")
-                ?: "0").toString())
-            this.binding.brokenEggsTextInputLayout.setText((monitoringCompanySituationData?.brokenEggs
-                ?: "0").toString())
-        } else {
-            this.binding.xlBoxTextInputLayout.setText("0")
-            this.binding.xlEggsNumberTextView.text = "0"
-            this.binding.xlCartonsNumberTextView.text = "0"
-            this.binding.lBoxTextInputLayout.setText("0")
-            this.binding.lEggsNumberTextView.text = "0"
-            this.binding.lCartonsNumberTextView.text = ("0")
-            this.binding.mBoxTextInputLayout.setText("0")
-            this.binding.mEggsNumberTextView.text = "0"
-            this.binding.mCartonsNumberTextView.text = "0"
-            this.binding.sBoxTextInputLayout.setText("0")
-            this.binding.sEggsNumberTextView.text = "0"
-            this.binding.sCartonsNumberTextView.text = "0"
-            this.binding.henLossesTextInputLayout.setText("0")
-            this.binding.brokenEggsTextInputLayout.setText("0")
-        }
+        this.binding.xlBoxTextInputLayout.setText((monitoringCompanySituationData.xlEggs["boxes"]
+            ?: "0").toString())
+        this.binding.xlEggsNumberTextView.text = (monitoringCompanySituationData.xlEggs["eggs"]
+            ?: "0").toString()
+        this.binding.xlCartonsNumberTextView.text = (monitoringCompanySituationData.xlEggs["cartons"]
+            ?: "0").toString()
+        this.binding.lBoxTextInputLayout.setText((monitoringCompanySituationData.lEggs["boxes"]
+            ?: "0").toString())
+        this.binding.lEggsNumberTextView.text = (monitoringCompanySituationData.lEggs["eggs"]
+            ?: "0").toString()
+        this.binding.lCartonsNumberTextView.text = (monitoringCompanySituationData.lEggs["cartons"]
+            ?: "0").toString()
+        this.binding.mBoxTextInputLayout.setText((monitoringCompanySituationData.mEggs["boxes"]
+            ?: "0").toString())
+        this.binding.mEggsNumberTextView.text = (monitoringCompanySituationData.mEggs["eggs"]
+            ?: "0").toString()
+        this.binding.mCartonsNumberTextView.text = (monitoringCompanySituationData.mEggs["cartons"]
+            ?: "0").toString()
+        this.binding.sBoxTextInputLayout.setText((monitoringCompanySituationData.sEggs["boxes"]
+            ?: "0").toString())
+        this.binding.sEggsNumberTextView.text = (monitoringCompanySituationData.sEggs["eggs"]
+            ?: "0").toString()
+        this.binding.sCartonsNumberTextView.text = (monitoringCompanySituationData.sEggs["cartons"]
+            ?: "0").toString()
+        this.binding.henLossesTextInputLayout.setText((monitoringCompanySituationData.hens["loses"]
+            ?: "0").toString())
+        this.binding.brokenEggsTextInputLayout.setText((monitoringCompanySituationData.brokenEggs).toString())
     }
 
     private fun disableFields() {
