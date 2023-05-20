@@ -12,7 +12,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.example.hueverianieto.databinding.FragmentDailyMonitoringCompanySituationBinding
+import com.example.hueverianieto.utils.FarmUtils
 import com.example.hueverianieto.utils.Utils
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -54,7 +56,48 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.saveButton.setOnClickListener {
+            val data = MonitoringCompanySituationData(
+                brokenEggs = (this.binding.brokenEggsTextInputLayout.text ?: 0).toString().toLong(),
+                createdBy = this.monitoringCompanySituationData.createdBy ?: currentUserData.documentId!!,
+                creationDatetime = this.monitoringCompanySituationData.creationDatetime ?: Timestamp.now(),
+                documentId = this.monitoringCompanySituationData.documentId,
+                hens = mapOf(
+                    "alive" to (this.monitoringCompanySituationData.hens["alive"] ?: 0),         // Gallinas vivas en el momento de la creación
+                    "losses" to (this.binding.henLossesTextInputLayout.text ?: 0).toString().toLong(),
+                ),
+                lEggs = mapOf(
+                    "boxes" to (this.binding.lBoxTextInputLayout.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.lCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "eggs" to (this.binding.lEggsNumberTextView.text ?: 0).toString().toLong(),
+                ),
+                mEggs = mapOf(
+                    "boxes" to (this.binding.mBoxTextInputLayout.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.mCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "eggs" to (this.binding.mEggsNumberTextView.text ?: 0).toString().toLong(),
+                ),
+                sEggs = mapOf(
+                    "boxes" to (this.binding.sBoxTextInputLayout.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.sCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "eggs" to (this.binding.sEggsNumberTextView.text ?: 0).toString().toLong(),
+                ),
+                this.monitoringCompanySituationData.situationDatetime,
+                xlEggs = mapOf(
+                    "boxes" to (this.binding.xlBoxTextInputLayout.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.xlCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "eggs" to (this.binding.xlEggsNumberTextView.text ?: 0).toString().toLong(),
+                ),
+            )
+            if (monitoringCompanySituationData.documentId == null) {
+                this.modifyDailyMonitoringCompanySituationVewModel.addDailyMonitoringCompanySituation(
+                    data)
+            } else {
+                // modificar
+                this.modifyDailyMonitoringCompanySituationVewModel.updateDailyMonitoringCompanySituation(
+                    data, this.monitoringCompanySituationData.documentId!!
+                )
+            }
+        }
     }
 
     override fun updateUI(state: BaseState) {
