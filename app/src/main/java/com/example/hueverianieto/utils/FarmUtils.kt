@@ -1,5 +1,6 @@
 package com.example.hueverianieto.utils
 
+import com.example.hueverianieto.data.models.local.EggEqualitiesData
 import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
@@ -70,5 +71,21 @@ object FarmUtils {
 
         return map
     }
+
+    fun getXLEggsEqualities(boxes: Long) : EggEqualitiesData =
+        EggEqualitiesData(
+            boxes = boxes,
+            cartons = 14 * boxes,
+            eggs = 240 * boxes
+        )
+
+
+
+    fun getLMSEggsEqualities(boxes: Long) : EggEqualitiesData =
+        EggEqualitiesData(
+            boxes = boxes,
+            cartons = 14 * boxes,
+            eggs = 360 * boxes
+        )
 
 }
