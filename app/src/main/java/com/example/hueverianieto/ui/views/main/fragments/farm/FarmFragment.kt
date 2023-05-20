@@ -52,6 +52,12 @@ class FarmFragment : BaseFragment() {
                 internalUserData
             )
         }
+        this.binding.stocksButton.setOnClickListener {
+            this.farmViewModel.navigateToStocks(
+                requireContext(),
+                internalUserData
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

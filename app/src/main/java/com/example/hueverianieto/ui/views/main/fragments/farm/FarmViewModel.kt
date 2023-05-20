@@ -8,6 +8,7 @@ import com.example.hueverianieto.domain.usecases.HomeUseCase
 import com.example.hueverianieto.ui.views.boxesandcartonsresources.BoxesAndCartonsActivity
 import com.example.hueverianieto.ui.views.finalproductcontrol.FinalProductControlActivity
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.MonitoringCompanySituationActivity
+import com.example.hueverianieto.ui.views.stocs.StocksActivity
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -24,6 +25,12 @@ class FarmViewModel @Inject constructor(
 
     fun navigateToFinalMonitoringCompanySituation(context: Context, currentUserData: Parcelable) {
         val intent = Intent(context, MonitoringCompanySituationActivity::class.java)
+        intent.putExtra("current_user_data", currentUserData)
+        context.startActivity(intent)
+    }
+
+    fun navigateToStocks(context: Context, currentUserData: Parcelable) {
+        val intent = Intent(context, StocksActivity::class.java)
         intent.putExtra("current_user_data", currentUserData)
         context.startActivity(intent)
     }
