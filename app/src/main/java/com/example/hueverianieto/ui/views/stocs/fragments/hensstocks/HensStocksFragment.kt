@@ -1,4 +1,4 @@
-package com.example.hueverianieto.ui.views.stocs.fragments.stocks.hensstocks
+package com.example.hueverianieto.ui.views.stocs.fragments.hensstocks
 
 import android.os.Bundle
 import android.view.LayoutInflater
