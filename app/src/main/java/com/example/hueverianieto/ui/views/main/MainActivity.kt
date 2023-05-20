@@ -2,6 +2,7 @@ package com.example.hueverianieto.ui.views.main
 
 import android.os.Build
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.example.hueverianieto.R
@@ -15,6 +16,7 @@ import com.example.hueverianieto.ui.views.main.fragments.material.MaterialFragme
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryFragment
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +24,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
+    private val mainViewModel: MainViewModel by viewModels()
 
     lateinit var currentUserData: InternalUserData
 
@@ -51,6 +54,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         supportFragmentManager.beginTransaction()
             .replace(R.id.fragment_container, HomeFragment()).commit()
         this.binding.navView.setCheckedItem(R.id.home_bottom_menu)
+
+        this.binding.logout.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
+            this.mainViewModel.navigateToLogin(applicationContext, this)
+        }
 
         /*if (savedInstanceState == null) {
             navigationView.setCheckedItem(R.id.nav_home)
@@ -187,6 +195,9 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 .replace(R.id.fragment_container, MaterialFragment()).commit()
             R.id.users_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, UsersAndClientsFragment()).commit()
+            R.id.logout -> {
+
+            }
         }
         this.binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
