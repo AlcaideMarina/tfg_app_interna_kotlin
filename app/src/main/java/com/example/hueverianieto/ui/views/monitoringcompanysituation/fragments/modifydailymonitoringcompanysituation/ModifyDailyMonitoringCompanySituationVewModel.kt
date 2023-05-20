@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
+import com.example.hueverianieto.domain.usecases.GetHensUseCase
 import com.example.hueverianieto.domain.usecases.NewMonitoringCompanySituationUseCase
 import com.example.hueverianieto.domain.usecases.UpdateDailyMonitoringCompanySituationUseCase
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationViewState
@@ -19,7 +20,6 @@ import javax.inject.Inject
 class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
     val updateDailyMonitoringCompanySituationUseCase: UpdateDailyMonitoringCompanySituationUseCase,
     val newMonitoringCompanySituationUseCase: NewMonitoringCompanySituationUseCase,
-    val get
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ModifyDailyMonitoringCompanySituationViewState())
