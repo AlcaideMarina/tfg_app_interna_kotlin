@@ -1,6 +1,8 @@
 package com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.modifydailymonitoringcompanysituation
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -142,25 +144,29 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
 
     private fun setFields() {
         this.binding.xlBoxTextInputLayout.setText((monitoringCompanySituationData.xlEggs["boxes"]
-            ?: "0").toString())
+            ?: "").toString())
+        this.binding.xlBoxTextInputLayout.addTextChangedListener(xlWatcher)
         this.binding.xlEggsNumberTextView.text = (monitoringCompanySituationData.xlEggs["eggs"]
             ?: "0").toString()
         this.binding.xlCartonsNumberTextView.text = (monitoringCompanySituationData.xlEggs["cartons"]
             ?: "0").toString()
         this.binding.lBoxTextInputLayout.setText((monitoringCompanySituationData.lEggs["boxes"]
-            ?: "0").toString())
+            ?: "").toString())
+        this.binding.lBoxTextInputLayout.addTextChangedListener(lWatcher)
         this.binding.lEggsNumberTextView.text = (monitoringCompanySituationData.lEggs["eggs"]
             ?: "0").toString()
         this.binding.lCartonsNumberTextView.text = (monitoringCompanySituationData.lEggs["cartons"]
             ?: "0").toString()
         this.binding.mBoxTextInputLayout.setText((monitoringCompanySituationData.mEggs["boxes"]
-            ?: "0").toString())
+            ?: "").toString())
+        this.binding.mBoxTextInputLayout.addTextChangedListener(mWatcher)
         this.binding.mEggsNumberTextView.text = (monitoringCompanySituationData.mEggs["eggs"]
             ?: "0").toString()
         this.binding.mCartonsNumberTextView.text = (monitoringCompanySituationData.mEggs["cartons"]
             ?: "0").toString()
         this.binding.sBoxTextInputLayout.setText((monitoringCompanySituationData.sEggs["boxes"]
-            ?: "0").toString())
+            ?: "").toString())
+        this.binding.sBoxTextInputLayout.addTextChangedListener(sWatcher)
         this.binding.sEggsNumberTextView.text = (monitoringCompanySituationData.sEggs["eggs"]
             ?: "0").toString()
         this.binding.sCartonsNumberTextView.text = (monitoringCompanySituationData.sEggs["cartons"]
@@ -178,4 +184,89 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
         }
         this.binding.cancelButton.visibility = View.GONE
     }
+
+    private val xlWatcher: TextWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            if (s.toString() != "") {
+                val equalities = FarmUtils.getXLEggsEqualities(s.toString().toLong())
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.xlEggsNumberTextView.text =
+                    equalities.eggs.toString()
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.xlCartonsNumberTextView.text =
+                    equalities.cartons.toString()
+            } else {
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.xlEggsNumberTextView.text =
+                    "0"
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.xlCartonsNumberTextView.text =
+                    "0"
+            }
+        }
+
+    }
+
+    private val lWatcher: TextWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            if (s.toString() != "") {
+                val equalities = FarmUtils.getLMSEggsEqualities(s.toString().toLong())
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.lEggsNumberTextView.text =
+                    equalities.eggs.toString()
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.lCartonsNumberTextView.text =
+                    equalities.cartons.toString()
+            } else {
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.lEggsNumberTextView.text =
+                    "0"
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.lCartonsNumberTextView.text =
+                    "0"
+            }
+        }
+
+    }
+
+    private val mWatcher: TextWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            if (s.toString() != "") {
+                val equalities = FarmUtils.getLMSEggsEqualities(s.toString().toLong())
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.mEggsNumberTextView.text =
+                    equalities.eggs.toString()
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.mCartonsNumberTextView.text =
+                    equalities.cartons.toString()
+            } else {
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.mEggsNumberTextView.text =
+                    "0"
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.mCartonsNumberTextView.text =
+                    "0"
+            }
+        }
+
+    }
+
+    private val sWatcher: TextWatcher = object : TextWatcher {
+
+        override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
+        override fun afterTextChanged(s: Editable) {
+            if (s.toString() != "") {
+                val equalities = FarmUtils.getLMSEggsEqualities(s.toString().toLong())
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.sEggsNumberTextView.text =
+                    equalities.eggs.toString()
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.sCartonsNumberTextView.text =
+                    equalities.cartons.toString()
+            } else {
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.sEggsNumberTextView.text =
+                    "0"
+                this@ModifyDailyMonitoringCompanySituationFragment.binding.sCartonsNumberTextView.text =
+                    "0"
+            }
+        }
+
+    }
+
 }
