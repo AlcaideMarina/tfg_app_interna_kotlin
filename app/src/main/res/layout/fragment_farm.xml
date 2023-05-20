@@ -25,12 +25,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"/>
 
-        <com.example.hueverianieto.ui.components.HNButton
-            android:id="@+id/stocks_button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"/>
-
     </LinearLayout>
 
 </ScrollView>
