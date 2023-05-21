@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -15,6 +17,8 @@ import com.example.hueverianieto.databinding.FragmentHomeBinding
 import com.example.hueverianieto.ui.views.main.MainActivity
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -34,6 +38,11 @@ class HomeFragment : BaseFragment() {
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
         this.homeViewModel.getDailyMonitoringCompanySituation(Timestamp(calendar.time))
+        lifecycleScope.launchWhenStarted {
+            homeViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
+        }
     }
 
     override fun setObservers() {
@@ -59,11 +68,12 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        state as HomeViewState
+        this.binding.loadingComponent.isVisible = state.isLoading
     }
 
     override fun onCreateView(
