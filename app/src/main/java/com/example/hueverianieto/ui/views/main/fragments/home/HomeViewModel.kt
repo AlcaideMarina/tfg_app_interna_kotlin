@@ -33,9 +33,11 @@ class HomeViewModel @Inject constructor(
             when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
                     _viewState.value = HomeViewState(isLoading = false, error = true)
+                    _todayOrdersNumber.value = 0
                 }
                 listOf<String>() -> {
                     _viewState.value = HomeViewState(isLoading = false)
+                    _todayOrdersNumber.value = 0
                 }
                 else -> {
                     val clientIdList : List<String?> = resultQ1
