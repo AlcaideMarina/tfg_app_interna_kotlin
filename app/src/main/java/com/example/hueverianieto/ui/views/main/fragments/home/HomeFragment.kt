@@ -1,9 +1,11 @@
 package com.example.hueverianieto.ui.views.main.fragments.home
 
+import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
@@ -11,6 +13,7 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentHomeBinding
 import com.example.hueverianieto.ui.views.main.MainActivity
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,6 +28,12 @@ class HomeFragment : BaseFragment() {
         this.binding.welcomeText.text = "Hola, " + currentUserData.name + ". Bienvenido/a de nuevo."
         this.homeViewModel.getTodayOrders()
         this.homeViewModel.getTodayDelivery()
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        this.homeViewModel.getDailyMonitoringCompanySituation(Timestamp(calendar.time))
     }
 
     override fun setObservers() {
@@ -33,6 +42,19 @@ class HomeFragment : BaseFragment() {
         }
         this.homeViewModel.todayDeliveriesNumber.observe(this) { todayDeliveriesNumber ->
             setDeliveriesNotification(todayDeliveriesNumber)
+        }
+        this.homeViewModel.mcsIsDone.observe(this) { isDone ->
+            if (isDone) {
+                binding.monitoringCompanySituationIcon.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_right))
+                this.binding.monitoringCompanySituationText.text =
+                    "Hoy se ha hecho el seguimiento de la situación de la empresa."
+            } else {
+                binding.monitoringCompanySituationIcon.setImageDrawable(
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_wrong))
+                this.binding.monitoringCompanySituationText.text =
+                    "Hoy aún no se ha hecho el seguimiento de la situación de la empresa."
+            }
         }
     }
 

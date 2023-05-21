@@ -5,11 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.remote.OrderData
-import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
-import com.example.hueverianieto.domain.usecases.GetClientTodayDeliveriesUseCase
-import com.example.hueverianieto.domain.usecases.GetClientTodayOrdersUseCase
-import com.example.hueverianieto.domain.usecases.HomeUseCase
+import com.example.hueverianieto.data.services.GetDailyMonitoringCompanySituationService
+import com.example.hueverianieto.domain.usecases.*
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
+import com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationViewState
+import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -20,7 +20,8 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     val getAllDocumentsIdUseCase: GetAllDocumentsIdUseCase,
     val getClientTodayOrdersUseCase: GetClientTodayOrdersUseCase,
-    val getClientTodayDeliveriesUseCase: GetClientTodayDeliveriesUseCase
+    val getClientTodayDeliveriesUseCase: GetClientTodayDeliveriesUseCase,
+    val getDailyMonitoringCompanySituationUseCase: GetDailyMonitoringCompanySituationUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState())
@@ -31,6 +32,9 @@ class HomeViewModel @Inject constructor(
 
     private val _todayDeliveriesNumber = MutableLiveData<Int>()
     val todayDeliveriesNumber: LiveData<Int> get() = _todayDeliveriesNumber
+
+    private val _mcsIsDone = MutableLiveData<Boolean>()
+    val mcsIsDone: LiveData<Boolean> get() = _mcsIsDone
 
     fun getTodayOrders() {
         viewModelScope.launch {
@@ -101,6 +105,15 @@ class HomeViewModel @Inject constructor(
                     _todayDeliveriesNumber.value = orderList.size
                 }
             }
+        }
+    }
+
+
+    fun getDailyMonitoringCompanySituation(timestamp: Timestamp) {
+        viewModelScope.launch {
+            _viewState.value = HomeViewState(isLoading = true)
+            _mcsIsDone.value = getDailyMonitoringCompanySituationUseCase(timestamp) != null
+            _viewState.value = HomeViewState(isLoading = false)
         }
     }
 
