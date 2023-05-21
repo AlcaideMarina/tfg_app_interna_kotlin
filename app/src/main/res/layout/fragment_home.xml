@@ -8,7 +8,7 @@
     android:padding="@dimen/size32">
 
     <TextView
-        android:id="@+id/wellcome_text"
+        android:id="@+id/welcome_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Hola"
@@ -18,26 +18,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.example.hueverianieto.ui.components.HNNotification
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/orders_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/wellcome_text"
+        android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
+        android:padding="@dimen/size16"
+        android:layout_marginTop="@dimen/size32"
+        app:layout_constraintTop_toBottomOf="@id/welcome_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" >
 
-    <com.example.hueverianieto.ui.components.HNNotification
+        <TextView
+            android:id="@+id/orders_notification_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/size16"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/deliver_notification"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
+        android:padding="@dimen/size16"
+        android:layout_marginTop="@dimen/size16"
         app:layout_constraintTop_toBottomOf="@id/orders_notification"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" >
+
+        <TextView
+            android:id="@+id/deliver_notification_text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/size16"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:id="@+id/monitoring_company_situation_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size32"
         app:layout_constraintTop_toBottomOf="@id/deliver_notification"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
