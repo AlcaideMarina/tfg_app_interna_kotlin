@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
+import com.example.hueverianieto.domain.usecases.GetClientTodayDeliveriesUseCase
 import com.example.hueverianieto.domain.usecases.GetClientTodayOrdersUseCase
 import com.example.hueverianieto.domain.usecases.HomeUseCase
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
@@ -18,7 +19,8 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     val getAllDocumentsIdUseCase: GetAllDocumentsIdUseCase,
-    val getClientTodayOrdersUseCase: GetClientTodayOrdersUseCase
+    val getClientTodayOrdersUseCase: GetClientTodayOrdersUseCase,
+    val getClientTodayDeliveriesUseCase: GetClientTodayDeliveriesUseCase
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(HomeViewState())
@@ -26,6 +28,9 @@ class HomeViewModel @Inject constructor(
 
     private val _todayOrdersNumber = MutableLiveData<Int>()
     val todayOrdersNumber: LiveData<Int> get() = _todayOrdersNumber
+
+    private val _todayDeliveriesNumber = MutableLiveData<Int>()
+    val todayDeliveriesNumber: LiveData<Int> get() = _todayDeliveriesNumber
 
     fun getTodayOrders() {
         viewModelScope.launch {
@@ -58,6 +63,42 @@ class HomeViewModel @Inject constructor(
                     }
                     _viewState.value = HomeViewState(isLoading = false)
                     _todayOrdersNumber.value = orderList.size
+                }
+            }
+        }
+    }
+
+    fun getTodayDelivery() {
+        viewModelScope.launch {
+            _viewState.value = HomeViewState(isLoading = true)
+            when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
+                null -> {
+                    _viewState.value = HomeViewState(isLoading = false, error = true)
+                    _todayDeliveriesNumber.value = 0
+                }
+                listOf<String>() -> {
+                    _viewState.value = HomeViewState(isLoading = false)
+                    _todayDeliveriesNumber.value = 0
+                }
+                else -> {
+                    val clientIdList : List<String?> = resultQ1
+                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    for (id in clientIdList) {
+                        if (id != null) {
+                            when (val resultQ2 = getClientTodayDeliveriesUseCase(id)) {
+                                null -> {}
+                                else -> {
+                                    for (order in resultQ2) {
+                                        if (order != null) {
+                                            orderList.add(order)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    _viewState.value = HomeViewState(isLoading = false)
+                    _todayDeliveriesNumber.value = orderList.size
                 }
             }
         }
