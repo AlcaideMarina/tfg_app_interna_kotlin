@@ -22,11 +22,13 @@ class HomeFragment : BaseFragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        this.homeViewModel.getTodayOrders()
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        this.homeViewModel.todayOrdersNumber.observe(this) { todayOrdersNumber ->
+            setOrderNotification(todayOrdersNumber)
+        }
     }
 
     override fun setListeners() {
@@ -46,6 +48,10 @@ class HomeFragment : BaseFragment() {
         this.binding =
             FragmentHomeBinding.bind(inflater.inflate(R.layout.fragment_home, container, false))
         return binding.root
+    }
+
+    private fun setOrderNotification(todayOrdersNumber: Int) {
+        this.binding.ordersNotificationText.text = "Hoy hay " + todayOrdersNumber.toString() + " pedidos"
     }
 
 }
