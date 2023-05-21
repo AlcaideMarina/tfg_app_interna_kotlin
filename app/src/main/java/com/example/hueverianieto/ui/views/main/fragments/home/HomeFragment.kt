@@ -14,7 +14,8 @@ import com.example.hueverianieto.ui.views.main.MainActivity
 class HomeFragment : BaseFragment() {
 
     private lateinit var binding: FragmentHomeBinding
-    private lateinit var internalUserData: InternalUserData
+    private lateinit var currentUserData: InternalUserData
+
     override fun configureUI() {
         //TODO("Not yet implemented")
     }
@@ -36,8 +37,8 @@ class HomeFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
-        internalUserData = (activity as MainActivity).currentUserData
-        binding =
+        this.currentUserData = (activity as MainActivity).currentUserData
+        this.binding =
             FragmentHomeBinding.bind(inflater.inflate(R.layout.fragment_home, container, false))
         return binding.root
     }
