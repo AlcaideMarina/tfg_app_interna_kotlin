@@ -36,4 +36,8 @@ class HNNotification : BaseComponent, ConstraintLayout {
         return this
     }
 
+    fun setText(text: String) {
+        this.binding.notificationText.text = text
+    }
+
 }
