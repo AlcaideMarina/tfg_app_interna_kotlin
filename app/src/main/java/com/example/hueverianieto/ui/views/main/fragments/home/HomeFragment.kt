@@ -22,6 +22,7 @@ class HomeFragment : BaseFragment() {
     private val homeViewModel: HomeViewModel by viewModels()
 
     override fun configureUI() {
+        this.binding.welcomeText.text = "Hola, " + currentUserData.name + ". Bienvenido/a de nuevo."
         this.homeViewModel.getTodayOrders()
         this.homeViewModel.getTodayDelivery()
     }
