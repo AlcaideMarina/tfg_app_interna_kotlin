@@ -23,11 +23,15 @@ class HomeFragment : BaseFragment() {
 
     override fun configureUI() {
         this.homeViewModel.getTodayOrders()
+        this.homeViewModel.getTodayDelivery()
     }
 
     override fun setObservers() {
         this.homeViewModel.todayOrdersNumber.observe(this) { todayOrdersNumber ->
             setOrderNotification(todayOrdersNumber)
+        }
+        this.homeViewModel.todayDeliveriesNumber.observe(this) { todayDeliveriesNumber ->
+            setDeliveriesNotification(todayDeliveriesNumber)
         }
     }
 
@@ -51,7 +55,11 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setOrderNotification(todayOrdersNumber: Int) {
-        this.binding.ordersNotificationText.text = "Hoy hay " + todayOrdersNumber.toString() + " pedidos"
+        this.binding.ordersNotificationText.text = "Hoy hay " + todayOrdersNumber.toString() + " pedidos."
+    }
+
+    private fun setDeliveriesNotification(todayDeliveriesNumber: Int) {
+        this.binding.deliverNotificationText.text = "Hay " + todayDeliveriesNumber.toString() + " repartos planificados para hoy."
     }
 
 }
