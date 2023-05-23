@@ -58,8 +58,13 @@ class LoginViewModel @Inject constructor (
                                 _viewState.value = LoginViewState(false)
                             }
                             else -> {
-                                _currentUserData.value = internalUser!!
-                                _navigateToMainActivity.value = Event(true)
+                                if (!internalUser.deleted) {
+                                    _currentUserData.value = internalUser!!
+                                    _navigateToMainActivity.value = Event(true)
+                                } else {
+                                    _alertDialog.value = UserLoginData(email, password, true)
+                                    _viewState.value = LoginViewState(false)
+                                }
                             }
                         }
                     }
