@@ -84,7 +84,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
                     }
                 }
                 if (orderList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.todayOrderRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
                 } else {
                     this.binding.todayOrderRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.todayOrderRecyclerView.adapter = HNOrderContainerAdapter(orderList)
