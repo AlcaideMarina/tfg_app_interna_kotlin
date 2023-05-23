@@ -42,13 +42,6 @@
                 android:text="CIF: "
                 android:textSize="16sp" />
 
-            <TextView
-                android:id="@+id/actual_order_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Pedido actual: "
-                android:textSize="16sp" />
-
         </LinearLayout>
 
         <ImageView

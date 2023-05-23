@@ -48,8 +48,4 @@ class HNComponentClients: ConstraintLayout, BaseComponent {
     fun setCifText(cifText: String) {
         this.binding.cifText.text = cifText
     }
-
-    fun setActualOrderText(actualOrderText: String) {
-        this.binding.actualOrderText.text = actualOrderText
-    }
 }
