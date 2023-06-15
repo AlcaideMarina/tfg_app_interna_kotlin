@@ -11,7 +11,9 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityChangePasswordBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ChangePasswordActivity  : BaseActivity() {
 
     private lateinit var binding: ActivityChangePasswordBinding
@@ -34,7 +36,7 @@ class ChangePasswordActivity  : BaseActivity() {
         navController = binding.fragContViewCentre.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
-            setOf()        // TODO
+            setOf(R.layout.fragment_change_password)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
