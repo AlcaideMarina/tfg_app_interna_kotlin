@@ -162,7 +162,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.views.stocs.StocksActivity"
+            android:name=".ui.views.changepassword.ChangePasswordActivity"
             android:exported="true"
             android:configChanges="orientation|screenSize"
             android:windowSoftInputMode="adjustResize" >
