@@ -17,6 +17,7 @@ import com.example.hueverianieto.ui.views.main.fragments.farm.FarmFragment
 import com.example.hueverianieto.ui.views.main.fragments.home.HomeFragment
 import com.example.hueverianieto.ui.views.main.fragments.material.MaterialFragment
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryFragment
+import com.example.hueverianieto.ui.views.main.fragments.settings.SettingsFragment
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
@@ -63,6 +64,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         this.binding.logout.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
             this.mainViewModel.navigateToLogin(applicationContext, this)
+        }
+        this.binding.settings.setOnClickListener {
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, SettingsFragment()).commit()
+            this.binding.drawerLayout.closeDrawer(GravityCompat.START)
         }
 
         this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.name_text).text =
@@ -206,9 +212,6 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
                 .replace(R.id.fragment_container, MaterialFragment()).commit()
             R.id.users_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, UsersAndClientsFragment()).commit()
-            R.id.logout -> {
-                FirebaseAuth.getInstance().signOut()
-            }
         }
         this.binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
