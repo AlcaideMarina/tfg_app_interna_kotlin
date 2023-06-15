@@ -347,7 +347,7 @@ class NewOrderFragment : BaseFragment() {
             approxDeliveryDatetime = approxDeliveryDatetimeSelected,
             clientId = clientData.id!!,
             company = clientData.company,
-            createdBy = "user_${currentUserData.createdBy}",
+            createdBy = "user_${currentUserData.id}",
             deliveryDatetime = null,
             deliveryDni = null,
             deliveryNote = null,

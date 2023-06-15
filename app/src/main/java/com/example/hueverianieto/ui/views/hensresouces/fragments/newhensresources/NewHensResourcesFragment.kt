@@ -148,7 +148,7 @@ class NewHensResourcesFragment : BaseFragment() {
                     alertDialog,
                     requireContext(),
                     "Formulario incompleto",
-                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise los datos e inténtelo de nuevo.",
                     "De acuerdo",
                     null,
                     { alertDialog.cancel() },

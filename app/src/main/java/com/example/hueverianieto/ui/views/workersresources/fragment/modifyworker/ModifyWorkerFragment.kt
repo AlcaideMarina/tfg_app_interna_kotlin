@@ -99,7 +99,7 @@ class ModifyWorkerFragment : BaseFragment() {
                     alertDialog,
                     requireContext(),
                     "Aviso",
-                    "Esta acción cambiará el salario del trabajador con DNI ${this.internalUserData.dni}, pasando de ser de ${this.internalUserData.salary ?: "-"} € mensuales, a ${this.binding.salaryTextInputLayout.text}.\n¿Está seguro de que quiere continuar?",
+                    "Esta acción cambiará el salario del trabajador con DNI ${this.internalUserData.dni}, pasando de ser de ${this.internalUserData.salary ?: "-"} € mensuales, a ${this.binding.salaryTextInputLayout.text} €.\n¿Está seguro de que quiere continuar?",
                     "Atrás",
                     "Continuar",
                     { alertDialog.cancel() },

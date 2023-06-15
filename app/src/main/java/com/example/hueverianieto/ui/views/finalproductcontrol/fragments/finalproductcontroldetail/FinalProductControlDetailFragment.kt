@@ -76,7 +76,7 @@ class FinalProductControlDetailFragment : BaseFragment() {
                 alertDialog,
                 requireContext(),
                 "Aviso importante",
-                "Esta acción es irreversible. Va a eliminar este ticket, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
+                "Esta acción es irreversible. Va a eliminar esta información, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
                 "Atrás",
                 "Continuar",
                 { alertDialog.cancel() },

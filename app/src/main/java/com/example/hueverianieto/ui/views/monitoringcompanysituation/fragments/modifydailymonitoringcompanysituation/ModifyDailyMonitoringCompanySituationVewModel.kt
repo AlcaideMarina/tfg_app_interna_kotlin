@@ -48,7 +48,7 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
                 else -> {
                     _alertDialog.value = AlertOkData(
                         title = "Situación guardada",
-                        text = "Las información sobre la situación de la empresa diaría ha sido guardada correctamente en la base de datos.",
+                        text = "La información sobre la situación de la empresa diaría ha sido guardada correctamente en la base de datos.",
                         true,
                         customCode = 0
                     )

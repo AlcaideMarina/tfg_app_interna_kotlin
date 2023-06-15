@@ -111,7 +111,7 @@ class ModifyFinalProductControlFragment : BaseFragment() {
                 alertDialog,
                 requireContext(),
                 "Aviso",
-                "Va a modificar este producto. ¿Quiere continuar con el proceso?",
+                "Va a modificar la información de la fecha de expedición ${Utils.parseTimestampToString(fpcData.issueDatetime) ?: "-"}. ¿Quiere continuar con el proceso?",
                 "Cancelar",
                 "Continuar",
                 { alertDialog.cancel() },

@@ -66,9 +66,9 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        this.feedResourcesDetailViewModel.feedResource.observe(this) { feedResurcesDataObserver ->
-            if (feedResurcesDataObserver != null) {
-                feedResourcesData = feedResurcesDataObserver
+        this.feedResourcesDetailViewModel.feedResource.observe(this) { feedResourcesDataObserver ->
+            if (feedResourcesDataObserver != null) {
+                feedResourcesData = feedResourcesDataObserver
                 setText()
             }
         }
