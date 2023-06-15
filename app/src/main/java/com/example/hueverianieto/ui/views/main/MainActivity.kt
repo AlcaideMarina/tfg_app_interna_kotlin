@@ -207,7 +207,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             R.id.users_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, UsersAndClientsFragment()).commit()
             R.id.logout -> {
-
+                FirebaseAuth.getInstance().signOut()
             }
         }
         this.binding.drawerLayout.closeDrawer(GravityCompat.START)
