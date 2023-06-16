@@ -67,6 +67,23 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
                 setText()
             }
         }
+        this.ewgResourcesDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    alertOkData.title,
+                    alertOkData.text,
+                    "De acuerdo",
+                    null,
+                    {
+                        alertDialog.cancel()
+                        (activity as BaseActivity).goBackFragments()
+                    },
+                    null
+                )
+            }
+        }
     }
 
     override fun setListeners() {
@@ -83,7 +100,6 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.ewgResourcesDetailViewModel
                         .deleteEWGResources(ewgResourcesData.documentId!!)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }

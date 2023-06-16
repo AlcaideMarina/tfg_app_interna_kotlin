@@ -44,7 +44,7 @@ class AllElectricityWaterGasViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = AllElectricityWaterGasViewState(isLoading = false, error = false)
-                    _ewgList.value = result.sortedBy { it?.expenseDatetime }            // TODO: Revisar esto, con el reverse salían ordenados de menor a mayor
+                    _ewgList.value = result.sortedBy { it?.expenseDatetime }.reversed()
                 }
             }
         }

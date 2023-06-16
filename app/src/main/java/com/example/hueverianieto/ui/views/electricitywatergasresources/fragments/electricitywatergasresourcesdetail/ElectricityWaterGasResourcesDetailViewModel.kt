@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteEWGResourcesUseCase
@@ -29,6 +30,9 @@ class ElectricityWaterGasResourcesDetailViewModel @Inject constructor(
 
     private val _viewState = MutableStateFlow(ElectricityWaterGasResourcesDetailViewState())
     val viewState: StateFlow<ElectricityWaterGasResourcesDetailViewState> get() = _viewState
+
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     private val _ewgResource = MutableLiveData<ElectricityWaterGasResourcesData?>()
     val ewgResource: LiveData<ElectricityWaterGasResourcesData?> get() = _ewgResource
@@ -53,6 +57,11 @@ class ElectricityWaterGasResourcesDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ElectricityWaterGasResourcesDetailViewState(isLoading = true)
             deleteEWGUseCase(documentId)
+            _alertDialog.value = AlertOkData(
+                "Recurso eliminado",
+                "El recurso ha sido eliminado correctamente.",
+                true
+            )
             _viewState.value = ElectricityWaterGasResourcesDetailViewState(isLoading = false)
         }
     }
