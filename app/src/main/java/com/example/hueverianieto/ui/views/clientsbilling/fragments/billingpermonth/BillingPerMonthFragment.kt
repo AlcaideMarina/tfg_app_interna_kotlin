@@ -19,7 +19,10 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBillingPerMonthBinding
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
 import com.example.hueverianieto.ui.components.componentbillingpermonth.billing.ComponentBillingPerMonthAdapter
+import com.google.firebase.Timestamp
+import com.google.type.DateTime
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class BillingPerMonthFragment : BaseFragment() {
@@ -63,6 +66,12 @@ class BillingPerMonthFragment : BaseFragment() {
                 val billingList = mutableListOf<BillingContainerItemModel>()
                 for (item in billingContainerList) {
                     if (item != null) {
+                        val calendarDataMonth = Calendar.getInstance()
+                        calendarDataMonth.time = item.initDate.toDate()
+                        var dataMonth = calendarDataMonth.get(Calendar.MONTH) + 1
+                        val calendarThisMonth = Calendar.getInstance()
+                        calendarThisMonth.time = Timestamp.now().toDate()
+                        var thisMonth = calendarThisMonth.get(Calendar.MONTH) + 1
                         var billingContainerItemModel = BillingContainerItemModel(
                             item
                         ) {
@@ -70,7 +79,8 @@ class BillingPerMonthFragment : BaseFragment() {
                                 this.view,
                                 bundleOf(
                                     "billingModel" to item.billingModel!!,
-                                    "currentUserData" to currentUserData
+                                    "currentUserData" to currentUserData,
+                                    "thisMonth" to (dataMonth == thisMonth)
                                 )
                             )
                         }
