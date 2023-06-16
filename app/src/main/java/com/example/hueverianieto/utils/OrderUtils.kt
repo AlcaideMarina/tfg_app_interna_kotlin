@@ -586,8 +586,6 @@ object OrderUtils {
                 totalPrice += (sDozenQuantity!! as Int) * (sDozenPrice!! as Double)
             }
         }
-        val decimal = BigDecimal(3.14159265359).setScale(2, RoundingMode.HALF_EVEN)
-        println(decimal)
 
         (totalPrice * 100).roundToInt() / 100
 

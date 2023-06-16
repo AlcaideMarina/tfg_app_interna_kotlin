@@ -22,6 +22,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
 class BillingPerMonthViewModel  @Inject constructor(
@@ -118,12 +119,12 @@ class BillingPerMonthViewModel  @Inject constructor(
             if (initDateTimestamp > item.orderDatetime) {
                 // Añadimos el elemento a la lista de retorno
                 val billingModel = BillingModel(
-                    paymentByCash = paymentByCash,
-                    paymentByReceipt = paymentByReceipt,
-                    paymentByTransfer = paymentByTransfer,
-                    paid = paid,
-                    toBePaid = toBePaid,
-                    totalPrice = totalPrice,
+                    paymentByCash = (paymentByCash * 100.0).roundToInt() / 100.0,
+                    paymentByReceipt = (paymentByReceipt * 100.0).roundToInt() / 100.0,
+                    paymentByTransfer = (paymentByTransfer * 100.0).roundToInt() / 100.0,
+                    paid = (paid * 100.0).roundToInt() / 100.0,
+                    toBePaid = (toBePaid * 100.0).roundToInt() / 100.0,
+                    totalPrice = (totalPrice * 100.0).roundToInt() / 100.0,
                     //orderBillingModelList = orderBillingModelMonthlyList
                 )
                 val billingContainerModel = BillingPerMonthContainerModel(
@@ -161,13 +162,12 @@ class BillingPerMonthViewModel  @Inject constructor(
 
             if (orderBillingModelListAux.last() == item) {
                 val billingModel = BillingModel(
-                    paymentByCash = paymentByCash,
-                    paymentByReceipt = paymentByReceipt,
-                    paymentByTransfer = paymentByTransfer,
-                    paid = paid,
-                    toBePaid = toBePaid,
-                    totalPrice = totalPrice,
-                    //orderBillingModelList = orderBillingModelMonthlyList
+                    paymentByCash = (paymentByCash * 100.0).roundToInt() / 100.0,
+                    paymentByReceipt = (paymentByReceipt * 100.0).roundToInt() / 100.0,
+                    paymentByTransfer = (paymentByTransfer * 100.0).roundToInt() / 100.0,
+                    paid = (paid * 100.0).roundToInt() / 100.0,
+                    toBePaid = (toBePaid * 100.0).roundToInt() / 100.0,
+                    totalPrice = (totalPrice * 100.0).roundToInt() / 100.0,
                 )
                 val billingContainerModel = BillingPerMonthContainerModel(
                     initDate = initDateTimestamp,
