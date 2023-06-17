@@ -26,13 +26,14 @@ class GetClientTodayDeliveriesService@Inject constructor(
         val today = Utils.parseStringToTimestamp(
             "$d/$m/$y 00:00:00", pattern = "dd/MM/yyyy hh:mm:ss"
         )
-        val tomorrow = Timestamp(Utils.addToDate(today.toDate(), daysToAdd = -1))
+        val tomorrow = Timestamp(Utils.addToDate(today.toDate(), daysToAdd = 1))
         return runCatching {
             firebaseClient.db
                 .collection("client_info")
                 .document(documentId)
                 .collection("orders")
                 .whereGreaterThanOrEqualTo("approximate_delivery_datetime", today)
+                .whereLessThan("approximate_delivery_datetime", tomorrow)
                 .get()
                 .await()
         }.toOrderDataList()
