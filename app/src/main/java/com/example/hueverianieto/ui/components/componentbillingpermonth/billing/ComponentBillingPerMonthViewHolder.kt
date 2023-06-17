@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.databinding.ComponentBillingPerMonthContainerBinding
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
 import com.example.hueverianieto.utils.Utils
+import com.example.hueverianieto.utils.Utils.capitalizeFirstChar
 
 class ComponentBillingPerMonthViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -15,7 +16,7 @@ class ComponentBillingPerMonthViewHolder(view: View) : RecyclerView.ViewHolder(v
         this.binding.billingDateText.text = Utils.parseDateToString(
             billingContainerItemModel.billingPerMonthContainerModel.initDate.toDate(),
             "MMMM, yyyy"
-        )
+        ).capitalizeFirstChar()
         this.binding.baseComponentBillingContainer.setOnClickListener(
             billingContainerItemModel.onClickListener
         )

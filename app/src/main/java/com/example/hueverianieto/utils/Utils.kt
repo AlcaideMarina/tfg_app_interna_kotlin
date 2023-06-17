@@ -72,8 +72,8 @@ object Utils {
     fun parseStringToTimestamp(dateStr : String, pattern : String? = Constants.dateFormat) :
             Timestamp = Timestamp(SimpleDateFormat(pattern).parse(dateStr))
 
-    fun parseDateToString(date: Date, format: String? = null) :
-            String = SimpleDateFormat(format ?: Constants.dateFormat).format(date)
+    fun parseDateToString(date: Date, format: String = Constants.dateFormat) :
+            String = SimpleDateFormat(format).format(date)
 
     fun addToDate(date: Date, daysToAdd: Int = 0, monthsToAdd: Int = 0) : Date {
         val c = Calendar.getInstance()
