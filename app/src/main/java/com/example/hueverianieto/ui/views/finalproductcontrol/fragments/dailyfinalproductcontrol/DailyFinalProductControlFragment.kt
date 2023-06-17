@@ -53,6 +53,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
     override fun configureUI() {
         this.dailyFinalProductControlViewModel.getThisMonthDailyFPC(
             monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
+        this.dailyFinalProductControlViewModel.getNextLot()
         this.binding.deletedFpcButton.setText("Eliminados")
         deletedList = mutableListOf<FPCData>()
         initRecyclerView()
@@ -71,6 +72,9 @@ class DailyFinalProductControlFragment : BaseFragment() {
                 this.monthlyFPCContainerModel = monthlyFPCContainerModelObserver
                 initRecyclerView()
             }
+        }
+        this.dailyFinalProductControlViewModel.lot.observe(this) { lot ->
+            lastLot = (lot).toLong()
         }
     }
 
@@ -121,7 +125,6 @@ class DailyFinalProductControlFragment : BaseFragment() {
                     )
                 }
                 list.add(fpcDailyContainerItemModel)
-                if (item.lot > lastLot) lastLot = item.lot
             } else {
                 deletedList.add(item)
             }

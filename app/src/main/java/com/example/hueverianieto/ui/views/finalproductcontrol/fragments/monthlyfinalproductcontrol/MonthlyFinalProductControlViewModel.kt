@@ -53,7 +53,7 @@ class MonthlyFinalProductControlViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = MonthlyFinalProductControlViewState(isLoading = true)
             val result = getNextLotUseCase()
-            _lot.value = result + 1
+            _lot.value = result
             _viewState.value = MonthlyFinalProductControlViewState(isLoading = false)
         }
     }
