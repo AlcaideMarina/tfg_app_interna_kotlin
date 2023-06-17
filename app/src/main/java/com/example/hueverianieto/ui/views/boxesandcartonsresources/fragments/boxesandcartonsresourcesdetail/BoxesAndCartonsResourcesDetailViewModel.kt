@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteBoxesAndCartonsResourcesUseCase
@@ -29,6 +30,9 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
 
     private val _viewState = MutableStateFlow(BoxesAndCartonsResourcesDetailViewState())
     val viewState: StateFlow<BoxesAndCartonsResourcesDetailViewState> get() = _viewState
+
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     private val _bcResource = MutableLiveData<BoxesAndCartonsResourcesData?>()
     val bcResource: LiveData<BoxesAndCartonsResourcesData?> get() = _bcResource
@@ -53,6 +57,11 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = true)
             deleteBoxesAndCartonsResourcesUseCase(documentId)
+            _alertDialog.value = AlertOkData(
+                "Recurso eliminado",
+                "El recurso ha sido eliminado correctamente.",
+                true
+            )
             _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = false)
         }
     }
