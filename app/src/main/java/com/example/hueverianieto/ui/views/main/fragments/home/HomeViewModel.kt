@@ -4,11 +4,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.data.services.GetDailyMonitoringCompanySituationService
 import com.example.hueverianieto.domain.usecases.*
 import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
 import com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationViewState
+import com.example.hueverianieto.utils.Constants
 import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -57,7 +59,7 @@ class HomeViewModel @Inject constructor(
                                 null -> {}
                                 else -> {
                                     for (order in resultQ2) {
-                                        if (order != null) {
+                                        if (order != null && order.status.toInt() != Constants.orderStatus[R.string.cancelled]!!.toInt()) {
                                             orderList.add(order)
                                         }
                                     }
@@ -93,7 +95,7 @@ class HomeViewModel @Inject constructor(
                                 null -> {}
                                 else -> {
                                     for (order in resultQ2) {
-                                        if (order != null) {
+                                        if (order != null && order.status.toInt() != Constants.orderStatus[R.string.cancelled]!!.toInt()) {
                                             orderList.add(order)
                                         }
                                     }
