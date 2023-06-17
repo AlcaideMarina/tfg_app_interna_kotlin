@@ -72,6 +72,23 @@ class FeedResourcesDetailFragment : BaseFragment() {
                 setText()
             }
         }
+        this.feedResourcesDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    alertOkData.title,
+                    alertOkData.text,
+                    "De acuerdo",
+                    null,
+                    {
+                        alertDialog.cancel()
+                        (activity as BaseActivity).goBackFragments()
+                    },
+                    null
+                )
+            }
+        }
     }
 
     override fun setListeners() {
@@ -88,7 +105,6 @@ class FeedResourcesDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.feedResourcesDetailViewModel
                         .deleteFeedResources(feedResourcesData.documentId!!)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }

@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
+import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteFeedResourcesUseCase
@@ -30,6 +31,9 @@ class FeedResourcesDetailViewModel @Inject constructor(
 
     private val _viewState = MutableStateFlow(FeedResourcesDetailViewState())
     val viewState: StateFlow<FeedResourcesDetailViewState> get() = _viewState
+
+    private var _alertDialog = MutableLiveData(AlertOkData())
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     private val _feedResource = MutableLiveData<FeedResourcesData?>()
     val feedResource: LiveData<FeedResourcesData?> get() = _feedResource
@@ -54,6 +58,11 @@ class FeedResourcesDetailViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = FeedResourcesDetailViewState(isLoading = true)
             deleteFeedResourcesUseCase(documentId)
+            _alertDialog.value = AlertOkData(
+                "Recurso eliminado",
+                "El recurso ha sido eliminado correctamente.",
+                true
+            )
             _viewState.value = FeedResourcesDetailViewState(isLoading = false)
         }
     }
