@@ -88,12 +88,16 @@ class BillingPerMonthFragment : BaseFragment() {
                     }
                 }
                 if (billingList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.billingRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoBilling.visibility = View.VISIBLE
+                    this.binding.containerWaringNoBilling.setTitle("No hay registros")
+                    this.binding.containerWaringNoBilling.setText("Aún no hay registros de facturación para el cliente seleccionado (${clientData.id} - {${clientData.company}")
                 } else {
                     this.binding.billingRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.billingRecyclerView.adapter =
                         ComponentBillingPerMonthAdapter(billingList)
                     this.binding.billingRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoBilling.visibility = View.GONE
                 }
             }
         }
