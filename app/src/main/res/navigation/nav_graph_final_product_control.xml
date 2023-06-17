@@ -11,6 +11,9 @@
         <action
             android:id="@+id/action_monthlyFinalProductControlFragment_to_dailyFinalProductControlFragment"
             app:destination="@id/dailyFinalProductControlFragment" />
+        <action
+            android:id="@+id/action_monthlyFinalProductControlFragment_to_newFinalProductControlFragment"
+            app:destination="@id/newFinalProductControlFragment" />
     </fragment>
     <fragment
         android:id="@+id/dailyFinalProductControlFragment"

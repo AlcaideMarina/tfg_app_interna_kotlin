@@ -26,6 +26,8 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private val monthlyFinalProductControlViewModel: MonthlyFinalProductControlViewModel by viewModels()
 
+    private var lastLot = (0).toLong()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +48,7 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
 
     override fun configureUI() {
         this.monthlyFinalProductControlViewModel.getMonthlyFPCData()
+        this.monthlyFinalProductControlViewModel.getNextLot()
         lifecycleScope.launchWhenStarted {
             monthlyFinalProductControlViewModel.getMonthlyFPCData()
             monthlyFinalProductControlViewModel.viewState.collect { viewState ->
@@ -85,10 +88,21 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
                 }
             }
         }
+        this.monthlyFinalProductControlViewModel.lot.observe(this) { lot ->
+            lastLot = (lot).toLong()
+        }
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.addButton.setOnClickListener {
+            this.monthlyFinalProductControlViewModel.navigateToNewFPC(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "lastLot" to lastLot
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {
