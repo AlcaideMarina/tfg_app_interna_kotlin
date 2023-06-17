@@ -130,6 +130,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
             }
         }
         if (list.isEmpty()) {
+            this.binding.dailyFpcRecyclerView.visibility = View.GONE
             this.binding.containerWaringNoDailyFpc.visibility = View.VISIBLE
             this.binding.containerWaringNoDailyFpc.setTitle("No hay entradas")
             this.binding.containerWaringNoDailyFpc.setText("Mo hay información sobre Control de Producto Final, con entradas sin eliminar.")
@@ -137,6 +138,7 @@ class DailyFinalProductControlFragment : BaseFragment() {
             this.binding.dailyFpcRecyclerView.layoutManager = LinearLayoutManager(this.context)
             this.binding.dailyFpcRecyclerView.adapter = ComponentDailyFinalProductControlAdapter(list)
             this.binding.dailyFpcRecyclerView.visibility = View.VISIBLE
+            this.binding.containerWaringNoDailyFpc.visibility = View.GONE
         }
     }
 
