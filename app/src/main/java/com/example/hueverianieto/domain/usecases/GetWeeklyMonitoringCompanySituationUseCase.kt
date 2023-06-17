@@ -16,28 +16,34 @@ class GetWeeklyMonitoringCompanySituationUseCase @Inject constructor(
         val response = getWeeklyMonitoringCompanySituationService.getMonitoringComponentSituation(
             initTimestamp, endTimestamp
         ).getOrNull()
-        var averageNumberHensWeek: Number = 0
-        var totalNumberHensWeek: Long = 0
+        var hensLosses: Long = 0
         var weeklyLaying: Long = 0
-        var weeklyLayingRate: Double = 0.0
+        var xlEggs: Long = 0
+        var lEggs: Long = 0
+        var mEggs: Long = 0
+        var sEggs: Long = 0
 
         if (response != null && response.documents.isNotEmpty()) {
             for (r in response.documents) {
                 if (r.data != null) {
                     val mcsParcelable = FarmUtils.monitoringCompanySituationMapToParcelable(r.data!!, r.id)
-                    totalNumberHensWeek += (mcsParcelable.hens["alive"] as Long)
+                    hensLosses += mcsParcelable.hens["losses"] as Long
+                    xlEggs += mcsParcelable.xlEggs["eggs"] as Long
+                    lEggs += mcsParcelable.lEggs["eggs"] as Long
+                    mEggs += mcsParcelable.mEggs["eggs"] as Long
+                    sEggs += mcsParcelable.sEggs["eggs"] as Long
                     weeklyLaying += (mcsParcelable.xlEggs["eggs"] as Long) + (mcsParcelable.lEggs["eggs"] as Long) +(mcsParcelable.mEggs["eggs"] as Long) +(mcsParcelable.sEggs["eggs"] as Long)
                 }
             }
-            averageNumberHensWeek = totalNumberHensWeek / response.documents.size
-            averageNumberHensWeek = if (averageNumberHensWeek == (0).toLong()) 1 else averageNumberHensWeek
-            weeklyLayingRate = weeklyLaying / response.documents.size / averageNumberHensWeek.toDouble()
         }
 
         return WeeklyMonitoringCompanySituationData(
-            averageNumberHensWeek,
+            hensLosses,
             weeklyLaying,
-            (weeklyLayingRate * 100.0).roundToInt() / 100.0
+            xlEggs,
+            lEggs,
+            mEggs,
+            sEggs
         )
 
     }

@@ -62,11 +62,19 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     override fun setObservers() {
         this.weeklyMonitoringCompanySituationViewModel.weeklyMonitoringCompanySituationData.observe(this) { data ->
             if (data != null) {
-                this.binding.weeklyLaying.text = "Puesta semanal:  " + data.weeklyLaying.toString()
-                this.binding.percentageWeeklyLaying.text = "Porcentaje de puesta semanal:  " + data.weeklyLayingRate.toString() + "%"
+                this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  " + data.xlEggs.toString()
+                this.binding.weeklyLLaying.text = "Puesta semanal - L:  " + data.lEggs.toString()
+                this.binding.weeklyMLaying.text = "Puesta semanal - M:  " + data.mEggs.toString()
+                this.binding.weeklySLaying.text = "Puesta semanal - S:  " + data.sEggs.toString()
+                this.binding.weeklyTotalLaying.text = "Puesta semanal (total):  " + data.weeklyLaying.toString()
+                this.binding.hensLossesWeeklyLaying.text = "Bajas de gallinas esta semana:  " + data.hensLosses.toString()
             } else {
-                this.binding.weeklyLaying.text = "Puesta semanal:  0"
-                this.binding.percentageWeeklyLaying.text = "Porcentaje de puesta semanal:  0%"
+                this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  0"
+                this.binding.weeklyLLaying.text = "Puesta semanal - L:  0"
+                this.binding.weeklyMLaying.text = "Puesta semanal - M:  0"
+                this.binding.weeklySLaying.text = "Puesta semanal - S:  0"
+                this.binding.weeklyTotalLaying.text = "Puesta semanal (total):  0"
+                this.binding.hensLossesWeeklyLaying.text = "Bajas de gallinas esta semana:  0"
             }
         }
     }

@@ -45,10 +45,10 @@
         app:layout_constraintEnd_toEndOf="parent" >
 
         <TextView
-            android:id="@+id/weekly_laying"
+            android:id="@+id/weekly_xl_laying"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Puesta semanal"
+            android:text="Puesta semanal - XL"
             android:textSize="@dimen/textSize16"
             android:textColor="@color/black_color"
             app:layout_constraintTop_toTopOf="parent"
@@ -56,13 +56,57 @@
             app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
-            android:id="@+id/percentage_weekly_laying"
+            android:id="@+id/weekly_l_laying"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puesta semanal - L"
+            android:textSize="@dimen/textSize16"
+            android:textColor="@color/black_color"
+            app:layout_constraintTop_toBottomOf="@id/weekly_xl_laying"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/weekly_m_laying"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puesta semanal - M"
+            android:textSize="@dimen/textSize16"
+            android:textColor="@color/black_color"
+            app:layout_constraintTop_toBottomOf="@id/weekly_l_laying"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/weekly_s_laying"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puesta semanal - S"
+            android:textSize="@dimen/textSize16"
+            android:textColor="@color/black_color"
+            app:layout_constraintTop_toBottomOf="@id/weekly_m_laying"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/weekly_total_laying"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Puesta semanal (total)"
+            android:textSize="@dimen/textSize16"
+            android:textColor="@color/black_color"
+            app:layout_constraintTop_toBottomOf="@id/weekly_s_laying"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <TextView
+            android:id="@+id/hens_losses_weekly_laying"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Porcentaje de puesta semanal"
             android:textSize="@dimen/textSize16"
             android:textColor="@color/black_color"
-            app:layout_constraintTop_toBottomOf="@id/weekly_laying"
+            app:layout_constraintTop_toBottomOf="@id/weekly_total_laying"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>
 

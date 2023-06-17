@@ -5,7 +5,10 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class WeeklyMonitoringCompanySituationData (
-    var averageNumberHensWeek: Number,
+    var hensLosses: Long,
     var weeklyLaying: Long,
-    var weeklyLayingRate: Number,
+    var xlEggs: Long,
+    var lEggs: Long,
+    var mEggs: Long,
+    var sEggs: Long
 ) : Parcelable
