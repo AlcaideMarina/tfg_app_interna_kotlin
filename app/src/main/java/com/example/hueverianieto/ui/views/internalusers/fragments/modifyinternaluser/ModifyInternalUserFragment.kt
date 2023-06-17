@@ -157,6 +157,7 @@ class ModifyInternalUserFragment : BaseFragment() {
             dniTextInputLayout.setText(internalUserData.dni)
             phoneTextInputLayout.setText(internalUserData.phone.toString())
             emailTextInputLayout.setText(internalUserData.email)
+            emailTextInputLayout.isEnabled = false
             directionTextInputLayout.setText(internalUserData.direction)
             cityTextInputLayout.setText(internalUserData.city)
             provinceTextInputLayout.setText(internalUserData.province)

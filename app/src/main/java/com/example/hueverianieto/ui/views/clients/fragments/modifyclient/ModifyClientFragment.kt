@@ -117,7 +117,7 @@ class ModifyClientFragment : BaseFragment() {
                 }
             }
 
-            var newClientData = ClientData(
+            val newClientData = ClientData(
                 this.binding.cifTextInputLayout.text.toString(),
                 this.binding.cityTextInputLayout.text.toString(),
                 clientData.createdBy,
@@ -163,6 +163,7 @@ class ModifyClientFragment : BaseFragment() {
             postalCodeTextInputLayout.setText(clientData.postalCode.toString())
             cifTextInputLayout.setText(clientData.cif)
             emailTextInputLayout.setText(clientData.email)
+            emailTextInputLayout.isEnabled = false
             phoneTextInputLayoutPhone1.setText(phone1.value.toString())
             phoneTextInputLayoutName1.setText(phone1.key)
             phoneTextInputLayoutPhone2.setText(phone2.value.toString())
