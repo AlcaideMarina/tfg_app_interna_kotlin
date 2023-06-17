@@ -86,6 +86,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
                 if (orderList.isEmpty()) {
                     this.binding.todayOrderRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
+                    this.binding.containerWaringNoInternalUsers.setTitle("No hay pedidos que mostrar")
+                    this.binding.containerWaringNoInternalUsers.setText("Hoy no se ha realizado ningún pedido todavía.")
                 } else {
                     this.binding.todayOrderRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.todayOrderRecyclerView.adapter = HNOrderContainerAdapter(orderList)
