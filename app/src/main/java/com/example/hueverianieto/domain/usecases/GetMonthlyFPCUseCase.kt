@@ -58,9 +58,15 @@ class GetMonthlyFPCUseCase @Inject constructor(
                 )
                 list.add(monthlyFPCContainerModel)
 
-                endDateTimestamp = initDateTimestamp
-                initDateTimestamp = Timestamp(
-                    Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = -1))
+                val newCal = Calendar.getInstance()
+                newCal.time = item.layingDatetime.toDate()
+                var m = (newCal.get(Calendar.MONTH) + 1).toString()
+                while (m.length < 2) m = "0" + m
+                var y = newCal.get(Calendar.YEAR).toString()
+                while (y.length < 4) y = "0" + y
+
+                initDateTimestamp = Utils.parseStringToTimestamp("01/$m/$y")
+                endDateTimestamp = Timestamp(Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = 1))
                 monthlyFPCDataList = mutableListOf()
             }
             monthlyFPCDataList.add(item)
@@ -73,9 +79,15 @@ class GetMonthlyFPCUseCase @Inject constructor(
                 )
                 list.add(monthlyFPCContainerModel)
 
-                endDateTimestamp = initDateTimestamp
-                initDateTimestamp = Timestamp(
-                    Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = -1))
+                val newCal = Calendar.getInstance()
+                newCal.time = item.layingDatetime.toDate()
+                var m = (newCal.get(Calendar.MONTH) + 1).toString()
+                while (m.length < 2) m = "0" + m
+                var y = newCal.get(Calendar.YEAR).toString()
+                while (y.length < 4) y = "0" + y
+
+                initDateTimestamp = Utils.parseStringToTimestamp("01/$m/$y")
+                endDateTimestamp = Timestamp(Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = 1))
                 monthlyFPCDataList = mutableListOf()
             }
         }
