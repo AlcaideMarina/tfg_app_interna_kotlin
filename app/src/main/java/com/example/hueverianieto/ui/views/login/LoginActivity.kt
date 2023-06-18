@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
+import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityLoginBinding
 import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
@@ -58,14 +59,9 @@ class LoginActivity : BaseActivity() {
         this.alertDialog = HNModalDialog(this)
 
         lifecycleScope.launchWhenStarted {
-            binding.extraComponentsContainer.isVisible =
-                !binding.extraComponentsContainer.isVisible
-            binding.loadingComponent.isVisible =
-                !binding.extraComponentsContainer.isVisible
-            /*loginViewModel.viewState.collect { viewState ->
-                binding.extraComponentsContainer.isVisible = viewState.isLoading
-                binding.loadingComponent.isVisible = viewState.isLoading
-            }*/
+            loginViewModel.viewState.collect { viewState ->
+                updateUI(viewState)
+            }
         }
 
     }
@@ -129,6 +125,20 @@ class LoginActivity : BaseActivity() {
                 true
             )
         )
+    }
+
+    private fun updateUI(state: BaseState) {
+        try {
+            with(state as LoginViewState) {
+                with(binding) {
+                    this.loadingComponent.isVisible = state.isLoading
+                    this.loginBaseContainer.isVisible = !state.isLoading
+                }
+            }
+        } catch (e: Exception) {
+            Log.e(TAG, e.message.toString())
+        }
+
     }
 
     companion object {

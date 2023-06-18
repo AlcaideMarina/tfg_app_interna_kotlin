@@ -59,7 +59,7 @@ class LoginViewModel @Inject constructor(
                             }
                             else -> {
                                 if (!internalUser.deleted) {
-                                    _currentUserData.value = internalUser
+                                    _currentUserData.value = internalUser!!
                                     _navigateToMainActivity.value = Event(true)
                                 } else {
                                     _alertDialog.value = UserLoginData(email, password, true)
@@ -75,7 +75,6 @@ class LoginViewModel @Inject constructor(
                 isValidEmail = checkValidEmail(email)
             )
         }
-        _viewState.value = LoginViewState(isLoading = false)
     }
 
 
