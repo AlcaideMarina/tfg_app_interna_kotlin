@@ -61,7 +61,10 @@ class BillingPerMonthFragment : BaseFragment() {
     override fun setObservers() {
         this.billingViewModel.billingContainerList.observe(this) { billingContainerList ->
             if (billingContainerList == null) {
-                // TODO: Error
+                this.binding.billingRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoBilling.visibility = View.VISIBLE
+                this.binding.containerWaringNoBilling.setTitle("Error")
+                this.binding.containerWaringNoBilling.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 val billingList = mutableListOf<BillingContainerItemModel>()
                 for (item in billingContainerList) {

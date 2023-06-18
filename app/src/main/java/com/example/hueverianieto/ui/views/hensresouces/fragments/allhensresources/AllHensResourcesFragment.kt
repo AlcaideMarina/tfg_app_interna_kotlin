@@ -63,7 +63,10 @@ class AllHensResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allHensResourcesViewModel.hensList.observe(this) { hensResourcesDataList ->
             if (hensResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.hensRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 hensDataList = mutableListOf()
                 for (hensResourcesData in hensResourcesDataList)  {

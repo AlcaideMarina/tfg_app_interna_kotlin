@@ -40,7 +40,10 @@ class DeletedClientsFragment : BaseFragment() {
     override fun setObservers() {
         deletedClientsViewModel.clientList.observe(this) { clientDataList ->
             if (clientDataList == null) {
-                // TODO: ERROR
+                this.binding.clientsRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoClients.visibility = View.VISIBLE
+                this.binding.containerWaringNoClients.setTitle("Error")
+                this.binding.containerWaringNoClients.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 clientList = mutableListOf()
                 for (clientData in clientDataList)  {

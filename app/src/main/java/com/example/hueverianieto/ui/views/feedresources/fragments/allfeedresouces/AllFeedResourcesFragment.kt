@@ -61,7 +61,10 @@ class AllFeedResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allFeedResourcesViewModel.feedList.observe(this) { feedResourcesDataList ->
             if (feedResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.feedRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 feedDataList = mutableListOf()
                 for (feedResourcesData in feedResourcesDataList)  {

@@ -67,7 +67,10 @@ class DeletedInternalUsersFragment : BaseFragment() {
     override fun setObservers() {
         deletedInternalUsersViewModel.internalUserList.observe(this) { internalUserDataList ->
             if (internalUserDataList == null) {
-                // TODO: ERROR
+                this.binding.deletedInternalUsersRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoDeletedInternalUsers.visibility = View.VISIBLE
+                this.binding.containerWaringNoDeletedInternalUsers.setTitle("Error")
+                this.binding.containerWaringNoDeletedInternalUsers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 internalUserList = mutableListOf()
                 for (internalUserData in internalUserDataList) {

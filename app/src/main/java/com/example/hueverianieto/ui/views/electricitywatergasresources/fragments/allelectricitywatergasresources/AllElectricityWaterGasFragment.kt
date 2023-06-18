@@ -60,7 +60,10 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     override fun setObservers() {
         this.allEWGViewModel.ewgList.observe(this) { ewgResourcesDataList ->
             if (ewgResourcesDataList == null) {
-                // TODO: Error
+                this.binding.electricityWaterGasRecyclerView.visibility = View.GONE
+                this.binding.containerWarningNoTickets.visibility = View.VISIBLE
+                this.binding.containerWarningNoTickets.setTitle("Error")
+                this.binding.containerWarningNoTickets.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 ewgDataList = mutableListOf()
                 for (ewgResourcesData in ewgResourcesDataList)  {

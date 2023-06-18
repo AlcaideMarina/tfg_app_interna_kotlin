@@ -70,7 +70,7 @@ class ClientOrdersFragment : BaseFragment() {
     override fun setObservers() {
         clientOrdersViewModel.allOrderList.observe(this) { orderDataList ->
             if (orderDataList == null) {
-                // Error
+                this.binding.orderRecyclerView.visibility = View.GONE
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
                 for(orderData in orderDataList) {
@@ -97,7 +97,7 @@ class ClientOrdersFragment : BaseFragment() {
                     }
                 }
                 if (orderList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.orderRecyclerView.visibility = View.GONE
                 } else {
                     this.binding.orderRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.orderRecyclerView.adapter = HNOrderContainerAdapter(orderList)

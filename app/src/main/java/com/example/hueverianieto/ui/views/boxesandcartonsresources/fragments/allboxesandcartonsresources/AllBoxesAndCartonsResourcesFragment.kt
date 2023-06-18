@@ -62,7 +62,10 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allBoxesAndCartonsResourcesViewModel.cbList.observe(this) { cbResourcesDataList ->
             if (cbResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.boxesAndCartonsRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 bcDataList = mutableListOf()
                 for (bcResourcesData in cbResourcesDataList)  {

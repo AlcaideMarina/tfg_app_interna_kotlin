@@ -65,7 +65,10 @@ class AllWorkersResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allWorkersResourcesViewModel.workerList.observe(this) { internalUserDataList ->
             if (internalUserDataList == null) {
-                // TODO: ERROR
+                this.binding.workersRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
+                this.binding.containerWaringNoWorkers.setTitle("Error")
+                this.binding.containerWaringNoWorkers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 workerList = mutableListOf()
                 for (internalUserData in internalUserDataList) {

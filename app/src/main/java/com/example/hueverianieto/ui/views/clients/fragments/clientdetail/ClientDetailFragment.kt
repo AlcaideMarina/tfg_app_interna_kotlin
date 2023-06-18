@@ -122,7 +122,6 @@ class ClientDetailFragment : BaseFragment() {
         this.clientDetailViewModel.allOrderList.observe(this) { orderDataList ->
             if (orderDataList == null || orderDataList.isEmpty()) {
                 this.binding.ordersLinearLayout.visibility = View.GONE
-                // Error
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
                 for(orderData in orderDataList) {
@@ -149,7 +148,7 @@ class ClientDetailFragment : BaseFragment() {
                     }
                 }
                 if (orderList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.orderRecyclerView.visibility = View.GONE
                 } else {
                     this.binding.orderRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.orderRecyclerView.adapter =
