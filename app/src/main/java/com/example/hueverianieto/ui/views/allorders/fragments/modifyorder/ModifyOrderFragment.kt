@@ -244,7 +244,7 @@ class ModifyOrderFragment : BaseFragment() {
                         null
                     )
                 } else {
-                    val orderData = OrderData(
+                    val updatedOrder = OrderData(
                         approxDeliveryDatetime = approxDeliveryDatetimeSelected,
                         clientId = clientData.id!!,
                         company = clientData.company,
@@ -264,7 +264,22 @@ class ModifyOrderFragment : BaseFragment() {
                         totalPrice = totalPrice,
                         documentId = this.orderData.documentId
                     )
-                    modifyOrderViewModel.updateOrder(clientData.documentId!!, orderData)
+
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Precio final",
+                        "El precio total del pedido será de $totalPrice €. ¿Desea continuar?",
+                        "Atrás",
+                        "Continuar",
+                        { alertDialog.cancel() },
+                        {
+                            alertDialog.cancel()
+                            continueOrder(
+                                updatedOrder
+                            )
+                        }
+                    )
                 }
 
 
@@ -423,6 +438,12 @@ class ModifyOrderFragment : BaseFragment() {
                 requireContext(), R.layout.component_dropdown_list_item, dropdownDeliveryPersonItem
             )
         )
+    }
+
+    private fun continueOrder(
+        updatedOrder: OrderData
+    ) {
+        modifyOrderViewModel.updateOrder(clientData.documentId!!, updatedOrder)
     }
 
     companion object {
