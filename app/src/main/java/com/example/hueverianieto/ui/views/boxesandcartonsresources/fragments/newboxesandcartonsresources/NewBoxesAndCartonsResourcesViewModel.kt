@@ -41,7 +41,7 @@ class NewBoxesAndCartonsResourcesViewModel @Inject constructor(
                     _viewState.value = NewBoxesAndCartonsResourcesViewState(isLoading = false)
                     _alertDialog.value = AlertOkData(
                         title = "Recurso guardado",
-                        text = "Las información sobre el pienso han sido guardada correctamente en la base de datos.",
+                        text = "La información del recurso ha sido guardada correctamente en la base de datos.",
                         true,
                         customCode = 0
                     )

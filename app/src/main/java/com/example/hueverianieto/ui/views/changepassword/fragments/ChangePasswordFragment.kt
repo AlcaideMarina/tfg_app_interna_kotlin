@@ -114,7 +114,7 @@ class ChangePasswordFragment : BaseFragment() {
                     alertDialog,
                     requireContext(),
                     "Formulario incompleto",
-                    "Debe rellenar todos los campos que se muestran.",
+                    "Debe rellenar todos los campos del formulario. Por favor revise los datos e inténtelo de nuevo.",
                     "De acuerdo",
                     null,
                     { alertDialog.cancel() },

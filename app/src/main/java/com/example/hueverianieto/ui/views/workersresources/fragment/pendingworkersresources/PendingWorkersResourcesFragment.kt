@@ -80,7 +80,7 @@ class PendingWorkersResourcesFragment : BaseFragment() {
                     this.binding.workersRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
                     this.binding.containerWaringNoWorkers.setTitle("No hay usuarios con sueldo pendiente")
-                    this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios a los que le falte el sueldo en la base de datos")
+                    this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios internos activos en la base de datos que estén pendientes de asignar el salario.")
                 } else {
                     initRecyclerView()
                 }
@@ -89,11 +89,11 @@ class PendingWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     private fun initRecyclerView() {

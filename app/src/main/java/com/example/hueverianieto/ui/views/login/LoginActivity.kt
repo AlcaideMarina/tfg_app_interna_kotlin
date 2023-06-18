@@ -187,7 +187,7 @@ class LoginActivity : BaseActivity() {
         alertDialog.show(
             this,
             ModalDialogModel(
-                "Vaya... ha habido un error",
+                "Error",
                 errorMessage,
                 "De acuerdo",
                 null,

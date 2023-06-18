@@ -42,8 +42,8 @@ class ModifyElectricityWaterGasResourcesViewModel @Inject constructor(
                 true -> {
                     _viewState.value = ModifyElectricityWaterGasResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
-                        "Cliente actualizado",
-                        "Los datos del cliente se han actualizado correctamente.",
+                        "Recurso actualizado",
+                        "Los datos del recurso se han actualizado correctamente.",
                         true,
                         0
                     )

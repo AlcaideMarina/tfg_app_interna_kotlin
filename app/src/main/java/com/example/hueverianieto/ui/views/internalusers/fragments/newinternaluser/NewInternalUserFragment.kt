@@ -194,8 +194,8 @@ class NewInternalUserFragment : BaseFragment() {
             Utils.setPopUp(
                 alertDialog,
                 requireContext(),
-                "Revise los datos",
-                "Hemos detectado que no se han rellenado todo slos campos solicitados o que son incorrectos. Por favor, revise el formulario.",
+                "Formulario incompleto",
+                "Debe rellenar todos los campos del formulario. Por favor revise los datos e inténtelo de nuevo.",
                 "De acuerdo",
                 null,
                 { alertDialog.cancel() },

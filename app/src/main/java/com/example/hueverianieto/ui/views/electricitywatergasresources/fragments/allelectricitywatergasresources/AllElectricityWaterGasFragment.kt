@@ -91,8 +91,8 @@ class AllElectricityWaterGasFragment : BaseFragment() {
                 if (ewgDataList.isEmpty()) {
                     this.binding.electricityWaterGasRecyclerView.visibility = View.GONE
                     this.binding.containerWarningNoTickets.visibility = View.VISIBLE
-                    this.binding.containerWarningNoTickets.setTitle("No hay clientes")
-                    this.binding.containerWarningNoTickets.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWarningNoTickets.setTitle("No hay recursos")
+                    this.binding.containerWarningNoTickets.setText("No hay registro de agua, luz o gas sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

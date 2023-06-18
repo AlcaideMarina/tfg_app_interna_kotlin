@@ -43,8 +43,8 @@ class ModifyHensResourcesViewModel @Inject constructor(
                 true -> {
                     _viewState.value = ModifyHensResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
-                        "Cliente actualizado",
-                        "Los datos del cliente se han actualizado correctamente.",
+                        "Recurso actualizado",
+                        "La información sobre el recurso ha sido actualizada correctamente en la base de datos.",
                         true,
                         0
                     )

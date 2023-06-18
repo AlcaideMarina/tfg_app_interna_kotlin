@@ -128,7 +128,7 @@ class NewClientFragment : BaseFragment() {
         }
 
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
-        this.binding.saveButton.setOnClickListener { checkOrder() }
+        this.binding.saveButton.setOnClickListener { checkInfo() }
     }
 
     override fun updateUI(state: BaseState) {
@@ -156,67 +156,7 @@ class NewClientFragment : BaseFragment() {
         )
     }
 
-    private fun saveUser() : String {
-        var nextIdStr = "0000000000"
-        Firebase.firestore.collection("client_info")
-            .get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    val documents = task.result
-                    nextIdStr = documents.size().toString()
-                    while(nextIdStr.length < 10) {
-                        nextIdStr = "0$nextIdStr"
-                    }
-
-                    // TODO: Guardar datos
-                    val userData = ClientData(
-                        cif,
-                        city,
-                        company,
-                        "TODO: created_by",
-                        false,
-                        direction,
-                        email,
-                        hasAccount,
-                        nextIdStr.toLong(),
-                        listOf(
-                            mapOf(namePhone1 to phone1.toLong()),
-                            mapOf(namePhone2 to phone2.toLong())
-                        ),
-                        postalCode.toLong(),
-                        province,
-                        null,
-                        accountUser,
-                        null
-                    )
-                    Firebase.firestore
-                        .collection("client_info")
-                        .add(ClientUtils.parcelableToMap(userData))
-                        .addOnSuccessListener {
-                            Log.d(NewClientFragment::class.java.simpleName, "DocumentSnapshot successfully written!")
-                            setPopUp(
-                                "Guardado correcto.",
-                                "El cliente ha sido guardado correctamente en la base de datos."
-                            ) {
-                                alertDialog.cancel()
-                                activity?.onBackPressedDispatcher?.onBackPressed()
-                            }
-                        }
-                        .addOnFailureListener { e ->
-                            Log.w(NewClientFragment::class.java.simpleName, "Error writing document", e)
-                            setPopUp(
-                                "Ha ocurrido un error.",
-                                "Ha ocurrido un error en el poceso de creación del cliente en nuestra base de datos. Por favor, inténtelo de nuevo.\nError: ${e.message}"
-                            ){
-                                alertDialog.cancel()
-                            }
-                        }
-                }
-            }
-        return nextIdStr
-    }
-
-    private fun checkOrder() {
+    private fun checkInfo() {
         variableAssignations()
         if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
             cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
@@ -244,8 +184,8 @@ class NewClientFragment : BaseFragment() {
             this.newClientViewModel.addNewClient(clientData)
         } else {
             setPopUp(
-                "Revise los datos",
-                "Hemos detectado que no se han rellenado todos los campos solicitados o que son incorrectos. Por favor, revise el formulario. Recuerde que los campos de usuario son obligatorios si el la casilla de verificación está marcada."
+                "Formulario incompleto",
+                "Debe rellenar todos los campos del formulario. Por favor revise los datos e inténtelo de nuevo."
             ) {
                 alertDialog.cancel()
             }

@@ -38,8 +38,6 @@ class MonthlyBillingDetailFragment : BaseFragment() {
         return this.binding.root
     }
 
-    // TODO: Falta por ocultar el texto cuando no es el mes actual
-    // TODO: Falta redondear a dos decimales
     override fun configureUI() {
         with(this.binding) {
             currentMonthWarning.isVisible = thisMonth
@@ -53,14 +51,14 @@ class MonthlyBillingDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 }

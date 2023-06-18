@@ -41,7 +41,7 @@ class NewHensResourcesViewModel @Inject constructor(
                     _viewState.value = NewHensResourcesViewState(isLoading = false)
                     _alertDialog.value = AlertOkData(
                         title = "Recurso guardado",
-                        text = "La información sobre las gallinas ha sido guardada correctamente en la base de datos.",
+                        text = "La información sobre el recurso ha sido actualizada correctamente en la base de datos.",
                         true,
                         customCode = 0
                     )

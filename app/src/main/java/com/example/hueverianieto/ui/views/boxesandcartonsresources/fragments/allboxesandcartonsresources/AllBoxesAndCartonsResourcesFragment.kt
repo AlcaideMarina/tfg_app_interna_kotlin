@@ -89,8 +89,8 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
                 if (bcDataList.isEmpty()) {
                     this.binding.boxesAndCartonsRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoOrders.visibility = View.VISIBLE
-                    this.binding.containerWaringNoOrders.setTitle("No hay clientes")
-                    this.binding.containerWaringNoOrders.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoOrders.setTitle("No hay recursos")
+                    this.binding.containerWaringNoOrders.setText("No hay registro de recursos de cajas y cartones sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

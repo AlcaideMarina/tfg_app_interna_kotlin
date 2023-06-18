@@ -146,7 +146,7 @@ class OrderDetailFragment : BaseFragment() {
                 alertDialog,
                 requireContext(),
                 "Aviso importante",
-                "Esta acción es irreversible. ¿Está seguro de que quiere eliminar el cliente?",
+                "Esta acción es irreversible. ¿Está seguro de que quiere eliminar el pedido?",
                 "Cancelar",
                 "Continuar",
                 { alertDialog.cancel() },

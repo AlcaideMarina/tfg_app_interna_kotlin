@@ -80,11 +80,15 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
                     }
                 }
                 if (list.isEmpty()) {
-                    // TODO
+                    this.binding.monthlyFpcRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoMonthlyFpc.visibility = View.VISIBLE
+                    this.binding.containerWaringNoMonthlyFpc.setTitle("No hay registros")
+                    this.binding.containerWaringNoMonthlyFpc.setText("No hay registros en la base de datos.")
                 } else {
                     this.binding.monthlyFpcRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.monthlyFpcRecyclerView.adapter = ComponentMonthlyFPCAdapter(list)
                     this.binding.monthlyFpcRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoMonthlyFpc.visibility = View.GONE
                 }
             }
         }

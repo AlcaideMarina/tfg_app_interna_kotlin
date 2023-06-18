@@ -58,7 +58,7 @@ class DeletedClientsFragment : BaseFragment() {
                     this.binding.clientsRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoClients.visibility = View.VISIBLE
                     this.binding.containerWaringNoClients.setTitle("No hay clientes")
-                    this.binding.containerWaringNoClients.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoClients.setText("No hay registro de clientes eliminados en la base de datos")
                 } else {
                     initRecyclerView()
                 }

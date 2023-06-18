@@ -86,8 +86,8 @@ class AllFeedResourcesFragment : BaseFragment() {
                 if (feedDataList.isEmpty()) {
                     this.binding.feedRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoOrders.visibility = View.VISIBLE
-                    this.binding.containerWaringNoOrders.setTitle("No hay clientes")
-                    this.binding.containerWaringNoOrders.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoOrders.setTitle("No hay recursos")
+                    this.binding.containerWaringNoOrders.setText("No hay registro de recursos de pienso sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

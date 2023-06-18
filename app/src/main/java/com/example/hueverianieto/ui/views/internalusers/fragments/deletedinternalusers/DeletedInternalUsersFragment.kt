@@ -87,7 +87,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
                     this.binding.deletedInternalUsersRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoDeletedInternalUsers.visibility = View.VISIBLE
                     this.binding.containerWaringNoDeletedInternalUsers.setTitle("No hay usuarios internos")
-                    this.binding.containerWaringNoDeletedInternalUsers.setText("No hay registro de usuarios internos en la base de datos")
+                    this.binding.containerWaringNoDeletedInternalUsers.setText("No hay registro de usuarios internos eliminados en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

@@ -105,7 +105,7 @@ class NewOrderViewModel @Inject constructor(
                     _viewState.value = NewOrderViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
-                        text = "Se ha producido un error. Por favor, revise los datos y vuelv a intentarlo",
+                        text = "Se ha producido un error. Por favor, revise los datos y vuelva a intentarlo",
                         true
                     )
                 }
@@ -116,7 +116,7 @@ class NewOrderViewModel @Inject constructor(
                             _viewState.value = NewOrderViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
                                 title = "Error",
-                                text = "Se ha producido un error. Por favor, revise los datos y vuelv a intentarlo",
+                                text = "Se ha producido un error. Por favor, revise los datos y vuelva a intentarlo",
                                 true
                             )
                         }

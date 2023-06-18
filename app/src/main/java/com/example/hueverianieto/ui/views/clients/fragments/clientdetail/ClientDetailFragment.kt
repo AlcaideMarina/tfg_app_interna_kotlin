@@ -70,7 +70,6 @@ class ClientDetailFragment : BaseFragment() {
     override fun configureUI() {
 
         setButtons()
-        // TODO: Habrá que controlar la parte de pedidos -> ordersLinearLayout.visibility = View.VISIBLE -> por ahora lo dejo seteado para que se muestre siempre
 
         clientDetailViewModel.getClientData(clientData.documentId!!)
         clientDetailViewModel.getOrders(clientData.documentId!!)
