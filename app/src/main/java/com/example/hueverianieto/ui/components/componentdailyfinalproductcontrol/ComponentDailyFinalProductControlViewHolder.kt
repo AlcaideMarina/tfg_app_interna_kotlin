@@ -16,8 +16,10 @@ class ComponentDailyFinalProductControlViewHolder(view: View) : RecyclerView.Vie
             fpcDailyContainerItemModel.fpcData.issueDatetime.toDate(),
             "dd/MM"
         )
-        this.binding.acceptedEggsText.text = fpcDailyContainerItemModel.fpcData.acceptedEggs.toString() + " huevos"
-        this.binding.rejectedEggsText.text = fpcDailyContainerItemModel.fpcData.rejectedEggs.toString() + " huevos"
+        this.binding.acceptedEggsText.text =
+            fpcDailyContainerItemModel.fpcData.acceptedEggs.toString() + " huevos"
+        this.binding.rejectedEggsText.text =
+            fpcDailyContainerItemModel.fpcData.rejectedEggs.toString() + " huevos"
         this.binding.baseComponentContainer.setOnClickListener(
             fpcDailyContainerItemModel.onClickListener
         )

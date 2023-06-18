@@ -7,7 +7,7 @@ class UpdateFeedUseCase @Inject constructor(
     private val updateFirestoreService: UpdateFirestoreService
 ) {
 
-    suspend operator fun invoke(feedDataMap: Map<String, Any?>, documentId: String) : Boolean =
+    suspend operator fun invoke(feedDataMap: Map<String, Any?>, documentId: String): Boolean =
         updateFirestoreService.updateDocumentFirestore(feedDataMap, documentId, "material_feed")
 
 }

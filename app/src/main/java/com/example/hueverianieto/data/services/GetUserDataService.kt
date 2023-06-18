@@ -12,7 +12,7 @@ class GetUserDataService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getUserData(uid: String) : InternalUserData? = runCatching {
+    suspend fun getUserData(uid: String): InternalUserData? = runCatching {
         firebaseClient.db
             .collection("user_info")
             .whereEqualTo("uid", uid)
@@ -20,12 +20,16 @@ class GetUserDataService @Inject constructor(
             .await()
     }.toInternalUserData()
 
-    private fun Result<QuerySnapshot>.toInternalUserData() = when(val result = getOrNull()) {
+    private fun Result<QuerySnapshot>.toInternalUserData() = when (val result = getOrNull()) {
         null -> null
         else -> {
             if (!result.isEmpty && result.documents.size > 0 && result.documents[0] != null
-                && result.documents[0].data != null) {
-                InternalUserUtils.mapToParcelable(result.documents[0].data!!, result.documents[0].id)
+                && result.documents[0].data != null
+            ) {
+                InternalUserUtils.mapToParcelable(
+                    result.documents[0].data!!,
+                    result.documents[0].id
+                )
             } else null
         }
     }

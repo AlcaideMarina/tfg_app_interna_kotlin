@@ -1,8 +1,6 @@
 package com.example.hueverianieto.ui.views.clients.fragments.clientdetail
 
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,30 +10,19 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.OrderContainerModel
-import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentClientDetailBinding
-import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
-import com.example.hueverianieto.databinding.FragmentNewClientBinding
-import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.componentordercontainertopthree.HNOrderContainerTopThreeContainerAdapter
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
-import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientFragment
-import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
-import com.example.hueverianieto.utils.Utils
 import com.example.hueverianieto.utils.Utils.setPopUp
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,7 +32,7 @@ class ClientDetailFragment : BaseFragment() {
     private lateinit var alertDialog: HNModalDialog
     private lateinit var clientData: ClientData
     private lateinit var currentUserData: InternalUserData
-    private val clientDetailViewModel : ClientDetailViewModel by viewModels()
+    private val clientDetailViewModel: ClientDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -76,7 +63,7 @@ class ClientDetailFragment : BaseFragment() {
 
         setFieldTexts()
         setUserInfo()
-        
+
         lifecycleScope.launchWhenStarted {
             clientDetailViewModel.getClientData(clientData.documentId!!)
             clientDetailViewModel.viewState.collect { viewState ->
@@ -100,7 +87,8 @@ class ClientDetailFragment : BaseFragment() {
                             alertDialog.cancel()
                             (activity as BaseActivity).goBackFragments()
                         },
-                        null)
+                        null
+                    )
                 } else {
                     setPopUp(
                         alertDialog,
@@ -110,7 +98,8 @@ class ClientDetailFragment : BaseFragment() {
                         "De acuerdo",
                         null,
                         { alertDialog.cancel() },
-                        null)
+                        null
+                    )
                 }
             }
         }
@@ -124,9 +113,10 @@ class ClientDetailFragment : BaseFragment() {
                 this.binding.ordersLinearLayout.visibility = View.GONE
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
-                for(orderData in orderDataList) {
+                for (orderData in orderDataList) {
                     if (orderData != null &&
-                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()
+                    ) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -171,7 +161,7 @@ class ClientDetailFragment : BaseFragment() {
         }
 
         this.binding.deleteClientButton.setOnClickListener {
-            Utils.setPopUp(
+            setPopUp(
                 alertDialog,
                 requireContext(),
                 "Aviso importante",
@@ -198,10 +188,9 @@ class ClientDetailFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        with(state as ClientDetailViewState) {
-            with(binding) {
-                this.loadingComponent.isVisible = state.isLoading
-            }
+        state as ClientDetailViewState
+        with(binding) {
+            this.loadingComponent.isVisible = state.isLoading
         }
     }
 

@@ -9,8 +9,11 @@ class GetEWGResourcesWithIdUseCase @Inject constructor(
     private val getFirestoreDocumentWithDocIdService: GetFirestoreDocumentWithDocIdService
 ) {
 
-    suspend operator fun invoke(documentId: String) : ElectricityWaterGasResourcesData? {
-        return when(val result = getFirestoreDocumentWithDocIdService.getDocumentWithDocId("material_electricity_water_gas", documentId).getOrNull()) {
+    suspend operator fun invoke(documentId: String): ElectricityWaterGasResourcesData? {
+        return when (val result = getFirestoreDocumentWithDocIdService.getDocumentWithDocId(
+            "material_electricity_water_gas",
+            documentId
+        ).getOrNull()) {
             null -> null
             else -> {
                 if (result.data != null) {

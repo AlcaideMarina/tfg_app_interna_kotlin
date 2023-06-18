@@ -8,6 +8,6 @@ class GetEWGUseCase @Inject constructor(
     private val getEWGService: GetEWGService
 ) {
 
-    suspend operator fun invoke() : List<ElectricityWaterGasResourcesData?>? = getEWGService.getEWG()
+    suspend operator fun invoke(): List<ElectricityWaterGasResourcesData?>? = getEWGService.getEWG()
 
 }

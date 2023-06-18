@@ -4,7 +4,7 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class WeeklyMonitoringCompanySituationData (
+data class WeeklyMonitoringCompanySituationData(
     var hensLosses: Long,
     var weeklyLaying: Long,
     var xlEggs: Long,

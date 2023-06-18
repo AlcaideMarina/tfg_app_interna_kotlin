@@ -15,7 +15,13 @@ class ComponentInternalUserAdapter(
         viewType: Int
     ): ComponentInternalUserViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ComponentInternalUserViewHolder(layoutInflater.inflate(R.layout.component_internal_user, parent, false))
+        return ComponentInternalUserViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_internal_user,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = componentInternalUserModelList.size

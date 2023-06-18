@@ -19,7 +19,6 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -107,14 +106,16 @@ class NewFinalProductControlFragment : BaseFragment() {
         this.binding.saveButton.setOnClickListener {
             it.hideSoftInput()
             if (this.binding.layingDateTextInputLayout.text != null && this.binding.layingDateTextInputLayout.text.toString() != "" &&
-                    this.binding.packingDateTextInputLayout.text != null && this.binding.packingDateTextInputLayout.text.toString() != "" &&
-                    this.binding.acceptedEggsTextInputLayout.text != null && this.binding.acceptedEggsTextInputLayout.text.toString() != "" &&
-                    this.binding.rejectedEggsTextInputLayout.text != null && this.binding.rejectedEggsTextInputLayout.text.toString() != "" &&
-                    this.binding.lotTextInputLayout.text != null && this.binding.lotTextInputLayout.text.toString() != "" &&
-                    this.binding.bestBeforeDateTextInputLayout.text != null && this.binding.bestBeforeDateTextInputLayout.text.toString() != "" &&
-                    this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != "") {
+                this.binding.packingDateTextInputLayout.text != null && this.binding.packingDateTextInputLayout.text.toString() != "" &&
+                this.binding.acceptedEggsTextInputLayout.text != null && this.binding.acceptedEggsTextInputLayout.text.toString() != "" &&
+                this.binding.rejectedEggsTextInputLayout.text != null && this.binding.rejectedEggsTextInputLayout.text.toString() != "" &&
+                this.binding.lotTextInputLayout.text != null && this.binding.lotTextInputLayout.text.toString() != "" &&
+                this.binding.bestBeforeDateTextInputLayout.text != null && this.binding.bestBeforeDateTextInputLayout.text.toString() != "" &&
+                this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != ""
+            ) {
                 if (layingDatetimeSelected <= packingDatetimeSelected && layingDatetimeSelected <= packingDatetimeSelected
-                        && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected) {
+                    && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected
+                ) {
                     this.newFinalProductControlViewModel.addFPC(
                         FPCData(
                             this.binding.acceptedEggsTextInputLayout.text.toString().toLong(),

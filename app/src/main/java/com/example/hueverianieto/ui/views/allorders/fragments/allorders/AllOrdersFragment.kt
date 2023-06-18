@@ -20,7 +20,6 @@ import com.example.hueverianieto.databinding.FragmentAllOrdersBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
-import com.example.hueverianieto.ui.views.main.MainActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
@@ -35,7 +34,7 @@ class AllOrdersFragment : BaseFragment() {
     private var fromNewOrderFragment by Delegates.notNull<Boolean>()
     private lateinit var alertDialog: HNModalDialog
     private var isFirst = true
-    private val allOrdersViewModel : AllOrdersViewModel by viewModels()
+    private val allOrdersViewModel: AllOrdersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -89,12 +88,16 @@ class AllOrdersFragment : BaseFragment() {
     override fun setObservers() {
         allOrdersViewModel.allOrderList.observe(this) { orderDataList ->
             if (orderDataList == null) {
-                // Error
+                this.binding.orderRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
-                for(orderData in orderDataList) {
+                for (orderData in orderDataList) {
                     if (orderData != null &&
-                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()
+                    ) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -146,11 +149,6 @@ class AllOrdersFragment : BaseFragment() {
             with(state as AllOrdersViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    } else if (state.isEmpty) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    }
                 }
             }
         } catch (e: Exception) {

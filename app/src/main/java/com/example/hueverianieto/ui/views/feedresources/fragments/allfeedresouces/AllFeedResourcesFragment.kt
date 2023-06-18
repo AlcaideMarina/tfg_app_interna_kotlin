@@ -14,13 +14,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllFeedResourcesBinding
-import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
 import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
-import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllFeedResourcesFragment : BaseFragment() {
@@ -67,7 +64,7 @@ class AllFeedResourcesFragment : BaseFragment() {
                 this.binding.containerWaringNoOrders.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 feedDataList = mutableListOf()
-                for (feedResourcesData in feedResourcesDataList)  {
+                for (feedResourcesData in feedResourcesDataList) {
                     if (feedResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             feedResourcesData.expenseDatetime,

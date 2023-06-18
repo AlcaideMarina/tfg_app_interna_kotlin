@@ -14,14 +14,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.ComponentTicketBinding
-import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
-import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HensResourcesDetailFragment : BaseFragment() {
@@ -44,7 +40,7 @@ class HensResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args : HensResourcesDetailFragmentArgs by navArgs()
+        val args: HensResourcesDetailFragmentArgs by navArgs()
         this.hensResourcesData = args.hensResourcesData
         this.currentUserData = args.currentUserData
 

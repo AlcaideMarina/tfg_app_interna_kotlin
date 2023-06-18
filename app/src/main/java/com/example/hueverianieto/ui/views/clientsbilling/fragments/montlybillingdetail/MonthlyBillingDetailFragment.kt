@@ -12,14 +12,13 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMontlyBillingDetailBinding
 import com.example.hueverianieto.domain.model.billingmodel.BillingModel
 import com.example.hueverianieto.ui.views.clientsbilling.ClientsBillingActivity
-import com.example.hueverianieto.ui.views.main.MainActivity
 import kotlin.properties.Delegates
 
 class MonthlyBillingDetailFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentMontlyBillingDetailBinding
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var billingModel : BillingModel
+    private lateinit var binding: FragmentMontlyBillingDetailBinding
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var billingModel: BillingModel
     private var thisMonth by Delegates.notNull<Boolean>()
 
     override fun onCreateView(
@@ -31,7 +30,7 @@ class MonthlyBillingDetailFragment : BaseFragment() {
         this.binding = FragmentMontlyBillingDetailBinding.inflate(
             inflater, container, false
         )
-        val args : MonthlyBillingDetailFragmentArgs by navArgs()
+        val args: MonthlyBillingDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.billingModel = args.billingModel
         this.thisMonth = args.thisMonth
@@ -61,4 +60,5 @@ class MonthlyBillingDetailFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         // Not necessary
     }
+
 }

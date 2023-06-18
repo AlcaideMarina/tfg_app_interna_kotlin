@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.domain.usecases.NewElectricityWaterGasResourcesUseCase
-import com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +22,15 @@ class NewElectricityWaterGasResourcesViewModel @Inject constructor(
     val viewState: StateFlow<NewElectricityWaterGasResourcesViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addEWGResource(electricityWaterGasResourcesData: ElectricityWaterGasResourcesData) {
         viewModelScope.launch {
             _viewState.value = NewElectricityWaterGasResourcesViewState(isLoading = true)
-            when(newElectricityWaterGasResourcesUseCase(electricityWaterGasResourcesData)) {
+            when (newElectricityWaterGasResourcesUseCase(electricityWaterGasResourcesData)) {
                 false -> {
-                    _viewState.value = NewElectricityWaterGasResourcesViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        NewElectricityWaterGasResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
                         text = "Se ha producido un error al guardar el recurso. Por favor, revise los datos e inténtelo de nuevo.",

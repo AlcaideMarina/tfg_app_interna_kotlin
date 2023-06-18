@@ -5,13 +5,12 @@ import com.example.hueverianieto.data.services.GetWeeklyMonitoringCompanySituati
 import com.example.hueverianieto.utils.FarmUtils
 import com.google.firebase.Timestamp
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 class GetWeeklyMonitoringCompanySituationUseCase @Inject constructor(
     private val getWeeklyMonitoringCompanySituationService: GetWeeklyMonitoringCompanySituationService
 ) {
 
-    suspend operator fun invoke(initTimestamp: Timestamp, endTimestamp: Timestamp) :
+    suspend operator fun invoke(initTimestamp: Timestamp, endTimestamp: Timestamp):
             WeeklyMonitoringCompanySituationData {
         val response = getWeeklyMonitoringCompanySituationService.getMonitoringComponentSituation(
             initTimestamp, endTimestamp
@@ -26,13 +25,14 @@ class GetWeeklyMonitoringCompanySituationUseCase @Inject constructor(
         if (response != null && response.documents.isNotEmpty()) {
             for (r in response.documents) {
                 if (r.data != null) {
-                    val mcsParcelable = FarmUtils.monitoringCompanySituationMapToParcelable(r.data!!, r.id)
+                    val mcsParcelable =
+                        FarmUtils.monitoringCompanySituationMapToParcelable(r.data!!, r.id)
                     hensLosses += mcsParcelable.hens["losses"] as Long
                     xlEggs += mcsParcelable.xlEggs["eggs"] as Long
                     lEggs += mcsParcelable.lEggs["eggs"] as Long
                     mEggs += mcsParcelable.mEggs["eggs"] as Long
                     sEggs += mcsParcelable.sEggs["eggs"] as Long
-                    weeklyLaying += (mcsParcelable.xlEggs["eggs"] as Long) + (mcsParcelable.lEggs["eggs"] as Long) +(mcsParcelable.mEggs["eggs"] as Long) +(mcsParcelable.sEggs["eggs"] as Long)
+                    weeklyLaying += (mcsParcelable.xlEggs["eggs"] as Long) + (mcsParcelable.lEggs["eggs"] as Long) + (mcsParcelable.mEggs["eggs"] as Long) + (mcsParcelable.sEggs["eggs"] as Long)
                 }
             }
         }

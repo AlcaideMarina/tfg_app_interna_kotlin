@@ -17,12 +17,11 @@ import com.example.hueverianieto.databinding.FragmentModifySellingPriceBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
-class ModifySellingPriceFragment  : BaseFragment() {
+class ModifySellingPriceFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentModifySellingPriceBinding
+    private lateinit var binding: FragmentModifySellingPriceBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var eggPricesData: EggPricesData
     private val modifySellingPriceViewModel: ModifySellingPriceViewModel by viewModels()
@@ -34,7 +33,7 @@ class ModifySellingPriceFragment  : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
-        val args : ModifySellingPriceFragmentArgs by navArgs()
+        val args: ModifySellingPriceFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.eggPricesData = args.eggPricesData
 
@@ -104,7 +103,10 @@ class ModifySellingPriceFragment  : BaseFragment() {
                 {
                     alertDialog.cancel()
                     val newEggPricesData = setEggPricesData()
-                    this.modifySellingPriceViewModel.updateEggSellingPrices(newEggPricesData, currentUserData.documentId!!)
+                    this.modifySellingPriceViewModel.updateEggSellingPrices(
+                        newEggPricesData,
+                        currentUserData.documentId!!
+                    )
                 }
             )
 
@@ -140,7 +142,7 @@ class ModifySellingPriceFragment  : BaseFragment() {
         }
     }
 
-    private fun setEggPricesData() : EggPricesData {
+    private fun setEggPricesData(): EggPricesData {
         return EggPricesData(
             this.binding.xlBoxEditText.text.toString().toDouble(),
             this.binding.xlDozenEditText.text.toString().toDouble(),

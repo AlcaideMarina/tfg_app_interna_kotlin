@@ -8,7 +8,7 @@ class GetAllInternalUsersUseCase @Inject constructor(
     private val getAllInternalUsersService: GetAllInternalUsersService
 ) {
 
-    suspend operator fun invoke(deleted: Boolean) : List<InternalUserData?>? =
+    suspend operator fun invoke(deleted: Boolean): List<InternalUserData?>? =
         getAllInternalUsersService.getAllInternalUsers(deleted)
 
 }

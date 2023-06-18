@@ -15,7 +15,6 @@ import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.DeleteDocumentFieldUseCase
 import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
-import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -42,7 +41,8 @@ class ClientDetailViewModel @Inject constructor(
     val allOrderList: LiveData<List<OrderData?>?> get() = _allOrderList
 
     fun navigateToModifyClient(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_modifyClientFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_clientDetailFragment_to_modifyClientFragment, bundle)
             ?: Log.e(
                 ClientDetailViewModel::class.simpleName,
                 "Error en la navegación a Modificar cliente"
@@ -52,7 +52,7 @@ class ClientDetailViewModel @Inject constructor(
     fun deleteClient(documentId: String) {
         _viewState.value = ClientDetailViewState(isLoading = true)
         viewModelScope.launch {
-            when(val result = deleteDocumentFieldUseCase(documentId, "client_info")) {
+            when (val result = deleteDocumentFieldUseCase(documentId, "client_info")) {
                 false -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -62,7 +62,8 @@ class ClientDetailViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ClientDetailViewState(isLoading = false, error = false, correct = true)
+                    _viewState.value =
+                        ClientDetailViewState(isLoading = false, error = false, correct = true)
                     _alertDialog.value = AlertOkData(
                         "Cliente eliminado",
                         "El cliente ha sido eliminado correctamente",
@@ -93,12 +94,12 @@ class ClientDetailViewModel @Inject constructor(
     fun getOrders(documentId: String) {
         viewModelScope.launch {
             _viewState.value = ClientDetailViewState(isLoading = true)
-            when(val result = getAllClientOrdersUseCase(documentId)) {
+            when (val result = getAllClientOrdersUseCase(documentId)) {
                 null -> {
                     _viewState.value = ClientDetailViewState(isLoading = false, error = true)
                 }
                 else -> {
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (order in result) {
                         if (order != null) {
                             orderList.add(order)
@@ -112,17 +113,17 @@ class ClientDetailViewModel @Inject constructor(
     }
 
     fun navigateToAllClientOrders(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_clientOrdersFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_clientDetailFragment_to_clientOrdersFragment, bundle)
             ?: Log.e(
                 ClientDetailViewModel::class.simpleName,
                 "Error en la navegación a todos los pedidos del cliente"
             )
     }
 
-
-
     fun navigateToOrderDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_clientDetailFragment_to_orderDetailFragment2, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_clientDetailFragment_to_orderDetailFragment2, bundle)
             ?: Log.e(
                 ClientDetailViewModel::class.java.simpleName,
                 "Error en la navegación a detalle de pedido"

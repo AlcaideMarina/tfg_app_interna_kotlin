@@ -11,8 +11,8 @@ class DeleteOrderService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun deleteOrder(clientDocumentId: String, orderDocumentId: String) : Boolean {
-        val deleted : Map<String, Any> = mapOf(
+    suspend fun deleteOrder(clientDocumentId: String, orderDocumentId: String): Boolean {
+        val deleted: Map<String, Any> = mapOf(
             "status" to Constants.orderStatus[R.string.cancelled]!!.toLong(),
             "delivery_datetime" to Timestamp.now()
         )
@@ -22,7 +22,8 @@ class DeleteOrderService @Inject constructor(
                 .document(clientDocumentId)
                 .collection("orders")
                 .document(orderDocumentId)
-                .set(deleted,
+                .set(
+                    deleted,
                     SetOptions.merge()
                 )
                 .await()

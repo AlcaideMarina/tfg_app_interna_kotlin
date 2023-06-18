@@ -7,6 +7,6 @@ class GetInternalUserIdUseCase @Inject constructor(
     private val getInternalUserIdService: GetInternalUserIdService
 ) {
 
-    suspend operator fun invoke() : Long? = getInternalUserIdService.getInternalUserId()
+    suspend operator fun invoke(): Long? = getInternalUserIdService.getInternalUserId()
 
 }

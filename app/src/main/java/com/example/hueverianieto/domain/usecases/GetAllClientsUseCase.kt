@@ -8,7 +8,7 @@ class GetAllClientsUseCase @Inject constructor(
     private val getAllClientsService: GetAllClientsService
 ) {
 
-    suspend operator fun invoke(deleted: Boolean) : List<ClientData?>? =
+    suspend operator fun invoke(deleted: Boolean): List<ClientData?>? =
         getAllClientsService.getAllClientsService(deleted)
 
 }

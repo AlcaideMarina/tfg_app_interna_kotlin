@@ -2,8 +2,8 @@ package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalpr
 
 import com.example.hueverianieto.base.BaseState
 
-class FinalProductControlDetailViewState (
+class FinalProductControlDetailViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
-    var isEmpty: Boolean =  false
+    var isEmpty: Boolean = false
 ) : BaseState

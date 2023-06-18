@@ -8,8 +8,11 @@ class NewDocumentService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun newDocument(collection: String, dataMap: Map<String, Any?>) : Result<DocumentReference> = runCatching {
-         firebaseClient.db
+    suspend fun newDocument(
+        collection: String,
+        dataMap: Map<String, Any?>
+    ): Result<DocumentReference> = runCatching {
+        firebaseClient.db
             .collection(collection)
             .add(dataMap)
             .await()

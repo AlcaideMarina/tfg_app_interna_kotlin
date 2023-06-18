@@ -33,7 +33,7 @@ class FinalProductControlDetailViewModel @Inject constructor(
     fun getFinalProductControl(documentId: String) {
         viewModelScope.launch {
             _viewState.value = FinalProductControlDetailViewState(isLoading = true)
-            when(val result = getFPCWithIdUseCase(documentId)) {
+            when (val result = getFPCWithIdUseCase(documentId)) {
                 null -> _viewState.value = FinalProductControlDetailViewState(isLoading = false)
                 else -> {
                     _viewState.value = FinalProductControlDetailViewState(isLoading = false)
@@ -52,7 +52,10 @@ class FinalProductControlDetailViewModel @Inject constructor(
     }
 
     fun navigateToModifyFPCResources(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_finalProductControlDetailFragment_to_modifyFinalProductControlFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_finalProductControlDetailFragment_to_modifyFinalProductControlFragment,
+            bundle
+        )
             ?: Log.e(
                 FinalProductControlDetailViewModel::class.simpleName,
                 "Error en la navegación a modificar fpc"

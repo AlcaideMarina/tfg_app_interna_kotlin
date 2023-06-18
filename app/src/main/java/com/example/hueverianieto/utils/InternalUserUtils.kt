@@ -2,8 +2,6 @@ package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.remote.InternalUserData
 
-// TODO: Sacar constantes
-
 object InternalUserUtils {
 
     fun checkErrorMap(data: MutableMap<String, Any?>?): String? {

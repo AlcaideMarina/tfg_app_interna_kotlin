@@ -3,7 +3,7 @@ package com.example.hueverianieto.domain.model.componentinternaluser
 import android.view.View.OnClickListener
 import com.example.hueverianieto.base.BaseModel
 
-class ComponentInternalUserModel (
+class ComponentInternalUserModel(
     var id: String,
     var name: String,
     var surname: String,

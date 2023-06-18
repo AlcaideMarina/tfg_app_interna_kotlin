@@ -33,12 +33,12 @@ class ModifyClientViewModel @Inject constructor(
         _viewState.value = ModifyClientViewState(isLoading = true)
         viewModelScope.launch {
             _viewState.value = ModifyClientViewState(isLoading = true)
-            if(Utils.isValidEmail(clientData.email)) {
-                // TODO: Hay que controlar si el cliente ya tenía cuenta de antes - Que venga como parámetro
+            if (Utils.isValidEmail(clientData.email)) {
                 if (createAuthAccount && clientData.hasAccount) {
                     when (val result = createAuthUserUseCase(clientData.email, clientData.user!!)) {
                         null -> {
-                            _viewState.value = ModifyClientViewState(isLoading = false, error = true)
+                            _viewState.value =
+                                ModifyClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
                                 "Error",
                                 "Se ha producido un error al crear el usuario de la aplicación. Revise los datos e inténtelo de nuevo. Recuerde que no se puede tener dos cuentas con el mismo correo y que el usuario debe tener, al menos, 6 caracteres.",
@@ -50,9 +50,14 @@ class ModifyClientViewModel @Inject constructor(
                             clientData.uid = newUid
                             val clientDataMap = ClientUtils.parcelableToMap(clientData)
                             when (val result =
-                                updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!, "client_info")) {
+                                updateFirestoreUserUseCase(
+                                    clientDataMap,
+                                    clientData.documentId!!,
+                                    "client_info"
+                                )) {
                                 false -> {
-                                    _viewState.value = ModifyClientViewState(isLoading = false, error = true)
+                                    _viewState.value =
+                                        ModifyClientViewState(isLoading = false, error = true)
                                     _alertDialog.value = AlertOkData(
                                         "Error",
                                         "Se ha producido un error al guardar los cambios. Revise los datos e inténtelo de nuevo.",
@@ -60,7 +65,11 @@ class ModifyClientViewModel @Inject constructor(
                                     )
                                 }
                                 true -> {
-                                    _viewState.value = ModifyClientViewState(isLoading = false, error = false, correct = true)
+                                    _viewState.value = ModifyClientViewState(
+                                        isLoading = false,
+                                        error = false,
+                                        correct = true
+                                    )
                                     _alertDialog.value = AlertOkData(
                                         "Cliente actualizado",
                                         "Los datos del cliente se han actualizado correctamente.",
@@ -74,9 +83,14 @@ class ModifyClientViewModel @Inject constructor(
                 } else {
                     val clientDataMap = ClientUtils.parcelableToMap(clientData)
                     when (val result =
-                        updateFirestoreUserUseCase(clientDataMap, clientData.documentId!!, "client_info")) {
+                        updateFirestoreUserUseCase(
+                            clientDataMap,
+                            clientData.documentId!!,
+                            "client_info"
+                        )) {
                         false -> {
-                            _viewState.value = ModifyClientViewState(isLoading = false, error = true)
+                            _viewState.value =
+                                ModifyClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
                                 "Error",
                                 "Se ha producido un error cuando se estaban actualizado los datos del cliente. Por favor, revise los datos e inténtelo de nuevo.",
@@ -84,7 +98,8 @@ class ModifyClientViewModel @Inject constructor(
                             )
                         }
                         true -> {
-                            _viewState.value = ModifyClientViewState(isLoading = false, error = false)
+                            _viewState.value =
+                                ModifyClientViewState(isLoading = false, error = false)
                             _alertDialog.value = AlertOkData(
                                 "Cliente actualizado",
                                 "Los datos del cliente se han actualizado correctamente.",

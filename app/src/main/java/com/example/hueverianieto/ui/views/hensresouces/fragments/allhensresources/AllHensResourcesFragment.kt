@@ -12,17 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
-import com.example.hueverianieto.domain.model.componentclientmodel.ComponentClientBillingModel
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
-import com.example.hueverianieto.ui.components.componentclientbilling.ComponentClientBillingAdapter
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
-import com.example.hueverianieto.ui.views.clientsbilling.fragments.clientsbilling.ClientsBillingViewState
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
 class AllHensResourcesFragment : BaseFragment() {
@@ -69,7 +64,7 @@ class AllHensResourcesFragment : BaseFragment() {
                 this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 hensDataList = mutableListOf()
-                for (hensResourcesData in hensResourcesDataList)  {
+                for (hensResourcesData in hensResourcesDataList) {
                     if (hensResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             hensResourcesData.expenseDatetime,

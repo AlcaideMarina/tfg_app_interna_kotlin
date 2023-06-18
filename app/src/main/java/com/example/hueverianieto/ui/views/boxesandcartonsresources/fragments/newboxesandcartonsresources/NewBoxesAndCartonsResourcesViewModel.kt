@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.domain.usecases.NewBoxesAndCartonsResourcesUseCase
-import com.example.hueverianieto.ui.views.feedresources.fragments.newfeedresources.NewFeedResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +22,15 @@ class NewBoxesAndCartonsResourcesViewModel @Inject constructor(
     val viewState: StateFlow<NewBoxesAndCartonsResourcesViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addBoxesAndCartonsResource(bcResourcesData: BoxesAndCartonsResourcesData) {
         viewModelScope.launch {
             _viewState.value = NewBoxesAndCartonsResourcesViewState(isLoading = true)
-            when(newBoxesAndCartonsResourcesUseCase(bcResourcesData)) {
+            when (newBoxesAndCartonsResourcesUseCase(bcResourcesData)) {
                 false -> {
-                    _viewState.value = NewBoxesAndCartonsResourcesViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        NewBoxesAndCartonsResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
                         text = "Se ha producido un error al guardar el recurso. Por favor, revise los datos e inténtelo de nuevo.",

@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class FeedResourcesData (
+class FeedResourcesData(
     var createdBy: String,
     var creationDatetime: Timestamp,
     var deleted: Boolean,

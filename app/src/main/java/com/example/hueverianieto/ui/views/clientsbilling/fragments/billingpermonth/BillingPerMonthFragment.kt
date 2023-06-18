@@ -20,14 +20,13 @@ import com.example.hueverianieto.databinding.FragmentBillingPerMonthBinding
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
 import com.example.hueverianieto.ui.components.componentbillingpermonth.billing.ComponentBillingPerMonthAdapter
 import com.google.firebase.Timestamp
-import com.google.type.DateTime
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 
 @AndroidEntryPoint
 class BillingPerMonthFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentBillingPerMonthBinding
+    private lateinit var binding: FragmentBillingPerMonthBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var clientData: ClientData
     private val billingViewModel: BillingPerMonthViewModel by viewModels()
@@ -42,7 +41,7 @@ class BillingPerMonthFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : BillingPerMonthFragmentArgs by navArgs()
+        val args: BillingPerMonthFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.clientData = args.clientData
 
@@ -115,11 +114,6 @@ class BillingPerMonthFragment : BaseFragment() {
             with(state as BillingPerMonthViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    } else if (state.isEmpty) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    }
                 }
             }
         } catch (e: Exception) {

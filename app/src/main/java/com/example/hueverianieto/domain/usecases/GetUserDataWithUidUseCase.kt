@@ -8,7 +8,7 @@ class GetUserDataWithUidUseCase @Inject constructor(
     private val getClientDataService: GetUserDataService
 ) {
 
-    suspend operator fun invoke(uid: String) : InternalUserData? =
+    suspend operator fun invoke(uid: String): InternalUserData? =
         getClientDataService.getUserData(uid)
 
 }

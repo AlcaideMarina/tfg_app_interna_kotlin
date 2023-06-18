@@ -20,15 +20,14 @@ import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import com.example.hueverianieto.utils.Utils.setPopUp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyInternalUserFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentModifyInternalUserBinding
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var internalUserData : InternalUserData
-    private var dropdownRoleItems : MutableList<String> = mutableListOf()
+    private lateinit var binding: FragmentModifyInternalUserBinding
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var internalUserData: InternalUserData
+    private var dropdownRoleItems: MutableList<String> = mutableListOf()
     private val modifyInternalUserViewModel: ModifyInternalUserViewModel by viewModels()
     private lateinit var alertDialog: HNModalDialog
 
@@ -43,7 +42,7 @@ class ModifyInternalUserFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : ModifyInternalUserFragmentArgs by navArgs()
+        val args: ModifyInternalUserFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
 
@@ -103,14 +102,15 @@ class ModifyInternalUserFragment : BaseFragment() {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
-            val positionSelected : Int? = when (this.binding.roleAutoCompleteTextView.text.toString()) {
-                requireContext().getString(R.string.warehouse_job) -> R.string.warehouse_job
-                requireContext().getString(R.string.boss_job) -> R.string.boss_job
-                requireContext().getString(R.string.farm_job) -> R.string.farm_job
-                requireContext().getString(R.string.office_job) -> R.string.office_job
-                requireContext().getString(R.string.delivery_job) -> R.string.delivery_job
-                else -> null
-            }
+            val positionSelected: Int? =
+                when (this.binding.roleAutoCompleteTextView.text.toString()) {
+                    requireContext().getString(R.string.warehouse_job) -> R.string.warehouse_job
+                    requireContext().getString(R.string.boss_job) -> R.string.boss_job
+                    requireContext().getString(R.string.farm_job) -> R.string.farm_job
+                    requireContext().getString(R.string.office_job) -> R.string.office_job
+                    requireContext().getString(R.string.delivery_job) -> R.string.delivery_job
+                    else -> null
+                }
             val internalUserData = InternalUserData(
                 this.binding.bankAccountTextInputLayout.text.toString(),
                 this.binding.cityTextInputLayout.text.toString(),

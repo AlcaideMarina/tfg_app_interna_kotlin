@@ -14,31 +14,29 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.databinding.FragmentOrderDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class OrderDetailFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentOrderDetailBinding
-    private lateinit var alertDialog : HNModalDialog
-    private lateinit var orderData : OrderData
-    private lateinit var clientData : ClientData
+    private lateinit var binding: FragmentOrderDetailBinding
+    private lateinit var alertDialog: HNModalDialog
+    private lateinit var orderData: OrderData
+    private lateinit var clientData: ClientData
     private lateinit var currentUserData: InternalUserData
-    private val orderDetailViewModel : OrderDetailViewModel by viewModels()
+    private val orderDetailViewModel: OrderDetailViewModel by viewModels()
 
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
     private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
 
     override fun onCreateView(
@@ -51,7 +49,7 @@ class OrderDetailFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : OrderDetailFragmentArgs by navArgs()
+        val args: OrderDetailFragmentArgs by navArgs()
         this.orderData = args.orderData
         this.currentUserData = args.currentUserData
 
@@ -153,7 +151,8 @@ class OrderDetailFragment : BaseFragment() {
                 {
                     alertDialog.cancel()
                     orderDetailViewModel.deleteOrder(
-                        clientData.documentId!!, orderData.documentId!!)
+                        clientData.documentId!!, orderData.documentId!!
+                    )
                 }
             )
         }
@@ -207,7 +206,7 @@ class OrderDetailFragment : BaseFragment() {
         this.binding.statusTextInputLayout.isEnabled = false
     }
 
-    private fun setTexts(clientData : ClientData) {
+    private fun setTexts(clientData: ClientData) {
 
         val phone1 = clientData.phone[0].entries.iterator().next()
         val phone2 = clientData.phone[1].entries.iterator().next()
@@ -221,21 +220,27 @@ class OrderDetailFragment : BaseFragment() {
         }
 
         val statusApproxDeliveryDatetimeList = listOf<Long>(0, 1, 2)
-        val deliveryDatetimeField : String = if (statusApproxDeliveryDatetimeList.contains(orderData.status)) {
-            requireContext().getString(
-                Utils.getKey(
-                Constants.orderStatus, orderData.status.toInt())!!) + " - " +
-                    Utils.parseTimestampToString(orderData.approxDeliveryDatetime)
-        } else if (orderData.status == (4).toLong()) {
-            Utils.parseTimestampToString(orderData.deliveryDatetime) ?: ""
-        } else if (orderData.status == (5).toLong()) {
-            requireContext().getString(Utils.getKey(
-                Constants.orderStatus, orderData.status.toInt())!!) + " - " +
-                    Utils.parseTimestampToString(orderData.deliveryDatetime)
-        } else {
-            Utils.parseTimestampToString(orderData.deliveryDatetime)
-                ?: Utils.parseTimestampToString(orderData.approxDeliveryDatetime)!!
-        }
+        val deliveryDatetimeField: String =
+            if (statusApproxDeliveryDatetimeList.contains(orderData.status)) {
+                requireContext().getString(
+                    Utils.getKey(
+                        Constants.orderStatus, orderData.status.toInt()
+                    )!!
+                ) + " - " +
+                        Utils.parseTimestampToString(orderData.approxDeliveryDatetime)
+            } else if (orderData.status == (4).toLong()) {
+                Utils.parseTimestampToString(orderData.deliveryDatetime) ?: ""
+            } else if (orderData.status == (5).toLong()) {
+                requireContext().getString(
+                    Utils.getKey(
+                        Constants.orderStatus, orderData.status.toInt()
+                    )!!
+                ) + " - " +
+                        Utils.parseTimestampToString(orderData.deliveryDatetime)
+            } else {
+                Utils.parseTimestampToString(orderData.deliveryDatetime)
+                    ?: Utils.parseTimestampToString(orderData.approxDeliveryDatetime)!!
+            }
 
         with(this.binding) {
             orderIdTextView.text = "ID pedido: " + orderData.orderId.toString()
@@ -246,19 +251,22 @@ class OrderDetailFragment : BaseFragment() {
             phoneTextInputLayoutPhone2.setText(phone2.value.toString())
             totalPriceTextInputLayout.setText(priceStr)
             orderDateTextInputLayout.setText(
-                Utils.parseTimestampToString(orderData.orderDatetime) ?: "")
+                Utils.parseTimestampToString(orderData.orderDatetime) ?: ""
+            )
             deliveryDateTextInputLayout.setText(deliveryDatetimeField)
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
             paidCheckedTextView.isChecked = orderData.paid
             paymentMethodAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!)
+                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!
+                )
             )
             lotTextInputLayout.setText(orderData.lot ?: "")
             statusAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!)
+                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!
+                )
             )
         }
 
@@ -273,7 +281,7 @@ class OrderDetailFragment : BaseFragment() {
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (recyclerViewTitles.contains(position)) 4
-                else if(recyclerViewTextInputLayouts.contains(position)) 2
+                else if (recyclerViewTextInputLayouts.contains(position)) 2
                 else 1
             }
         }

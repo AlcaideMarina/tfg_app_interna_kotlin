@@ -27,12 +27,18 @@ class EconomyFragment : BaseFragment() {
         (activity as MainActivity).configNav(false)
         internalUserData = (activity as MainActivity).currentUserData
         binding =
-            FragmentEcconomyBinding.bind(inflater.inflate(R.layout.fragment_ecconomy, container, false))
+            FragmentEcconomyBinding.bind(
+                inflater.inflate(
+                    R.layout.fragment_ecconomy,
+                    container,
+                    false
+                )
+            )
         return binding.root
     }
 
     override fun configureUI() {
-      setButtons()
+        setButtons()
     }
 
     override fun setObservers() {
@@ -42,7 +48,8 @@ class EconomyFragment : BaseFragment() {
     override fun setListeners() {
         this.binding.clientsBillingButton.setOnClickListener {
             this.economyViewModel.navigateToClientsBilling(
-                requireContext(), this.internalUserData)
+                requireContext(), this.internalUserData
+            )
         }
         this.binding.companyAccountsButton.setOnClickListener {
             this.economyViewModel.navigateToSellingPrice(
@@ -59,4 +66,5 @@ class EconomyFragment : BaseFragment() {
         this.binding.clientsBillingButton.setText("Facturación de clientes")
         this.binding.companyAccountsButton.setText("Precio de venta")
     }
+
 }

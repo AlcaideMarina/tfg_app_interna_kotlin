@@ -13,7 +13,6 @@ import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
 import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewState
-import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -37,12 +36,12 @@ class ClientOrdersViewModel @Inject constructor(
     fun getOrders(documentId: String) {
         viewModelScope.launch {
             _viewState.value = ClientOrdersViewState(isLoading = true)
-            when(val result = getAllClientOrdersUseCase(documentId)) {
+            when (val result = getAllClientOrdersUseCase(documentId)) {
                 null -> {
                     _viewState.value = ClientOrdersViewState(isLoading = false, error = true)
                 }
                 else -> {
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (order in result) {
                         if (order != null) {
                             orderList.add(order)
@@ -56,7 +55,8 @@ class ClientOrdersViewModel @Inject constructor(
     }
 
     fun navigateToOrderDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_clientOrdersFragment_to_orderDetailFragment2, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_clientOrdersFragment_to_orderDetailFragment2, bundle)
             ?: Log.e(
                 AllOrdersViewState::class.java.simpleName,
                 "Error en la navegación a detalle de pedido"

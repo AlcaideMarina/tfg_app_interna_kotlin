@@ -1,7 +1,6 @@
 package com.example.hueverianieto.ui.components
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.text.method.TransformationMethod
 import android.util.AttributeSet
 import android.view.LayoutInflater

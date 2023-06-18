@@ -8,19 +8,19 @@ class DeleteDocumentFieldService @Inject constructor(
     private var firebaseClient: FirebaseClient
 ) {
 
-    suspend fun deleteDocumentField(documentId: String, collection: String) : Boolean {
-        val deleted : Map<String, Boolean> = mapOf("deleted" to true)
+    suspend fun deleteDocumentField(documentId: String, collection: String): Boolean {
+        val deleted: Map<String, Boolean> = mapOf("deleted" to true)
         return runCatching {
             firebaseClient.db
                 .collection(collection)
                 .document(documentId)
-                .set(deleted,
+                .set(
+                    deleted,
                     SetOptions.merge()
                 )
                 .await()
         }.toBooleanResult()
     }
-
 
     private fun Result<Void>.toBooleanResult() = when (val result = getOrNull()) {
         null -> true

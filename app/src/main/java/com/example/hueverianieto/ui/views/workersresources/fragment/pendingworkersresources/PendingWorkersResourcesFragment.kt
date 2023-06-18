@@ -104,4 +104,5 @@ class PendingWorkersResourcesFragment : BaseFragment() {
         this.binding.workersRecyclerView.adapter = HNComponentWorkerAdapter(pendingWorkersList)
         this.binding.workersRecyclerView.setHasFixedSize(false)
     }
+
 }

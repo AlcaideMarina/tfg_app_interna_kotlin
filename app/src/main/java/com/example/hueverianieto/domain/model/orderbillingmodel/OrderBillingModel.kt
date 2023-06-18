@@ -2,7 +2,7 @@ package com.example.hueverianieto.domain.model.orderbillingmodel
 
 import com.google.firebase.Timestamp
 
-data class OrderBillingModel (
+data class OrderBillingModel(
     val orderId: Long?,
     val orderDatetime: Timestamp,
     val paymentMethod: Long,

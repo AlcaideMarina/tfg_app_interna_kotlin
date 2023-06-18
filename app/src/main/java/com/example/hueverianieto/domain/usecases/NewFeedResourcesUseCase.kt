@@ -7,11 +7,11 @@ import javax.inject.Inject
 
 class NewFeedResourcesUseCase @Inject constructor(
     private val newDocumentService: NewDocumentService
-){
+) {
 
-    suspend operator fun invoke(feedResourcesData: FeedResourcesData) : Boolean {
+    suspend operator fun invoke(feedResourcesData: FeedResourcesData): Boolean {
         val dataMap = MaterialUtils.feedParcelableToMap(feedResourcesData)
-        return when(newDocumentService.newDocument("material_feed", dataMap).getOrNull()) {
+        return when (newDocumentService.newDocument("material_feed", dataMap).getOrNull()) {
             null -> false
             else -> true
         }

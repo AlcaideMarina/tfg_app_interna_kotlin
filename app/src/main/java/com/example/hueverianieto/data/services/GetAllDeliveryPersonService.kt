@@ -10,7 +10,7 @@ class GetAllDeliveryPersonService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getAllDeliveryPerson() : List<InternalUserData?>? = runCatching {
+    suspend fun getAllDeliveryPerson(): List<InternalUserData?>? = runCatching {
         firebaseClient.db
             .collection("user_info")
             .whereEqualTo("position", (2).toLong())
@@ -18,10 +18,10 @@ class GetAllDeliveryPersonService @Inject constructor(
             .await()
     }.toInternalUserDataList()
 
-    private fun Result<QuerySnapshot>.toInternalUserDataList() = when(val result = getOrNull()) {
+    private fun Result<QuerySnapshot>.toInternalUserDataList() = when (val result = getOrNull()) {
         null -> null
         else -> {
-            val list : MutableList<InternalUserData> = mutableListOf()
+            val list: MutableList<InternalUserData> = mutableListOf()
             if (!result.isEmpty && result.documents.size > 0) {
                 for (document in result) {
                     val data = document.data

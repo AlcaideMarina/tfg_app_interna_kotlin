@@ -6,10 +6,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
-import com.example.hueverianieto.domain.usecases.GetHensUseCase
 import com.example.hueverianieto.domain.usecases.NewMonitoringCompanySituationUseCase
 import com.example.hueverianieto.domain.usecases.UpdateDailyMonitoringCompanySituationUseCase
-import com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationViewState
 import com.example.hueverianieto.utils.FarmUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,9 +25,12 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
     val viewState: StateFlow<ModifyDailyMonitoringCompanySituationViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
-    fun updateDailyMonitoringCompanySituation(monitoringCompanySituationData: MonitoringCompanySituationData, documentId: String) {
+    fun updateDailyMonitoringCompanySituation(
+        monitoringCompanySituationData: MonitoringCompanySituationData,
+        documentId: String
+    ) {
         viewModelScope.launch {
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
             when (updateDailyMonitoringCompanySituationUseCase(
@@ -85,6 +86,5 @@ class ModifyDailyMonitoringCompanySituationVewModel @Inject constructor(
             _viewState.value = ModifyDailyMonitoringCompanySituationViewState(isLoading = true)
         }
     }
-
 
 }

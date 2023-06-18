@@ -1,13 +1,15 @@
 package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.local.DBBoxesAndCartonsOrderFieldData
-import com.example.hueverianieto.data.models.local.DBOrderFieldData
 import com.example.hueverianieto.data.models.remote.*
 import com.google.firebase.Timestamp
 
 object MaterialUtils {
 
-    fun hensMapToParcelable(data: MutableMap<String, Any?>, documentId: String?): HensResourcesData {
+    fun hensMapToParcelable(
+        data: MutableMap<String, Any?>,
+        documentId: String?
+    ): HensResourcesData {
         return HensResourcesData(
             data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
@@ -21,7 +23,7 @@ object MaterialUtils {
         )
     }
 
-    fun hensParcelableToMap(hensResourcesData: HensResourcesData) : Map<String, Any?> {
+    fun hensParcelableToMap(hensResourcesData: HensResourcesData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["created_by"] = hensResourcesData.createdBy
@@ -36,7 +38,10 @@ object MaterialUtils {
         return map
     }
 
-    fun ewgMapToParcelable(data: MutableMap<String, Any?>, documentId: String?) : ElectricityWaterGasResourcesData {
+    fun ewgMapToParcelable(
+        data: MutableMap<String, Any?>,
+        documentId: String?
+    ): ElectricityWaterGasResourcesData {
         return ElectricityWaterGasResourcesData(
             data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
@@ -49,11 +54,11 @@ object MaterialUtils {
         )
     }
 
-    fun ewgParcelableToMap(electricityWaterGasResourcesData: ElectricityWaterGasResourcesData) : Map<String, Any?> {
+    fun ewgParcelableToMap(electricityWaterGasResourcesData: ElectricityWaterGasResourcesData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["created_by"] = electricityWaterGasResourcesData.createBy
-        map["creation_datetime"] = electricityWaterGasResourcesData.creationDatatime
+        map["creation_datetime"] = electricityWaterGasResourcesData.creationDatetime
         map["deleted"] = electricityWaterGasResourcesData.deleted
         map["expense_datetime"] = electricityWaterGasResourcesData.expenseDatetime
         map["notes"] = electricityWaterGasResourcesData.notes
@@ -63,7 +68,7 @@ object MaterialUtils {
         return map
     }
 
-    fun feedMapToParcelable(data: Map<String, Any?>, documentId: String?) : FeedResourcesData {
+    fun feedMapToParcelable(data: Map<String, Any?>, documentId: String?): FeedResourcesData {
         return FeedResourcesData(
             data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
@@ -71,10 +76,11 @@ object MaterialUtils {
             documentId,
             data["expense_datetime"] as Timestamp,
             data["kilos"] as Number,
-            data["total_price"] as Number)
+            data["total_price"] as Number
+        )
     }
 
-    fun feedParcelableToMap(feedResourcesData: FeedResourcesData) : Map<String, Any?> {
+    fun feedParcelableToMap(feedResourcesData: FeedResourcesData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["created_by"] = feedResourcesData.createdBy
@@ -87,7 +93,10 @@ object MaterialUtils {
         return map
     }
 
-    fun boxesAndCartonsMapToParcelable(data: Map<String, Any?>, documentId: String?) : BoxesAndCartonsResourcesData {
+    fun boxesAndCartonsMapToParcelable(
+        data: Map<String, Any?>,
+        documentId: String?
+    ): BoxesAndCartonsResourcesData {
         return BoxesAndCartonsResourcesData(
             data["created_by"] as String,
             data["creation_datetime"] as Timestamp,
@@ -95,10 +104,11 @@ object MaterialUtils {
             documentId,
             data["expense_datetime"] as Timestamp,
             data["order"] as Map<String, Number?>,
-            data["total_price"] as Number)
+            data["total_price"] as Number
+        )
     }
 
-    fun boxesAndCartonsParcelableToMap(boxesAndCartonsResourcesData: BoxesAndCartonsResourcesData) : Map<String, Any?> {
+    fun boxesAndCartonsParcelableToMap(boxesAndCartonsResourcesData: BoxesAndCartonsResourcesData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["created_by"] = boxesAndCartonsResourcesData.createdBy
@@ -111,9 +121,9 @@ object MaterialUtils {
         return map
     }
 
-    fun getBCOrderSummary(dbOrderFieldData: DBBoxesAndCartonsOrderFieldData) : String {
+    fun getBCOrderSummary(dbOrderFieldData: DBBoxesAndCartonsOrderFieldData): String {
 
-        val list : MutableList<String> = mutableListOf()
+        val list: MutableList<String> = mutableListOf()
 
         if (dbOrderFieldData.box != 0) list.add(dbOrderFieldData.box.toString() + " cajas")
         if (dbOrderFieldData.xlCarton != 0) list.add(dbOrderFieldData.xlCarton.toString() + " cartones XL")
@@ -130,13 +140,13 @@ object MaterialUtils {
         return summary
     }
 
-    fun bcOrderToDBBoxesAndCartonsOrderModel(bcData: BoxesAndCartonsResourcesData) : DBBoxesAndCartonsOrderFieldData {
+    fun bcOrderToDBBoxesAndCartonsOrderModel(bcData: BoxesAndCartonsResourcesData): DBBoxesAndCartonsOrderFieldData {
 
         val order = bcData.order
         val data = DBBoxesAndCartonsOrderFieldData()
 
         if (order.containsKey("box")) {
-            data.box =  order["box"]
+            data.box = order["box"]
         }
         if (order.containsKey("xl_carton")) {
             data.xlCarton = order["xl_carton"]
@@ -155,28 +165,28 @@ object MaterialUtils {
 
     }
 
-    fun parseDBBoxesAndCartonsOrderFieldDataToMap(data: DBBoxesAndCartonsOrderFieldData) :
+    fun parseDBBoxesAndCartonsOrderFieldDataToMap(data: DBBoxesAndCartonsOrderFieldData):
             Map<String, Number?> {
         val map = mutableMapOf<String, Number?>()
-        if(data.box != null && data.box!!.toInt() != 0) {
+        if (data.box != null && data.box!!.toInt() != 0) {
             map["box"] = data.box
         }
-        if(data.xlCarton != null && data.xlCarton!!.toInt() != 0) {
+        if (data.xlCarton != null && data.xlCarton!!.toInt() != 0) {
             map["xl_carton"] = data.xlCarton
         }
-        if(data.lCarton != null && data.lCarton!!.toInt() != 0) {
+        if (data.lCarton != null && data.lCarton!!.toInt() != 0) {
             map["l_carton"] = data.lCarton
         }
-        if(data.mCarton != null && data.mCarton!!.toInt() != 0) {
+        if (data.mCarton != null && data.mCarton!!.toInt() != 0) {
             map["m_carton"] = data.mCarton
         }
-        if(data.sCarton != null && data.sCarton!!.toInt() != 0) {
+        if (data.sCarton != null && data.sCarton!!.toInt() != 0) {
             map["s_carton"] = data.sCarton
         }
         return map
     }
 
-    fun fpcMapToParcelable(data: Map<String, Any?>, documentId: String?) : FPCData {
+    fun fpcMapToParcelable(data: Map<String, Any?>, documentId: String?): FPCData {
         return FPCData(
             data["accepted_eggs"] as Long,
             data["best_before_datetime"] as Timestamp,
@@ -190,23 +200,6 @@ object MaterialUtils {
             data["packing_datetime"] as Timestamp,
             data["rejected_eggs"] as Long
         )
-    }
-
-    fun fpcParcelableToMap(fpcData: FPCData) : Map<String, Any?> {
-        val map = mutableMapOf<String, Any?>()
-
-        map["accepted_eggs"] = fpcData.acceptedEggs
-        map["best_before_datetime"] = fpcData.bestBeforeDatetime
-        map["created_by"] = fpcData.createdBy
-        map["creation_datetime"] = fpcData.creationDatetime
-        map["deleted"] = fpcData.deleted
-        map["issue_datetime"] = fpcData.issueDatetime
-        map["laying_datetime"] = fpcData.layingDatetime
-        map["lot"] = fpcData.lot
-        map["packing_datetime"] = fpcData.packingDatetime
-        map["rejected_eggs"] = fpcData.rejectedEggs
-
-        return map
     }
 
 }

@@ -18,8 +18,6 @@ import com.example.hueverianieto.domain.model.componentdatedivisionmodel.Compone
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
 class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
@@ -49,25 +47,35 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(initTimestamp, endTimestamp)
+        this.weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(
+            initTimestamp,
+            endTimestamp
+        )
         setDataTexts()
         lifecycleScope.launchWhenStarted {
-            weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(initTimestamp, endTimestamp)
-            weeklyMonitoringCompanySituationViewModel.viewState.collect() { stateView ->
+            weeklyMonitoringCompanySituationViewModel.getWeeklyMonitoringCompanySituation(
+                initTimestamp,
+                endTimestamp
+            )
+            weeklyMonitoringCompanySituationViewModel.viewState.collect { stateView ->
                 updateUI(stateView)
             }
         }
     }
 
     override fun setObservers() {
-        this.weeklyMonitoringCompanySituationViewModel.weeklyMonitoringCompanySituationData.observe(this) { data ->
+        this.weeklyMonitoringCompanySituationViewModel.weeklyMonitoringCompanySituationData.observe(
+            this
+        ) { data ->
             if (data != null) {
                 this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  " + data.xlEggs.toString()
                 this.binding.weeklyLLaying.text = "Puesta semanal - L:  " + data.lEggs.toString()
                 this.binding.weeklyMLaying.text = "Puesta semanal - M:  " + data.mEggs.toString()
                 this.binding.weeklySLaying.text = "Puesta semanal - S:  " + data.sEggs.toString()
-                this.binding.weeklyTotalLaying.text = "Puesta semanal (total):  " + data.weeklyLaying.toString()
-                this.binding.hensLossesWeeklyLaying.text = "Bajas de gallinas esta semana:  " + data.hensLosses.toString()
+                this.binding.weeklyTotalLaying.text =
+                    "Puesta semanal (total):  " + data.weeklyLaying.toString()
+                this.binding.hensLossesWeeklyLaying.text =
+                    "Bajas de gallinas esta semana:  " + data.hensLosses.toString()
             } else {
                 this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  0"
                 this.binding.weeklyLLaying.text = "Puesta semanal - L:  0"
@@ -112,17 +120,35 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
         this.binding.mondayText.text = "Lunes - " +
                 Utils.parseTimestampToString(initTimestamp, "dd, MMMM, yyyy")
         this.binding.tuesdayText.text = "Martes - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)),
+                    "dd, MMMM, yyyy"
+                )
         this.binding.wednesdayText.text = "Miércoles - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)),
+                    "dd, MMMM, yyyy"
+                )
         this.binding.thursdayText.text = "Jueves - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)),
+                    "dd, MMMM, yyyy"
+                )
         this.binding.fridayText.text = "Viernes - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)),
+                    "dd, MMMM, yyyy"
+                )
         this.binding.saturdayDateText.text = "Sábado - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)),
+                    "dd, MMMM, yyyy"
+                )
         this.binding.sundayText.text = "Domingo - " +
-                Utils.parseTimestampToString(Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)), "dd, MMMM, yyyy")
+                Utils.parseTimestampToString(
+                    Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)),
+                    "dd, MMMM, yyyy"
+                )
     }
 
     private fun navigateToDailyDetail(daysToAdd: Int) {
@@ -137,6 +163,5 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
                 )
             )
     }
-
 
 }

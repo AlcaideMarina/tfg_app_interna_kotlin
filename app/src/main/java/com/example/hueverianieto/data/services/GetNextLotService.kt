@@ -9,7 +9,7 @@ class GetNextLotService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getNextLot() : Result<QuerySnapshot> = runCatching {
+    suspend fun getNextLot(): Result<QuerySnapshot> = runCatching {
         firebaseClient.db
             .collection("final_product_control")
             .orderBy("lot", Query.Direction.DESCENDING)

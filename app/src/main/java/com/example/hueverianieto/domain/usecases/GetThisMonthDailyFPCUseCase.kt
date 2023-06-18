@@ -11,8 +11,13 @@ class GetThisMonthDailyFPCUseCase @Inject constructor(
     private val getThisMonthDailyFPCService: GetThisMonthDailyFPCService
 ) {
 
-    suspend operator fun invoke(initTimestamp: Timestamp, endTimestamp: Timestamp) : MonthlyFPCContainerModel {
-        val fpcDataList = when(val result = getThisMonthDailyFPCService.getThisMonthDailyFPC(initTimestamp, endTimestamp).getOrNull()) {
+    suspend operator fun invoke(
+        initTimestamp: Timestamp,
+        endTimestamp: Timestamp
+    ): MonthlyFPCContainerModel {
+        val fpcDataList = when (val result =
+            getThisMonthDailyFPCService.getThisMonthDailyFPC(initTimestamp, endTimestamp)
+                .getOrNull()) {
             null -> mutableListOf()
             else -> {
                 val list = mutableListOf<FPCData>()

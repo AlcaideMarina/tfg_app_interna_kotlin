@@ -12,4 +12,3 @@ data class ModalDialogModel(
     var rightButtonListener: View.OnClickListener?,
     var cancelledOnTouchOutside: Boolean
 ) : BaseModel
-

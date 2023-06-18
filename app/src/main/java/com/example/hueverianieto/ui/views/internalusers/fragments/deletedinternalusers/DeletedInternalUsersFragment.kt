@@ -14,21 +14,14 @@ import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
-import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentDeletedInternalUsersBinding
-import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
-import com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsFragment
+import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
+import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsFragmentArgs
 import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.utils.InternalUserUtils
 import com.example.hueverianieto.utils.Utils
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DeletedInternalUsersFragment : BaseFragment() {
@@ -37,7 +30,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
 
     private var internalUserList: MutableList<ComponentInternalUserModel> = mutableListOf()
-    private val deletedInternalUsersViewModel : DeletedInternalUsersViewModel by viewModels()
+    private val deletedInternalUsersViewModel: DeletedInternalUsersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,7 +39,7 @@ class DeletedInternalUsersFragment : BaseFragment() {
     ): View {
         (activity as BaseActivity).configNav(true)
 
-        val args : DeletedClientsFragmentArgs by navArgs()
+        val args: DeletedClientsFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
 
         this.binding = FragmentDeletedInternalUsersBinding.inflate(
@@ -80,7 +73,12 @@ class DeletedInternalUsersFragment : BaseFragment() {
                             internalUserData.name,
                             internalUserData.surname,
                             internalUserData.dni,
-                            requireContext().getString(Utils.getKey(Constants.roles, internalUserData.position.toInt())!!),
+                            requireContext().getString(
+                                Utils.getKey(
+                                    Constants.roles,
+                                    internalUserData.position.toInt()
+                                )!!
+                            ),
                             null
                         )
                         internalUserList.add(componentInternalUserModel)
@@ -121,13 +119,17 @@ class DeletedInternalUsersFragment : BaseFragment() {
 
     private fun initRecyclerView() {
         this.binding.deletedInternalUsersRecyclerView.layoutManager = LinearLayoutManager(context)
-        this.binding.deletedInternalUsersRecyclerView.adapter = ComponentInternalUserAdapter(internalUserList)
+        this.binding.deletedInternalUsersRecyclerView.adapter =
+            ComponentInternalUserAdapter(internalUserList)
         this.binding.deletedInternalUsersRecyclerView.setHasFixedSize(false)
     }
 
     private fun navigateToInternalUserDetails() {
         // TODO: Navegación a pantalla de detalles
-        Log.v("NAVEGACIÓN", DeletedInternalUsersFragment::class.java.simpleName + " - Aquí iría la navegación ")
+        Log.v(
+            "NAVEGACIÓN",
+            DeletedInternalUsersFragment::class.java.simpleName + " - Aquí iría la navegación "
+        )
     }
 
 

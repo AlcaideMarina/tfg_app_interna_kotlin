@@ -26,7 +26,7 @@ class ChangePasswordViewModel @Inject constructor(
     fun checkOldPassword(oldPass: String, newPass: String) {
         viewModelScope.launch {
             _viewState.value = ChangePasswordViewState(isLoading = true)
-            when(val result = changePasswordUseCase(oldPass, newPass)) {
+            when (changePasswordUseCase(oldPass, newPass)) {
                 false -> {
                     _alertDialog.value = AlertOkData(
                         "Error",

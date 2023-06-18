@@ -33,7 +33,8 @@ class MonitoringCompanySituationActivity : BaseActivity() {
         setContentView(this.binding.root)
 
         setSupportActionBar(this.binding.topBar)
-        navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
+        navController =
+            this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             setOf(R.layout.fragment_monthly_monitoring_company_situation)
@@ -54,7 +55,7 @@ class MonitoringCompanySituationActivity : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

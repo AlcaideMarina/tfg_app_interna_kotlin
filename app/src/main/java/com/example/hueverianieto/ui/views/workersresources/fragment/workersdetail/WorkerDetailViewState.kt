@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.workersresources.fragment.workersdeta
 
 import com.example.hueverianieto.base.BaseState
 
-class WorkerDetailViewState (
+class WorkerDetailViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var correct: Boolean = false,

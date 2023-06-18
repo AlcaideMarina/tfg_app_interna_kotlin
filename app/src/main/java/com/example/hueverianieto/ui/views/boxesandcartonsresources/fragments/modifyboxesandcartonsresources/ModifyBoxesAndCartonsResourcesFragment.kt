@@ -19,7 +19,6 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.MaterialUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
@@ -113,8 +112,11 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.bcResourcesData.order = MaterialUtils
                         .parseDBBoxesAndCartonsOrderFieldDataToMap(getOrderFieldStructure())
-                    this.bcResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
-                    this.modifyBoxesAndCartonsResourcesViewModel.updateBoxesAndCartons(bcResourcesData)
+                    this.bcResourcesData.totalPrice =
+                        this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                    this.modifyBoxesAndCartonsResourcesViewModel.updateBoxesAndCartons(
+                        bcResourcesData
+                    )
                 }
             )
         }
@@ -152,7 +154,7 @@ class ModifyBoxesAndCartonsResourcesFragment : BaseFragment() {
         }
     }
 
-    private fun getOrderFieldStructure() : DBBoxesAndCartonsOrderFieldData {
+    private fun getOrderFieldStructure(): DBBoxesAndCartonsOrderFieldData {
         val box =
             if (this.binding.boxesTextInputLayout.text == null || this.binding.boxesTextInputLayout.text.toString() == "") "0"
             else this.binding.boxesTextInputLayout.text.toString()

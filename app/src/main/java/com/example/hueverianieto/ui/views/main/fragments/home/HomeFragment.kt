@@ -17,8 +17,6 @@ import com.example.hueverianieto.databinding.FragmentHomeBinding
 import com.example.hueverianieto.ui.views.main.MainActivity
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment() {
@@ -55,12 +53,14 @@ class HomeFragment : BaseFragment() {
         this.homeViewModel.mcsIsDone.observe(this) { isDone ->
             if (isDone) {
                 binding.monitoringCompanySituationIcon.setImageDrawable(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_right))
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_right)
+                )
                 this.binding.monitoringCompanySituationText.text =
                     "Hoy se ha hecho el seguimiento de la situación de la empresa."
             } else {
                 binding.monitoringCompanySituationIcon.setImageDrawable(
-                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_wrong))
+                    ContextCompat.getDrawable(requireContext(), R.drawable.ic_wrong)
+                )
                 this.binding.monitoringCompanySituationText.text =
                     "Hoy aún no se ha hecho el seguimiento de la situación de la empresa."
             }
@@ -88,11 +88,13 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setOrderNotification(todayOrdersNumber: Int) {
-        this.binding.ordersNotificationText.text = "Hoy hay " + todayOrdersNumber.toString() + " pedidos."
+        this.binding.ordersNotificationText.text =
+            "Hoy hay " + todayOrdersNumber.toString() + " pedidos."
     }
 
     private fun setDeliveriesNotification(todayDeliveriesNumber: Int) {
-        this.binding.deliverNotificationText.text = "Hay " + todayDeliveriesNumber.toString() + " repartos planificados para hoy."
+        this.binding.deliverNotificationText.text =
+            "Hay " + todayDeliveriesNumber.toString() + " repartos planificados para hoy."
     }
 
 }

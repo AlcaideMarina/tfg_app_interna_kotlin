@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.internalusers.fragments.internaluserd
 
 import com.example.hueverianieto.base.BaseState
 
-class InternalUserDetailViewState (
+class InternalUserDetailViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var correct: Boolean = false,

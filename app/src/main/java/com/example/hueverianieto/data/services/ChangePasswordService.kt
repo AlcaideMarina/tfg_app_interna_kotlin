@@ -20,7 +20,6 @@ class ChangePasswordService @Inject constructor(
                 }
             }
             .await()
-
     }
 
 }

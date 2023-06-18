@@ -11,9 +11,8 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.OrderData
-import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
 import com.example.hueverianieto.domain.usecases.GetAllClientOrdersUseCase
-import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
+import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -38,7 +37,7 @@ class AllOrdersViewModel @Inject constructor(
     fun getOrders() {
         viewModelScope.launch {
             _viewState.value = AllOrdersViewState(isLoading = true)
-            when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
+            when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
                     _viewState.value = AllOrdersViewState(isLoading = false, error = true)
                 }
@@ -46,8 +45,8 @@ class AllOrdersViewModel @Inject constructor(
                     _viewState.value = AllOrdersViewState(isLoading = false, isEmpty = true)
                 }
                 else -> {
-                    val clientIdList : List<String?> = resultQ1
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val clientIdList: List<String?> = resultQ1
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (id in clientIdList) {
                         if (id != null) {
                             when (val resultQ2 = getAllClientOrdersUseCase(id)) {
@@ -70,17 +69,19 @@ class AllOrdersViewModel @Inject constructor(
     }
 
     fun navigateToOrderDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_orderDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allOrdersFragment_to_orderDetailFragment, bundle)
             ?: Log.e(
-                AllOrdersViewState::class.java.simpleName,
+                AllOrdersViewModel::class.java.simpleName,
                 "Error en la navegación a detalle de pedido"
             )
     }
 
     fun navigateToNewOrder(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allOrdersFragment_to_newOrderFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allOrdersFragment_to_newOrderFragment, bundle)
             ?: Log.e(
-                AllOrdersViewState::class.java.simpleName,
+                AllOrdersViewModel::class.java.simpleName,
                 "Error en la navegación a nuevo pedido"
             )
     }

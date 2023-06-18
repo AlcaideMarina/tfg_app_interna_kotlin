@@ -3,7 +3,6 @@ package com.example.hueverianieto.ui.views.clients.fragments.allclients
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -31,11 +30,10 @@ class AllClientsViewModel @Inject constructor(
 
     fun getClientsData() {
 
-        // Se puede quitar este?
         _viewState.value = AllClientsViewState(isLoading = true)
         viewModelScope.launch {
             _viewState.value = AllClientsViewState(isLoading = true)
-            when (val result : List<ClientData?>? = getAllClientsUseCase(false)) {
+            when (val result: List<ClientData?>? = getAllClientsUseCase(false)) {
                 null -> {
                     _viewState.value = AllClientsViewState(isLoading = false, error = true)
                     _clientList.value = listOf()
@@ -54,7 +52,8 @@ class AllClientsViewModel @Inject constructor(
     }
 
     fun navigateToClientDetails(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_clientDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allClientsFragment_to_clientDetailFragment, bundle)
             ?: Log.e(
                 AllClientsFragment::class.simpleName,
                 "Error en la navegación en newClientButton"
@@ -62,7 +61,8 @@ class AllClientsViewModel @Inject constructor(
     }
 
     fun navigateDeleteClients(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allClientsFragment_to_deletedClientsFragment, bundle)
             ?: Log.e(
                 AllClientsFragment::class.simpleName,
                 "Error en la navegación a 'Clientes eliminados'"
@@ -70,7 +70,8 @@ class AllClientsViewModel @Inject constructor(
     }
 
     fun navigateToNewClient(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allClientsFragment_to_newClientFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allClientsFragment_to_newClientFragment, bundle)
             ?: Log.e(
                 AllClientsFragment::class.simpleName,
                 "Error en la navegación en newClientButton"

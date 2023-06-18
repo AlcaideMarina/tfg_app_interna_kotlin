@@ -1,8 +1,6 @@
 package com.example.hueverianieto.ui.views.clients.fragments.newclient
 
 import android.os.Bundle
-import android.text.InputType
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -14,18 +12,13 @@ import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.FragmentNewClientBinding
-import com.example.hueverianieto.utils.ClientUtils
+import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
+import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-
 
 @AndroidEntryPoint
 class NewClientFragment : BaseFragment() {
@@ -33,21 +26,21 @@ class NewClientFragment : BaseFragment() {
     private lateinit var binding: FragmentNewClientBinding
     private lateinit var alertDialog: HNModalDialog
     private lateinit var currentUserData: InternalUserData
-    private val newClientViewModel : NewClientViewModel by viewModels()
+    private val newClientViewModel: NewClientViewModel by viewModels()
 
-    private var company : String = ""
-    private var direction : String = ""
-    private var city : String = ""
-    private var province : String = ""
-    private var postalCode : String = ""
-    private var cif : String  = ""
-    private var email : String = ""
-    private var phone1 : String = ""
-    private  var namePhone1 : String = ""
-    private var phone2 : String = ""
-    private var namePhone2 : String = ""
-    private var hasAccount : Boolean = false
-    private var accountUser : String? = ""
+    private var company: String = ""
+    private var direction: String = ""
+    private var city: String = ""
+    private var province: String = ""
+    private var postalCode: String = ""
+    private var cif: String = ""
+    private var email: String = ""
+    private var phone1: String = ""
+    private var namePhone1: String = ""
+    private var phone2: String = ""
+    private var namePhone2: String = ""
+    private var hasAccount: Boolean = false
+    private var accountUser: String? = ""
 
 
     override fun onCreateView(
@@ -60,7 +53,7 @@ class NewClientFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : NewClientFragmentArgs by navArgs()
+        val args: NewClientFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
 
         return this.binding.root
@@ -76,18 +69,6 @@ class NewClientFragment : BaseFragment() {
 
             it.userAccountTextInputLayout.isEnabled = false
 
-            /*it.companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            it.postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
-            it.cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
-            it.emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-            it.phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
-            it.phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            it.emailAccountTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)*/
         }
 
         lifecycleScope.launchWhenStarted {
@@ -115,7 +96,7 @@ class NewClientFragment : BaseFragment() {
                         null
                     )
                 } else {
-                    setPopUp(alertOkData.title, alertOkData.text){ alertDialog.cancel() }
+                    setPopUp(alertOkData.title, alertOkData.text) { alertDialog.cancel() }
                 }
             }
         }
@@ -124,7 +105,8 @@ class NewClientFragment : BaseFragment() {
     override fun setListeners() {
         this.binding.checkedTextView.setOnClickListener {
             this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
-            this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
+            this.binding.userAccountTextInputLayout.isEnabled =
+                this.binding.checkedTextView.isChecked
         }
 
         this.binding.cancelButton.setOnClickListener { activity?.onBackPressedDispatcher?.onBackPressed() }
@@ -140,8 +122,6 @@ class NewClientFragment : BaseFragment() {
     }
 
     private fun setPopUp(title: String, message: String, listener: OnClickListener) {
-
-        // TODO: Close button
         alertDialog.show(
             requireContext(),
             ModalDialogModel(
@@ -159,8 +139,9 @@ class NewClientFragment : BaseFragment() {
     private fun checkInfo() {
         variableAssignations()
         if (company != "" && direction != "" && city != "" && province != "" && postalCode.toLongOrNull() != null &&
-            cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2 .toLongOrNull() != null &&
-            namePhone2 != "") {
+            cif != "" && email != "" && phone1.toLongOrNull() != null && namePhone1 != "" && phone2.toLongOrNull() != null &&
+            namePhone2 != ""
+        ) {
             val clientData = ClientData(
                 cif,
                 city,
@@ -209,4 +190,5 @@ class NewClientFragment : BaseFragment() {
             accountUser = if (hasAccount) it.userAccountTextInputLayout.text.toString() else null
         }
     }
+
 }

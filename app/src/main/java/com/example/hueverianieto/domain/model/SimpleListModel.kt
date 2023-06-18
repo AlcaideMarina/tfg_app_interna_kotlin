@@ -2,7 +2,7 @@ package com.example.hueverianieto.domain.model
 
 import android.view.View
 
-class SimpleListModel (
+class SimpleListModel(
     val title: String,
     val onClickListener: View.OnClickListener
 )

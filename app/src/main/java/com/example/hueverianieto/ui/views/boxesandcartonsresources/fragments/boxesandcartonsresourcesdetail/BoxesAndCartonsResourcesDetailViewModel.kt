@@ -11,11 +11,8 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
-import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteBoxesAndCartonsResourcesUseCase
 import com.example.hueverianieto.domain.usecases.GetBoxesAndCartonsResourcesWithIdUseCase
-import com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesViewModel
-import com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail.FeedResourcesDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +37,7 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
     fun getBoxesAndCartonsResource(documentId: String) {
         viewModelScope.launch {
             _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = true)
-            when(val result = getBoxesAndCartonsResourcesWithIdUseCase(documentId)) {
+            when (val result = getBoxesAndCartonsResourcesWithIdUseCase(documentId)) {
                 null -> {
                     _viewState.value = BoxesAndCartonsResourcesDetailViewState(isLoading = false)
                 }
@@ -67,9 +64,12 @@ class BoxesAndCartonsResourcesDetailViewModel @Inject constructor(
     }
 
     fun navigationToModifyBCResources(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_boxesAndCartonsResourcesDetailFragment_to_modifyBoxesAndCartonsResourcesFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_boxesAndCartonsResourcesDetailFragment_to_modifyBoxesAndCartonsResourcesFragment,
+            bundle
+        )
             ?: Log.e(
-                AllFeedResourcesViewModel::class.simpleName,
+                BoxesAndCartonsResourcesDetailViewModel::class.simpleName,
                 "Error en la navegación a detalle de recursos (pienso)"
             )
     }

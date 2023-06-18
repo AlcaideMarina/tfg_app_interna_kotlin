@@ -4,7 +4,7 @@ import com.example.hueverianieto.data.models.local.EggPricesData
 
 object DefaultConstantsUtils {
 
-    fun eggPricesParcelizeToMap(eggPricesData: EggPricesData) : Map<String, Any> {
+    fun eggPricesParcelizeToMap(eggPricesData: EggPricesData): Map<String, Any> {
         val map = mutableMapOf<String, Any>()
         map["xl_box"] = eggPricesData.xlBox ?: 0
         map["xl_dozen"] = eggPricesData.xlDozen ?: 0

@@ -14,7 +14,7 @@ import com.example.hueverianieto.databinding.ActivityChangePasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ChangePasswordActivity  : BaseActivity() {
+class ChangePasswordActivity : BaseActivity() {
 
     private lateinit var binding: ActivityChangePasswordBinding
     private lateinit var navController: NavController
@@ -53,7 +53,7 @@ class ChangePasswordActivity  : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

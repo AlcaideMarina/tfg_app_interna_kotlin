@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class MonitoringCompanySituationData (
+data class MonitoringCompanySituationData(
     var brokenEggs: Long,
     var createdBy: String?,
     var creationDatetime: Timestamp?,

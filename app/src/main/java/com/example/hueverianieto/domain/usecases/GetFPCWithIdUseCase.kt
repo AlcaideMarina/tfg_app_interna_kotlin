@@ -9,8 +9,11 @@ class GetFPCWithIdUseCase @Inject constructor(
     private val getFirestoreDocumentWithDocIdService: GetFirestoreDocumentWithDocIdService
 ) {
 
-    suspend operator fun invoke(documentId: String) : FPCData? {
-        return when(val result = getFirestoreDocumentWithDocIdService.getDocumentWithDocId("final_product_control", documentId).getOrNull()) {
+    suspend operator fun invoke(documentId: String): FPCData? {
+        return when (val result = getFirestoreDocumentWithDocIdService.getDocumentWithDocId(
+            "final_product_control",
+            documentId
+        ).getOrNull()) {
             null -> null
             else -> {
                 if (result.data != null) {

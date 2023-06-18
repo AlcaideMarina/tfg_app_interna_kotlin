@@ -11,11 +11,11 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.databinding.ComponentItemSettingsBinding
 import com.example.hueverianieto.domain.model.SimpleListModel
 
-class HNSimpleListAdapter (
+class HNSimpleListAdapter(
     context: Context, dataList: List<SimpleListModel?>
 ) : ArrayAdapter<SimpleListModel>(context, R.layout.component_item_settings, dataList) {
 
-    var binding : ComponentItemSettingsBinding = ComponentItemSettingsBinding.inflate(
+    var binding: ComponentItemSettingsBinding = ComponentItemSettingsBinding.inflate(
         LayoutInflater.from(context)
     )
 
@@ -26,7 +26,8 @@ class HNSimpleListAdapter (
 
         if (view == null) {
             view = LayoutInflater.from(context).inflate(
-                R.layout.component_item_settings, parent, false)
+                R.layout.component_item_settings, parent, false
+            )
         }
 
         val titleView = view!!.findViewById<TextView>(R.id.title_item_list)

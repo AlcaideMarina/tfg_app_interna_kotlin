@@ -36,9 +36,10 @@ class AllElectricityWaterGasFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
-        (activity as ElectricityWaterGasResourcesActivity).getToolbar().setNavigationOnClickListener {
-            (activity as BaseActivity).goBackFragments()
-        }
+        (activity as ElectricityWaterGasResourcesActivity).getToolbar()
+            .setNavigationOnClickListener {
+                (activity as BaseActivity).goBackFragments()
+            }
         currentUserData = (activity as ElectricityWaterGasResourcesActivity).currentUserData
 
         this.binding = FragmentAllElectricityWaterGasResourcesBinding.inflate(
@@ -66,7 +67,7 @@ class AllElectricityWaterGasFragment : BaseFragment() {
                 this.binding.containerWarningNoTickets.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 ewgDataList = mutableListOf()
-                for (ewgResourcesData in ewgResourcesDataList)  {
+                for (ewgResourcesData in ewgResourcesDataList) {
                     if (ewgResourcesData != null) {
                         val key = Utils.getKey(Constants.ewgTypes, ewgResourcesData.type.toInt())
                         val type: String = if (key == null) {

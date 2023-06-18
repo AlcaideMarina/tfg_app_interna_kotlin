@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseFragment
@@ -17,8 +16,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MaterialFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentMaterialBinding
-    private lateinit var currentUserData : InternalUserData
+    private lateinit var binding: FragmentMaterialBinding
+    private lateinit var currentUserData: InternalUserData
 
     private val materialViewModel: MaterialViewModel by viewModels()
 
@@ -29,7 +28,13 @@ class MaterialFragment : BaseFragment() {
         (activity as MainActivity).configNav(false)
         currentUserData = (activity as MainActivity).currentUserData
         binding =
-            FragmentMaterialBinding.bind(inflater.inflate(R.layout.fragment_material, container, false))
+            FragmentMaterialBinding.bind(
+                inflater.inflate(
+                    R.layout.fragment_material,
+                    container,
+                    false
+                )
+            )
         return binding.root
     }
 

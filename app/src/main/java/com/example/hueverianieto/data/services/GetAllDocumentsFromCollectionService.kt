@@ -8,11 +8,12 @@ class GetAllDocumentsFromCollectionService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getDocumentsFromCollection(collection: String) : Result<QuerySnapshot> = runCatching {
-        firebaseClient.db
-            .collection(collection)
-            .get()
-            .await()
-    }
+    suspend fun getDocumentsFromCollection(collection: String): Result<QuerySnapshot> =
+        runCatching {
+            firebaseClient.db
+                .collection(collection)
+                .get()
+                .await()
+        }
 
 }

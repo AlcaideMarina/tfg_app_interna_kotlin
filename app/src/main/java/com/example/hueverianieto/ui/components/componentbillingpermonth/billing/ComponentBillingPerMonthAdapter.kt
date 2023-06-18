@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
 
-class ComponentBillingPerMonthAdapter (
+class ComponentBillingPerMonthAdapter(
     private val billingContainerModelItemList: List<BillingContainerItemModel>
 ) : RecyclerView.Adapter<ComponentBillingPerMonthViewHolder>() {
 
@@ -15,8 +15,10 @@ class ComponentBillingPerMonthAdapter (
         viewType: Int
     ): ComponentBillingPerMonthViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ComponentBillingPerMonthViewHolder(layoutInflater.inflate(
-            R.layout.component_billing_per_month_container, parent, false)
+        return ComponentBillingPerMonthViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_billing_per_month_container, parent, false
+            )
         )
     }
 

@@ -8,7 +8,7 @@ class GetAllDeliveryPersonUseCase @Inject constructor(
     private val getAllDeliveryPersonService: GetAllDeliveryPersonService
 ) {
 
-    suspend operator fun invoke() : List<InternalUserData?>? =
+    suspend operator fun invoke(): List<InternalUserData?>? =
         getAllDeliveryPersonService.getAllDeliveryPerson()
 
 }

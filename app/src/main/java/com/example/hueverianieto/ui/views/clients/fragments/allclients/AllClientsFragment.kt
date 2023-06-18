@@ -9,17 +9,14 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentAllClientsBinding
+import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
+import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.ui.views.clients.AllClientsActivity
 import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
 import com.example.hueverianieto.utils.ClientUtils
@@ -34,8 +31,7 @@ class AllClientsFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
 
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
-    private val allClientsViewModel : AllClientsViewModel by viewModels()
-
+    private val allClientsViewModel: AllClientsViewModel by viewModels()
 
     override fun configureUI() {
 
@@ -61,7 +57,7 @@ class AllClientsFragment : BaseFragment() {
                 this.binding.containerWaringNoClients.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 clientList = mutableListOf()
-                for (clientData in clientDataList)  {
+                for (clientData in clientDataList) {
                     if (clientData != null) {
                         val componentClientModel = ComponentClientModel(
                             clientData.id.toString(),
@@ -108,16 +104,11 @@ class AllClientsFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         try {
-            with(state as AllClientsViewState) {
-                with(binding) {
-                    this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        // TODO: Popup error
-                    } else if (state.isEmpty) {
-                        // TODO: Popup está vacío
-                    }
-                }
+            state as AllClientsViewState
+            with(binding) {
+                this.loadingComponent.isVisible = state.isLoading
             }
+
         } catch (e: Exception) {
             Log.e(TAG, e.message.toString(), e)
         }
@@ -152,7 +143,10 @@ class AllClientsFragment : BaseFragment() {
                         this.binding.clientsRecyclerView.visibility = View.VISIBLE
                         this.binding.containerWaringNoClients.visibility = View.GONE
                         for (document in documentList) {
-                            Log.v("CONSULTA", UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta")
+                            Log.v(
+                                "CONSULTA",
+                                UsersAndClientsFragment::class.java.simpleName + " - Consulta correcta"
+                            )
                             val doc = document.data as MutableMap<String, Any?>?
                             if (ClientUtils.checkErrorMap(doc) == null) {
                                 val data = doc as MutableMap<String, Any?>
@@ -172,7 +166,10 @@ class AllClientsFragment : BaseFragment() {
                                 }
                             } else {
                                 // TODO
-                                Log.e("CONSULTA", AllClientsFragment::class.java.simpleName + " - Error 1")
+                                Log.e(
+                                    "CONSULTA",
+                                    AllClientsFragment::class.java.simpleName + " - Error 1"
+                                )
                             }
                         }
                         if (clientList.isEmpty()) {

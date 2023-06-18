@@ -14,16 +14,13 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.local.DBBoxesAndCartonsOrderFieldData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
-import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewBoxesAndCartonsResourcesBinding
-import com.example.hueverianieto.domain.usecases.NewBoxesAndCartonsResourcesUseCase
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.MaterialUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -65,7 +62,7 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
@@ -77,10 +74,12 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
             it.hideSoftInput()
             val orderFieldStructure = getOrderFieldStructure()
             val emptyOrder = DBBoxesAndCartonsOrderFieldData(
-                (0).toLong(), (0).toLong(), (0).toLong(), (0).toLong(), (0).toLong())
+                (0).toLong(), (0).toLong(), (0).toLong(), (0).toLong(), (0).toLong()
+            )
             if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
                 orderFieldStructure != emptyOrder &&
-                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != ""
+            ) {
                 it.hideSoftInput()
                 val bcResourcesData = BoxesAndCartonsResourcesData(
                     this.currentUserData.documentId!!,
@@ -113,9 +112,8 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        with(state as NewBoxesAndCartonsResourcesViewState) {
-            binding.loadingComponent.isVisible = state.isLoading
-        }
+        state as NewBoxesAndCartonsResourcesViewState
+        binding.loadingComponent.isVisible = state.isLoading
     }
 
     private fun setButtons() {
@@ -155,7 +153,7 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
         datePickerDialog.show()
     }
 
-    private fun getOrderFieldStructure() : DBBoxesAndCartonsOrderFieldData {
+    private fun getOrderFieldStructure(): DBBoxesAndCartonsOrderFieldData {
         val box =
             if (this.binding.boxesTextInputLayout.text == null || this.binding.boxesTextInputLayout.text.toString() == "") "0"
             else this.binding.boxesTextInputLayout.text.toString()

@@ -21,7 +21,6 @@ import com.example.hueverianieto.utils.FarmUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
@@ -101,38 +100,47 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
         this.binding.saveButton.setOnClickListener {
             val data = MonitoringCompanySituationData(
                 brokenEggs = (this.binding.brokenEggsTextInputLayout.text ?: 0).toString().toLong(),
-                createdBy = this.monitoringCompanySituationData.createdBy ?: currentUserData.documentId!!,
-                creationDatetime = this.monitoringCompanySituationData.creationDatetime ?: Timestamp.now(),
+                createdBy = this.monitoringCompanySituationData.createdBy
+                    ?: currentUserData.documentId!!,
+                creationDatetime = this.monitoringCompanySituationData.creationDatetime
+                    ?: Timestamp.now(),
                 documentId = this.monitoringCompanySituationData.documentId,
                 hens = mapOf(
-                    "alive" to (this.monitoringCompanySituationData.hens["alive"] ?: 0),         // Gallinas vivas en el momento de la creación
-                    "losses" to (this.binding.henLossesTextInputLayout.text ?: 0).toString().toLong(),
+                    "alive" to (this.monitoringCompanySituationData.hens["alive"]
+                        ?: 0),         // Gallinas vivas en el momento de la creación
+                    "losses" to (this.binding.henLossesTextInputLayout.text ?: 0).toString()
+                        .toLong(),
                 ),
                 lEggs = mapOf(
                     "boxes" to (this.binding.lBoxTextInputLayout.text ?: 0).toString().toLong(),
-                    "cartons" to (this.binding.lCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.lCartonsNumberTextView.text ?: 0).toString()
+                        .toLong(),
                     "eggs" to (this.binding.lEggsNumberTextView.text ?: 0).toString().toLong(),
                 ),
                 mEggs = mapOf(
                     "boxes" to (this.binding.mBoxTextInputLayout.text ?: 0).toString().toLong(),
-                    "cartons" to (this.binding.mCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.mCartonsNumberTextView.text ?: 0).toString()
+                        .toLong(),
                     "eggs" to (this.binding.mEggsNumberTextView.text ?: 0).toString().toLong(),
                 ),
                 sEggs = mapOf(
                     "boxes" to (this.binding.sBoxTextInputLayout.text ?: 0).toString().toLong(),
-                    "cartons" to (this.binding.sCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.sCartonsNumberTextView.text ?: 0).toString()
+                        .toLong(),
                     "eggs" to (this.binding.sEggsNumberTextView.text ?: 0).toString().toLong(),
                 ),
                 this.monitoringCompanySituationData.situationDatetime,
                 xlEggs = mapOf(
                     "boxes" to (this.binding.xlBoxTextInputLayout.text ?: 0).toString().toLong(),
-                    "cartons" to (this.binding.xlCartonsNumberTextView.text ?: 0).toString().toLong(),
+                    "cartons" to (this.binding.xlCartonsNumberTextView.text ?: 0).toString()
+                        .toLong(),
                     "eggs" to (this.binding.xlEggsNumberTextView.text ?: 0).toString().toLong(),
                 ),
             )
             if (monitoringCompanySituationData.documentId == null) {
                 this.modifyDailyMonitoringCompanySituationViewModel.addDailyMonitoringCompanySituation(
-                    data)
+                    data
+                )
             } else {
                 // modificar
                 this.modifyDailyMonitoringCompanySituationViewModel.updateDailyMonitoringCompanySituation(
@@ -148,40 +156,52 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     private fun setDate() {
-        this.binding.dateTextView.text = Utils.parseTimestampToString(monitoringCompanySituationData.situationDatetime)
+        this.binding.dateTextView.text =
+            Utils.parseTimestampToString(monitoringCompanySituationData.situationDatetime)
     }
 
     private fun setFields() {
-        this.binding.xlBoxTextInputLayout.setText((monitoringCompanySituationData.xlEggs["boxes"]
-            ?: "").toString())
+        this.binding.xlBoxTextInputLayout.setText(
+            (monitoringCompanySituationData.xlEggs["boxes"]
+                ?: "").toString()
+        )
         this.binding.xlBoxTextInputLayout.addTextChangedListener(xlWatcher)
         this.binding.xlEggsNumberTextView.text = (monitoringCompanySituationData.xlEggs["eggs"]
             ?: "0").toString()
-        this.binding.xlCartonsNumberTextView.text = (monitoringCompanySituationData.xlEggs["cartons"]
-            ?: "0").toString()
-        this.binding.lBoxTextInputLayout.setText((monitoringCompanySituationData.lEggs["boxes"]
-            ?: "").toString())
+        this.binding.xlCartonsNumberTextView.text =
+            (monitoringCompanySituationData.xlEggs["cartons"]
+                ?: "0").toString()
+        this.binding.lBoxTextInputLayout.setText(
+            (monitoringCompanySituationData.lEggs["boxes"]
+                ?: "").toString()
+        )
         this.binding.lBoxTextInputLayout.addTextChangedListener(lWatcher)
         this.binding.lEggsNumberTextView.text = (monitoringCompanySituationData.lEggs["eggs"]
             ?: "0").toString()
         this.binding.lCartonsNumberTextView.text = (monitoringCompanySituationData.lEggs["cartons"]
             ?: "0").toString()
-        this.binding.mBoxTextInputLayout.setText((monitoringCompanySituationData.mEggs["boxes"]
-            ?: "").toString())
+        this.binding.mBoxTextInputLayout.setText(
+            (monitoringCompanySituationData.mEggs["boxes"]
+                ?: "").toString()
+        )
         this.binding.mBoxTextInputLayout.addTextChangedListener(mWatcher)
         this.binding.mEggsNumberTextView.text = (monitoringCompanySituationData.mEggs["eggs"]
             ?: "0").toString()
         this.binding.mCartonsNumberTextView.text = (monitoringCompanySituationData.mEggs["cartons"]
             ?: "0").toString()
-        this.binding.sBoxTextInputLayout.setText((monitoringCompanySituationData.sEggs["boxes"]
-            ?: "").toString())
+        this.binding.sBoxTextInputLayout.setText(
+            (monitoringCompanySituationData.sEggs["boxes"]
+                ?: "").toString()
+        )
         this.binding.sBoxTextInputLayout.addTextChangedListener(sWatcher)
         this.binding.sEggsNumberTextView.text = (monitoringCompanySituationData.sEggs["eggs"]
             ?: "0").toString()
         this.binding.sCartonsNumberTextView.text = (monitoringCompanySituationData.sEggs["cartons"]
             ?: "0").toString()
-        this.binding.henLossesTextInputLayout.setText((monitoringCompanySituationData.hens["loses"]
-            ?: "0").toString())
+        this.binding.henLossesTextInputLayout.setText(
+            (monitoringCompanySituationData.hens["loses"]
+                ?: "0").toString()
+        )
         this.binding.brokenEggsTextInputLayout.setText((monitoringCompanySituationData.brokenEggs).toString())
     }
 

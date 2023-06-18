@@ -10,8 +10,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.ComponentModalDialogBinding
+import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 
 open class HNModalDialog : ConstraintLayout, BaseComponent {
 
@@ -50,7 +50,6 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
         this.setModalDialogLeftButtonText(model.leftButtonText)
         this.setModalDialogLeftButtonListener(model.leftButtonListener)
         if (model.rightButtonText != null) {
-            // TODO: Cuidado con !! - Intentar cambiarlo
             this.setModalDialogButtons(true)
             this.setModalDialogRightButtonText(model.rightButtonText!!)
             this.setModalDialogRightButtonListener(model.rightButtonListener!!)
@@ -86,7 +85,7 @@ open class HNModalDialog : ConstraintLayout, BaseComponent {
         this.binding.modalDialogLeftButton.text = text
     }
 
-    fun setModalDialogRightButtonText(text: String) {
+    private fun setModalDialogRightButtonText(text: String) {
         this.binding.modalDialogRightButton.text = text
     }
 

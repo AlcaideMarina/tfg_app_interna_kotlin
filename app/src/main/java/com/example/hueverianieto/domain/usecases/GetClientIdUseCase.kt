@@ -7,7 +7,7 @@ class GetClientIdUseCase @Inject constructor(
     private val getClientIdService: GetClientIdService
 ) {
 
-    suspend operator fun invoke() : Long? =
+    suspend operator fun invoke(): Long? =
         getClientIdService.getClientId()
 
 }

@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 
-class HNComponentTicketAdapter (
+class HNComponentTicketAdapter(
     private val ticketModelList: List<ComponentTicketModel>
 ) : RecyclerView.Adapter<HNComponentTicketViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HNComponentTicketViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return HNComponentTicketViewHolder(layoutInflater.inflate(R.layout.component_ticket, parent, false))
+        return HNComponentTicketViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_ticket,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = this.ticketModelList.size

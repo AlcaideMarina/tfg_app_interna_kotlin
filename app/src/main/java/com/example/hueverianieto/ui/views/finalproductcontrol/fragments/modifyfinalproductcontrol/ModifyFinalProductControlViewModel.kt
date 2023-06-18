@@ -1,6 +1,5 @@
 package com.example.hueverianieto.ui.views.finalproductcontrol.fragments.modifyfinalproductcontrol
 
-import android.app.AlertDialog
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -30,9 +29,10 @@ class ModifyFinalProductControlViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyFinalProductControlViewState(isLoading = true)
             val hensResourcesMap = FarmUtils.fpcParcelableToMap(fpcData)
-            when(val result = updateFPCUseCase(hensResourcesMap, fpcData.documentId!!)) {
+            when (val result = updateFPCUseCase(hensResourcesMap, fpcData.documentId!!)) {
                 false -> {
-                    _viewState.value = ModifyFinalProductControlViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        ModifyFinalProductControlViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         "Error",
                         "Se ha producido un error cuando se estaban actualizado los datos del producto final. Por favor, revise los datos e inténtelo de nuevo.",
@@ -40,7 +40,8 @@ class ModifyFinalProductControlViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ModifyFinalProductControlViewState(isLoading = false, error = false)
+                    _viewState.value =
+                        ModifyFinalProductControlViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
                         "FPC actualizado",
                         "Los datos del producto final se han actualizado correctamente.",

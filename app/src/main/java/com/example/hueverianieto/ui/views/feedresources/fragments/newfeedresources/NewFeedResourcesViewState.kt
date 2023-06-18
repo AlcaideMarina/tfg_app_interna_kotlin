@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.feedresources.fragments.newfeedresour
 
 import com.example.hueverianieto.base.BaseState
 
-class NewFeedResourcesViewState (
+class NewFeedResourcesViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

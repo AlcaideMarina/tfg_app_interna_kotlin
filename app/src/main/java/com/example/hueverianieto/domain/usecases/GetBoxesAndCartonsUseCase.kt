@@ -8,7 +8,7 @@ class GetBoxesAndCartonsUseCase @Inject constructor(
     private val getBoxesAndCartonsService: GetBoxesAndCartonsService
 ) {
 
-    suspend operator fun invoke() :List<BoxesAndCartonsResourcesData?>? =
+    suspend operator fun invoke(): List<BoxesAndCartonsResourcesData?>? =
         getBoxesAndCartonsService.getBoxesAndCartons()
 
 }

@@ -12,7 +12,13 @@ class ComponentClientAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentClientViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ComponentClientViewHolder(layoutInflater.inflate(R.layout.component_client, parent, false))
+        return ComponentClientViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_client,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = componentClientModelList.size
@@ -20,5 +26,5 @@ class ComponentClientAdapter(
     override fun onBindViewHolder(holder: ComponentClientViewHolder, position: Int) {
         holder.render(componentClientModelList[position])
     }
-    
+
 }

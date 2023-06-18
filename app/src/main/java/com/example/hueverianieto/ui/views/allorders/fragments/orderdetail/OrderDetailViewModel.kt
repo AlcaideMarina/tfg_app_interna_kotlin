@@ -17,7 +17,6 @@ import com.example.hueverianieto.domain.usecases.DeleteOrderUseCase
 import com.example.hueverianieto.domain.usecases.GetClientWithIdUseCase
 import com.example.hueverianieto.domain.usecases.GetInternalUserWithIdUseCase
 import com.example.hueverianieto.domain.usecases.GetOrderUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -57,7 +56,7 @@ class OrderDetailViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = OrderDetailViewState(isLoading = false)
-                    _clientData.value = result!!
+                    _clientData.value = result
                 }
             }
         }
@@ -66,7 +65,7 @@ class OrderDetailViewModel @Inject constructor(
     fun deleteOrder(clientDocumentId: String, orderDocumentId: String) {
         _viewState.value = OrderDetailViewState(isLoading = true)
         viewModelScope.launch {
-            when(val result = deleteOrderUseCase(clientDocumentId, orderDocumentId)) {
+            when (deleteOrderUseCase(clientDocumentId, orderDocumentId)) {
                 false -> {
                     _viewState.value = OrderDetailViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -76,7 +75,8 @@ class OrderDetailViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = OrderDetailViewState(isLoading = false, error = false, correct = true)
+                    _viewState.value =
+                        OrderDetailViewState(isLoading = false, error = false, correct = true)
                     _alertDialog.value = AlertOkData(
                         "Pedido eliminado",
                         "El pedido ha sido eliminado correctamente",
@@ -91,7 +91,7 @@ class OrderDetailViewModel @Inject constructor(
     fun getOrder(clientDocumentId: String, orderDocumentId: String) {
         viewModelScope.launch {
             _viewState.value = OrderDetailViewState(isLoading = true)
-            when(val result = getOrderUseCase(clientDocumentId, orderDocumentId)) {
+            when (val result = getOrderUseCase(clientDocumentId, orderDocumentId)) {
                 null -> {
                     _viewState.value = OrderDetailViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -102,7 +102,7 @@ class OrderDetailViewModel @Inject constructor(
                 }
                 else -> {
                     _viewState.value = OrderDetailViewState(isLoading = false)
-                    _orderData.value = result!!
+                    _orderData.value = result
                 }
             }
         }
@@ -111,7 +111,7 @@ class OrderDetailViewModel @Inject constructor(
     fun getDeliveryPerson(documentId: String) {
         viewModelScope.launch {
             _viewState.value = OrderDetailViewState(isLoading = true)
-            when(val result = getInternalUserWithIdUseCase(documentId)) {
+            when (val result = getInternalUserWithIdUseCase(documentId)) {
                 null -> {
                     _viewState.value = OrderDetailViewState(isLoading = false)
                 }
@@ -125,7 +125,8 @@ class OrderDetailViewModel @Inject constructor(
     }
 
     fun navigateToModifyOrder(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_orderDetailFragment_to_modifyOrderFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_orderDetailFragment_to_modifyOrderFragment, bundle)
             ?: Log.e(
                 OrderDetailViewModel::class.java.simpleName,
                 "Error en la navigación a Modificar pedido"

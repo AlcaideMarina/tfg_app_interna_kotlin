@@ -7,7 +7,11 @@ class UpdateBoxesAndCartonsUseCase @Inject constructor(
     private val updateFirestoreService: UpdateFirestoreService
 ) {
 
-    suspend operator fun invoke(bcDataMpa: Map<String, Any?>, documentId: String) : Boolean =
-        updateFirestoreService.updateDocumentFirestore(bcDataMpa, documentId, "material_boxes_and_cartons")
+    suspend operator fun invoke(bcDataMpa: Map<String, Any?>, documentId: String): Boolean =
+        updateFirestoreService.updateDocumentFirestore(
+            bcDataMpa,
+            documentId,
+            "material_boxes_and_cartons"
+        )
 
 }

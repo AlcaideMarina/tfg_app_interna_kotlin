@@ -1,7 +1,6 @@
 package com.example.hueverianieto.ui.views.clients.fragments.modifyclient
 
 import android.os.Bundle
-import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,10 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ModifyClientFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentModifyClientBinding
-    private lateinit var clientData : ClientData
-    private lateinit var currentUserData : InternalUserData
-    private val modifyClientViewModel : ModifyClientViewModel by viewModels()
+    private lateinit var binding: FragmentModifyClientBinding
+    private lateinit var clientData: ClientData
+    private lateinit var currentUserData: InternalUserData
+    private val modifyClientViewModel: ModifyClientViewModel by viewModels()
     private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
@@ -40,7 +39,7 @@ class ModifyClientFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : ModifyClientFragmentArgs by navArgs()
+        val args: ModifyClientFragmentArgs by navArgs()
         this.clientData = args.clientData
         this.currentUserData = args.currentUserData
 
@@ -55,7 +54,6 @@ class ModifyClientFragment : BaseFragment() {
             this.binding.containerBorderCheckTitle.visibility = View.GONE
         }
         setFieldTexts()
-        setFieldTypes()
 
         this.alertDialog = HNModalDialog(requireContext())
 
@@ -94,14 +92,15 @@ class ModifyClientFragment : BaseFragment() {
     override fun setListeners() {
         this.binding.checkedTextView.setOnClickListener {
             this.binding.checkedTextView.isChecked = !this.binding.checkedTextView.isChecked
-            this.binding.userAccountTextInputLayout.isEnabled = this.binding.checkedTextView.isChecked
+            this.binding.userAccountTextInputLayout.isEnabled =
+                this.binding.checkedTextView.isChecked
         }
         this.binding.cancelButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
         this.binding.saveButton.setOnClickListener {
-            var user : String? = null
-            var hasAccount : Boolean = false
+            var user: String? = null
+            var hasAccount: Boolean = false
 
             if (clientData.hasAccount) {
                 hasAccount = true
@@ -128,8 +127,14 @@ class ModifyClientFragment : BaseFragment() {
                 hasAccount,
                 clientData.id,
                 listOf(
-                    mapOf(this.binding.phoneTextInputLayoutName1.text.toString() to this.binding.phoneTextInputLayoutPhone1.text.toString().toLong()),
-                    mapOf(this.binding.phoneTextInputLayoutName2.text.toString() to this.binding.phoneTextInputLayoutPhone2.text.toString().toLong()),
+                    mapOf(
+                        this.binding.phoneTextInputLayoutName1.text.toString() to this.binding.phoneTextInputLayoutPhone1.text.toString()
+                            .toLong()
+                    ),
+                    mapOf(
+                        this.binding.phoneTextInputLayoutName2.text.toString() to this.binding.phoneTextInputLayoutPhone2.text.toString()
+                            .toLong()
+                    ),
                 ),
                 this.binding.postalCodeTextInputLayout.text.toString().toLong(),
                 this.binding.provinceTextInputLayout.text.toString(),
@@ -174,24 +179,7 @@ class ModifyClientFragment : BaseFragment() {
         }
     }
 
-    private fun setFieldTypes() {
-       /* with(this.binding) {
-            companyTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            directionTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            cityTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            provinceTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_SENTENCES)
-            postalCodeTextInputLayout.setInputType(InputType.TYPE_CLASS_NUMBER)
-            cifTextInputLayout.setInputType(InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS)
-            emailTextInputLayout.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
-            phoneTextInputLayoutPhone1.setInputType(InputType.TYPE_CLASS_PHONE)
-            phoneTextInputLayoutName1.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-            phoneTextInputLayoutPhone2.setInputType(InputType.TYPE_CLASS_PHONE)
-            phoneTextInputLayoutName2.setInputType(InputType.TYPE_TEXT_FLAG_CAP_WORDS)
-        }*/
-    }
-
     private fun setPopUp(title: String, errorMessage: String) {
-        // TODO: Close button
         alertDialog.show(
             requireContext(),
             ModalDialogModel(

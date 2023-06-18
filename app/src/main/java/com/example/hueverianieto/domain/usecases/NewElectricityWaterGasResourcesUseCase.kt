@@ -9,9 +9,10 @@ class NewElectricityWaterGasResourcesUseCase @Inject constructor(
     private val newDocumentService: NewDocumentService
 ) {
 
-    suspend operator fun invoke(ewgResourcesData: ElectricityWaterGasResourcesData) : Boolean {
+    suspend operator fun invoke(ewgResourcesData: ElectricityWaterGasResourcesData): Boolean {
         val dataMap = MaterialUtils.ewgParcelableToMap(ewgResourcesData)
-        return when (newDocumentService.newDocument("material_electricity_water_gas", dataMap).getOrNull()) {
+        return when (newDocumentService.newDocument("material_electricity_water_gas", dataMap)
+            .getOrNull()) {
             null -> false
             else -> true
         }

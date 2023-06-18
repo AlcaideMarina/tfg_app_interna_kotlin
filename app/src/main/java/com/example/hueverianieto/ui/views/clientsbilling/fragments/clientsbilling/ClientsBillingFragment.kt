@@ -14,16 +14,9 @@ import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentClientsBillingBinding
-import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.domain.model.componentclientmodel.ComponentClientBillingModel
-import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import com.example.hueverianieto.ui.components.componentclientbilling.ComponentClientBillingAdapter
-import com.example.hueverianieto.ui.views.clients.AllClientsActivity
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsFragment
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsViewState
-import com.example.hueverianieto.ui.views.clients.fragments.deletedclients.DeletedClientsViewModel
 import com.example.hueverianieto.ui.views.clientsbilling.ClientsBillingActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -32,7 +25,7 @@ class ClientsBillingFragment : BaseFragment() {
 
     private lateinit var binding: FragmentClientsBillingBinding
     private var clientList: MutableList<ComponentClientBillingModel> = mutableListOf()
-    private val clientsBillingViewModel : ClientsBillingViewModel by viewModels()
+    private val clientsBillingViewModel: ClientsBillingViewModel by viewModels()
     private lateinit var currentUserData: InternalUserData
 
     override fun onCreateView(
@@ -69,7 +62,7 @@ class ClientsBillingFragment : BaseFragment() {
                 this.binding.containerWaringNoClients.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 clientList = mutableListOf()
-                for (clientData in clientDataList)  {
+                for (clientData in clientDataList) {
                     if (clientData != null) {
                         val componentBillingClientModel = ComponentClientBillingModel(
                             clientData.id.toString(),
@@ -130,6 +123,5 @@ class ClientsBillingFragment : BaseFragment() {
     companion object {
         private val TAG = ClientsBillingFragment::class.java.simpleName
     }
-
 
 }

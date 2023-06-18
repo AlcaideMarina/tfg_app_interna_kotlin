@@ -19,9 +19,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class ChangePasswordFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentChangePasswordBinding
+    private lateinit var binding: FragmentChangePasswordBinding
     private lateinit var alertDialog: HNModalDialog
-    private val changePasswordViewModel : ChangePasswordViewModel by viewModels()
+    private val changePasswordViewModel: ChangePasswordViewModel by viewModels()
 
     lateinit var currentUserData: InternalUserData
 
@@ -86,7 +86,8 @@ class ChangePasswordFragment : BaseFragment() {
         this.binding.saveButton.setOnClickListener {
             if (this.binding.oldPasswordTextInputLayout.text != null && this.binding.oldPasswordTextInputLayout.text.toString() != ""
                 && this.binding.newPassword1TextInputLayout.text != null && this.binding.newPassword1TextInputLayout.text.toString() != ""
-                && this.binding.newPassword2TextInputLayout.text != null && this.binding.newPassword2TextInputLayout.text.toString() != "") {
+                && this.binding.newPassword2TextInputLayout.text != null && this.binding.newPassword2TextInputLayout.text.toString() != ""
+            ) {
                 val oldPass = this.binding.oldPasswordTextInputLayout.text.toString()
                 val newPass1 = this.binding.newPassword1TextInputLayout.text.toString()
                 val newPass2 = this.binding.newPassword2TextInputLayout.text.toString()
@@ -96,7 +97,7 @@ class ChangePasswordFragment : BaseFragment() {
                             oldPass,
                             newPass1
                         )
-                } else  {
+                } else {
                     setPopUp(
                         alertDialog,
                         requireContext(),

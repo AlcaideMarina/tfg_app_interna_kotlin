@@ -19,17 +19,11 @@ import com.example.hueverianieto.data.models.local.OrderContainerModel
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllOrdersBinding
-import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
-import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
-import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersFragment
-import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewModel
 import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewState
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
-import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlin.properties.Delegates
 
 @AndroidEntryPoint
 class ClientOrdersFragment : BaseFragment() {
@@ -37,8 +31,7 @@ class ClientOrdersFragment : BaseFragment() {
     private lateinit var binding: FragmentAllOrdersBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var clientData: ClientData
-    private var fromNewOrderFragment by Delegates.notNull<Boolean>()
-    private val clientOrdersViewModel : ClientOrdersViewModel by viewModels()
+    private val clientOrdersViewModel: ClientOrdersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -73,9 +66,10 @@ class ClientOrdersFragment : BaseFragment() {
                 this.binding.orderRecyclerView.visibility = View.GONE
             } else {
                 val orderList = mutableListOf<OrderContainerModel>()
-                for(orderData in orderDataList) {
+                for (orderData in orderDataList) {
                     if (orderData != null &&
-                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()
+                    ) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -116,11 +110,6 @@ class ClientOrdersFragment : BaseFragment() {
             with(state as AllOrdersViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    } else if (state.isEmpty) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    }
                 }
             }
         } catch (e: Exception) {
@@ -129,6 +118,6 @@ class ClientOrdersFragment : BaseFragment() {
     }
 
     companion object {
-        private val TAG = AllOrdersFragment::class.java.simpleName
+        private val TAG = ClientOrdersFragment::class.java.simpleName
     }
 }

@@ -36,7 +36,7 @@ class OrderAndDeliveryViewModel @Inject constructor(
     fun getTodayOrders() {
         viewModelScope.launch {
             _viewState.value = OrderAndDeliveryViewState(isLoading = true)
-            when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
+            when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
                     _viewState.value = OrderAndDeliveryViewState(isLoading = false, error = true)
                 }
@@ -44,8 +44,8 @@ class OrderAndDeliveryViewModel @Inject constructor(
                     _viewState.value = OrderAndDeliveryViewState(isLoading = false, isEmpty = true)
                 }
                 else -> {
-                    val clientIdList : List<String?> = resultQ1
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val clientIdList: List<String?> = resultQ1
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (id in clientIdList) {
                         if (id != null) {
                             when (val resultQ2 = getClientTodayOrdersUseCase(id)) {
@@ -73,4 +73,5 @@ class OrderAndDeliveryViewModel @Inject constructor(
         intent.putExtra("from_new_order", false)
         context.startActivity(intent)
     }
+
 }

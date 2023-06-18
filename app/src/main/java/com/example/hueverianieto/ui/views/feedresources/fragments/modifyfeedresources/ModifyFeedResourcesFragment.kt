@@ -1,6 +1,5 @@
 package com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -15,11 +14,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyFeedResourcesFragment : BaseFragment() {
@@ -110,8 +107,10 @@ class ModifyFeedResourcesFragment : BaseFragment() {
                 { alertDialog.cancel() },
                 {
                     alertDialog.cancel()
-                    feedResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
-                    feedResourcesData.kilos = this.binding.kilosTextInputLayout.text.toString().toDouble()
+                    feedResourcesData.totalPrice =
+                        this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                    feedResourcesData.kilos =
+                        this.binding.kilosTextInputLayout.text.toString().toDouble()
                     this.modifyFeedResourcesViewModel.updateFeed(feedResourcesData)
                 }
             )

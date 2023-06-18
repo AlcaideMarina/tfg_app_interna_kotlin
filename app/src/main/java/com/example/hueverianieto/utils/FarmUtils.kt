@@ -2,7 +2,6 @@ package com.example.hueverianieto.utils
 
 import com.example.hueverianieto.data.models.local.EggEqualitiesData
 import com.example.hueverianieto.data.models.remote.FPCData
-import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.MonitoringCompanySituationData
 import com.google.firebase.Timestamp
 
@@ -24,7 +23,7 @@ object FarmUtils {
         )
     }
 
-    fun fpcParcelableToMap(fpcData: FPCData) : Map<String, Any?> {
+    fun fpcParcelableToMap(fpcData: FPCData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["accepted_eggs"] = fpcData.acceptedEggs
@@ -41,7 +40,10 @@ object FarmUtils {
         return map
     }
 
-    fun monitoringCompanySituationMapToParcelable(data: MutableMap<String, Any?>, documentId: String?): MonitoringCompanySituationData {
+    fun monitoringCompanySituationMapToParcelable(
+        data: MutableMap<String, Any?>,
+        documentId: String?
+    ): MonitoringCompanySituationData {
         return MonitoringCompanySituationData(
             data["broken_eggs"] as Long,
             data["created_by"] as String,
@@ -56,7 +58,7 @@ object FarmUtils {
         )
     }
 
-    fun monitoringCompanySituationParcelableToMap(monitoringCompanySituationData: MonitoringCompanySituationData) : Map<String, Any?> {
+    fun monitoringCompanySituationParcelableToMap(monitoringCompanySituationData: MonitoringCompanySituationData): Map<String, Any?> {
         val map = mutableMapOf<String, Any?>()
 
         map["broken_eggs"] = monitoringCompanySituationData.brokenEggs
@@ -72,7 +74,7 @@ object FarmUtils {
         return map
     }
 
-    fun getXLEggsEqualities(boxes: Long) : EggEqualitiesData =
+    fun getXLEggsEqualities(boxes: Long): EggEqualitiesData =
         EggEqualitiesData(
             boxes = boxes,
             cartons = 14 * boxes,
@@ -80,8 +82,7 @@ object FarmUtils {
         )
 
 
-
-    fun getLMSEggsEqualities(boxes: Long) : EggEqualitiesData =
+    fun getLMSEggsEqualities(boxes: Long): EggEqualitiesData =
         EggEqualitiesData(
             boxes = boxes,
             cartons = 14 * boxes,

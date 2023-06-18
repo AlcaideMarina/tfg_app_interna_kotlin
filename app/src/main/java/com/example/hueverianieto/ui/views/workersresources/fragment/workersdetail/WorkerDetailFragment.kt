@@ -12,12 +12,8 @@ import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
-import com.example.hueverianieto.ui.views.clients.AllClientsActivity
-import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,8 +89,11 @@ class WorkerDetailFragment : BaseFragment() {
             this.surnameTextView.text = internalUserData.surname
             this.dniTextView.text = internalUserData.dni
             this.accountTextView.text = internalUserData.bankAccount
-            this.positionTextView.text = resources.getString(Utils.getKey(
-                Constants.roles, internalUserData.position.toInt())!!)
+            this.positionTextView.text = resources.getString(
+                Utils.getKey(
+                    Constants.roles, internalUserData.position.toInt()
+                )!!
+            )
             this.salaryTextInputLayout.setText((internalUserData.salary ?: "").toString())
             this.salaryTextInputLayout.isEnabled = false
         }

@@ -9,7 +9,7 @@ class GetWeeklyMonitoringCompanySituationService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getMonitoringComponentSituation(initTimestamp: Timestamp, endTimestamp: Timestamp) :
+    suspend fun getMonitoringComponentSituation(initTimestamp: Timestamp, endTimestamp: Timestamp):
             Result<QuerySnapshot> = runCatching {
         firebaseClient.db
             .collection("farm_situation")

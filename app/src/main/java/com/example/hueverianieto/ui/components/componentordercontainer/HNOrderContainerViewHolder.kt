@@ -11,7 +11,7 @@ import com.example.hueverianieto.utils.Utils
 
 class HNOrderContainerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-    val binding : ComponentOrderContainerBinding = ComponentOrderContainerBinding.bind(view)
+    val binding: ComponentOrderContainerBinding = ComponentOrderContainerBinding.bind(view)
 
     fun render(orderContainerModel: OrderContainerModel) {
 
@@ -36,7 +36,8 @@ class HNOrderContainerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.binding.statusDateText.text = this.binding.root.context.getString(statusStr)
 
         this.binding.baseComponentOrderContainer.setOnClickListener(
-            orderContainerModel.onClickListener )
+            orderContainerModel.onClickListener
+        )
 
     }
 

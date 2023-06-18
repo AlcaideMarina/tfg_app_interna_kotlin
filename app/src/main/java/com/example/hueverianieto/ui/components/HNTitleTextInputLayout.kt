@@ -6,11 +6,11 @@ import android.view.LayoutInflater
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.ui.components.rowtextinputlayout.RowTextInputLayoutAdapter
-import com.example.hueverianieto.domain.model.textinputlayout.TitleTextInputLayoutModel
 import com.example.hueverianieto.databinding.ComponentTitleTextInputLayoutBinding
+import com.example.hueverianieto.domain.model.textinputlayout.TitleTextInputLayoutModel
+import com.example.hueverianieto.ui.components.rowtextinputlayout.RowTextInputLayoutAdapter
 
-class HNTitleTextInputLayout: HNRowTextInputLayout, BaseComponent {
+class HNTitleTextInputLayout : HNRowTextInputLayout, BaseComponent {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -18,11 +18,12 @@ class HNTitleTextInputLayout: HNRowTextInputLayout, BaseComponent {
         context, attrs, defStyleAttr
     )
 
-    private var binding: ComponentTitleTextInputLayoutBinding = ComponentTitleTextInputLayoutBinding.bind(
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.component_title_text_input_layout, this, true)
-    )
+    private var binding: ComponentTitleTextInputLayoutBinding =
+        ComponentTitleTextInputLayoutBinding.bind(
+            LayoutInflater
+                .from(context)
+                .inflate(R.layout.component_title_text_input_layout, this, true)
+        )
 
     init {
         this.addView(this.binding.root)
@@ -31,7 +32,8 @@ class HNTitleTextInputLayout: HNRowTextInputLayout, BaseComponent {
     fun setUp(model: TitleTextInputLayoutModel) {
         this.binding.textView.text = model.title
         this.binding.rowTextInputLayoutRecyclerView.layoutManager = LinearLayoutManager(context)
-        this.binding.rowTextInputLayoutRecyclerView.adapter = RowTextInputLayoutAdapter(model.rowTextInputLayoutModelList)
+        this.binding.rowTextInputLayoutRecyclerView.adapter =
+            RowTextInputLayoutAdapter(model.rowTextInputLayoutModelList)
     }
 
 }

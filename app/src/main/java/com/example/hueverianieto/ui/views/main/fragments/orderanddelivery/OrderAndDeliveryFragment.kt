@@ -1,12 +1,10 @@
 package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +17,6 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrdersAndDeliveryBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import com.example.hueverianieto.ui.views.main.MainActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
@@ -31,10 +27,9 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OrderAndDeliveryFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentOrdersAndDeliveryBinding
+    private lateinit var binding: FragmentOrdersAndDeliveryBinding
     private lateinit var currentUserData: InternalUserData
-    private lateinit var alertDialog: HNModalDialog
-    private val orderAndDeliveryViewModel : OrderAndDeliveryViewModel by viewModels()
+    private val orderAndDeliveryViewModel: OrderAndDeliveryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +38,13 @@ class OrderAndDeliveryFragment : BaseFragment() {
         (activity as MainActivity).configNav(false)
         currentUserData = (activity as MainActivity).currentUserData
         binding =
-            FragmentOrdersAndDeliveryBinding.bind(inflater.inflate(R.layout.fragment_orders_and_delivery, container, false))
+            FragmentOrdersAndDeliveryBinding.bind(
+                inflater.inflate(
+                    R.layout.fragment_orders_and_delivery,
+                    container,
+                    false
+                )
+            )
         return binding.root
     }
 
@@ -71,7 +72,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
                 val orderList = mutableListOf<OrderContainerModel>()
                 for (orderData in orderDataList) {
                     if (orderData != null &&
-                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()
+                    ) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -113,11 +115,6 @@ class OrderAndDeliveryFragment : BaseFragment() {
             with(state as OrderAndDeliveryViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        // TODO: Popup error
-                    } else if (state.isEmpty) {
-                        // TODO: Popup está vacío
-                    }
                 }
             }
         } catch (e: Exception) {
@@ -138,6 +135,5 @@ class OrderAndDeliveryFragment : BaseFragment() {
     companion object {
         private val TAG = OrderAndDeliveryFragment::class.java.simpleName
     }
-
 
 }

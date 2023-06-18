@@ -3,7 +3,7 @@ package com.example.hueverianieto.domain.model.componentworkers
 import android.view.View
 import com.example.hueverianieto.base.BaseModel
 
-class ComponentWorkersModel (
+class ComponentWorkersModel(
     var id: String,
     var name: String,
     var surname: String,

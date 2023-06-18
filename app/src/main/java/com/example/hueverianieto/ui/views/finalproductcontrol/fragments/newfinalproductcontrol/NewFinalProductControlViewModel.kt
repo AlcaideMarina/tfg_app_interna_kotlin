@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.domain.usecases.NewFinalProductControlUseCase
-import com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -23,14 +22,15 @@ class NewFinalProductControlViewModel @Inject constructor(
     val viewState: StateFlow<NewFinalProductControlViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addFPC(fpcData: FPCData) {
         viewModelScope.launch {
             _viewState.value = NewFinalProductControlViewState(isLoading = true)
-            when(newFinalProductControlUseCase(fpcData)) {
+            when (newFinalProductControlUseCase(fpcData)) {
                 false -> {
-                    _viewState.value = NewFinalProductControlViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        NewFinalProductControlViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
                         text = "Se ha producido un error al guardar el producto final. Por favor, revise los datos e inténtelo de nuevo.",

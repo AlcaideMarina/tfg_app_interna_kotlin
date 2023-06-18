@@ -5,10 +5,10 @@ import com.example.hueverianieto.data.services.UpdateOrderService
 import javax.inject.Inject
 
 class UpdateOrderUseCase @Inject constructor(
-    private val updateOrderService : UpdateOrderService
+    private val updateOrderService: UpdateOrderService
 ) {
 
-    suspend operator fun invoke(clientDocumentId : String, orderData: OrderData) : Boolean =
+    suspend operator fun invoke(clientDocumentId: String, orderData: OrderData): Boolean =
         updateOrderService.updateOrder(clientDocumentId, orderData)
 
 }

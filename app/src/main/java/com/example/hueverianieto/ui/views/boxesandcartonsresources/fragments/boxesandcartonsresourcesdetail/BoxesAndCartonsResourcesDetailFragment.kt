@@ -1,6 +1,5 @@
 package com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.boxesandcartonsresourcesdetail
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,6 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBoxesAndCartonsResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +53,8 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
         setText()
         lifecycleScope.launchWhenStarted {
             boxesAndCartonsResourcesDetailViewModel.getBoxesAndCartonsResource(
-                bcResourcesData.documentId!!)
+                bcResourcesData.documentId!!
+            )
             boxesAndCartonsResourcesDetailViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -132,13 +131,21 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
             this.dateTextView.text = Utils.parseTimestampToString(bcResourcesData.expenseDatetime)
             this.boxesTextInputLayout.setText((bcResourcesData.order["box"] ?: "").toString())
             this.boxesTextInputLayout.isEnabled = false
-            this.xlCartonsTextInputLayout.setText((bcResourcesData.order["xl_carton"] ?: "").toString())
+            this.xlCartonsTextInputLayout.setText(
+                (bcResourcesData.order["xl_carton"] ?: "").toString()
+            )
             this.xlCartonsTextInputLayout.isEnabled = false
-            this.lCartonsTextInputLayout.setText((bcResourcesData.order["l_carton"] ?: "").toString())
+            this.lCartonsTextInputLayout.setText(
+                (bcResourcesData.order["l_carton"] ?: "").toString()
+            )
             this.lCartonsTextInputLayout.isEnabled = false
-            this.mCartonsTextInputLayout.setText((bcResourcesData.order["m_carton"] ?: "").toString())
+            this.mCartonsTextInputLayout.setText(
+                (bcResourcesData.order["m_carton"] ?: "").toString()
+            )
             this.mCartonsTextInputLayout.isEnabled = false
-            this.sCartonsTextInputLayout.setText((bcResourcesData.order["s_carton"] ?: "").toString())
+            this.sCartonsTextInputLayout.setText(
+                (bcResourcesData.order["s_carton"] ?: "").toString()
+            )
             this.sCartonsTextInputLayout.isEnabled = false
             this.totalPriceTextInputLayout.setText(bcResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false

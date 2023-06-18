@@ -16,11 +16,9 @@ import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail.FinalProductControlDetailFragmentArgs
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -111,7 +109,11 @@ class ModifyFinalProductControlFragment : BaseFragment() {
                 alertDialog,
                 requireContext(),
                 "Aviso",
-                "Va a modificar la información de la fecha de expedición ${Utils.parseTimestampToString(fpcData.issueDatetime) ?: "-"}. ¿Quiere continuar con el proceso?",
+                "Va a modificar la información de la fecha de expedición ${
+                    Utils.parseTimestampToString(
+                        fpcData.issueDatetime
+                    ) ?: "-"
+                }. ¿Quiere continuar con el proceso?",
                 "Cancelar",
                 "Continuar",
                 { alertDialog.cancel() },
@@ -119,8 +121,10 @@ class ModifyFinalProductControlFragment : BaseFragment() {
                     alertDialog.cancel()
                     fpcData.layingDatetime = layingDatetimeSelected
                     fpcData.packingDatetime = packingDatetimeSelected
-                    fpcData.acceptedEggs = (this.binding.acceptedEggsTextInputLayout.text ?: "0").toString().toLong()
-                    fpcData.rejectedEggs = (this.binding.rejectedEggsTextInputLayout.text ?: "0").toString().toLong()
+                    fpcData.acceptedEggs =
+                        (this.binding.acceptedEggsTextInputLayout.text ?: "0").toString().toLong()
+                    fpcData.rejectedEggs =
+                        (this.binding.rejectedEggsTextInputLayout.text ?: "0").toString().toLong()
                     fpcData.lot = (this.binding.lotTextInputLayout.text ?: "0").toString().toLong()
                     fpcData.bestBeforeDatetime = bestBeforeDatetimeSelected
                     fpcData.issueDatetime = issueDatetimeSelected
@@ -151,22 +155,30 @@ class ModifyFinalProductControlFragment : BaseFragment() {
         with(this.binding) {
             this.layingDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
-                fpcData.layingDatetime))
+                    fpcData.layingDatetime
+                )
+            )
             this.layingDateTextInputLayout.setOnClickListener { onClickScheduledLayingDate() }
             this.packingDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
-                fpcData.packingDatetime))
+                    fpcData.packingDatetime
+                )
+            )
             this.packingDateTextInputLayout.setOnClickListener { onClickScheduledPackingDate() }
             this.acceptedEggsTextInputLayout.setText(fpcData.acceptedEggs.toString())
             this.rejectedEggsTextInputLayout.setText(fpcData.rejectedEggs.toString())
             this.lotTextInputLayout.setText(fpcData.lot.toString())
             this.bestBeforeDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
-                fpcData.bestBeforeDatetime))
+                    fpcData.bestBeforeDatetime
+                )
+            )
             this.bestBeforeDateTextInputLayout.setOnClickListener { onClickScheduledBestBeforeDate() }
             this.issueDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
-                fpcData.issueDatetime))
+                    fpcData.issueDatetime
+                )
+            )
             this.issueDateTextInputLayout.setOnClickListener { onClickScheduledIssueDate() }
         }
     }

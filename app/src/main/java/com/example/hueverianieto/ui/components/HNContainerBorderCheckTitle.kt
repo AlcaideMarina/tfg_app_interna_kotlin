@@ -7,16 +7,15 @@ import android.view.View
 import android.widget.LinearLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.base.BaseModel
 import com.example.hueverianieto.databinding.ComponentContainerBorderCheckTitleBinding
 
-class HNContainerBorderCheckTitle: LinearLayout, BaseComponent {
+class HNContainerBorderCheckTitle : LinearLayout, BaseComponent {
 
-    private var binding: ComponentContainerBorderCheckTitleBinding = ComponentContainerBorderCheckTitleBinding.inflate(
-        LayoutInflater.from(this.context)
-    )
+    private var binding: ComponentContainerBorderCheckTitleBinding =
+        ComponentContainerBorderCheckTitleBinding.inflate(
+            LayoutInflater.from(this.context)
+        )
 
     constructor(context: Context) : super(context)
 
@@ -29,7 +28,11 @@ class HNContainerBorderCheckTitle: LinearLayout, BaseComponent {
     )
 
     init {
-        this.addView(this.binding.root, ConstraintLayout.LayoutParams.MATCH_PARENT, ConstraintLayout.LayoutParams.WRAP_CONTENT)
+        this.addView(
+            this.binding.root,
+            ConstraintLayout.LayoutParams.MATCH_PARENT,
+            ConstraintLayout.LayoutParams.WRAP_CONTENT
+        )
     }
 
     override fun getComponentContext(): Context {
@@ -40,12 +43,7 @@ class HNContainerBorderCheckTitle: LinearLayout, BaseComponent {
         return this
     }
 
-    /*fun setBodyContent(layoutManager: LayoutManager, adapter: RecyclerView.Adapter<>) {
-        this.binding.bodyContainerRecyclerView.layoutManager = layoutManager
-        this.binding.bodyContainerRecyclerView.adapter = adapter
-    }*/
-
-    fun getBodyContainer() : RecyclerView {
+    fun getBodyContainer(): RecyclerView {
         return this.binding.bodyContainerRecyclerView
     }
 

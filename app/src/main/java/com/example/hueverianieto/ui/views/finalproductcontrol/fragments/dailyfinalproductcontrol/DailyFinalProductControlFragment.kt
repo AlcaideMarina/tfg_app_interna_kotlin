@@ -20,7 +20,6 @@ import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContai
 import com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel
 import com.example.hueverianieto.ui.components.componentdailyfinalproductcontrol.ComponentDailyFinalProductControlAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DailyFinalProductControlFragment : BaseFragment() {
@@ -52,14 +51,16 @@ class DailyFinalProductControlFragment : BaseFragment() {
 
     override fun configureUI() {
         this.dailyFinalProductControlViewModel.getThisMonthDailyFPC(
-            monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
+            monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate
+        )
         this.dailyFinalProductControlViewModel.getNextLot()
         this.binding.deletedFpcButton.setText("Eliminados")
         deletedList = mutableListOf<FPCData>()
         initRecyclerView()
         lifecycleScope.launchWhenStarted {
             dailyFinalProductControlViewModel.getThisMonthDailyFPC(
-                monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
+                monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate
+            )
             dailyFinalProductControlViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -136,7 +137,8 @@ class DailyFinalProductControlFragment : BaseFragment() {
             this.binding.containerWaringNoDailyFpc.setText("No hay registros de producto final sin eliminar para el mes seleccionado en la base de datos.")
         } else {
             this.binding.dailyFpcRecyclerView.layoutManager = LinearLayoutManager(this.context)
-            this.binding.dailyFpcRecyclerView.adapter = ComponentDailyFinalProductControlAdapter(list)
+            this.binding.dailyFpcRecyclerView.adapter =
+                ComponentDailyFinalProductControlAdapter(list)
             this.binding.dailyFpcRecyclerView.visibility = View.VISIBLE
             this.binding.containerWaringNoDailyFpc.visibility = View.GONE
         }

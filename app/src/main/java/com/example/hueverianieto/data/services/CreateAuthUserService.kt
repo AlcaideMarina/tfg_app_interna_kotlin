@@ -8,13 +8,13 @@ class CreateAuthUserService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun createAuthUser(email: String, password: String) : String? = kotlin.runCatching {
+    suspend fun createAuthUser(email: String, password: String): String? = kotlin.runCatching {
         firebaseClient.auth
             .createUserWithEmailAndPassword(email, password)
             .await()
     }.toStringResult()
 
-    private fun Result<AuthResult>.toStringResult() = when(val result = getOrNull()) {
+    private fun Result<AuthResult>.toStringResult() = when (val result = getOrNull()) {
         null -> null
         else -> result.user?.uid
     }

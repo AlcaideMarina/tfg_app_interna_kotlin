@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.OrderData
-import com.example.hueverianieto.data.services.GetDailyMonitoringCompanySituationService
-import com.example.hueverianieto.domain.usecases.*
-import com.example.hueverianieto.ui.views.main.fragments.orderanddelivery.OrderAndDeliveryViewState
-import com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationViewState
+import com.example.hueverianieto.domain.usecases.GetAllDocumentsIdUseCase
+import com.example.hueverianieto.domain.usecases.GetClientTodayDeliveriesUseCase
+import com.example.hueverianieto.domain.usecases.GetClientTodayOrdersUseCase
+import com.example.hueverianieto.domain.usecases.GetDailyMonitoringCompanySituationUseCase
 import com.example.hueverianieto.utils.Constants
 import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,7 +41,7 @@ class HomeViewModel @Inject constructor(
     fun getTodayOrders() {
         viewModelScope.launch {
             _viewState.value = HomeViewState(isLoading = true)
-            when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
+            when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
                     _viewState.value = HomeViewState(isLoading = false, error = true)
                     _todayOrdersNumber.value = 0
@@ -51,8 +51,8 @@ class HomeViewModel @Inject constructor(
                     _todayOrdersNumber.value = 0
                 }
                 else -> {
-                    val clientIdList : List<String?> = resultQ1
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val clientIdList: List<String?> = resultQ1
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (id in clientIdList) {
                         if (id != null) {
                             when (val resultQ2 = getClientTodayOrdersUseCase(id)) {
@@ -77,7 +77,7 @@ class HomeViewModel @Inject constructor(
     fun getTodayDelivery() {
         viewModelScope.launch {
             _viewState.value = HomeViewState(isLoading = true)
-            when(val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
+            when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
                     _viewState.value = HomeViewState(isLoading = false, error = true)
                     _todayDeliveriesNumber.value = 0
@@ -87,8 +87,8 @@ class HomeViewModel @Inject constructor(
                     _todayDeliveriesNumber.value = 0
                 }
                 else -> {
-                    val clientIdList : List<String?> = resultQ1
-                    val orderList : MutableList<OrderData?> = mutableListOf()
+                    val clientIdList: List<String?> = resultQ1
+                    val orderList: MutableList<OrderData?> = mutableListOf()
                     for (id in clientIdList) {
                         if (id != null) {
                             when (val resultQ2 = getClientTodayDeliveriesUseCase(id)) {

@@ -5,9 +5,9 @@ import com.example.hueverianieto.data.services.GetHensService
 import javax.inject.Inject
 
 class GetHensUseCase @Inject constructor(
-    private val getHensService : GetHensService
+    private val getHensService: GetHensService
 ) {
 
-    suspend operator fun invoke() : List<HensResourcesData?>? = getHensService.getHens()
+    suspend operator fun invoke(): List<HensResourcesData?>? = getHensService.getHens()
 
 }

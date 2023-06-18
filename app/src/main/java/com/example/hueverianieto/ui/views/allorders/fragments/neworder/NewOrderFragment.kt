@@ -34,22 +34,21 @@ import java.util.*
 @AndroidEntryPoint
 class NewOrderFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentOrderDetailBinding
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var alertDialog : HNModalDialog
-    private val newOrderViewModel : NewOrderViewModel by viewModels()
+    private lateinit var binding: FragmentOrderDetailBinding
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var alertDialog: HNModalDialog
+    private val newOrderViewModel: NewOrderViewModel by viewModels()
 
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
     private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
 
     private val dropdownClientItemsMap = mutableMapOf<String, String>()
     private val dropdownClientItems = mutableListOf<String>()
     private lateinit var clientData: ClientData
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
-    private var clientDocumentId : String? = null
+    private var clientDocumentId: String? = null
 
-    private lateinit var approxDeliveryDatetimeSelected : Timestamp
+    private lateinit var approxDeliveryDatetimeSelected: Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -62,7 +61,7 @@ class NewOrderFragment : BaseFragment() {
         this.binding = FragmentOrderDetailBinding.inflate(
             inflater, container, false
         )
-        val args : NewOrderFragmentArgs by navArgs()
+        val args: NewOrderFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
 
         this.alertDialog = HNModalDialog(requireContext())
@@ -128,8 +127,6 @@ class NewOrderFragment : BaseFragment() {
                     )
                 }
             }
-
-
         }
     }
 
@@ -145,12 +142,13 @@ class NewOrderFragment : BaseFragment() {
         }
         this.binding.modifyButton.setOnClickListener {
             it.hideSoftInput()
-            val paymentMethodSelected : Int? = when (this.binding.paymentMethodAutoCompleteTextView.text.toString()) {
-                requireContext().getString(R.string.in_cash) -> R.string.in_cash
-                requireContext().getString(R.string.per_receipt) -> R.string.per_receipt
-                requireContext().getString(R.string.transfer) -> R.string.transfer
-                else -> null
-            }
+            val paymentMethodSelected: Int? =
+                when (this.binding.paymentMethodAutoCompleteTextView.text.toString()) {
+                    requireContext().getString(R.string.in_cash) -> R.string.in_cash
+                    requireContext().getString(R.string.per_receipt) -> R.string.per_receipt
+                    requireContext().getString(R.string.transfer) -> R.string.transfer
+                    else -> null
+                }
             val dbOrderFieldData = OrderUtils.getOrderStructure(this.binding.orderRecyclerView)
 
             if (clientDocumentId == null) {
@@ -255,7 +253,7 @@ class NewOrderFragment : BaseFragment() {
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
                 return if (recyclerViewTitles.contains(position)) 4
-                else if(recyclerViewTextInputLayouts.contains(position)) 2
+                else if (recyclerViewTextInputLayouts.contains(position)) 2
                 else 1
             }
         }
@@ -269,7 +267,8 @@ class NewOrderFragment : BaseFragment() {
         if (clientDataList != null) {
             for (client in clientDataList) {
                 if (client != null) {
-                    dropdownClientItemsMap[client.id.toString() + " - " + client.company] = client.documentId!!
+                    dropdownClientItemsMap[client.id.toString() + " - " + client.company] =
+                        client.documentId!!
                     dropdownClientItems.add(client.id.toString() + " - " + client.company)
                 }
             }
@@ -301,7 +300,8 @@ class NewOrderFragment : BaseFragment() {
         }
         this.binding.paymentMethodAutoCompleteTextView.setAdapter(
             ArrayAdapter(
-                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
+                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems
+            )
         )
     }
 
@@ -326,7 +326,8 @@ class NewOrderFragment : BaseFragment() {
             if (monthStr.length < 2) monthStr = "0$monthStr"
             if (yearStr.length < 4) yearStr = "0$yearStr"
             this.binding.deliveryDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
-            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+            approxDeliveryDatetimeSelected =
+                Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
         }
         val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
         datePickerDialog.datePicker.minDate = Utils.addToDate(Date(), 3).time

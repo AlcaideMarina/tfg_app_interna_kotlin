@@ -5,9 +5,7 @@ import android.view.MenuItem
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.GravityCompat
-import androidx.core.view.get
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -75,51 +73,8 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             currentUserData.name + " " + currentUserData.surname
         this.binding.navView.getHeaderView(0).findViewById<TextView>(R.id.role_text).text =
             applicationContext.getString(
-                Utils.getKey(Constants.roles, currentUserData.position.toInt())!!)
-
-        /*if (savedInstanceState == null) {
-            navigationView.setCheckedItem(R.id.nav_home)
-        }
-
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        this.binding.navigationView.setNavigationItemSelectedListener {
-            it.isChecked = true
-            when (it.itemId) {
-                R.id.home_bottom_menu -> replaceFragment(HomeFragment(), "Huevería Nieto")
-                R.id.orders_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "ORDERS",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.economy_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "ECCONOMY",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.farm_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "FARM",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.material_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "MATERIAL",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.users_bottom_menu -> replaceFragment(
-                    UsersAndClientsFragment(),
-                    it.title.toString()
-                )
-            }
-            true
-        }
-        this.binding.topBarMenuIcon.setOnClickListener {
-            this.binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        this.binding.navigationView.itemIconTintList = null*/
+                Utils.getKey(Constants.roles, currentUserData.position.toInt())!!
+            )
     }
 
     override fun configureUI() {
@@ -131,75 +86,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
-    /*override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        toggle = ActionBarDrawerToggle(
-            this@MainActivity,
-            this.binding.drawerLayout,
-            R.string.open_lateral_menu,
-            R.string.close_lateral_menu
-        )
-        this.binding.drawerLayout.addDrawerListener(toggle)
-        toggle.syncState()
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        this.binding.navigationView.setNavigationItemSelectedListener {
-            it.isChecked = true
-            when (it.itemId) {
-                R.id.home_bottom_menu -> replaceFragment(HomeFragment(), "Huevería Nieto")
-                R.id.orders_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "ORDERS",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.economy_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "ECCONOMY",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.farm_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "FARM",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.material_bottom_menu -> Toast.makeText(
-                    applicationContext,
-                    "MATERIAL",
-                    Toast.LENGTH_SHORT
-                ).show()
-                R.id.users_bottom_menu -> replaceFragment(
-                    UsersAndClientsFragment(),
-                    it.title.toString()
-                )
-            }
-            true
-        }
-        this.binding.topBarMenuIcon.setOnClickListener {
-            this.binding.drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        this.binding.navigationView.itemIconTintList = null
-        //this.binding.bottomMenu.itemIconTintList = null
-
-    }*/
-
-    /*private fun replaceFragment(fragment: Fragment, title: String) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.fragment_container, fragment).commit()
-        this.binding.drawerLayout.closeDrawers()
-        this.binding.topBarText.text = title
-    }*/
-
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.home_bottom_menu -> supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, HomeFragment()).commit()
             R.id.orders_bottom_menu -> supportFragmentManager.beginTransaction()
@@ -216,6 +107,7 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         this.binding.drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
+
     override fun onBackPressed() {
         if (this.binding.drawerLayout.isDrawerOpen(GravityCompat.START)) {
             this.binding.drawerLayout.closeDrawer(GravityCompat.START)
@@ -223,4 +115,5 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
             onBackPressedDispatcher.onBackPressed()
         }
     }
+
 }

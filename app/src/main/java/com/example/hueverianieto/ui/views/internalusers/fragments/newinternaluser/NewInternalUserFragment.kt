@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -20,7 +19,6 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class NewInternalUserFragment : BaseFragment() {
@@ -28,8 +26,8 @@ class NewInternalUserFragment : BaseFragment() {
     private lateinit var binding: FragmentNewInternalUserBinding
     private lateinit var alertDialog: HNModalDialog
     private lateinit var currentUserData: InternalUserData
-    private var dropdownRoleItems : MutableList<String> = mutableListOf()
-    private val newInternalUserViewModel : NewInternalUserViewModel by viewModels()
+    private var dropdownRoleItems: MutableList<String> = mutableListOf()
+    private val newInternalUserViewModel: NewInternalUserViewModel by viewModels()
 
     var name: String = ""
     var surname: String = ""
@@ -53,7 +51,7 @@ class NewInternalUserFragment : BaseFragment() {
     ): View {
         (activity as BaseActivity).configNav(true)
 
-        val args : NewInternalUserFragmentArgs by navArgs()
+        val args: NewInternalUserFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
 
         this.binding = FragmentNewInternalUserBinding.inflate(
@@ -146,18 +144,20 @@ class NewInternalUserFragment : BaseFragment() {
             ArrayAdapter(
                 this.requireContext(), R.layout.component_dropdown_list_item,
                 dropdownRoleItems
-            ))
+            )
+        )
 
     }
 
     private fun checkFields() {
         variableAssignations()
         if (name.isNotEmpty() && surname.isNotEmpty() && dni.isNotEmpty() && phone.isNotEmpty() &&
-                email.isNotEmpty() && direction.isNotEmpty() && city.isNotEmpty() &&
-                province.isNotEmpty() && postalCode.isNotEmpty() && ssNumber.isNotEmpty() &&
-                bankAccount.isNotEmpty() && position.isNotEmpty() && user.isNotEmpty()) {
+            email.isNotEmpty() && direction.isNotEmpty() && city.isNotEmpty() &&
+            province.isNotEmpty() && postalCode.isNotEmpty() && ssNumber.isNotEmpty() &&
+            bankAccount.isNotEmpty() && position.isNotEmpty() && user.isNotEmpty()
+        ) {
 
-            val positionSelected : Int? = when (position) {
+            val positionSelected: Int? = when (position) {
                 requireContext().getString(R.string.warehouse_job) -> R.string.warehouse_job
                 requireContext().getString(R.string.boss_job) -> R.string.boss_job
                 requireContext().getString(R.string.farm_job) -> R.string.farm_job
@@ -170,7 +170,7 @@ class NewInternalUserFragment : BaseFragment() {
             val internalUserData = InternalUserData(
                 bankAccount,
                 city,
-                "user_${currentUserData.id }",
+                "user_${currentUserData.id}",
                 false,
                 direction,
                 dni,

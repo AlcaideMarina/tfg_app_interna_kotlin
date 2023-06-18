@@ -8,8 +8,8 @@ class GetNextLotUseCase @Inject constructor(
     private val getNextLotService: GetNextLotService
 ) {
 
-    suspend operator fun invoke() : Int {
-        return when(val result = getNextLotService.getNextLot().getOrNull()) {
+    suspend operator fun invoke(): Int {
+        return when (val result = getNextLotService.getNextLot().getOrNull()) {
             null -> 0
             else -> {
                 if (!result.isEmpty && result.documents.size > 0) {

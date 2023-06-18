@@ -9,7 +9,7 @@ class NewFinalProductControlUseCase @Inject constructor(
     private val newDocumentService: NewDocumentService
 ) {
 
-    suspend operator fun invoke(fpcData: FPCData) : Boolean {
+    suspend operator fun invoke(fpcData: FPCData): Boolean {
         val dataMap = FarmUtils.fpcParcelableToMap(fpcData)
         return when (newDocumentService.newDocument("final_product_control", dataMap).getOrNull()) {
             null -> false

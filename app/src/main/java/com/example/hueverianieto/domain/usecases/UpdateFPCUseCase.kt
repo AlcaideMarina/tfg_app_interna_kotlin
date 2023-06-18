@@ -7,7 +7,11 @@ class UpdateFPCUseCase @Inject constructor(
     val updateFirestoreService: UpdateFirestoreService
 ) {
 
-    suspend operator fun invoke(fpcDataMap: Map<String, Any?>, documentId: String) : Boolean =
-        updateFirestoreService.updateDocumentFirestore(fpcDataMap, documentId, "final_product_control")
+    suspend operator fun invoke(fpcDataMap: Map<String, Any?>, documentId: String): Boolean =
+        updateFirestoreService.updateDocumentFirestore(
+            fpcDataMap,
+            documentId,
+            "final_product_control"
+        )
 
 }

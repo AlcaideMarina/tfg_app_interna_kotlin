@@ -13,9 +13,6 @@ import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.DeleteHensResourcesUseCase
 import com.example.hueverianieto.domain.usecases.GetHenResourcesWithIdUseCase
-import com.example.hueverianieto.domain.usecases.HomeUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
-import com.example.hueverianieto.ui.views.workersresources.fragment.workersdetail.WorkerDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -40,7 +37,7 @@ class HensResourcesDetailViewModel @Inject constructor(
     fun getHensResource(documentId: String) {
         viewModelScope.launch {
             _viewState.value = HensResourcesDetailViewState(isLoading = true)
-            when(val result = getHenResourcesWithIdUseCase(documentId)) {
+            when (val result = getHenResourcesWithIdUseCase(documentId)) {
                 null -> {
                     _viewState.value = HensResourcesDetailViewState(isLoading = false)
                 }
@@ -67,7 +64,10 @@ class HensResourcesDetailViewModel @Inject constructor(
     }
 
     fun navigateToModifyHensResources(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_hensResourcesDetailFragment_to_modifyHensResourcesFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_hensResourcesDetailFragment_to_modifyHensResourcesFragment,
+            bundle
+        )
             ?: Log.e(
                 HensResourcesDetailViewModel::class.simpleName,
                 "Error en la navegación a modificar ticket de gallinas"

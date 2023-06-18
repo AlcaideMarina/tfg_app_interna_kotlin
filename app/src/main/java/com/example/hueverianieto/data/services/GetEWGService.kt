@@ -1,7 +1,6 @@
 package com.example.hueverianieto.data.services
 
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
-import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.utils.MaterialUtils
 import com.google.firebase.firestore.QuerySnapshot
 import kotlinx.coroutines.tasks.await

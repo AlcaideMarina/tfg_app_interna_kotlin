@@ -9,13 +9,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentDailyFinalProductControlBinding
 import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContainerItemModel
 import com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel
 import com.example.hueverianieto.ui.components.componentdailyfinalproductcontrol.ComponentDailyFinalProductControlAdapter
-import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailyfinalproductcontrol.DailyFinalProductControlFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -68,7 +66,7 @@ class DailyDeletedFinalProductControlFragment : BaseFragment() {
         val list = mutableListOf<FPCDailyContainerItemModel>()
         for (item in monthlyDeletedFPCContainerModel.fpcDataList) {
             val fpcDailyContainerItemModel = FPCDailyContainerItemModel(
-                item
+                item,
             ) {
                 // TODO Navegación
             }
@@ -82,11 +80,11 @@ class DailyDeletedFinalProductControlFragment : BaseFragment() {
             this.binding.containerWaringNoDailyFpc.setText("No hay registros de producto final eliminados para el mes seleccionado en la base de datos.")
         } else {
             this.binding.dailyFpcRecyclerView.layoutManager = LinearLayoutManager(this.context)
-            this.binding.dailyFpcRecyclerView.adapter = ComponentDailyFinalProductControlAdapter(list)
+            this.binding.dailyFpcRecyclerView.adapter =
+                ComponentDailyFinalProductControlAdapter(list)
             this.binding.dailyFpcRecyclerView.visibility = View.VISIBLE
             this.binding.containerWaringNoDailyFpc.visibility = View.GONE
         }
     }
-
 
 }

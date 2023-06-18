@@ -34,7 +34,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
 
     private var initFilterDatetime = Date()
     private var endFilterDatetime = Date()
-    
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -59,7 +59,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
@@ -75,7 +75,8 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
                 var y = year.toString()
                 while (y.length < 4) y = "0" + y
 
-                initFilterDatetime = Utils.parseStringToTimestamp("01/" + m + "/"+ y, "dd/MM/yyyy").toDate()
+                initFilterDatetime =
+                    Utils.parseStringToTimestamp("01/" + m + "/" + y, "dd/MM/yyyy").toDate()
                 getDateFilterText()
 
                 alertDialog.cancel()
@@ -84,7 +85,7 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     private fun getDateFilterText() {
@@ -97,10 +98,12 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
         while (m.length < 2) m = "0" + m
         var y = year.toString()
         while (y.length < 4) y = "0" + y
-        initFilterDatetime = Utils.parseStringToTimestamp("01/" + m + "/"+ y, "dd/MM/yyyy").toDate()
+        initFilterDatetime =
+            Utils.parseStringToTimestamp("01/" + m + "/" + y, "dd/MM/yyyy").toDate()
         endFilterDatetime = Utils.addToDate(initFilterDatetime, 0, 1)
 
-        this.binding.textDateFilter.text = Utils.parseDateToString(initFilterDatetime, "MMMM, yyyy").capitalizeFirstChar()
+        this.binding.textDateFilter.text =
+            Utils.parseDateToString(initFilterDatetime, "MMMM, yyyy").capitalizeFirstChar()
 
         setRecyclerView()
     }

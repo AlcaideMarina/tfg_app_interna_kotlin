@@ -1,6 +1,5 @@
 package com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +15,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.hensresouces.fragments.hensresourcesdetail.HensResourcesDetailFragmentArgs
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FeedResourcesDetailFragment : BaseFragment() {
@@ -42,7 +38,7 @@ class FeedResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args : FeedResourcesDetailFragmentArgs by navArgs()
+        val args: FeedResourcesDetailFragmentArgs by navArgs()
         this.feedResourcesData = args.feedResourcesData
         this.currentUserData = args.currentUserData
 

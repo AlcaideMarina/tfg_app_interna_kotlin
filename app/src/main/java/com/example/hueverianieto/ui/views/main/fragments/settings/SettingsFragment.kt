@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -19,8 +18,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class SettingsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentSettingsBinding
-    private var dataList : List<SimpleListModel?> = listOf()
-    private val settingsViewModel : SettingsViewModel by viewModels()
+    private var dataList: List<SimpleListModel?> = listOf()
+    private val settingsViewModel: SettingsViewModel by viewModels()
     private lateinit var currentUser: InternalUserData
 
     override fun onCreateView(

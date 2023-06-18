@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -15,9 +14,9 @@ import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
-import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
 import com.example.hueverianieto.databinding.FragmentDeletedClientsBinding
+import com.example.hueverianieto.domain.model.componentclient.ComponentClientModel
+import com.example.hueverianieto.ui.components.componentclientadapter.ComponentClientAdapter
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,7 +24,7 @@ class DeletedClientsFragment : BaseFragment() {
 
     private lateinit var binding: FragmentDeletedClientsBinding
     private var clientList: MutableList<ComponentClientModel> = mutableListOf()
-    private val deletedClientsViewModel : DeletedClientsViewModel by viewModels()
+    private val deletedClientsViewModel: DeletedClientsViewModel by viewModels()
     private lateinit var currentUserData: InternalUserData
 
     override fun configureUI() {
@@ -46,7 +45,7 @@ class DeletedClientsFragment : BaseFragment() {
                 this.binding.containerWaringNoClients.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 clientList = mutableListOf()
-                for (clientData in clientDataList)  {
+                for (clientData in clientDataList) {
                     if (clientData != null) {
                         val componentClientModel = ComponentClientModel(
                             clientData.id.toString(),

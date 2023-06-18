@@ -10,10 +10,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.HensResourcesData
-import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetHensUseCase
-import com.example.hueverianieto.domain.usecases.HomeUseCase
-import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -34,7 +31,7 @@ class AllHensResourcesViewModel @Inject constructor(
     fun getHens() {
         viewModelScope.launch {
             _viewState.value = AllHensResourcesViewState(isLoading = true)
-            when(val result: List<HensResourcesData?>? = getHensUseCase()) {
+            when (val result: List<HensResourcesData?>? = getHensUseCase()) {
                 null -> {
                     _viewState.value = AllHensResourcesViewState(isLoading = false, error = true)
                     _hensList.value = listOf()
@@ -52,7 +49,8 @@ class AllHensResourcesViewModel @Inject constructor(
     }
 
     fun navigationToHensResourcesDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allHensResourcesFragment_to_hensResourcesDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allHensResourcesFragment_to_hensResourcesDetailFragment, bundle)
             ?: Log.e(
                 AllHensResourcesViewModel::class.simpleName,
                 "Error en la navegación a detalle de recursos (gallinas)"
@@ -60,7 +58,8 @@ class AllHensResourcesViewModel @Inject constructor(
     }
 
     fun navigateToNewHensResources(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allHensResourcesFragment_to_newHensResourcesFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allHensResourcesFragment_to_newHensResourcesFragment, bundle)
             ?: Log.e(
                 AllHensResourcesViewModel::class.simpleName,
                 "Error en la navegación a añadir nuevo recurso (gallinas)"

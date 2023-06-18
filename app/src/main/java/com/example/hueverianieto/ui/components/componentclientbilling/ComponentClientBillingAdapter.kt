@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.componentclientmodel.ComponentClientBillingModel
 
-class ComponentClientBillingAdapter (
+class ComponentClientBillingAdapter(
     private val componentClientBillingModeList: List<ComponentClientBillingModel>
 ) : RecyclerView.Adapter<ComponentClientBillingViewHolder>() {
 
@@ -15,7 +15,13 @@ class ComponentClientBillingAdapter (
         viewType: Int
     ): ComponentClientBillingViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ComponentClientBillingViewHolder(layoutInflater.inflate(R.layout.component_client_billing, parent, false))
+        return ComponentClientBillingViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_client_billing,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int = componentClientBillingModeList.size

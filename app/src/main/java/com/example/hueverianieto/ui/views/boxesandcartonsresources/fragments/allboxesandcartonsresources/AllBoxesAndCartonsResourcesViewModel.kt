@@ -10,11 +10,8 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
-import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.GetBoxesAndCartonsUseCase
-import com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesViewModel
-import com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

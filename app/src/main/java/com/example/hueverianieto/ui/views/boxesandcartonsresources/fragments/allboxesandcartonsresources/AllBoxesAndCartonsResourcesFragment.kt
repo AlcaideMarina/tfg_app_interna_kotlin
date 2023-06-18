@@ -14,14 +14,11 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllBoxesAndCartonsResourcesBinding
-import com.example.hueverianieto.databinding.FragmentAllFeedResourcesBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
 import com.example.hueverianieto.ui.views.boxesandcartonsresources.BoxesAndCartonsActivity
-import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
 import com.example.hueverianieto.utils.MaterialUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
@@ -68,13 +65,15 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
                 this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 bcDataList = mutableListOf()
-                for (bcResourcesData in cbResourcesDataList)  {
+                for (bcResourcesData in cbResourcesDataList) {
                     if (bcResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             bcResourcesData.expenseDatetime,
                             MaterialUtils.getBCOrderSummary(
                                 MaterialUtils.bcOrderToDBBoxesAndCartonsOrderModel(
-                                    bcResourcesData)),
+                                    bcResourcesData
+                                )
+                            ),
                             "",
                             bcResourcesData.totalPrice
                         ) {

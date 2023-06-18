@@ -12,7 +12,6 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetAllInternalUsersUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,7 +32,7 @@ class AllInternalUsersViewModel @Inject constructor(
     fun getInternalUserData() {
         viewModelScope.launch {
             _viewState.value = AllInternalUsersViewState(isLoading = true)
-            when(val result : List<InternalUserData?>? = getAllInternalUsersUseCase(false)) {
+            when (val result: List<InternalUserData?>? = getAllInternalUsersUseCase(false)) {
                 null -> {
                     _viewState.value = AllInternalUsersViewState(isLoading = false, error = true)
                     _internalUserList.value = listOf()
@@ -51,7 +50,8 @@ class AllInternalUsersViewModel @Inject constructor(
     }
 
     fun navigateDeleteInternalUsers(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_deletedInternalUsersFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allInternalUsersFragment_to_deletedInternalUsersFragment, bundle)
             ?: Log.e(
                 AllInternalUsersViewModel::class.simpleName,
                 "Error en la navegación a Usuarios internos eliminados"
@@ -59,7 +59,8 @@ class AllInternalUsersViewModel @Inject constructor(
     }
 
     fun navigateToNewInternalUsers(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_newInternalUserFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allInternalUsersFragment_to_newInternalUserFragment, bundle)
             ?: Log.e(
                 AllInternalUsersViewModel::class.simpleName,
                 "Error en la navegación a Usuarios internos eliminados"
@@ -67,7 +68,8 @@ class AllInternalUsersViewModel @Inject constructor(
     }
 
     fun navigateToInternalUserDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allInternalUsersFragment_to_internalUserDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allInternalUsersFragment_to_internalUserDetailFragment, bundle)
             ?: Log.e(
                 AllInternalUsersViewModel::class.simpleName,
                 "Error en la navegacion a Detalle de usuario interno"
