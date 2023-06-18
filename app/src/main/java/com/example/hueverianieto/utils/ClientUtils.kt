@@ -6,11 +6,9 @@ import com.example.hueverianieto.domain.model.textinputlayout.RowTextInputLayout
 import com.example.hueverianieto.domain.model.textinputlayout.TextInputLayoutModel
 import com.example.hueverianieto.domain.model.textinputlayout.TitleTextInputLayoutModel
 
-// TODO: Sacar constantes
-
 object ClientUtils {
 
-    fun checkErrorMap(data: MutableMap<String, Any?>?) : String? {
+    fun checkErrorMap(data: MutableMap<String, Any?>?): String? {
         return if (data == null) {
             "empty input map"
         } else if (data.containsKey("cif") && data.containsKey("city") &&
@@ -27,7 +25,6 @@ object ClientUtils {
         }
     }
 
-    // TODO: Investigar cómo comprobar si data["phone"] es List<Map<String, Long>>
     fun mapToParcelable(data: MutableMap<String, Any?>, documentId: String?): ClientData {
         return ClientData(
             data["cif"] as String,
@@ -48,7 +45,7 @@ object ClientUtils {
         )
     }
 
-    fun parcelableToMap(clientData: ClientData) : MutableMap<String, Any?> {
+    fun parcelableToMap(clientData: ClientData): MutableMap<String, Any?> {
         val map = mutableMapOf<String, Any?>()
         map["cif"] = clientData.cif
         map["city"] = clientData.city
@@ -65,93 +62,6 @@ object ClientUtils {
         map["uid"] = clientData.uid
         map["user"] = clientData.user
         return map
-    }
-
-    fun newClientFields() : MutableList<TitleTextInputLayoutModel> {
-        val fieldList: MutableList<TitleTextInputLayoutModel> = mutableListOf()
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Empresa:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Dirección:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Ciudad:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Provincia:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Código postal:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "CIF:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Correo:",
-                listOf(RowTextInputLayoutModel(
-                    TextInputLayoutModel(
-                        inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_SUBJECT
-                    ))
-                )
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Teléfono",
-                listOf(
-                    RowTextInputLayoutModel(
-                        TextInputLayoutModel(),
-                        TextInputLayoutModel(
-                            inputType = InputType.TYPE_CLASS_PHONE
-                        )
-                    ),
-                    RowTextInputLayoutModel(
-                        TextInputLayoutModel(),
-                        TextInputLayoutModel(
-                            inputType = InputType.TYPE_CLASS_PHONE
-                        )
-                    )
-                )
-            )
-        )
-        return fieldList
-    }
-
-    fun createUserToClientFields() : MutableList<TitleTextInputLayoutModel> {
-        val fieldList: MutableList<TitleTextInputLayoutModel> = mutableListOf()
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Usuario:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        fieldList.add(
-            TitleTextInputLayoutModel(
-                "Correo:",
-                listOf(RowTextInputLayoutModel(TextInputLayoutModel()))
-            )
-        )
-        return fieldList
     }
 
 }

@@ -14,15 +14,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllWorkersResourcesBinding
-import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.domain.model.componentworkers.ComponentWorkersModel
-import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.ui.components.componentworker.HNComponentWorkerAdapter
 import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
-import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllWorkersResourcesFragment : BaseFragment() {
@@ -119,7 +114,7 @@ class AllWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {

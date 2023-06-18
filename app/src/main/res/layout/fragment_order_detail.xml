@@ -191,8 +191,6 @@
 
         </LinearLayout>
 
-        <!-- TODO: Cantidades, precios y unidades -->
-
         <LinearLayout
             android:id="@+id/order_text_layout"
             android:layout_width="match_parent"

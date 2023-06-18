@@ -11,8 +11,6 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.domain.usecases.GetPricesUseCase
-import com.example.hueverianieto.ui.views.allorders.fragments.modifyorder.ModifyOrderViewState
-import com.example.hueverianieto.ui.views.allorders.fragments.neworder.NewOrderViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,7 +31,7 @@ class SellingPriceViewModel @Inject constructor(
     fun getPrices() {
         viewModelScope.launch {
             _viewState.value = SellingPriceViewState(isLoading = true)
-            when(val result = getPricesUseCase()) {
+            when (val result = getPricesUseCase()) {
                 null -> {
                     _viewState.value = SellingPriceViewState(isLoading = false, error = true)
                     _eggPrices.value = EggPricesData()
@@ -47,7 +45,8 @@ class SellingPriceViewModel @Inject constructor(
     }
 
     fun navigateToModifySellingPrice(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_sellingPriceFragment_to_modifySellingPriceFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_sellingPriceFragment_to_modifySellingPriceFragment, bundle)
             ?: Log.e(
                 SellingPriceViewModel::class.simpleName,
                 "Error en la navegación a modificar precios de venta"

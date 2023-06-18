@@ -9,14 +9,16 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.activity.viewModels
-import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.ui.views.main.MainActivity
+import androidx.core.view.isVisible
+import androidx.lifecycle.lifecycleScope
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
 import com.example.hueverianieto.databinding.ActivityLoginBinding
+import com.example.hueverianieto.domain.model.modaldialog.ModalDialogModel
+import com.example.hueverianieto.ui.components.HNModalDialog
+import com.example.hueverianieto.ui.views.main.MainActivity
+import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.InternalUserUtils
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -33,7 +35,6 @@ class LoginActivity : BaseActivity() {
     private val loginViewModel: LoginViewModel by viewModels()
     private lateinit var currentUserData: InternalUserData
 
-
     override fun setUp() {
         this.binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -45,14 +46,27 @@ class LoginActivity : BaseActivity() {
 
         this.binding.userTextInputLayout.hint = "Correo"
         this.binding.userTextInputLayout.inputType = InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
-        this.binding.passwordTextInputLayout.hint = resources.getString(R.string.password_text_input_layout)
-        this.binding.passwordTextInputLayout.transformationMethod = PasswordTransformationMethod.getInstance()
+        this.binding.passwordTextInputLayout.hint =
+            resources.getString(R.string.password_text_input_layout)
+        this.binding.passwordTextInputLayout.transformationMethod =
+            PasswordTransformationMethod.getInstance()
 
         this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
         this.binding.loginButton.setTextBold(true)
         this.binding.loginButton.isEnabled = false
 
         this.alertDialog = HNModalDialog(this)
+
+        lifecycleScope.launchWhenStarted {
+            binding.extraComponentsContainer.isVisible =
+                !binding.extraComponentsContainer.isVisible
+            binding.loadingComponent.isVisible =
+                !binding.extraComponentsContainer.isVisible
+            /*loginViewModel.viewState.collect { viewState ->
+                binding.extraComponentsContainer.isVisible = viewState.isLoading
+                binding.loadingComponent.isVisible = viewState.isLoading
+            }*/
+        }
 
     }
 
@@ -102,88 +116,7 @@ class LoginActivity : BaseActivity() {
         }
     }
 
-    private fun checkCredentials(email: String, password: String) {
-
-        initProgressBar()
-// TODO: If email, password != ""
-        auth.signInWithEmailAndPassword(email, password)
-            .addOnCompleteListener(this) { task ->
-                if (task.isSuccessful) {
-                    // Sign in success, update UI with the signed-in user's information
-                    Log.d(TAG, "signInWithEmail:success")
-                    val user = auth.currentUser
-
-                    if (user != null) {
-                        val db = Firebase.firestore
-                        db.collection("user_info")
-                            .whereEqualTo("uid", user.uid)
-                            .whereEqualTo("deleted", false)
-                            .limit(1)
-                            .get()
-                            .addOnCompleteListener { task ->
-                                if (task.isSuccessful) {
-                                    val documents = task.result
-                                    if (!documents.isEmpty) {
-                                        // TODO: Control de nulos
-                                        val document =
-                                            documents.documents[0].data as MutableMap<String, Any?>?
-                                        if (InternalUserUtils.checkErrorMap(document) == null) {
-                                            val data = document as MutableMap<String, Any?>
-                                            val userData = InternalUserUtils.mapToParcelable(
-                                                data,
-                                                documents.documents[0].id
-                                            )
-                                            val intent = Intent(this, MainActivity::class.java)
-                                            intent.putExtra("current_user", userData)
-                                            startActivity(intent)
-                                            closeProgressBar()
-                                            finish()
-                                        } else {
-                                            if (InternalUserUtils.checkErrorMap(document) == "empty input map") {
-                                                setPopUp("Ha habido un problema con tu usuario. Por favor, vuelve a intentarlo, y si el error persiste, ponte en contacto con nosotros.")
-                                            }
-                                        }
-                                    }
-
-                                } else {
-                                    setPopUp("Ha habido un en el proceso de login. Por favor, inténtalo de nuevo.")
-                                }
-                            }.addOnFailureListener {
-                                setPopUp("Ha habido un en el proceso de login. Por favor, inténtalo de nuevo.")
-                            }
-                    } else {
-                        setPopUp("No hemos podido encontrar tu usuario en nuestra base de datos. Por favor, ponte en contacto con nosotros.")
-                    }
-                } else {
-                    val errorMessage: String = if (task.exception != null) {
-                        task.exception!!.message.toString()
-                    } else {
-                        "generic error"
-                    }
-                    setPopUp(errorMap(errorMessage))
-
-                }
-            }
-        closeProgressBar()
-    }
-
-    private fun initProgressBar() {
-        this.binding.loadingComponent.visibility = View.VISIBLE
-        this.binding.extraComponentsContainer.visibility = View.VISIBLE
-        window.setFlags(
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,
-            WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE
-        )
-    }
-
-    private fun closeProgressBar() {
-        this.binding.loadingComponent.visibility = View.GONE
-        this.binding.extraComponentsContainer.visibility = View.GONE
-        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE)
-    }
-
     private fun setPopUp(errorMessage: String) {
-        // TODO: Close button
         alertDialog.show(
             this,
             ModalDialogModel(
@@ -196,16 +129,6 @@ class LoginActivity : BaseActivity() {
                 true
             )
         )
-    }
-
-    private fun errorMap(errorMessage: String): String {
-        return when (errorMessage) {
-            Constants.loginNetworkError -> "Parece que no tienes conexión a internet. Por favor, inténtalo más tarde."
-            Constants.loginBadFormattedEmailError -> "El email introducido no tiene un formato válido. Por favor, revisa los datos y vuelve a intentarlo."
-            Constants.loginNoUserRecordedError -> "El usuario no consta en nuestra base de datos. Por favor, revisa los datos y vuelve a intentarlo."
-            Constants.loginInvalidPasswordError -> "El usuario y/o contraseña no son correctas. Por favor, revisa los datos y vuelve a intentarlo."
-            else -> "Se ha producido un error inesperado. Por favor, inténtalo más tarde.\nError: $errorMessage"
-        }
     }
 
     companion object {

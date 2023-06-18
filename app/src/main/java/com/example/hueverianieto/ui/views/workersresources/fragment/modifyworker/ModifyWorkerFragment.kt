@@ -14,7 +14,6 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.workersresources.fragment.workersdetail.WorkerDetailFragmentArgs
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,8 +104,9 @@ class ModifyWorkerFragment : BaseFragment() {
                     { alertDialog.cancel() },
                     {
                         alertDialog.cancel()
-                        val a =this.binding.salaryTextInputLayout.text
-                        internalUserData.salary = this.binding.salaryTextInputLayout.text.toString().toDouble()
+                        val a = this.binding.salaryTextInputLayout.text
+                        internalUserData.salary =
+                            this.binding.salaryTextInputLayout.text.toString().toDouble()
                         this.modifyWorkerViewModel.updateUser(internalUserData)
                     }
                 )
@@ -145,7 +145,9 @@ class ModifyWorkerFragment : BaseFragment() {
             this.accountTextView.text = internalUserData.bankAccount
             this.positionTextView.text = resources.getString(
                 Utils.getKey(
-                Constants.roles, internalUserData.position.toInt())!!)
+                    Constants.roles, internalUserData.position.toInt()
+                )!!
+            )
             this.salaryTextInputLayout.setText((internalUserData.salary ?: "").toString())
             this.salaryTextInputLayout.isEnabled = true
         }

@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.workersresources.fragment.pendingwork
 
 import com.example.hueverianieto.base.BaseState
 
-class PendingWorkersResourcesViewState (
+class PendingWorkersResourcesViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

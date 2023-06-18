@@ -402,8 +402,6 @@
                         android:layout_height="wrap_content"
                         android:text="Últimos pedidos:" />
 
-                    <!-- TODO: Esto habrá que cambiarlo a RV -->
-
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/order_recycler_view"
                         android:layout_width="match_parent"

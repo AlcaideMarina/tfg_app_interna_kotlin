@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SellingPriceFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentSellingPriceBinding
+    private lateinit var binding: FragmentSellingPriceBinding
     private lateinit var currentUserData: InternalUserData
     private val sellingPriceViewModel: SellingPriceViewModel by viewModels()
     private var eggPricesData: EggPricesData? = null
@@ -66,7 +66,8 @@ class SellingPriceFragment : BaseFragment() {
         this.binding.modifyButton.setOnClickListener {
             if (eggPricesData == null) {
                 eggPricesData = EggPricesData(
-                    0, 0, 0, 0, 0, 0, 0, 0)
+                    0, 0, 0, 0, 0, 0, 0, 0
+                )
             }
             this.sellingPriceViewModel.navigateToModifySellingPrice(
                 this.view,
