@@ -4,14 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="@dimen/size24"
+    android:paddingTop="@dimen/size32"
+    android:paddingHorizontal="@dimen/size24"
+    android:paddingBottom="@dimen/size16"
     android:layout_marginTop="@dimen/size16">
 
     <TextView
         android:id="@+id/name_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size16"
         android:textColor="@color/black"
         android:textSize="@dimen/textSize16"
         android:textStyle="bold"
@@ -23,7 +24,6 @@
         android:id="@+id/role_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/size16"
         android:textSize="@dimen/textSize16"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@+id/name_text"
