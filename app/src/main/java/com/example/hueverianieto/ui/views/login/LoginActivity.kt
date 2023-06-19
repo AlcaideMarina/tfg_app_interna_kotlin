@@ -52,8 +52,6 @@ class LoginActivity : BaseActivity() {
         this.binding.passwordTextInputLayout.transformationMethod =
             PasswordTransformationMethod.getInstance()
 
-        this.binding.loginButton.setText(resources.getString(R.string.login_button).uppercase())
-        this.binding.loginButton.setTextBold(true)
         this.binding.loginButton.isEnabled = false
 
         this.alertDialog = HNModalDialog(this)
