@@ -78,11 +78,11 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
     }
 
     override fun configureUI() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setObservers() {
@@ -114,6 +114,10 @@ class MainActivity : BaseActivity(), NavigationView.OnNavigationItemSelectedList
         } else {
             onBackPressedDispatcher.onBackPressed()
         }
+    }
+
+    fun setToolbarTitle(title: String) {
+        supportActionBar?.title = title
     }
 
 }

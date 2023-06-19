@@ -38,17 +38,28 @@ class HomeViewModel @Inject constructor(
     private val _mcsIsDone = MutableLiveData<Boolean>()
     val mcsIsDone: LiveData<Boolean> get() = _mcsIsDone
 
+    private val _serviceGetTodayOrders = MutableLiveData<Boolean>()
+    val serviceGetTodayOrders: LiveData<Boolean> get() = _serviceGetTodayOrders
+
+    private val _serviceGetTodayDeliveries = MutableLiveData<Boolean>()
+    val serviceGetTodayDeliveries: LiveData<Boolean> get() = _serviceGetTodayDeliveries
+
+    private val _serviceGetTodayMCS = MutableLiveData<Boolean>()
+    val serviceGetTodayMCS: LiveData<Boolean> get() = _serviceGetTodayMCS
+
     fun getTodayOrders() {
         viewModelScope.launch {
             _viewState.value = HomeViewState(isLoading = true)
             when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
-                    _viewState.value = HomeViewState(isLoading = false, error = true)
                     _todayOrdersNumber.value = 0
+                    _serviceGetTodayOrders.value = true
+                    _viewState.value = HomeViewState(isLoading = false, error = true)
                 }
                 listOf<String>() -> {
-                    _viewState.value = HomeViewState(isLoading = false)
                     _todayOrdersNumber.value = 0
+                    _serviceGetTodayOrders.value = true
+                    _viewState.value = HomeViewState(isLoading = false)
                 }
                 else -> {
                     val clientIdList: List<String?> = resultQ1
@@ -67,8 +78,9 @@ class HomeViewModel @Inject constructor(
                             }
                         }
                     }
-                    _viewState.value = HomeViewState(isLoading = false)
                     _todayOrdersNumber.value = orderList.size
+                    _serviceGetTodayOrders.value = true
+                    _viewState.value = HomeViewState(isLoading = false)
                 }
             }
         }
@@ -79,12 +91,14 @@ class HomeViewModel @Inject constructor(
             _viewState.value = HomeViewState(isLoading = true)
             when (val resultQ1 = getAllDocumentsIdUseCase("client_info")) {
                 null -> {
-                    _viewState.value = HomeViewState(isLoading = false, error = true)
                     _todayDeliveriesNumber.value = 0
+                    _serviceGetTodayDeliveries.value = true
+                    _viewState.value = HomeViewState(isLoading = false, error = true)
                 }
                 listOf<String>() -> {
-                    _viewState.value = HomeViewState(isLoading = false)
                     _todayDeliveriesNumber.value = 0
+                    _serviceGetTodayDeliveries.value = true
+                    _viewState.value = HomeViewState(isLoading = false)
                 }
                 else -> {
                     val clientIdList: List<String?> = resultQ1
@@ -103,8 +117,9 @@ class HomeViewModel @Inject constructor(
                             }
                         }
                     }
-                    _viewState.value = HomeViewState(isLoading = false)
                     _todayDeliveriesNumber.value = orderList.size
+                    _serviceGetTodayDeliveries.value = true
+                    _viewState.value = HomeViewState(isLoading = false)
                 }
             }
         }
@@ -115,6 +130,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = HomeViewState(isLoading = true)
             _mcsIsDone.value = getDailyMonitoringCompanySituationUseCase(timestamp) != null
+            _serviceGetTodayMCS.value = true
             _viewState.value = HomeViewState(isLoading = false)
         }
     }

@@ -26,15 +26,23 @@ class HomeFragment : BaseFragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
+    private var serviceTodayOrders: Boolean = false
+    private var serviceTodayDeliveries: Boolean = false
+    private var serviceTodayMCS: Boolean = false
+
     override fun configureUI() {
-        this.binding.welcomeText.text = "Hola, " + currentUserData.name + ". Bienvenido/a de nuevo."
-        this.homeViewModel.getTodayOrders()
-        this.homeViewModel.getTodayDelivery()
+        (activity as MainActivity).setToolbarTitle("Home")
+
+        this.binding.welcomeText1.text = "Hola, " + currentUserData.name
+
         val calendar = Calendar.getInstance()
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         calendar.set(Calendar.MINUTE, 0)
         calendar.set(Calendar.SECOND, 0)
         calendar.set(Calendar.MILLISECOND, 0)
+
+        this.homeViewModel.getTodayOrders()
+        this.homeViewModel.getTodayDelivery()
         this.homeViewModel.getDailyMonitoringCompanySituation(Timestamp(calendar.time))
         lifecycleScope.launchWhenStarted {
             homeViewModel.viewState.collect { viewState ->
@@ -65,6 +73,15 @@ class HomeFragment : BaseFragment() {
                     "Hoy aún no se ha hecho el seguimiento de la situación de la empresa."
             }
         }
+        this.homeViewModel.serviceGetTodayOrders.observe(this) { isDone ->
+            serviceTodayOrders = isDone
+        }
+        this.homeViewModel.serviceGetTodayDeliveries.observe(this) { isDone ->
+            serviceTodayDeliveries = isDone
+        }
+        this.homeViewModel.serviceGetTodayMCS.observe(this) { isDone ->
+            serviceTodayMCS = isDone
+        }
     }
 
     override fun setListeners() {
@@ -73,7 +90,10 @@ class HomeFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         state as HomeViewState
-        this.binding.loadingComponent.isVisible = state.isLoading
+        if (serviceTodayOrders == serviceTodayDeliveries && serviceTodayOrders == serviceTodayMCS) {
+            this.binding.loadingComponent.isVisible = state.isLoading
+            this.binding.baseComponent.isVisible = !state.isLoading
+        }
     }
 
     override fun onCreateView(
