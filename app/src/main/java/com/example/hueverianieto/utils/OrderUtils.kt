@@ -130,6 +130,58 @@ object OrderUtils {
         return dbOrderFieldData
     }
 
+    fun orderDataAndEggPricesDataToBDOrderModel(orderData: OrderData, eggPricesData: EggPricesData): DBOrderFieldData {
+
+        val order = orderData.order
+        val dbOrderFieldData = DBOrderFieldData()
+
+        if (order.containsKey("xl_box")) {
+            val xlBox = order["xl_box"]!!
+            dbOrderFieldData.xlBoxPrice = xlBox["price"] ?: eggPricesData.xlBox
+            dbOrderFieldData.xlBoxQuantity = xlBox["quantity"]?.toLong()
+        }
+        if (order.containsKey("xl_dozen")) {
+            val xlDozen = order["xl_dozen"]!!
+            dbOrderFieldData.xlDozenPrice = xlDozen["price"] ?: eggPricesData.xlDozen
+            dbOrderFieldData.xlDozenQuantity = xlDozen["quantity"]?.toLong()
+        }
+
+        if (order.containsKey("l_box")) {
+            val lBox = order["l_box"]!!
+            dbOrderFieldData.lBoxPrice = lBox["price"] ?: eggPricesData.lBox
+            dbOrderFieldData.lBoxQuantity = lBox["quantity"]?.toLong()
+        }
+        if (order.containsKey("l_dozen")) {
+            val lDozen = order["l_dozen"]!!
+            dbOrderFieldData.lDozenPrice = lDozen["price"] ?: eggPricesData.lDozen
+            dbOrderFieldData.lDozenQuantity = lDozen["quantity"]?.toLong()
+        }
+
+        if (order.containsKey("m_box")) {
+            val mBox = order["m_box"]!!
+            dbOrderFieldData.mBoxPrice = mBox["price"] ?: eggPricesData.mBox
+            dbOrderFieldData.mBoxQuantity = mBox["quantity"]?.toLong()
+        }
+        if (order.containsKey("m_dozen")) {
+            val mDozen = order["m_dozen"]!!
+            dbOrderFieldData.mDozenPrice = mDozen["price"] ?: eggPricesData.mDozen
+            dbOrderFieldData.mDozenQuantity = mDozen["quantity"]?.toLong()
+        }
+
+        if (order.containsKey("s_box")) {
+            val sBox = order["s_box"]!!
+            dbOrderFieldData.sBoxPrice = sBox["price"] ?: eggPricesData.sBox
+            dbOrderFieldData.sBoxQuantity = sBox["quantity"]?.toLong()
+        }
+        if (order.containsKey("s_dozen")) {
+            val sDozen = order["s_dozen"]!!
+            dbOrderFieldData.sDozenPrice = sDozen["price"] ?: eggPricesData.sDozen
+            dbOrderFieldData.sDozenQuantity = sDozen["quantity"]?.toLong()
+        }
+
+        return dbOrderFieldData
+    }
+
     fun getOrderDataGridModel(orderData: OrderData, isEnable: Boolean): List<GridTextItemData> {
 
         val dbOrderModel = orderDataToBDOrderModel(orderData)
