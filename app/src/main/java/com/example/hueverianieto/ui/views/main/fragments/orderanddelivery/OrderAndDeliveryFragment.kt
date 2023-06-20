@@ -49,7 +49,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
+        (activity as MainActivity).setToolbarTitle("Pedidos y repartos")
+
         this.binding.dateTextView.text = Utils.parseTimestampToString(Timestamp.now())
         this.orderAndDeliveryViewModel.getTodayOrders()
         lifecycleScope.launchWhenStarted {
@@ -126,10 +127,6 @@ class OrderAndDeliveryFragment : BaseFragment() {
         this.orderAndDeliveryViewModel.getTodayOrders()
         this.binding.todayOrderRecyclerView.visibility = View.GONE
         super.onResume()
-    }
-
-    private fun setButtons() {
-        this.binding.seeAllOrdersButton.setText("Ver todo")
     }
 
     companion object {
