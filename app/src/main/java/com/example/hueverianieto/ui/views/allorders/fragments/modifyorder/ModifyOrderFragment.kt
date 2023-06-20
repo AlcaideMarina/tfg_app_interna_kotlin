@@ -298,8 +298,8 @@ class ModifyOrderFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.modifyButton.setText("Guardar")
-        this.binding.deleteButton.setText("Cancelar")
+        this.binding.modifyButtonText.text = "Guardar"
+        this.binding.deleteButtonText.text = "Cancelar"
     }
 
     private fun disableTextInputLayouts() {

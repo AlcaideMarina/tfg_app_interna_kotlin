@@ -177,8 +177,8 @@ class OrderDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.modifyButton.setText("Modificar")
-        this.binding.deleteButton.setText("Eliminar")
+        this.binding.modifyButtonText.text = "Modificar"
+        this.binding.deleteButtonText.text = "Eliminar"
         if (this.orderData.status == Constants.orderStatus[R.string.cancelled]!!.toLong()) {
             this.binding.modifyButton.isEnabled = false
             this.binding.deleteButton.isEnabled = false
@@ -243,7 +243,7 @@ class OrderDetailFragment : BaseFragment() {
             }
 
         with(this.binding) {
-            orderIdTextView.text = "ID pedido: " + orderData.orderId.toString()
+            orderIdTextView.text = orderData.orderId.toString()
             companyAutoCompleteTextView.setText(clientData.company)
             directionTextInputLayout.setText(clientData.direction)
             cifTextInputLayout.setText(clientData.cif)
@@ -274,9 +274,40 @@ class OrderDetailFragment : BaseFragment() {
 
     private fun setRecyclerView() {
 
-        val list = OrderUtils.getOrderDataGridModel(orderData, false)
+        //val list = OrderUtils.getOrderDataGridModel(orderData, false)
+        val bdOrderModel = OrderUtils.orderDataToBDOrderModel(orderData)
 
-        val manager = CustomGridLayoutManager(this.context, 4)
+        with(this.binding) {
+            this.xlDozenTextInputLayout.setText(bdOrderModel.xlDozenQuantity.toString())
+            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: "-").toString() + " €"
+            this.xlDozenTextInputLayout.isEnabled = false
+            this.xlBoxTextInputLayout.setText(bdOrderModel.xlBoxQuantity.toString())
+            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: "-").toString() + " €"
+            this.xlBoxTextInputLayout.isEnabled = false
+
+            this.lDozenTextInputLayout.setText(bdOrderModel.lDozenQuantity.toString())
+            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: "-").toString() + " €"
+            this.lDozenTextInputLayout.isEnabled = false
+            this.lBoxTextInputLayout.setText(bdOrderModel.lBoxQuantity.toString())
+            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: "-").toString() + " €"
+            this.lBoxTextInputLayout.isEnabled = false
+
+            this.mDozenTextInputLayout.setText(bdOrderModel.mDozenQuantity.toString())
+            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: "-").toString() + " €"
+            this.mDozenTextInputLayout.isEnabled = false
+            this.mBoxTextInputLayout.setText(bdOrderModel.mBoxQuantity.toString())
+            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: "-").toString() + " €"
+            this.mBoxTextInputLayout.isEnabled = false
+
+            this.sDozenTextInputLayout.setText(bdOrderModel.sDozenQuantity.toString())
+            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: "-").toString() + " €"
+            this.sDozenTextInputLayout.isEnabled = false
+            this.sBoxTextInputLayout.setText(bdOrderModel.sBoxQuantity.toString())
+            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: "-").toString() + " €"
+            this.sBoxTextInputLayout.isEnabled = false
+        }
+
+        /*val manager = CustomGridLayoutManager(this.context, 4)
         manager.setScrollEnabled(false)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int {
@@ -287,7 +318,7 @@ class OrderDetailFragment : BaseFragment() {
         }
 
         this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
+        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)*/
 
     }
 
