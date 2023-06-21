@@ -41,9 +41,6 @@ class NewOrderFragment : BaseFragment() {
     private lateinit var eggPrices: EggPricesData
     private val newOrderViewModel: NewOrderViewModel by viewModels()
 
-    private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
-
     private val dropdownClientItemsMap = mutableMapOf<String, String>()
     private val dropdownClientItems = mutableListOf<String>()
     private lateinit var clientData: ClientData
@@ -253,20 +250,6 @@ class NewOrderFragment : BaseFragment() {
 
     private fun setRecyclerView(eggPricesData: EggPricesData) {
 
-        /*val list = OrderUtils.getNewOrderGridModel(eggPricesData)
-
-        val manager = CustomGridLayoutManager(this.context, 4)
-        manager.setScrollEnabled(false)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (recyclerViewTitles.contains(position)) 4
-                else if (recyclerViewTextInputLayouts.contains(position)) 2
-                else 1
-            }
-        }
-
-        this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)*/
         with(this.binding) {
             this.xlDozenTextInputLayout.setText("0")
             this.xlDozenPriceTextInputLayout.text = (eggPricesData.xlDozen ?: "-").toString() + " €/ud"

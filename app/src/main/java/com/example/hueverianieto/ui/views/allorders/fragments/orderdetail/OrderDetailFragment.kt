@@ -36,9 +36,6 @@ class OrderDetailFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private val orderDetailViewModel: OrderDetailViewModel by viewModels()
 
-    private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -274,7 +271,6 @@ class OrderDetailFragment : BaseFragment() {
 
     private fun setRecyclerView() {
 
-        //val list = OrderUtils.getOrderDataGridModel(orderData, false)
         val bdOrderModel = OrderUtils.orderDataToBDOrderModel(orderData)
 
         with(this.binding) {
@@ -306,19 +302,6 @@ class OrderDetailFragment : BaseFragment() {
             this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: "-").toString() + " €/ud"
             this.sBoxTextInputLayout.isEnabled = false
         }
-
-        /*val manager = CustomGridLayoutManager(this.context, 4)
-        manager.setScrollEnabled(false)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (recyclerViewTitles.contains(position)) 4
-                else if (recyclerViewTextInputLayouts.contains(position)) 2
-                else 1
-            }
-        }
-
-        this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)*/
 
     }
 

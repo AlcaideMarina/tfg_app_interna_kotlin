@@ -44,9 +44,6 @@ class ModifyOrderFragment : BaseFragment() {
     private lateinit var eggPrices: EggPricesData
     private val modifyOrderViewModel: ModifyOrderViewModel by viewModels()
 
-    private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
-
     private lateinit var approxDeliveryDatetimeSelected: Timestamp
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
     private var dropdownStatusItems: MutableList<String> = mutableListOf()
@@ -391,8 +388,6 @@ class ModifyOrderFragment : BaseFragment() {
             if (isEnabled) R.color.black_color
             else R.color.black_light_color_80
 
-        //val list = OrderUtils.getOrderDataModifyGridModel(orderData, eggPricesData, isEnabled)
-
         val bdOrderModel = OrderUtils.orderDataAndEggPricesDataToBDOrderModel(
             orderData, eggPricesData)
 
@@ -433,19 +428,6 @@ class ModifyOrderFragment : BaseFragment() {
             this.sBoxTextInputLayout.isEnabled = isEnabled
             this.sBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
         }
-
-        /*val manager = CustomGridLayoutManager(this.context, 4)
-        manager.setScrollEnabled(false)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (recyclerViewTitles.contains(position)) 4
-                else if (recyclerViewTextInputLayouts.contains(position)) 2
-                else 1
-            }
-        }
-
-        this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)*/
 
     }
 
