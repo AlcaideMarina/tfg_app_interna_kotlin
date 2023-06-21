@@ -2,6 +2,7 @@ package com.example.hueverianieto.ui.components.componentordercontainer
 
 import android.icu.text.SimpleDateFormat
 import android.view.View
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.OrderContainerModel
@@ -35,9 +36,12 @@ class HNOrderContainerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.binding.priceText.text = "$priceStr €"
         this.binding.statusDateText.text = this.binding.root.context.getString(statusStr)
 
-        this.binding.baseComponentOrderContainer.setOnClickListener(
-            orderContainerModel.onClickListener
-        )
+        if (orderContainerModel.onClickListener != null) {
+            this.binding.baseComponentOrderContainer.setOnClickListener(
+                orderContainerModel.onClickListener
+            )
+        } else this.binding.arrowIcon.visibility = View.INVISIBLE
+
 
     }
 

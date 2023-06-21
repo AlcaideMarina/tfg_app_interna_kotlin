@@ -82,10 +82,9 @@ class OrderAndDeliveryFragment : BaseFragment() {
                             OrderUtils.getOrderSummary(OrderUtils.orderDataToBDOrderModel(orderData)),
                             orderData.totalPrice ?: -1,
                             orderData.status,
-                            orderData.deliveryDni
-                        ) {
-                            // TODO
-                        }
+                            orderData.deliveryDni,
+                            null
+                        )
                         orderList.add(orderContainerModel)
                     }
                 }
