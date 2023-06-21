@@ -961,7 +961,7 @@
             android:id="@+id/modify_button"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/bg_squared_button"
+            android:background="@drawable/bg_squared_button_black"
             android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
