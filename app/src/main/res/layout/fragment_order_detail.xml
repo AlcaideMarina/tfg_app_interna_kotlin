@@ -279,7 +279,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/xl_dozen_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -308,7 +308,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/xl_box_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -346,7 +346,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -356,7 +356,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/l_dozen_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -376,7 +376,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -385,7 +385,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/l_box_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -423,7 +423,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -433,7 +433,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/m_dozen_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -453,7 +453,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -462,7 +462,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/m_box_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -500,7 +500,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -510,7 +510,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/s_dozen_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"
@@ -530,7 +530,7 @@
                     android:layout_height="40dp"
                     android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="text"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
@@ -539,7 +539,7 @@
                     android:textColor="@color/black_light_color_80"/>
                 <TextView
                     android:id="@+id/s_box_price_text_input_layout"
-                    android:layout_width="80dp"
+                    android:layout_width="104dp"
                     android:layout_height="wrap_content"
                     android:text="€"
                     android:textSize="16sp"

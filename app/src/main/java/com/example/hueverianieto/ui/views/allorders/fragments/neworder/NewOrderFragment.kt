@@ -16,6 +16,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.local.DBOrderFieldData
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -37,6 +38,7 @@ class NewOrderFragment : BaseFragment() {
     private lateinit var binding: FragmentOrderDetailBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var alertDialog: HNModalDialog
+    private lateinit var eggPrices: EggPricesData
     private val newOrderViewModel: NewOrderViewModel by viewModels()
 
     private val recyclerViewTitles = listOf(0, 7, 14, 21)
@@ -89,6 +91,7 @@ class NewOrderFragment : BaseFragment() {
 
     override fun setObservers() {
         this.newOrderViewModel.eggPrices.observe(this) {
+            eggPrices = it
             setRecyclerView(it)
         }
         this.newOrderViewModel.clientList.observe(this) {
@@ -149,7 +152,7 @@ class NewOrderFragment : BaseFragment() {
                     requireContext().getString(R.string.transfer) -> R.string.transfer
                     else -> null
                 }
-            val dbOrderFieldData = OrderUtils.getOrderStructure(this.binding.orderRecyclerView)
+            val dbOrderFieldData = getDBOrderFieldData()
 
             if (clientDocumentId == null) {
                 Utils.setPopUp(
@@ -241,12 +244,16 @@ class NewOrderFragment : BaseFragment() {
             directionTextInputLayout.isEnabled = false
             phoneTextInputLayoutPhone1.isEnabled = false
             phoneTextInputLayoutPhone2.isEnabled = false
+
+            this.companyAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_color))
+            this.paymentMethodAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_color))
+            this.deliveryDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
         }
     }
 
     private fun setRecyclerView(eggPricesData: EggPricesData) {
 
-        val list = OrderUtils.getNewOrderGridModel(eggPricesData)
+        /*val list = OrderUtils.getNewOrderGridModel(eggPricesData)
 
         val manager = CustomGridLayoutManager(this.context, 4)
         manager.setScrollEnabled(false)
@@ -259,8 +266,36 @@ class NewOrderFragment : BaseFragment() {
         }
 
         this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
+        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)*/
+        with(this.binding) {
+            this.xlDozenTextInputLayout.setText("0")
+            this.xlDozenPriceTextInputLayout.text = (eggPricesData.xlDozen ?: "-").toString() + " €/ud"
+            this.xlDozenTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            this.xlBoxTextInputLayout.setText("0")
+            this.xlBoxPriceTextInputLayout.text = (eggPricesData.xlBox ?: "-").toString() + " €/ud"
+            this.xlBoxTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
 
+            this.lDozenTextInputLayout.setText("0")
+            this.lDozenPriceTextInputLayout.text = (eggPricesData.lDozen ?: "-").toString() + " €/ud"
+            this.lDozenTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            this.lBoxTextInputLayout.setText("0")
+            this.lBoxPriceTextInputLayout.text = (eggPricesData.lBox ?: "-").toString() + " €/ud"
+            this.lBoxTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+
+            this.mDozenTextInputLayout.setText("0")
+            this.mDozenPriceTextInputLayout.text = (eggPricesData.mDozen ?: "-").toString() + " €/ud"
+            this.mDozenTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            this.mBoxTextInputLayout.setText("0")
+            this.mBoxPriceTextInputLayout.text = (eggPricesData.mBox ?: "-").toString() + " €/ud"
+            this.mBoxTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+
+            this.sDozenTextInputLayout.setText("0")
+            this.sDozenPriceTextInputLayout.text = (eggPricesData.sDozen ?: "-").toString() + " €/ud"
+            this.sDozenTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            this.sBoxTextInputLayout.setText("0")
+            this.sBoxPriceTextInputLayout.text = (eggPricesData.sBox ?: "-").toString() + " €/ud"
+            this.sBoxTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+        }
     }
 
     private fun setClientsDropdownValues(clientDataList: List<ClientData?>?) {
@@ -337,6 +372,52 @@ class NewOrderFragment : BaseFragment() {
     private fun setButtons() {
         this.binding.modifyButtonText.text = "Guardar"
         this.binding.deleteButtonText.text = "Cancelar"
+    }
+
+    private fun getDBOrderFieldData() : DBOrderFieldData {
+        val xlBox =
+            if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull()
+        val xlDozen =
+            if(this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull()
+        val lBox =
+            if(this.binding.lBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.lBoxTextInputLayout.text.toString().toIntOrNull()
+        val lDozen =
+            if(this.binding.lDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.lDozenTextInputLayout.text.toString().toIntOrNull()
+        val mBox =
+            if(this.binding.mBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.mBoxTextInputLayout.text.toString().toIntOrNull()
+        val mDozen =
+            if(this.binding.mDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.mDozenTextInputLayout.text.toString().toIntOrNull()
+        val sBox =
+            if(this.binding.sBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.sBoxTextInputLayout.text.toString().toIntOrNull()
+        val sDozen =
+            if(this.binding.sDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.sDozenTextInputLayout.text.toString().toIntOrNull()
+
+        return DBOrderFieldData(
+            eggPrices.xlBox,
+            xlBox,
+            eggPrices.xlDozen,
+            xlDozen,
+            eggPrices.lBox,
+            lBox,
+            eggPrices.lDozen,
+            lDozen,
+            eggPrices.mBox,
+            mBox,
+            eggPrices.mDozen,
+            mDozen,
+            eggPrices.sBox,
+            sBox,
+            eggPrices.sDozen,
+            sDozen,
+        )
     }
 
     private fun continueOrder(

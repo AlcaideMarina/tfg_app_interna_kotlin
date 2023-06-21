@@ -279,31 +279,31 @@ class OrderDetailFragment : BaseFragment() {
 
         with(this.binding) {
             this.xlDozenTextInputLayout.setText(bdOrderModel.xlDozenQuantity.toString())
-            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: "-").toString() + " €"
+            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: "-").toString() + " €/ud"
             this.xlDozenTextInputLayout.isEnabled = false
             this.xlBoxTextInputLayout.setText(bdOrderModel.xlBoxQuantity.toString())
-            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: "-").toString() + " €"
+            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: "-").toString() + " €/ud"
             this.xlBoxTextInputLayout.isEnabled = false
 
             this.lDozenTextInputLayout.setText(bdOrderModel.lDozenQuantity.toString())
-            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: "-").toString() + " €"
+            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: "-").toString() + " €/ud"
             this.lDozenTextInputLayout.isEnabled = false
             this.lBoxTextInputLayout.setText(bdOrderModel.lBoxQuantity.toString())
-            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: "-").toString() + " €"
+            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: "-").toString() + " €/ud"
             this.lBoxTextInputLayout.isEnabled = false
 
             this.mDozenTextInputLayout.setText(bdOrderModel.mDozenQuantity.toString())
-            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: "-").toString() + " €"
+            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: "-").toString() + " €/ud"
             this.mDozenTextInputLayout.isEnabled = false
             this.mBoxTextInputLayout.setText(bdOrderModel.mBoxQuantity.toString())
-            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: "-").toString() + " €"
+            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: "-").toString() + " €/ud"
             this.mBoxTextInputLayout.isEnabled = false
 
             this.sDozenTextInputLayout.setText(bdOrderModel.sDozenQuantity.toString())
-            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: "-").toString() + " €"
+            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: "-").toString() + " €/ud"
             this.sDozenTextInputLayout.isEnabled = false
             this.sBoxTextInputLayout.setText(bdOrderModel.sBoxQuantity.toString())
-            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: "-").toString() + " €"
+            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: "-").toString() + " €/ud"
             this.sBoxTextInputLayout.isEnabled = false
         }
 

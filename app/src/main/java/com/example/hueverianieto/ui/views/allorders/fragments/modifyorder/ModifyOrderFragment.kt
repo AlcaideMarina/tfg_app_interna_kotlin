@@ -398,38 +398,38 @@ class ModifyOrderFragment : BaseFragment() {
 
         with(this.binding) {
             this.xlDozenTextInputLayout.setText(bdOrderModel.xlDozenQuantity.toString())
-            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: eggPricesData.xlDozen).toString() + " €"
+            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: eggPricesData.xlDozen).toString() + " €/ud"
             this.xlDozenTextInputLayout.isEnabled = isEnabled
             this.xlDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
             this.xlBoxTextInputLayout.setText(bdOrderModel.xlBoxQuantity.toString())
-            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: eggPricesData.xlBox).toString() + " €"
+            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: eggPricesData.xlBox).toString() + " €/ud"
             this.xlBoxTextInputLayout.isEnabled = isEnabled
             this.xlBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
 
             this.lDozenTextInputLayout.setText(bdOrderModel.lDozenQuantity.toString())
-            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: eggPricesData.lDozen).toString() + " €"
+            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: eggPricesData.lDozen).toString() + " €/ud"
             this.lDozenTextInputLayout.isEnabled = isEnabled
             this.lDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
             this.lBoxTextInputLayout.setText(bdOrderModel.lBoxQuantity.toString())
-            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: eggPricesData.lBox).toString() + " €"
+            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: eggPricesData.lBox).toString() + " €/ud"
             this.lBoxTextInputLayout.isEnabled = isEnabled
             this.lBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
 
             this.mDozenTextInputLayout.setText(bdOrderModel.mDozenQuantity.toString())
-            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: eggPricesData.mDozen).toString() + " €"
+            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: eggPricesData.mDozen).toString() + " €/ud"
             this.mDozenTextInputLayout.isEnabled = isEnabled
             this.mDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
             this.mBoxTextInputLayout.setText(bdOrderModel.mBoxQuantity.toString())
-            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: eggPricesData.mBox).toString() + " €"
+            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: eggPricesData.mBox).toString() + " €/ud"
             this.mBoxTextInputLayout.isEnabled = isEnabled
             this.mBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
 
             this.sDozenTextInputLayout.setText(bdOrderModel.sDozenQuantity.toString())
-            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: eggPricesData.sDozen).toString() + " €"
+            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: eggPricesData.sDozen).toString() + " €/ud"
             this.sDozenTextInputLayout.isEnabled = isEnabled
             this.sDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
             this.sBoxTextInputLayout.setText(bdOrderModel.sBoxQuantity.toString())
-            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: eggPricesData.sBox).toString() + " €"
+            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: eggPricesData.sBox).toString() + " €/ud"
             this.sBoxTextInputLayout.isEnabled = isEnabled
             this.sBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
         }
@@ -451,29 +451,29 @@ class ModifyOrderFragment : BaseFragment() {
 
     private fun getDBOrderFieldData() : DBOrderFieldData {
         val xlBox =
-            if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
+            if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull()
         val xlDozen =
-            if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
-            else this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull()
+            if(this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull()
         val lBox =
-            if(this.binding.lBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
+            if(this.binding.lBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.lBoxTextInputLayout.text.toString().toIntOrNull()
         val lDozen =
-            if(this.binding.lBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
-            else this.binding.lBoxTextInputLayout.text.toString().toIntOrNull()
+            if(this.binding.lDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.lDozenTextInputLayout.text.toString().toIntOrNull()
         val mBox =
-            if(this.binding.mBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
+            if(this.binding.mBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.mBoxTextInputLayout.text.toString().toIntOrNull()
         val mDozen =
-            if(this.binding.mBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
-            else this.binding.mBoxTextInputLayout.text.toString().toIntOrNull()
+            if(this.binding.mDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.mDozenTextInputLayout.text.toString().toIntOrNull()
         val sBox =
-            if(this.binding.sBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
+            if(this.binding.sBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.sBoxTextInputLayout.text.toString().toIntOrNull()
         val sDozen =
-            if(this.binding.sBoxTextInputLayout.text.toString().toIntOrNull() == null) 0
-            else this.binding.sBoxTextInputLayout.text.toString().toIntOrNull()
+            if(this.binding.sDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.sDozenTextInputLayout.text.toString().toIntOrNull()
 
         return DBOrderFieldData(
             eggPrices.xlBox,
