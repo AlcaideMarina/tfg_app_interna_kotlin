@@ -60,7 +60,10 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     override fun setObservers() {
         this.monthlyFinalProductControlViewModel.monthlyFPCContainerModelList.observe(this) { monthlyFPCContainerModelList ->
             if (monthlyFPCContainerModelList == null) {
-                // TODO
+                this.binding.monthlyFpcRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoMonthlyFpc.visibility = View.VISIBLE
+                this.binding.containerWaringNoMonthlyFpc.setTitle("Error")
+                this.binding.containerWaringNoMonthlyFpc.setText("Se ha producido un error cuando se estaban actualizado los datos. Por favor, inténtelo de nuevo.")
             } else {
                 val list = mutableListOf<FPCContainerItemModel>()
                 for (item in monthlyFPCContainerModelList) {
