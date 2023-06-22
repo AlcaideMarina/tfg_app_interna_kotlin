@@ -68,21 +68,19 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
             this
         ) { data ->
             if (data != null) {
-                this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  " + data.xlEggs.toString()
-                this.binding.weeklyLLaying.text = "Puesta semanal - L:  " + data.lEggs.toString()
-                this.binding.weeklyMLaying.text = "Puesta semanal - M:  " + data.mEggs.toString()
-                this.binding.weeklySLaying.text = "Puesta semanal - S:  " + data.sEggs.toString()
-                this.binding.weeklyTotalLaying.text =
-                    "Puesta semanal (total):  " + data.weeklyLaying.toString()
-                this.binding.hensLossesWeeklyLaying.text =
-                    "Bajas de gallinas esta semana:  " + data.hensLosses.toString()
+                this.binding.weeklyXlLaying.text =  data.xlEggs.toString()
+                this.binding.weeklyLLaying.text = data.lEggs.toString()
+                this.binding.weeklyMLaying.text = data.mEggs.toString()
+                this.binding.weeklySLaying.text = data.sEggs.toString()
+                this.binding.weeklyTotalLaying.text = data.weeklyLaying.toString()
+                this.binding.hensLossesWeeklyLaying.text = data.hensLosses.toString()
             } else {
-                this.binding.weeklyXlLaying.text = "Puesta semanal - XL:  0"
-                this.binding.weeklyLLaying.text = "Puesta semanal - L:  0"
-                this.binding.weeklyMLaying.text = "Puesta semanal - M:  0"
-                this.binding.weeklySLaying.text = "Puesta semanal - S:  0"
-                this.binding.weeklyTotalLaying.text = "Puesta semanal (total):  0"
-                this.binding.hensLossesWeeklyLaying.text = "Bajas de gallinas esta semana:  0"
+                this.binding.weeklyXlLaying.text = "0"
+                this.binding.weeklyLLaying.text = "0"
+                this.binding.weeklyMLaying.text = "0"
+                this.binding.weeklySLaying.text = "0"
+                this.binding.weeklyTotalLaying.text = "0"
+                this.binding.hensLossesWeeklyLaying.text = "0"
             }
         }
     }
@@ -117,34 +115,34 @@ class WeeklyMonitoringCompanySituationFragment : BaseFragment() {
     }
 
     private fun setDataTexts() {
-        this.binding.mondayText.text = "Lunes - " +
+        this.binding.mondayText.text = "Lunes  -  " +
                 Utils.parseTimestampToString(initTimestamp, "dd, MMMM, yyyy")
-        this.binding.tuesdayText.text = "Martes - " +
+        this.binding.tuesdayText.text = "Martes  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 1)),
                     "dd, MMMM, yyyy"
                 )
-        this.binding.wednesdayText.text = "Miércoles - " +
+        this.binding.wednesdayText.text = "Miércoles  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 2)),
                     "dd, MMMM, yyyy"
                 )
-        this.binding.thursdayText.text = "Jueves - " +
+        this.binding.thursdayText.text = "Jueves  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 3)),
                     "dd, MMMM, yyyy"
                 )
-        this.binding.fridayText.text = "Viernes - " +
+        this.binding.fridayText.text = "Viernes  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 4)),
                     "dd, MMMM, yyyy"
                 )
-        this.binding.saturdayDateText.text = "Sábado - " +
+        this.binding.saturdayDateText.text = "Sábado  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 5)),
                     "dd, MMMM, yyyy"
                 )
-        this.binding.sundayText.text = "Domingo - " +
+        this.binding.sundayText.text = "Domingo  -  " +
                 Utils.parseTimestampToString(
                     Timestamp(Utils.addToDate(initTimestamp.toDate(), 6)),
                     "dd, MMMM, yyyy"
