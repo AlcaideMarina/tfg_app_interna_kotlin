@@ -207,11 +207,10 @@ class ModifyDailyMonitoringCompanySituationFragment : BaseFragment() {
 
     private fun setButtons() {
         if (monitoringCompanySituationData.documentId == null) {
-            this.binding.saveButton.setText("Añadir")
+            this.binding.saveButtonText.text = "Añadir"
         } else {
-            this.binding.saveButton.setText("Modificar")
+            this.binding.saveButtonText.text = "Modificar"
         }
-        this.binding.cancelButton.visibility = View.GONE
     }
 
     private val xlWatcher: TextWatcher = object : TextWatcher {
