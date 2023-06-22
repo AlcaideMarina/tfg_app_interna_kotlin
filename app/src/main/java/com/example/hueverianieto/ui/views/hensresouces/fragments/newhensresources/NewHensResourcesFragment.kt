@@ -53,7 +53,6 @@ class NewHensResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         lifecycleScope.launchWhenStarted {
             newHensResourcesViewModel.viewState.collect { viewState ->
@@ -163,13 +162,6 @@ class NewHensResourcesFragment : BaseFragment() {
             with(binding) {
                 this.loadingComponent.isVisible = state.isLoading
             }
-        }
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
         }
     }
 
