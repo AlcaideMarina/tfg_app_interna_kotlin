@@ -46,7 +46,6 @@ class SellingPriceFragment : BaseFragment() {
 
     override fun configureUI() {
         this.sellingPriceViewModel.getPrices()
-        setButton()
         disableAllEditTexts()
         lifecycleScope.launchWhenStarted {
             sellingPriceViewModel.viewState.collect { viewState ->
@@ -89,10 +88,6 @@ class SellingPriceFragment : BaseFragment() {
         } catch (e: java.lang.Exception) {
             Log.e(TAG, e.message.toString())
         }
-    }
-
-    private fun setButton() {
-        this.binding.modifyButton.setText("Modificar precios")
     }
 
     private fun disableAllEditTexts() {

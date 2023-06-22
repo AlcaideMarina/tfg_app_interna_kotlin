@@ -47,7 +47,6 @@ class ModifySellingPriceFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButton()
         setEditTextInfo(eggPricesData)
 
         lifecycleScope.launchWhenStarted {
@@ -122,11 +121,6 @@ class ModifySellingPriceFragment : BaseFragment() {
                 this.loadingComponent.isVisible = state.isLoading
             }
         }
-    }
-
-    private fun setButton() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
     }
 
     private fun setEditTextInfo(eggPricesData: EggPricesData) {
