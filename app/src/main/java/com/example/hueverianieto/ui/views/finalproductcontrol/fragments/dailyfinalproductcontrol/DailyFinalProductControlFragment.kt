@@ -54,7 +54,6 @@ class DailyFinalProductControlFragment : BaseFragment() {
             monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate
         )
         this.dailyFinalProductControlViewModel.getNextLot()
-        this.binding.deletedFpcButton.setText("Eliminados")
         deletedList = mutableListOf<FPCData>()
         initRecyclerView()
         lifecycleScope.launchWhenStarted {

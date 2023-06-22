@@ -17,12 +17,17 @@ class ComponentDailyFinalProductControlViewHolder(view: View) : RecyclerView.Vie
             "dd/MM"
         )
         this.binding.acceptedEggsText.text =
-            fpcDailyContainerItemModel.fpcData.acceptedEggs.toString() + " huevos"
+            fpcDailyContainerItemModel.fpcData.acceptedEggs.toString() + " aceptados"
         this.binding.rejectedEggsText.text =
-            fpcDailyContainerItemModel.fpcData.rejectedEggs.toString() + " huevos"
-        this.binding.baseComponentContainer.setOnClickListener(
-            fpcDailyContainerItemModel.onClickListener
-        )
+            fpcDailyContainerItemModel.fpcData.rejectedEggs.toString() + " rechazados"
+        if (fpcDailyContainerItemModel.onClickListener != null) {
+            this.binding.baseComponentContainer.setOnClickListener(
+                fpcDailyContainerItemModel.onClickListener
+            )
+        } else {
+            this.binding.arrowIcon.visibility = View.GONE
+        }
+
     }
 
 }

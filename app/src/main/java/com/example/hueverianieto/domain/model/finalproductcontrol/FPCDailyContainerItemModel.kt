@@ -5,5 +5,5 @@ import com.example.hueverianieto.data.models.remote.FPCData
 
 data class FPCDailyContainerItemModel(
     val fpcData: FPCData,
-    var onClickListener: View.OnClickListener
+    var onClickListener: View.OnClickListener?
 )

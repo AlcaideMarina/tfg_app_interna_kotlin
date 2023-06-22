@@ -67,9 +67,8 @@ class DailyDeletedFinalProductControlFragment : BaseFragment() {
         for (item in monthlyDeletedFPCContainerModel.fpcDataList) {
             val fpcDailyContainerItemModel = FPCDailyContainerItemModel(
                 item,
-            ) {
-                // TODO Navegación
-            }
+                null
+            )
             list.add(fpcDailyContainerItemModel)
 
         }
