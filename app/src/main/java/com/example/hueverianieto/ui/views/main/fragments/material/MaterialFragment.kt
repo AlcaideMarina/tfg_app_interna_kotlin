@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -26,6 +27,7 @@ class MaterialFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
+        (activity as BaseActivity).changeTopBarName("Material")
         currentUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentMaterialBinding.bind(
@@ -39,7 +41,7 @@ class MaterialFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
+        // Not necessary
     }
 
     override fun setObservers() {
@@ -76,26 +78,6 @@ class MaterialFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         // Not necessary
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.seeAllButton.setText("Ver todo")
-            this.seeAllButton.visibility = View.GONE
-            this.workersButton.setText("Trabajadores y sueldos")
-            this.machinesButton.setText("Maquinaria")
-            this.machinesButton.visibility = View.GONE
-            this.hensButton.setText("Gallinas")
-            this.electricityWaterGasButton.setText("Luz, agua, gas")
-            this.feedButton.setText("Pienso")
-            this.petrolButton.setText("Gasolina")
-            this.petrolButton.visibility = View.GONE
-            this.boxesCartonsButton.setText("Cajas y cartones")
-            this.trucksButton.setText("Camiones")
-            this.trucksButton.visibility = View.GONE
-            this.othersButton.setText("Otros")
-            this.othersButton.visibility = View.GONE
-        }
     }
 
 }
