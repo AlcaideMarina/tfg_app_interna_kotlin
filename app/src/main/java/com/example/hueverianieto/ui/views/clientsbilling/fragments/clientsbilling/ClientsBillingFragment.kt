@@ -100,11 +100,6 @@ class ClientsBillingFragment : BaseFragment() {
             with(state as ClientsBillingViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        // TODO: Popup error
-                    } else if (state.isEmpty) {
-                        // TODO: Popup está vacío
-                    }
                 }
             }
         } catch (e: Exception) {

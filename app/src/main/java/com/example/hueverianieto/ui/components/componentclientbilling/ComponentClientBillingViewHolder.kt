@@ -10,8 +10,8 @@ class ComponentClientBillingViewHolder(view: View) : RecyclerView.ViewHolder(vie
     val binding: ComponentClientBillingBinding = ComponentClientBillingBinding.bind(view)
 
     fun render(componentClientBillingModel: ComponentClientBillingModel) {
-        this.binding.idText.text = "ID: ${componentClientBillingModel.id}"
-        this.binding.nameText.text = "${componentClientBillingModel.company}"
+        this.binding.idText.text = componentClientBillingModel.id
+        this.binding.nameText.text = componentClientBillingModel.company
         this.itemView.setOnClickListener(componentClientBillingModel.onClickListener)
     }
 
