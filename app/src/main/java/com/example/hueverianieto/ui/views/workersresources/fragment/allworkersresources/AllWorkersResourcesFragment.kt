@@ -48,7 +48,7 @@ class AllWorkersResourcesFragment : BaseFragment() {
 
     override fun configureUI() {
         this.allWorkersResourcesViewModel.getAllWorkers()
-        this.binding.pendingWorkersButton.setText("Sueldos pendientes")
+        this.binding.pendingWorkersButtonText.text = "Sueldos pendientes"
         lifecycleScope.launchWhenStarted {
             allWorkersResourcesViewModel.getAllWorkers()
             allWorkersResourcesViewModel.viewState.collect { viewState ->
