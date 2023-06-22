@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/allHensResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.allhensresources.AllHensResourcesFragment"
-        android:label="AllHensResourcesFragment" >
+        android:label="Registros de gallinas" >
         <action
             android:id="@+id/action_allHensResourcesFragment_to_hensResourcesDetailFragment"
             app:destination="@id/hensResourcesDetailFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/hensResourcesDetailFragment"
         android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.hensresourcesdetail.HensResourcesDetailFragment"
-        android:label="HensResourcesDetailFragment" >
+        android:label="Detalle registro gallinas" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/modifyHensResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragment"
-        android:label="ModifyHensResourcesFragment" >
+        android:label="Modificar registro gallinas" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/newHensResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesFragment"
-        android:label="NewHensResourcesFragment" >
+        android:label="Añadir registro gallinas" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
