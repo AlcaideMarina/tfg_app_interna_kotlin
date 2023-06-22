@@ -104,7 +104,6 @@ class ModifyWorkerFragment : BaseFragment() {
                     { alertDialog.cancel() },
                     {
                         alertDialog.cancel()
-                        val a = this.binding.salaryTextInputLayout.text
                         internalUserData.salary =
                             this.binding.salaryTextInputLayout.text.toString().toDouble()
                         this.modifyWorkerViewModel.updateUser(internalUserData)
@@ -155,8 +154,9 @@ class ModifyWorkerFragment : BaseFragment() {
 
     private fun setButtons() {
         with(this.binding) {
-            this.saveButton.setText("Guardar")
-            this.cancelButton.setText("Cancelar")
+            this.saveButtonText.text = "Guardar"
+            this.cancelButtonText.text = "Cancelar"
+            this.cancelButton.visibility = View.VISIBLE
         }
     }
 

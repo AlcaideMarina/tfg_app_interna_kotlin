@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -96,12 +97,13 @@ class WorkerDetailFragment : BaseFragment() {
             )
             this.salaryTextInputLayout.setText((internalUserData.salary ?: "").toString())
             this.salaryTextInputLayout.isEnabled = false
+            this.salaryTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 
     private fun setButtons() {
         with(this.binding) {
-            this.saveButton.setText("Modificar")
+            this.saveButtonText.text = "Modificar"
             this.cancelButton.visibility = View.GONE
         }
     }
