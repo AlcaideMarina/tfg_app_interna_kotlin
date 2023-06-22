@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -22,14 +23,7 @@ class UsersAndClientsFragment : BaseFragment() {
     private lateinit var internalUserData: InternalUserData
 
     override fun configureUI() {
-
-        this.binding.clientsButton.isEnabled = true
-        this.binding.clientsButton.setText("Ver clientes")
-        this.binding.internalUsersButton.isEnabled = true
-        this.binding.internalUsersButton.setText("Usuarios internos")
-        this.binding.externalUsersButton.isEnabled = true
-        this.binding.externalUsersButton.setText("Usuarios externos")
-
+        // Not necessary
     }
 
     override fun setObservers() {
@@ -57,6 +51,7 @@ class UsersAndClientsFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         internalUserData = (activity as MainActivity).currentUserData
+        (activity as BaseActivity).changeTopBarName("Usuarios y clientes")
         this.binding = FragmentUsersAndClientsBinding
             .inflate(inflater, container, false)
         this.view = inflater.inflate(R.layout.fragment_users_and_clients, container, false)
