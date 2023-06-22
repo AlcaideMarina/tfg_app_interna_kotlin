@@ -44,10 +44,6 @@ class SettingsFragment : BaseFragment() {
                         requireContext(), currentUser
                     )
                 }
-            ),
-            SimpleListModel(
-                title = "Cambiar idioma",
-                onClickListener = { }
             )
         )
         this.binding.settingOptionsListView.adapter =
