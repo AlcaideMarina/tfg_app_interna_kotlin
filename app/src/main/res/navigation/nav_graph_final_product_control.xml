@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/monthlyFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.monthlyfinalproductcontrol.MonthlyFinalProductControlFragment"
-        android:label="MonthlyFinalProductControlFragment" >
+        android:label="Control prod. final - Mensual" >
         <action
             android:id="@+id/action_monthlyFinalProductControlFragment_to_dailyFinalProductControlFragment"
             app:destination="@id/dailyFinalProductControlFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/dailyFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailyfinalproductcontrol.DailyFinalProductControlFragment"
-        android:label="DailyFinalProductControlFragment" >
+        android:label="Control prod. final - Diario" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -38,7 +38,7 @@
     <fragment
         android:id="@+id/dailyDeletedFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.dailydeletedfinalproductcontrol.DailyDeletedFinalProductControlFragment"
-        android:label="DailyDeletedFinalProductControlFragment" >
+        android:label="CPF - Eliminados" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -49,7 +49,7 @@
     <fragment
         android:id="@+id/newFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlFragment"
-        android:label="NewFinalProductControlFragment" >
+        android:label="Añadir control prod. final" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -60,7 +60,7 @@
     <fragment
         android:id="@+id/finalProductControlDetailFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.finalproductcontroldetail.FinalProductControlDetailFragment"
-        android:label="FinalProductControlDetailFragment" >
+        android:label="Detalle control prod. final" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -74,7 +74,7 @@
     <fragment
         android:id="@+id/modifyFinalProductControlFragment"
         android:name="com.example.hueverianieto.ui.views.finalproductcontrol.fragments.modifyfinalproductcontrol.ModifyFinalProductControlFragment"
-        android:label="ModifyFinalProductControlFragment" >
+        android:label="Modificar control prod. final" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
