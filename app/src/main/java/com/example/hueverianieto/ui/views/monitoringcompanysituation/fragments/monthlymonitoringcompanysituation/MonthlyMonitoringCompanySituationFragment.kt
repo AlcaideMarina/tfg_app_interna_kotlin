@@ -53,7 +53,6 @@ class MonthlyMonitoringCompanySituationFragment : BaseFragment() {
         return this.binding.root
     }
 
-
     override fun configureUI() {
         getDateFilterText()
     }
