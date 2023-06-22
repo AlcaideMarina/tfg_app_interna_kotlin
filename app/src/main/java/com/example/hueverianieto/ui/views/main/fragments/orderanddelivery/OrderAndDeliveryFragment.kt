@@ -36,6 +36,7 @@ class OrderAndDeliveryFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
+        (activity as MainActivity).setToolbarTitle("Pedidos y repartos")
         currentUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentOrdersAndDeliveryBinding.bind(
@@ -49,7 +50,6 @@ class OrderAndDeliveryFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        (activity as MainActivity).setToolbarTitle("Pedidos y repartos")
 
         this.binding.dateTextView.text = Utils.parseTimestampToString(Timestamp.now())
         this.orderAndDeliveryViewModel.getTodayOrders()

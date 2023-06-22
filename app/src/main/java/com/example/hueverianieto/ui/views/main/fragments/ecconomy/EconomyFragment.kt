@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -25,6 +26,7 @@ class EconomyFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
+        (activity as BaseActivity).changeTopBarName("Economía")
         internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentEcconomyBinding.bind(
@@ -38,7 +40,7 @@ class EconomyFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
+        // Not necessary
     }
 
     override fun setObservers() {
@@ -60,11 +62,6 @@ class EconomyFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         // Not necessary
-    }
-
-    private fun setButtons() {
-        this.binding.clientsBillingButton.setText("Facturación de clientes")
-        this.binding.companyAccountsButton.setText("Precio de venta")
     }
 
 }
