@@ -55,7 +55,6 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         setDropdownTypesOptions()
 
@@ -164,13 +163,6 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         with(state as NewElectricityWaterGasResourcesViewState) {
             binding.loadingComponent.isVisible = state.isLoading
-        }
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
         }
     }
 
