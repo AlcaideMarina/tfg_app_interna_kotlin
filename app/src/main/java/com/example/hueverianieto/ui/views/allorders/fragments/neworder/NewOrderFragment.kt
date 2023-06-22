@@ -357,7 +357,7 @@ class NewOrderFragment : BaseFragment() {
         this.binding.deleteButtonText.text = "Cancelar"
     }
 
-    private fun getDBOrderFieldData() : DBOrderFieldData {
+    private fun getDBOrderFieldData() : DBOrderFieldData? {
         val xlBox =
             if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull()
@@ -383,24 +383,29 @@ class NewOrderFragment : BaseFragment() {
             if(this.binding.sDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
             else this.binding.sDozenTextInputLayout.text.toString().toIntOrNull()
 
-        return DBOrderFieldData(
-            eggPrices.xlBox,
-            xlBox,
-            eggPrices.xlDozen,
-            xlDozen,
-            eggPrices.lBox,
-            lBox,
-            eggPrices.lDozen,
-            lDozen,
-            eggPrices.mBox,
-            mBox,
-            eggPrices.mDozen,
-            mDozen,
-            eggPrices.sBox,
-            sBox,
-            eggPrices.sDozen,
-            sDozen,
-        )
+        return if (xlBox == null && xlDozen == null && lBox == null && lDozen == null &&
+                mBox == null && mDozen == null && sBox == null && sDozen == null) {
+            null
+        } else {
+            DBOrderFieldData(
+                eggPrices.xlBox,
+                xlBox,
+                eggPrices.xlDozen,
+                xlDozen,
+                eggPrices.lBox,
+                lBox,
+                eggPrices.lDozen,
+                lDozen,
+                eggPrices.mBox,
+                mBox,
+                eggPrices.mDozen,
+                mDozen,
+                eggPrices.sBox,
+                sBox,
+                eggPrices.sDozen,
+                sDozen,
+            )
+        }
     }
 
     private fun continueOrder(

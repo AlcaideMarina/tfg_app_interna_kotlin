@@ -35,6 +35,11 @@ class HNOrderContainerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         this.binding.orderSummaryText.text = orderContainerModel.orderSummary
         this.binding.priceText.text = "$priceStr €"
         this.binding.statusDateText.text = this.binding.root.context.getString(statusStr)
+        if (orderContainerModel.deliveryDni != null) {
+            this.binding.deliveryDniText.text = orderContainerModel.deliveryDni
+        } else {
+            this.binding.deliveryDniLayout.visibility = View.GONE
+        }
 
         if (orderContainerModel.onClickListener != null) {
             this.binding.baseComponentOrderContainer.setOnClickListener(
