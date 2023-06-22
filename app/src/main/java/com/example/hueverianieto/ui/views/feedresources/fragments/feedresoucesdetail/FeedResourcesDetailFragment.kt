@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -122,8 +123,8 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
+        this.binding.saveButtonText.text = "Modificar"
+        this.binding.cancelButtonText.text = "Eliminar"
     }
 
     private fun setText() {
@@ -131,8 +132,10 @@ class FeedResourcesDetailFragment : BaseFragment() {
             this.dateTextView.text = Utils.parseTimestampToString(feedResourcesData.expenseDatetime)
             this.kilosTextInputLayout.setText(feedResourcesData.kilos.toString())
             this.kilosTextInputLayout.isEnabled = false
+            this.kilosTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             this.totalPriceTextInputLayout.setText(feedResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 
