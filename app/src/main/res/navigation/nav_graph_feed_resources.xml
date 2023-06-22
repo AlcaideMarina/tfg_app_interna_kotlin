@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/allFeedResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.feedresources.fragments.allfeedresouces.AllFeedResourcesFragment"
-        android:label="AllFeedResourcesFragment" >
+        android:label="Registro de pienso" >
         <action
             android:id="@+id/action_allFeedResourcesFragment_to_feedResourcesDetailFragment"
             app:destination="@id/feedResourcesDetailFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/feedResourcesDetailFragment"
         android:name="com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail.FeedResourcesDetailFragment"
-        android:label="FeedResourcesDetailFragment" >
+        android:label="Detalle registro de pienso" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/modifyFeedResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources.ModifyFeedResourcesFragment"
-        android:label="ModifyFeedResourcesFragment" >
+        android:label="Modificar registro pienso" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/newFeedResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.feedresources.fragments.newfeedresources.NewFeedResourcesFragment"
-        android:label="NewFeedResourcesFragment" >
+        android:label="Añadir registro pienso" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
