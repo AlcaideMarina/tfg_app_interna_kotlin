@@ -48,7 +48,6 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setTexts()
         lifecycleScope.launchWhenStarted {
             finalProductControlDetailViewModel.getFinalProductControl(fpcData.documentId!!)
@@ -100,11 +99,6 @@ class FinalProductControlDetailFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         state as FinalProductControlDetailViewState
         this.binding.loadingComponent.isVisible = state.isLoading
-    }
-
-    private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
     }
 
     private fun setTexts() {

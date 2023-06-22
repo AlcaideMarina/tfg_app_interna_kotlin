@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -140,8 +141,8 @@ class ModifyFinalProductControlFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
+        this.binding.saveButtonText.text = "Guardar"
+        this.binding.cancelButtonText.text = "Cancelar"
     }
 
     private fun setVariables() {
@@ -159,27 +160,34 @@ class ModifyFinalProductControlFragment : BaseFragment() {
                 )
             )
             this.layingDateTextInputLayout.setOnClickListener { onClickScheduledLayingDate() }
+            this.layingDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.packingDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                     fpcData.packingDatetime
                 )
             )
             this.packingDateTextInputLayout.setOnClickListener { onClickScheduledPackingDate() }
+            this.packingDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.acceptedEggsTextInputLayout.setText(fpcData.acceptedEggs.toString())
+            this.acceptedEggsTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.rejectedEggsTextInputLayout.setText(fpcData.rejectedEggs.toString())
+            this.rejectedEggsTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.lotTextInputLayout.setText(fpcData.lot.toString())
+            this.lotTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.bestBeforeDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                     fpcData.bestBeforeDatetime
                 )
             )
             this.bestBeforeDateTextInputLayout.setOnClickListener { onClickScheduledBestBeforeDate() }
+            this.bestBeforeDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             this.issueDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
                     fpcData.issueDatetime
                 )
             )
             this.issueDateTextInputLayout.setOnClickListener { onClickScheduledIssueDate() }
+            this.issueDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
         }
     }
 
