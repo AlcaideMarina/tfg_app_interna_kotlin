@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -31,6 +32,9 @@ class ChangePasswordFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as ChangePasswordActivity).configNav(true)
+        (activity as ChangePasswordActivity).getToolbar().setNavigationOnClickListener {
+            (activity as BaseActivity).goBackFragments()
+        }
         this.binding = FragmentChangePasswordBinding.inflate(
             inflater, container, false
         )
@@ -41,7 +45,6 @@ class ChangePasswordFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.binding.saveButton.setText("Cambiar contraseña")
         lifecycleScope.launchWhenStarted {
             changePasswordViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
