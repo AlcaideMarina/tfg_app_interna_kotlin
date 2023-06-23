@@ -47,6 +47,7 @@ class ClientOrdersFragment : BaseFragment() {
         val args: ClientOrdersFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.clientData = args.clientData
+        (activity as BaseActivity).changeTopBarName("Pedidos del cliente - ID: ${clientData.id}")
 
         return this.binding.root
     }

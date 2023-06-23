@@ -36,7 +36,7 @@
     <fragment
         android:id="@+id/clientDetailFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailFragment"
-        android:label="Información de cliente" >
+        android:label="Detalle de cliente" >
         <argument
             android:name="clientData"
             app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
@@ -67,7 +67,7 @@
     <fragment
         android:id="@+id/clientOrdersFragment"
         android:name="com.example.hueverianieto.ui.views.clients.fragments.clientorders.ClientOrdersFragment"
-        android:label="ClientOrdersFragment" >
+        android:label="Pedidos del cliente - ID: " >
         <argument
             android:name="clientData"
             app:argType="com.example.hueverianieto.data.models.remote.ClientData" />
@@ -81,7 +81,7 @@
     <fragment
         android:id="@+id/orderDetailFragment2"
         android:name="com.example.hueverianieto.ui.views.allorders.fragments.orderdetail.OrderDetailFragment"
-        android:label="OrderDetailFragment" >
+        android:label="Detalle de pedido" >
         <argument
             android:name="orderData"
             app:argType="com.example.hueverianieto.data.models.remote.OrderData" />
