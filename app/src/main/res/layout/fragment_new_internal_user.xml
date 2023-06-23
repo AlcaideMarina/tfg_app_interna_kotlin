@@ -29,14 +29,20 @@
                     android:id="@+id/name_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/name_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Nombre:" />
+                        android:text="Nombre:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color"/>
 
                     <EditText
                         android:id="@+id/name_text_input_layout"
@@ -57,14 +63,21 @@
                     android:id="@+id/surname_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:textColor="@color/black_color"
+                    app:layout_constraintTop_toBottomOf="@id/name_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/surname_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Apellidos:" />
+                        android:text="Apellidos:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/surname_text_input_layout"
@@ -85,14 +98,20 @@
                     android:id="@+id/dni_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/surname_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/dni_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="DNI:" />
+                        android:text="DNI:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/dni_text_input_layout"
@@ -105,7 +124,7 @@
                         android:ems="10"
                         android:inputType="text"
                         android:paddingHorizontal="12dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"/>
 
                 </LinearLayout>
 
@@ -113,14 +132,20 @@
                     android:id="@+id/phone_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/dni_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/phone_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Teléfono:" />
+                        android:text="Teléfono:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/phone_text_input_layout"
@@ -141,14 +166,20 @@
                     android:id="@+id/email_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/phone_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/email_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Correo:" />
+                        android:text="Correo:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/email_text_input_layout"
@@ -169,14 +200,20 @@
                     android:id="@+id/direction_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/email_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/direction_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Dirección:" />
+                        android:text="Dirección:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/direction_text_input_layout"
@@ -189,7 +226,10 @@
                         android:ems="10"
                         android:inputType="text"
                         android:paddingHorizontal="12dp"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        app:layout_constraintTop_toBottomOf="@id/name_text_layout"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent" />
 
                 </LinearLayout>
 
@@ -197,14 +237,20 @@
                     android:id="@+id/city_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/direction_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/city_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Ciudad:" />
+                        android:text="Ciudad:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/city_text_input_layout"
@@ -225,14 +271,20 @@
                     android:id="@+id/province_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/city_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/province_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Provincia:" />
+                        android:text="Provincia:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/province_text_input_layout"
@@ -253,14 +305,20 @@
                     android:id="@+id/postal_code_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/province_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/postal_code_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Código postal:" />
+                        android:text="Código postal:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/postal_code_text_input_layout"
@@ -281,14 +339,20 @@
                     android:id="@+id/ss_number_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/postal_code_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/ss_number_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Nº Afiliación de la Seguridad Social:" />
+                        android:text="Nº Afiliación de la Seguridad Social:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/ss_number_text_input_layout"
@@ -309,14 +373,20 @@
                     android:id="@+id/bank_account_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/ss_number_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/bank_account_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Cuenta bancaria:" />
+                        android:text="Cuenta bancaria:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/bank_account_text_input_layout"
@@ -337,14 +407,20 @@
                     android:id="@+id/role_text_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    app:layout_constraintTop_toBottomOf="@id/bank_account_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
                     <TextView
                         android:id="@+id/role_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Puesto:" />
+                        android:text="Puesto:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/role_text_input_layout"
@@ -383,14 +459,22 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginBottom="56dp">
+                    app:layout_constraintTop_toBottomOf="@id/role_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_color">
 
                     <TextView
                         android:id="@+id/user_account_text_view"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:layout_marginTop="@dimen/size8"
-                        android:text="Usuario:" />
+                        android:text="Usuario:"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/black_color" />
 
                     <EditText
                         android:id="@+id/user_account_text_input_layout"
@@ -409,13 +493,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="El usuario debe tener más de 6 dígitos."
-                        android:layout_marginTop="@dimen/size16"/>
+                        android:layout_marginTop="@dimen/size16"
+                        android:textColor="@color/black_color"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="La contraseña será igual que el usuario. Por favor, cámbiela en cuanto sea posible. Para hacer login, se necesitará el correo y la contraseña."
-                        android:layout_marginBottom="4dp"/>
+                        android:layout_marginBottom="4dp"
+                        android:textColor="@color/black_color"/>
 
                 </LinearLayout>
 
@@ -423,24 +509,62 @@
                     android:id="@+id/buttons_container"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/size16">
+                    android:layout_marginHorizontal="@dimen/size8"
+                    android:layout_marginTop="@dimen/size24"
+                    app:layout_constraintTop_toBottomOf="@id/user_account_text_layout"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
 
-                    <com.example.hueverianieto.ui.components.HNButton
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/save_button"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_squared_button_black"
+                        android:layout_marginBottom="8dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintBottom_toTopOf="@id/cancel_button">
 
-                    <com.example.hueverianieto.ui.components.HNButton
+                        <TextView
+                            android:id="@+id/save_button_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/size24"
+                            android:textColor="@color/white_color"
+                            android:textSize="14dp"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
                         android:id="@+id/cancel_button"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/size8"
+                        android:layout_height="50dp"
+                        android:background="@drawable/bg_squared_button"
+                        android:layout_marginBottom="16dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/save_button" />
+                        app:layout_constraintBottom_toBottomOf="parent">
+
+                        <TextView
+                            android:id="@+id/cancel_button_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/size24"
+                            android:textColor="@color/white_color"
+                            android:textSize="14dp"
+                            android:text="Eliminar cliente"
+                            android:textStyle="bold"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

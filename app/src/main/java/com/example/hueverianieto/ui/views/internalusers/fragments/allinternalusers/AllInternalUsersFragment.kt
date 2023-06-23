@@ -48,8 +48,7 @@ class AllInternalUsersFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.binding.newInternalUserButton.setText("Nuevo")
-        this.binding.deletedInternalUsersButton.setText("Usuarios eliminados")
+        this.binding.deletedUsersButtonText.setText("Usuarios eliminados")
         this.allInternalUsersViewModel.getInternalUserData()
         lifecycleScope.launchWhenStarted {
             allInternalUsersViewModel.viewState.collect { viewState ->
@@ -105,7 +104,7 @@ class AllInternalUsersFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        this.binding.deletedInternalUsersButton.setOnClickListener {
+        this.binding.deletedUsersButton.setOnClickListener {
             this.allInternalUsersViewModel.navigateDeleteInternalUsers(
                 this.view,
                 bundleOf(
@@ -113,7 +112,7 @@ class AllInternalUsersFragment : BaseFragment() {
                 )
             )
         }
-        this.binding.newInternalUserButton.setOnClickListener {
+        this.binding.newUserButton.setOnClickListener {
             this.allInternalUsersViewModel.navigateToNewInternalUsers(
                 this.view,
                 bundleOf(

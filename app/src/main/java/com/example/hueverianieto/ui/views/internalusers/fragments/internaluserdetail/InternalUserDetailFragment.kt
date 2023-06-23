@@ -136,10 +136,10 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.modifyButton.setText("Modificar")
-        this.binding.deleteUserButton.setText("Eliminar usuario")
+        this.binding.modifyButtonText.text = "Modificar"
+        this.binding.deleteUserButtonText.text = "Eliminar usuario"
         if (currentUserData.documentId == internalUserData.documentId) {
-            this.binding.deleteUserButton.isEnabled = false
+            this.binding.deleteUserButtonText.isEnabled = false
         }
     }
 
