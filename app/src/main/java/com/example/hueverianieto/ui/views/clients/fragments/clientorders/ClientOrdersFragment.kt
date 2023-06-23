@@ -53,6 +53,7 @@ class ClientOrdersFragment : BaseFragment() {
     }
 
     override fun configureUI() {
+        this.binding.addButton.visibility = View.GONE
         this.clientOrdersViewModel.getOrders(clientData.documentId!!)
         lifecycleScope.launchWhenStarted {
             clientOrdersViewModel.viewState.collect { viewState ->

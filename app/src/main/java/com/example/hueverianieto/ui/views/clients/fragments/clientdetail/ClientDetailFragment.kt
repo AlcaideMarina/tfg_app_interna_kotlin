@@ -196,9 +196,9 @@ class ClientDetailFragment : BaseFragment() {
 
     private fun setButtons() {
         with(this.binding) {
-            modifyButton.setText("Modificar")
-            deleteClientButton.setText("Eliminar cliente")
-            seeAllButton.setText("Ver todos")
+            modifyButtonText.text = "Modificar"
+            deleteClientButtonText.text = "Eliminar cliente"
+            seeAllButtonText.text = "Ver todos"
         }
     }
 

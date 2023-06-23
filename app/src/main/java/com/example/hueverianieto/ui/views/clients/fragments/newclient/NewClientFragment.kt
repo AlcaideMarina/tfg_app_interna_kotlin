@@ -64,8 +64,8 @@ class NewClientFragment : BaseFragment() {
         this.alertDialog = HNModalDialog(requireContext())
 
         this.binding.let {
-            it.saveButton.setText("Guardar")
-            it.cancelButton.setText("Cancelar")
+            it.saveButtonText.text = "Guardar"
+            it.cancelButtonText.text = "Cancelar"
 
             it.userAccountTextInputLayout.isEnabled = false
 

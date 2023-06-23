@@ -48,8 +48,8 @@ class ModifyClientFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
+        this.binding.modifyButtonText.setText("Guardar")
+        this.binding.deleteClientButtonText.setText("Cancelar")
         if (clientData.hasAccount) {
             this.binding.containerBorderCheckTitle.visibility = View.GONE
         }
@@ -95,10 +95,10 @@ class ModifyClientFragment : BaseFragment() {
             this.binding.userAccountTextInputLayout.isEnabled =
                 this.binding.checkedTextView.isChecked
         }
-        this.binding.cancelButton.setOnClickListener {
+        this.binding.deleteClientButton.setOnClickListener {
             activity?.onBackPressedDispatcher?.onBackPressed()
         }
-        this.binding.saveButton.setOnClickListener {
+        this.binding.modifyButton.setOnClickListener {
             var user: String? = null
             var hasAccount: Boolean = false
 

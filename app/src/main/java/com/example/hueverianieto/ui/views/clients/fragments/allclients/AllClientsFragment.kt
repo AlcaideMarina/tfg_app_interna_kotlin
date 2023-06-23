@@ -35,11 +35,6 @@ class AllClientsFragment : BaseFragment() {
 
     override fun configureUI() {
 
-        this.binding.newUserButton.isEnabled = true
-        this.binding.newUserButton.setText("Nuevo")
-        this.binding.deletedUsersButton.isEnabled = true
-        this.binding.deletedUsersButton.setText("Clientes eliminados")
-
         this.allClientsViewModel.getClientsData()
         lifecycleScope.launchWhenStarted {
             allClientsViewModel.viewState.collect { viewState ->
