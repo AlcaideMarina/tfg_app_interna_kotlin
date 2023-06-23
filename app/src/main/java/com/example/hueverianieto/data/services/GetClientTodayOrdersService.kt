@@ -13,7 +13,7 @@ class GetClientTodayOrdersService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getClientTodayOrders(documentId: String) : List<OrderData?>?  {
+    suspend fun getClientTodayOrders(documentId: String): List<OrderData?>? {
         val calendar = Calendar.getInstance()
         calendar.time = Timestamp.now().toDate()
         var d = (calendar.get(Calendar.DAY_OF_MONTH)).toString()
@@ -38,21 +38,21 @@ class GetClientTodayOrdersService @Inject constructor(
         }.toOrderDataList()
     }
 
-    private fun Result<QuerySnapshot>.toOrderDataList() : List<OrderData?>? = when(val result = getOrNull()) {
-        null -> null
-        else -> {
-            val list = mutableListOf<OrderData>()
-            if (!result.isEmpty && result.documents.size > 0) {
-                for (item in result.documents) {
-                    if (item.data != null) {
-                        val data = item.data!!
-                        list.add(OrderUtils.mapToParcelable(data, item.id))
+    private fun Result<QuerySnapshot>.toOrderDataList(): List<OrderData?>? =
+        when (val result = getOrNull()) {
+            null -> null
+            else -> {
+                val list = mutableListOf<OrderData>()
+                if (!result.isEmpty && result.documents.size > 0) {
+                    for (item in result.documents) {
+                        if (item.data != null) {
+                            val data = item.data!!
+                            list.add(OrderUtils.mapToParcelable(data, item.id))
+                        }
                     }
                 }
+                list
             }
-            list
         }
-    }
-
 
 }

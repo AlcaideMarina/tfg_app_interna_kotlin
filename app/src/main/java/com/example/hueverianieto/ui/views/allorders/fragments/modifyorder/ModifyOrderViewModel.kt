@@ -1,41 +1,29 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.modifyorder
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.local.EggPricesData
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.GetAllDeliveryPersonUseCase
 import com.example.hueverianieto.domain.usecases.GetInternalUserWithIdUseCase
 import com.example.hueverianieto.domain.usecases.GetPricesUseCase
 import com.example.hueverianieto.domain.usecases.UpdateOrderUseCase
-import com.example.hueverianieto.ui.views.allorders.fragments.neworder.NewOrderViewState
-import com.example.hueverianieto.ui.views.allorders.fragments.orderdetail.OrderDetailViewState
-import com.example.hueverianieto.ui.views.internalusers.fragments.modifyinternaluser.ModifyInternalUserViewState
-import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.utils.InternalUserUtils
-import com.example.hueverianieto.utils.OrderUtils
-import com.example.hueverianieto.utils.Utils
-import com.google.firebase.Timestamp
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.util.*
 import javax.inject.Inject
 
 @HiltViewModel
 class ModifyOrderViewModel @Inject constructor(
-    val updateOrderUseCase : UpdateOrderUseCase,
+    val updateOrderUseCase: UpdateOrderUseCase,
     val getAllDeliveryPersonUseCase: GetAllDeliveryPersonUseCase,
     val getInternalUserWithIdUseCase: GetInternalUserWithIdUseCase,
-    val getPricesUseCase : GetPricesUseCase,
+    val getPricesUseCase: GetPricesUseCase,
 ) : ViewModel() {
 
     private val _viewState = MutableStateFlow(ModifyOrderViewState())
@@ -57,7 +45,8 @@ class ModifyOrderViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyOrderViewState(isLoading = true)
             when (val result = updateOrderUseCase(
-                clientDocumentId, orderData)) {
+                clientDocumentId, orderData
+            )) {
                 false -> {
                     _viewState.value = ModifyOrderViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -82,7 +71,7 @@ class ModifyOrderViewModel @Inject constructor(
     fun getAllDeliveryPerson() {
         viewModelScope.launch {
             _viewState.value = ModifyOrderViewState(isLoading = true)
-            when(val result = getAllDeliveryPersonUseCase()) {
+            when (val result = getAllDeliveryPersonUseCase()) {
                 null -> {
                     _viewState.value = ModifyOrderViewState(isLoading = false, error = true)
                 }
@@ -97,7 +86,7 @@ class ModifyOrderViewModel @Inject constructor(
     fun getDeliveryPerson(documentId: String) {
         viewModelScope.launch {
             _viewState.value = ModifyOrderViewState(isLoading = true)
-            when(val result = getInternalUserWithIdUseCase(documentId)) {
+            when (val result = getInternalUserWithIdUseCase(documentId)) {
                 null -> {
                     _viewState.value = ModifyOrderViewState(isLoading = false)
                 }
@@ -113,7 +102,7 @@ class ModifyOrderViewModel @Inject constructor(
     fun getPrices() {
         viewModelScope.launch {
             _viewState.value = ModifyOrderViewState(isLoading = true)
-            when(val result = getPricesUseCase()) {
+            when (val result = getPricesUseCase()) {
                 null -> {
                     _viewState.value = ModifyOrderViewState(isLoading = false, error = true)
                     _eggPrices.value = EggPricesData()

@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/allBoxesAndCartonsResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.allboxesandcartonsresources.AllBoxesAndCartonsResourcesFragment"
-        android:label="AllBoxesAndCartonsResourcesFragment" >
+        android:label="Registro cajas y cartones" >
         <action
             android:id="@+id/action_allBoxesAndCartonsResourcesFragment_to_boxesAndCartonsResourcesDetailFragment"
             app:destination="@id/boxesAndCartonsResourcesDetailFragment" />
@@ -18,7 +18,7 @@
     <fragment
         android:id="@+id/boxesAndCartonsResourcesDetailFragment"
         android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.boxesandcartonsresourcesdetail.BoxesAndCartonsResourcesDetailFragment"
-        android:label="BoxesAndCartonsResourcesDetailFragment" >
+        android:label="Detalle cajas y cartones" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -32,7 +32,7 @@
     <fragment
         android:id="@+id/modifyBoxesAndCartonsResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.modifyboxesandcartonsresources.ModifyBoxesAndCartonsResourcesFragment"
-        android:label="ModifyBoxesAndCartonsResourcesFragment" >
+        android:label="Modificar cajas y cartones" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/newBoxesAndCartonsResourcesFragment"
         android:name="com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.newboxesandcartonsresources.NewBoxesAndCartonsResourcesFragment"
-        android:label="NewBoxesAndCartonsResourcesFragment" >
+        android:label="Añadir cajas y cartones" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />

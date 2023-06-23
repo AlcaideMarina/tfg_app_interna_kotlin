@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.internalusers.fragments.deletedintern
 
 import com.example.hueverianieto.base.BaseState
 
-class DeletedInternalUsersViewState (
+class DeletedInternalUsersViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.electricitywatergasresources.fragment
 
 import com.example.hueverianieto.base.BaseState
 
-class ModifyElectricityWaterGasResourcesViewState (
+class ModifyElectricityWaterGasResourcesViewState(
     val isLoading: Boolean = false,
     val error: Boolean = false,
     val correct: Boolean = false

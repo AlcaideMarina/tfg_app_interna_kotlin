@@ -14,15 +14,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllWorkersResourcesBinding
-import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.domain.model.componentworkers.ComponentWorkersModel
-import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.ui.components.componentworker.HNComponentWorkerAdapter
 import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
-import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllWorkersResourcesFragment : BaseFragment() {
@@ -53,7 +48,7 @@ class AllWorkersResourcesFragment : BaseFragment() {
 
     override fun configureUI() {
         this.allWorkersResourcesViewModel.getAllWorkers()
-        this.binding.pendingWorkersButton.setText("Sueldos pendientes")
+        this.binding.pendingWorkersButtonText.text = "Sueldos pendientes"
         lifecycleScope.launchWhenStarted {
             allWorkersResourcesViewModel.getAllWorkers()
             allWorkersResourcesViewModel.viewState.collect { viewState ->
@@ -65,7 +60,10 @@ class AllWorkersResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allWorkersResourcesViewModel.workerList.observe(this) { internalUserDataList ->
             if (internalUserDataList == null) {
-                // TODO: ERROR
+                this.binding.workersRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
+                this.binding.containerWaringNoWorkers.setTitle("Error")
+                this.binding.containerWaringNoWorkers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 workerList = mutableListOf()
                 for (internalUserData in internalUserDataList) {
@@ -116,7 +114,7 @@ class AllWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {

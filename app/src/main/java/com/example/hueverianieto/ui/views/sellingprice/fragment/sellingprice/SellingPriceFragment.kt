@@ -21,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SellingPriceFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentSellingPriceBinding
+    private lateinit var binding: FragmentSellingPriceBinding
     private lateinit var currentUserData: InternalUserData
     private val sellingPriceViewModel: SellingPriceViewModel by viewModels()
     private var eggPricesData: EggPricesData? = null
@@ -46,7 +46,6 @@ class SellingPriceFragment : BaseFragment() {
 
     override fun configureUI() {
         this.sellingPriceViewModel.getPrices()
-        setButton()
         disableAllEditTexts()
         lifecycleScope.launchWhenStarted {
             sellingPriceViewModel.viewState.collect { viewState ->
@@ -66,7 +65,8 @@ class SellingPriceFragment : BaseFragment() {
         this.binding.modifyButton.setOnClickListener {
             if (eggPricesData == null) {
                 eggPricesData = EggPricesData(
-                    0, 0, 0, 0, 0, 0, 0, 0)
+                    0, 0, 0, 0, 0, 0, 0, 0
+                )
             }
             this.sellingPriceViewModel.navigateToModifySellingPrice(
                 this.view,
@@ -88,10 +88,6 @@ class SellingPriceFragment : BaseFragment() {
         } catch (e: java.lang.Exception) {
             Log.e(TAG, e.message.toString())
         }
-    }
-
-    private fun setButton() {
-        this.binding.modifyButton.setText("Modificar precios")
     }
 
     private fun disableAllEditTexts() {

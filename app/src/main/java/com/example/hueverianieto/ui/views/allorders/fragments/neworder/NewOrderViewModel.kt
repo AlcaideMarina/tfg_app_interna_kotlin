@@ -1,29 +1,23 @@
 package com.example.hueverianieto.ui.views.allorders.fragments.neworder
 
-import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.findNavController
-import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.domain.usecases.*
-import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class NewOrderViewModel @Inject constructor(
-    val getPricesUseCase : GetPricesUseCase,
+    val getPricesUseCase: GetPricesUseCase,
     val getAllClientsUseCase: GetAllClientsUseCase,
     val getUserDataUseCase: GetUserDataUseCase,
     val getNewOrderIdUseCase: GetNewOrderIdUseCase,
@@ -48,7 +42,7 @@ class NewOrderViewModel @Inject constructor(
     fun getPrices() {
         viewModelScope.launch {
             _viewState.value = NewOrderViewState(isLoading = true)
-            when(val result = getPricesUseCase()) {
+            when (val result = getPricesUseCase()) {
                 null -> {
                     _viewState.value = NewOrderViewState(isLoading = false, error = true)
                     _eggPrices.value = EggPricesData()
@@ -64,7 +58,7 @@ class NewOrderViewModel @Inject constructor(
     fun getClients() {
         viewModelScope.launch {
             _viewState.value = NewOrderViewState(isLoading = true)
-            when(val result = getAllClientsUseCase(false)) {
+            when (val result = getAllClientsUseCase(false)) {
                 null -> {
                     _viewState.value = NewOrderViewState(isLoading = false, error = true)
                     _clientList.value = listOf()
@@ -97,26 +91,26 @@ class NewOrderViewModel @Inject constructor(
         }
     }
 
-    fun addNewOrder(clientDocumentId : String, orderData: OrderData) {
+    fun addNewOrder(clientDocumentId: String, orderData: OrderData) {
         viewModelScope.launch {
             _viewState.value = NewOrderViewState(isLoading = true)
-            when(val orderId = getNewOrderIdUseCase(clientDocumentId)) {
+            when (val orderId = getNewOrderIdUseCase(clientDocumentId)) {
                 null -> {
                     _viewState.value = NewOrderViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         title = "Error",
-                        text = "Se ha producido un error. Por favor, revise los datos y vuelv a intentarlo",
+                        text = "Se ha producido un error. Por favor, revise los datos y vuelva a intentarlo",
                         true
                     )
                 }
                 else -> {
                     orderData.orderId = orderId
-                    when(newOrderUseCase(clientDocumentId, orderData)) {
+                    when (newOrderUseCase(clientDocumentId, orderData)) {
                         false -> {
                             _viewState.value = NewOrderViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
                                 title = "Error",
-                                text = "Se ha producido un error. Por favor, revise los datos y vuelv a intentarlo",
+                                text = "Se ha producido un error. Por favor, revise los datos y vuelva a intentarlo",
                                 true
                             )
                         }
@@ -134,6 +128,4 @@ class NewOrderViewModel @Inject constructor(
             }
         }
     }
-
-
 }

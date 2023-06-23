@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresourc
 
 import com.example.hueverianieto.base.BaseState
 
-class NewHensResourcesViewState (
+class NewHensResourcesViewState(
     val isLoading: Boolean = false,
     val error: Boolean = false,
     val correct: Boolean = false

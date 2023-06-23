@@ -7,7 +7,7 @@ class GetAllDocumentsIdUseCase @Inject constructor(
     private val getAllDocumentsIdUseCase: GetAllDocumentsIdService
 ) {
 
-    suspend operator fun invoke(collection: String) : List<String?>? =
+    suspend operator fun invoke(collection: String): List<String?>? =
         getAllDocumentsIdUseCase.getAllDocumentsId(collection)
 
 }

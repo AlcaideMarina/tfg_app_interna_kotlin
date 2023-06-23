@@ -9,25 +9,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/size32"
-        android:layout_marginVertical="@dimen/size16">
+        android:orientation="vertical">
 
-        <com.example.hueverianieto.ui.components.HNButton
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/pending_workers_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/size16"
-            android:layout_marginBottom="@dimen/size16"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_squared_button"
+            android:layout_margin="@dimen/size24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/pending_workers_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size24"
+                android:textColor="@color/white_color"
+                android:textSize="14dp"
+                android:text="Sueldos pendientes"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vertical_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/red_gray_secondary_color" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/workers_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"/>
+            android:nestedScrollingEnabled="false"
+            android:padding="@dimen/size24"/>
 
         <com.example.hueverianieto.ui.components.HNWarningContainer
             android:id="@+id/container_waring_no_workers"

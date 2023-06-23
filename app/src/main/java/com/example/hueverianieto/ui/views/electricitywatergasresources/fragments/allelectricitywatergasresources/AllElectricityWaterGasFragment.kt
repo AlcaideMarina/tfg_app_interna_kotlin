@@ -36,9 +36,10 @@ class AllElectricityWaterGasFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as BaseActivity).configNav(true)
-        (activity as ElectricityWaterGasResourcesActivity).getToolbar().setNavigationOnClickListener {
-            (activity as BaseActivity).goBackFragments()
-        }
+        (activity as ElectricityWaterGasResourcesActivity).getToolbar()
+            .setNavigationOnClickListener {
+                (activity as BaseActivity).goBackFragments()
+            }
         currentUserData = (activity as ElectricityWaterGasResourcesActivity).currentUserData
 
         this.binding = FragmentAllElectricityWaterGasResourcesBinding.inflate(
@@ -60,10 +61,13 @@ class AllElectricityWaterGasFragment : BaseFragment() {
     override fun setObservers() {
         this.allEWGViewModel.ewgList.observe(this) { ewgResourcesDataList ->
             if (ewgResourcesDataList == null) {
-                // TODO: Error
+                this.binding.electricityWaterGasRecyclerView.visibility = View.GONE
+                this.binding.containerWarningNoTickets.visibility = View.VISIBLE
+                this.binding.containerWarningNoTickets.setTitle("Error")
+                this.binding.containerWarningNoTickets.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 ewgDataList = mutableListOf()
-                for (ewgResourcesData in ewgResourcesDataList)  {
+                for (ewgResourcesData in ewgResourcesDataList) {
                     if (ewgResourcesData != null) {
                         val key = Utils.getKey(Constants.ewgTypes, ewgResourcesData.type.toInt())
                         val type: String = if (key == null) {
@@ -91,8 +95,8 @@ class AllElectricityWaterGasFragment : BaseFragment() {
                 if (ewgDataList.isEmpty()) {
                     this.binding.electricityWaterGasRecyclerView.visibility = View.GONE
                     this.binding.containerWarningNoTickets.visibility = View.VISIBLE
-                    this.binding.containerWarningNoTickets.setTitle("No hay clientes")
-                    this.binding.containerWarningNoTickets.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWarningNoTickets.setTitle("No hay recursos")
+                    this.binding.containerWarningNoTickets.setText("No hay registro de agua, luz o gas sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

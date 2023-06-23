@@ -1,7 +1,6 @@
 package com.example.hueverianieto.ui.components
 
 import android.content.Context
-import android.content.res.TypedArray
 import android.graphics.Typeface
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -65,7 +64,6 @@ open class HNButton : ConstraintLayout, BaseComponent {
         this.binding.buttonText.setTextColor(color)
     }
 
-    // TODO: revisar esta función - ¿hace lo que tiene que hacer?
     fun setHorizontalTextMargin(margin: Int) {
         val param = this.binding.buttonText.layoutParams as MarginLayoutParams
         param.setMargins(margin, 0, margin, 0)

@@ -7,7 +7,7 @@ class UpdateHensUseCase @Inject constructor(
     private val updateFirestoreService: UpdateFirestoreService
 ) {
 
-    suspend operator fun invoke(hensDataMap: Map<String, Any?>, documentId: String) : Boolean =
+    suspend operator fun invoke(hensDataMap: Map<String, Any?>, documentId: String): Boolean =
         updateFirestoreService.updateDocumentFirestore(hensDataMap, documentId, "material_hens")
 
 

@@ -20,7 +20,6 @@ import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContai
 import com.example.hueverianieto.domain.model.finalproductcontrol.MonthlyFPCContainerModel
 import com.example.hueverianieto.ui.components.componentdailyfinalproductcontrol.ComponentDailyFinalProductControlAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class DailyFinalProductControlFragment : BaseFragment() {
@@ -52,13 +51,15 @@ class DailyFinalProductControlFragment : BaseFragment() {
 
     override fun configureUI() {
         this.dailyFinalProductControlViewModel.getThisMonthDailyFPC(
-            monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
-        this.binding.deletedFpcButton.setText("Eliminados")
+            monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate
+        )
+        this.dailyFinalProductControlViewModel.getNextLot()
         deletedList = mutableListOf<FPCData>()
         initRecyclerView()
         lifecycleScope.launchWhenStarted {
             dailyFinalProductControlViewModel.getThisMonthDailyFPC(
-                monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate)
+                monthlyFPCContainerModel.initDate, monthlyFPCContainerModel.endDate
+            )
             dailyFinalProductControlViewModel.viewState.collect { viewState ->
                 updateUI(viewState)
             }
@@ -71,6 +72,9 @@ class DailyFinalProductControlFragment : BaseFragment() {
                 this.monthlyFPCContainerModel = monthlyFPCContainerModelObserver
                 initRecyclerView()
             }
+        }
+        this.dailyFinalProductControlViewModel.lot.observe(this) { lot ->
+            lastLot = (lot).toLong()
         }
     }
 
@@ -121,19 +125,21 @@ class DailyFinalProductControlFragment : BaseFragment() {
                     )
                 }
                 list.add(fpcDailyContainerItemModel)
-                if (item.lot > lastLot) lastLot = item.lot
             } else {
                 deletedList.add(item)
             }
         }
         if (list.isEmpty()) {
+            this.binding.dailyFpcRecyclerView.visibility = View.GONE
             this.binding.containerWaringNoDailyFpc.visibility = View.VISIBLE
-            this.binding.containerWaringNoDailyFpc.setTitle("No hay entradas")
-            this.binding.containerWaringNoDailyFpc.setText("Mo hay información sobre Control de Producto Final, con entradas sin eliminar.")
+            this.binding.containerWaringNoDailyFpc.setTitle("No hay registros")
+            this.binding.containerWaringNoDailyFpc.setText("No hay registros de producto final sin eliminar para el mes seleccionado en la base de datos.")
         } else {
             this.binding.dailyFpcRecyclerView.layoutManager = LinearLayoutManager(this.context)
-            this.binding.dailyFpcRecyclerView.adapter = ComponentDailyFinalProductControlAdapter(list)
+            this.binding.dailyFpcRecyclerView.adapter =
+                ComponentDailyFinalProductControlAdapter(list)
             this.binding.dailyFpcRecyclerView.visibility = View.VISIBLE
+            this.binding.containerWaringNoDailyFpc.visibility = View.GONE
         }
     }
 

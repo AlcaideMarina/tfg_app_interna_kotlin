@@ -8,8 +8,8 @@ class DeleteInternalUserService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun deleteInternalUser(documentId: String) : Boolean {
-        val deleted : Map<String, Boolean> = mapOf("deleted" to true)
+    suspend fun deleteInternalUser(documentId: String): Boolean {
+        val deleted: Map<String, Boolean> = mapOf("deleted" to true)
         return runCatching {
             firebaseClient.db
                 .collection("user_info")

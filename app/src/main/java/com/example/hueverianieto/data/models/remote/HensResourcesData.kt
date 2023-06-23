@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class HensResourcesData (
+data class HensResourcesData(
     var createdBy: String,
     var creationDatetime: Timestamp,
     var deleted: Boolean,

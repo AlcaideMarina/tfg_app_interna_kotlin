@@ -17,14 +17,21 @@ class HNGridTextAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HNGridTextViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return HNGridTextViewHolder(layoutInflater.inflate(R.layout.component_grid_text, parent, false))
+        return HNGridTextViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_grid_text,
+                parent,
+                false
+            )
+        )
     }
 
     override fun onBindViewHolder(holder: HNGridTextViewHolder, position: Int) {
         holder.render(gridItemModelList[position])
     }
 
-    fun getItemWithPosition(position: Int) : GridTextItemData {
+    fun getItemWithPosition(position: Int): GridTextItemData {
         return this.gridItemModelList[position]
     }
+
 }

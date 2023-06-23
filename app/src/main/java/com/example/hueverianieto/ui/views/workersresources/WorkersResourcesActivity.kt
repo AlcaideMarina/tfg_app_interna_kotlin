@@ -35,9 +35,11 @@ class WorkersResourcesActivity : BaseActivity() {
         setSupportActionBar(this.binding.topBar)
         navController = binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
-        appBarConfiguration = AppBarConfiguration(setOf(
-            R.layout.fragment_all_workers_resources
-        ))
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.layout.fragment_all_workers_resources
+            )
+        )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
     }
@@ -54,7 +56,7 @@ class WorkersResourcesActivity : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

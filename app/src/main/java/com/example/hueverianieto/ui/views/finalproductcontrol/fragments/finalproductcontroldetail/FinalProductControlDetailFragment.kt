@@ -8,7 +8,6 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.viewmodel.viewModelFactory
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
@@ -17,10 +16,8 @@ import com.example.hueverianieto.data.models.remote.FPCData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFinalProductControlDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.finalproductcontrol.fragments.newfinalproductcontrol.NewFinalProductControlViewModel
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FinalProductControlDetailFragment : BaseFragment() {
@@ -51,7 +48,6 @@ class FinalProductControlDetailFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setTexts()
         lifecycleScope.launchWhenStarted {
             finalProductControlDetailViewModel.getFinalProductControl(fpcData.documentId!!)
@@ -76,14 +72,15 @@ class FinalProductControlDetailFragment : BaseFragment() {
                 alertDialog,
                 requireContext(),
                 "Aviso importante",
-                "Esta acción es irreversible. Va a eliminar este ticket, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
+                "Esta acción es irreversible. Va a eliminar esta información, y puede conllevar consecuencias para la empresa. ¿Está seguro de que quiere continuar?",
                 "Atrás",
                 "Continuar",
                 { alertDialog.cancel() },
                 {
                     alertDialog.cancel()
                     this.finalProductControlDetailViewModel.deleteFinalProductControl(
-                        fpcData.documentId!!)
+                        fpcData.documentId!!
+                    )
                     activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
@@ -104,18 +101,19 @@ class FinalProductControlDetailFragment : BaseFragment() {
         this.binding.loadingComponent.isVisible = state.isLoading
     }
 
-    private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
-    }
-
     private fun setTexts() {
         with(this.binding) {
-            this.layingDateTextInputLayout.setText(Utils.parseTimestampToString(
-                fpcData.layingDatetime))
+            this.layingDateTextInputLayout.setText(
+                Utils.parseTimestampToString(
+                    fpcData.layingDatetime
+                )
+            )
             this.layingDateTextInputLayout.isEnabled = false
-            this.packingDateTextInputLayout.setText(Utils.parseTimestampToString(
-                fpcData.packingDatetime))
+            this.packingDateTextInputLayout.setText(
+                Utils.parseTimestampToString(
+                    fpcData.packingDatetime
+                )
+            )
             this.packingDateTextInputLayout.isEnabled = false
             this.acceptedEggsTextInputLayout.setText(fpcData.acceptedEggs.toString())
             this.acceptedEggsTextInputLayout.isEnabled = false
@@ -123,11 +121,17 @@ class FinalProductControlDetailFragment : BaseFragment() {
             this.rejectedEggsTextInputLayout.isEnabled = false
             this.lotTextInputLayout.setText(fpcData.lot.toString())
             this.lotTextInputLayout.isEnabled = false
-            this.bestBeforeDateTextInputLayout.setText(Utils.parseTimestampToString(
-                fpcData.bestBeforeDatetime))
+            this.bestBeforeDateTextInputLayout.setText(
+                Utils.parseTimestampToString(
+                    fpcData.bestBeforeDatetime
+                )
+            )
             this.bestBeforeDateTextInputLayout.isEnabled = false
-            this.issueDateTextInputLayout.setText(Utils.parseTimestampToString(
-                fpcData.issueDatetime))
+            this.issueDateTextInputLayout.setText(
+                Utils.parseTimestampToString(
+                    fpcData.issueDatetime
+                )
+            )
             this.issueDateTextInputLayout.isEnabled = false
         }
     }

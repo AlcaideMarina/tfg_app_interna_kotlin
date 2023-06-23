@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.workersresources.fragment.modifyworke
 
 import com.example.hueverianieto.base.BaseState
 
-class ModifyWorkerViewState (
+class ModifyWorkerViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var correct: Boolean = false,

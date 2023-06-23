@@ -8,6 +8,6 @@ class GetFeedUseCase @Inject constructor(
     private val getFeedService: GetFeedService
 ) {
 
-    suspend operator fun invoke() : List<FeedResourcesData?>? = getFeedService.getFeed()
+    suspend operator fun invoke(): List<FeedResourcesData?>? = getFeedService.getFeed()
 
 }

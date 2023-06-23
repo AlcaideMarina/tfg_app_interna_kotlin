@@ -7,7 +7,6 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.ActivityFinalProductControlBinding
@@ -33,7 +32,8 @@ class FinalProductControlActivity : BaseActivity() {
         setContentView(this.binding.root)
 
         setSupportActionBar(this.binding.topBar)
-        navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
+        navController =
+            this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             setOf()         // TODO
@@ -54,7 +54,7 @@ class FinalProductControlActivity : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

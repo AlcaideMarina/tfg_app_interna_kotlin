@@ -9,15 +9,12 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.FragmentAllClientsBinding
 import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
-import com.example.hueverianieto.ui.views.clients.AllClientsActivity
-import com.example.hueverianieto.ui.views.workersresources.WorkersResourcesActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
@@ -93,16 +90,20 @@ class WorkerDetailFragment : BaseFragment() {
             this.surnameTextView.text = internalUserData.surname
             this.dniTextView.text = internalUserData.dni
             this.accountTextView.text = internalUserData.bankAccount
-            this.positionTextView.text = resources.getString(Utils.getKey(
-                Constants.roles, internalUserData.position.toInt())!!)
+            this.positionTextView.text = resources.getString(
+                Utils.getKey(
+                    Constants.roles, internalUserData.position.toInt()
+                )!!
+            )
             this.salaryTextInputLayout.setText((internalUserData.salary ?: "").toString())
             this.salaryTextInputLayout.isEnabled = false
+            this.salaryTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 
     private fun setButtons() {
         with(this.binding) {
-            this.saveButton.setText("Modificar")
+            this.saveButtonText.text = "Modificar"
             this.cancelButton.visibility = View.GONE
         }
     }

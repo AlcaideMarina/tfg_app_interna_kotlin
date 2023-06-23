@@ -9,7 +9,6 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.CreateAuthUserUseCase
 import com.example.hueverianieto.domain.usecases.GetInternalUserIdUseCase
 import com.example.hueverianieto.domain.usecases.NewInternalUserUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.newclient.NewClientViewState
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,19 +21,20 @@ class NewInternalUserViewModel @Inject constructor(
     val newInternalUserUseCase: NewInternalUserUseCase,
     val getInternalUserIdUseCase: GetInternalUserIdUseCase,
     val createAuthUserUseCase: CreateAuthUserUseCase
-) :  ViewModel() {
+) : ViewModel() {
 
     private val _viewState = MutableStateFlow(NewInternalUserViewState())
     val viewState: StateFlow<NewInternalUserViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addNewInternalUser(internalUserData: InternalUserData) {
         viewModelScope.launch {
             _viewState.value = NewInternalUserViewState(isLoading = true)
             if (Utils.isValidEmail(internalUserData.email)) {
-                when(val newUid = createAuthUserUseCase(internalUserData.email, internalUserData.user)) {
+                when (val newUid =
+                    createAuthUserUseCase(internalUserData.email, internalUserData.user)) {
                     null -> {
                         _viewState.value = NewInternalUserViewState(isLoading = false, error = true)
                         _alertDialog.value = AlertOkData(
@@ -45,17 +45,19 @@ class NewInternalUserViewModel @Inject constructor(
                     }
                     else -> {
                         internalUserData.uid = newUid
-                        when(val internalUserId = getInternalUserIdUseCase()) {
+                        when (val internalUserId = getInternalUserIdUseCase()) {
                             null -> {
-                                _viewState.value = NewInternalUserViewState(isLoading = false, error = true)
+                                _viewState.value =
+                                    NewInternalUserViewState(isLoading = false, error = true)
                             }
                             else -> {
                                 internalUserData.id = internalUserId
-                                when(newInternalUserUseCase(internalUserData)) {
+                                when (newInternalUserUseCase(internalUserData)) {
                                     false -> {
                                         _viewState.value = NewInternalUserViewState(
                                             isLoading = false,
-                                            error = true)
+                                            error = true
+                                        )
                                         _alertDialog.value = AlertOkData(
                                             title = "Error",
                                             text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",
@@ -87,8 +89,6 @@ class NewInternalUserViewModel @Inject constructor(
                     true
                 )
             }
-
-
         }
     }
 

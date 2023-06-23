@@ -2,9 +2,8 @@ package com.example.hueverianieto.ui.views.internalusers.fragments.newinternalus
 
 import com.example.hueverianieto.base.BaseState
 
-class NewInternalUserViewState (
+class NewInternalUserViewState(
     val error: Boolean = false,
     val isLoading: Boolean = false,
-    val correct: Boolean = false,
-    val popUpCode: Int? = null
+    val correct: Boolean = false
 ) : BaseState

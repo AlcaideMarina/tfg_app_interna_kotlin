@@ -9,8 +9,10 @@ class GetFeedResourcesWithIdUseCase @Inject constructor(
     private val getFirestoreDocumentWithDocIdService: GetFirestoreDocumentWithDocIdService
 ) {
 
-    suspend operator fun invoke(documentId: String) : FeedResourcesData? {
-        return when(val result = getFirestoreDocumentWithDocIdService.getDocumentWithDocId("material_feed", documentId).getOrNull()) {
+    suspend operator fun invoke(documentId: String): FeedResourcesData? {
+        return when (val result =
+            getFirestoreDocumentWithDocIdService.getDocumentWithDocId("material_feed", documentId)
+                .getOrNull()) {
             null -> null
             else -> {
                 if (result.data != null) {

@@ -56,7 +56,7 @@ class AllOrdersActivity : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.finalproductcontrol.FPCDailyContainerItemModel
 
-class ComponentDailyFinalProductControlAdapter (
+class ComponentDailyFinalProductControlAdapter(
     private val fpcDailyContainerItemModelList: List<FPCDailyContainerItemModel>
 ) : RecyclerView.Adapter<ComponentDailyFinalProductControlViewHolder>() {
 

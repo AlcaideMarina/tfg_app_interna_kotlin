@@ -16,7 +16,8 @@ class ComponentWeekDivisionAdapter(
     ): ComponentWeekDivisionViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return ComponentWeekDivisionViewHolder(
-            layoutInflater.inflate(R.layout.component_week_division, parent, false))
+            layoutInflater.inflate(R.layout.component_week_division, parent, false)
+        )
     }
 
     override fun getItemCount(): Int = this.componentWeekDivisionModelList.size

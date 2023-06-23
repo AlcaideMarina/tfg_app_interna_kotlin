@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/monthlyMonitoringCompanySituationFragment"
         android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.monthlymonitoringcompanysituation.MonthlyMonitoringCompanySituationFragment"
-        android:label="MonthlyMonitoringCompanySituationFragment" >
+        android:label="Seguimiento sit. empresa" >
         <action
             android:id="@+id/action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment"
             app:destination="@id/weeklyMonitoringCompanySituationFragment" />
@@ -15,7 +15,7 @@
     <fragment
         android:id="@+id/weeklyMonitoringCompanySituationFragment"
         android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.weeklymonitoringcompanysituation.WeeklyMonitoringCompanySituationFragment"
-        android:label="WeeklyMonitoringCompanySituationFragment" >
+        android:label="Seguimiento sit. empresa" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -29,7 +29,7 @@
     <fragment
         android:id="@+id/dailyMonitoringCompanySituationFragment"
         android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.dailymonitoringcompanysituation.DailyMonitoringCompanySituationFragment"
-        android:label="DailyMonitoringCompanySituationFragment" >
+        android:label="Seguimiento sit. empresa" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />
@@ -43,7 +43,7 @@
     <fragment
         android:id="@+id/modifyDailyMonitoringCompanySituationFragment"
         android:name="com.example.hueverianieto.ui.views.monitoringcompanysituation.fragments.modifydailymonitoringcompanysituation.ModifyDailyMonitoringCompanySituationFragment"
-        android:label="ModifyDailyMonitoringCompanySituationFragment" >
+        android:label="Seguimiento sit. empresa" >
         <argument
             android:name="currentUserData"
             app:argType="com.example.hueverianieto.data.models.remote.InternalUserData" />

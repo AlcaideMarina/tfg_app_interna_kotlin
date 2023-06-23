@@ -8,7 +8,7 @@ class GetClientTodayOrdersUseCase @Inject constructor(
     private val getClientTodayOrdersService: GetClientTodayOrdersService
 ) {
 
-    suspend operator fun invoke(documentId : String) :List<OrderData?>? =
+    suspend operator fun invoke(documentId: String): List<OrderData?>? =
         getClientTodayOrdersService.getClientTodayOrders(documentId)
 
 }

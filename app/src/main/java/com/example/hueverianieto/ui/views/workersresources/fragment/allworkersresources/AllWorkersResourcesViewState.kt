@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.workersresources.fragment.allworkersr
 
 import com.example.hueverianieto.base.BaseState
 
-class AllWorkersResourcesViewState (
+class AllWorkersResourcesViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

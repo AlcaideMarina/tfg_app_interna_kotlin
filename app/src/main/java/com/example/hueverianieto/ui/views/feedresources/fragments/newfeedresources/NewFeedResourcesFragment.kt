@@ -9,20 +9,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentNewFeedResourcesBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -53,7 +49,6 @@ class NewFeedResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         lifecycleScope.launchWhenStarted {
             newFeedResourcesViewModel.viewState.collect { viewState ->
@@ -104,7 +99,8 @@ class NewFeedResourcesFragment : BaseFragment() {
             it.hideSoftInput()
             if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
                 this.binding.kilosTextInputLayout.text != null && this.binding.kilosTextInputLayout.text.toString() != "" &&
-                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != ""
+            ) {
                 it.hideSoftInput()
                 val feedResourcesData = FeedResourcesData(
                     this.currentUserData.documentId!!,
@@ -141,13 +137,6 @@ class NewFeedResourcesFragment : BaseFragment() {
         }
     }
 
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
-        }
-    }
-
     private fun setFields() {
         with(this.binding) {
             datetimeSelected = Timestamp(Date())
@@ -177,4 +166,5 @@ class NewFeedResourcesFragment : BaseFragment() {
         datePickerDialog.datePicker.maxDate = Date().time
         datePickerDialog.show()
     }
+
 }

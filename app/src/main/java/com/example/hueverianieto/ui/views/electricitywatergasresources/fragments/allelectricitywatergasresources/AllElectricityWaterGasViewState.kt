@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.electricitywatergasresources.fragment
 
 import com.example.hueverianieto.base.BaseState
 
-class AllElectricityWaterGasViewState (
+class AllElectricityWaterGasViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

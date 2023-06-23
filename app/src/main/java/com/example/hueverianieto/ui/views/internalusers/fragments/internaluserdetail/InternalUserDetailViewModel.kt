@@ -13,7 +13,6 @@ import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.DeleteInternalUserUseCase
 import com.example.hueverianieto.domain.usecases.GetUserDataUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.clientdetail.ClientDetailViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -22,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class InternalUserDetailViewModel @Inject constructor(
-    val deleteInternalUserUseCase : DeleteInternalUserUseCase,
+    val deleteInternalUserUseCase: DeleteInternalUserUseCase,
     val getUserDataUseCase: GetUserDataUseCase,
 ) : ViewModel() {
 
@@ -38,7 +37,7 @@ class InternalUserDetailViewModel @Inject constructor(
     fun deleteInternalUser(documentId: String) {
         viewModelScope.launch {
             _viewState.value = InternalUserDetailViewState(isLoading = true)
-            when(val result = deleteInternalUserUseCase(documentId)) {
+            when (val result = deleteInternalUserUseCase(documentId)) {
                 false -> {
                     _viewState.value = InternalUserDetailViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -48,7 +47,11 @@ class InternalUserDetailViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = InternalUserDetailViewState(isLoading = false, error = false, correct = true)
+                    _viewState.value = InternalUserDetailViewState(
+                        isLoading = false,
+                        error = false,
+                        correct = true
+                    )
                     _alertDialog.value = AlertOkData(
                         "Cliente eliminado",
                         "El cliente ha sido eliminado correctamente",
@@ -61,7 +64,8 @@ class InternalUserDetailViewModel @Inject constructor(
     }
 
     fun navigateToModifyInternalUser(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_internalUserDetailFragment_to_modifyInternalUserFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_internalUserDetailFragment_to_modifyInternalUserFragment, bundle)
             ?: Log.e(
                 InternalUserDetailViewModel::class.simpleName,
                 "Error en la navegación a Modificar usuario interno"
@@ -71,11 +75,12 @@ class InternalUserDetailViewModel @Inject constructor(
     fun getInternalUserData(documentId: String) {
         viewModelScope.launch {
             _viewState.value = InternalUserDetailViewState(isLoading = true)
-            when(val result = getUserDataUseCase(documentId, "user_info")) {
-                null -> _viewState.value = InternalUserDetailViewState(isLoading = false, error = true)
+            when (val result = getUserDataUseCase(documentId, "user_info")) {
+                null -> _viewState.value =
+                    InternalUserDetailViewState(isLoading = false, error = true)
                 else -> {
                     _viewState.value = InternalUserDetailViewState(isLoading = false)
-                    _internalUserData.value = result!! as InternalUserData
+                    _internalUserData.value = result as InternalUserData
                 }
             }
         }

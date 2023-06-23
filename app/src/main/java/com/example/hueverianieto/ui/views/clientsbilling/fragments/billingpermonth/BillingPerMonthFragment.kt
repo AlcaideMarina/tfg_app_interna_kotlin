@@ -19,12 +19,14 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentBillingPerMonthBinding
 import com.example.hueverianieto.domain.model.billingcontaineritemmodel.BillingContainerItemModel
 import com.example.hueverianieto.ui.components.componentbillingpermonth.billing.ComponentBillingPerMonthAdapter
+import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class BillingPerMonthFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentBillingPerMonthBinding
+    private lateinit var binding: FragmentBillingPerMonthBinding
     private lateinit var currentUserData: InternalUserData
     private lateinit var clientData: ClientData
     private val billingViewModel: BillingPerMonthViewModel by viewModels()
@@ -39,7 +41,7 @@ class BillingPerMonthFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : BillingPerMonthFragmentArgs by navArgs()
+        val args: BillingPerMonthFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.clientData = args.clientData
 
@@ -58,11 +60,20 @@ class BillingPerMonthFragment : BaseFragment() {
     override fun setObservers() {
         this.billingViewModel.billingContainerList.observe(this) { billingContainerList ->
             if (billingContainerList == null) {
-                // TODO: Error
+                this.binding.billingRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoBilling.visibility = View.VISIBLE
+                this.binding.containerWaringNoBilling.setTitle("Error")
+                this.binding.containerWaringNoBilling.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 val billingList = mutableListOf<BillingContainerItemModel>()
                 for (item in billingContainerList) {
                     if (item != null) {
+                        val calendarDataMonth = Calendar.getInstance()
+                        calendarDataMonth.time = item.initDate.toDate()
+                        var dataMonth = calendarDataMonth.get(Calendar.MONTH) + 1
+                        val calendarThisMonth = Calendar.getInstance()
+                        calendarThisMonth.time = Timestamp.now().toDate()
+                        var thisMonth = calendarThisMonth.get(Calendar.MONTH) + 1
                         var billingContainerItemModel = BillingContainerItemModel(
                             item
                         ) {
@@ -70,7 +81,8 @@ class BillingPerMonthFragment : BaseFragment() {
                                 this.view,
                                 bundleOf(
                                     "billingModel" to item.billingModel!!,
-                                    "currentUserData" to currentUserData
+                                    "currentUserData" to currentUserData,
+                                    "thisMonth" to (dataMonth == thisMonth)
                                 )
                             )
                         }
@@ -78,12 +90,16 @@ class BillingPerMonthFragment : BaseFragment() {
                     }
                 }
                 if (billingList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.billingRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoBilling.visibility = View.VISIBLE
+                    this.binding.containerWaringNoBilling.setTitle("No hay registros")
+                    this.binding.containerWaringNoBilling.setText("Aún no hay registros de facturación para el cliente seleccionado (${clientData.id} - {${clientData.company})")
                 } else {
                     this.binding.billingRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.billingRecyclerView.adapter =
                         ComponentBillingPerMonthAdapter(billingList)
                     this.binding.billingRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoBilling.visibility = View.GONE
                 }
             }
         }
@@ -98,11 +114,6 @@ class BillingPerMonthFragment : BaseFragment() {
             with(state as BillingPerMonthViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    } else if (state.isEmpty) {
-                        //setPopUp(errorMap(Constants.loginBadFormattedEmailError))
-                    }
                 }
             }
         } catch (e: Exception) {

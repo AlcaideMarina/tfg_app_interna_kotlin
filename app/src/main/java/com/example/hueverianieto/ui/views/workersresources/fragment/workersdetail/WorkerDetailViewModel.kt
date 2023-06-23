@@ -11,8 +11,6 @@ import androidx.navigation.findNavController
 import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetInternalUserWithIdUseCase
-import com.example.hueverianieto.ui.views.allorders.fragments.orderdetail.OrderDetailViewState
-import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -33,7 +31,7 @@ class WorkerDetailViewModel @Inject constructor(
     fun getInternalUser(documentId: String) {
         viewModelScope.launch {
             _viewState.value = WorkerDetailViewState(isLoading = true)
-            when(val result = getInternalUserWithIdUseCase(documentId)) {
+            when (val result = getInternalUserWithIdUseCase(documentId)) {
                 null -> {
                     _viewState.value = WorkerDetailViewState(isLoading = false)
                 }
@@ -47,7 +45,8 @@ class WorkerDetailViewModel @Inject constructor(
     }
 
     fun navigateToModifyWorker(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_workerDetailFragment_to_modifyWorkerFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_workerDetailFragment_to_modifyWorkerFragment, bundle)
             ?: Log.e(
                 WorkerDetailViewModel::class.simpleName,
                 "Error en la navegación a modificar trabajador"

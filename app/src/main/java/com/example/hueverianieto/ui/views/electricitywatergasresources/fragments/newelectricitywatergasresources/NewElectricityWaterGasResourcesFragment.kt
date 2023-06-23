@@ -34,7 +34,7 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     private lateinit var alertDialog: HNModalDialog
 
     private lateinit var datetimeSelected: Timestamp
-    private var dropdownTypesItems : MutableList<String> = mutableListOf()
+    private var dropdownTypesItems: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,7 +55,6 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         setDropdownTypesOptions()
 
@@ -105,17 +104,20 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
         }
         this.binding.saveButton.setOnClickListener {
             if (this.binding.dateTextInputLayout.text != null && this.binding.dateTextInputLayout.text.toString() != "" &&
-                    this.binding.typeAutoCompleteTextView.text != null && this.binding.typeAutoCompleteTextView.text.toString() != "" &&
-                    this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                this.binding.typeAutoCompleteTextView.text != null && this.binding.typeAutoCompleteTextView.text.toString() != "" &&
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != ""
+            ) {
                 it.hideSoftInput()
-                val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
-                    resources.getString(R.string.electricity) -> R.string.electricity
-                    resources.getString(R.string.water) -> R.string.water
-                    resources.getString(R.string.gas) -> R.string.gas
-                    else -> null
-                }
-                if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
-                    this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                val typeSelected: Int? =
+                    when (this.binding.typeAutoCompleteTextView.text.toString()) {
+                        resources.getString(R.string.electricity) -> R.string.electricity
+                        resources.getString(R.string.water) -> R.string.water
+                        resources.getString(R.string.gas) -> R.string.gas
+                        else -> null
+                    }
+                if (typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
+                    this.binding.totalPriceTextInputLayout.text.toString() != ""
+                ) {
                     val ewgResourcesData = ElectricityWaterGasResourcesData(
                         this.currentUserData.documentId!!,
                         Timestamp.now(),
@@ -161,13 +163,6 @@ class NewElectricityWaterGasResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         with(state as NewElectricityWaterGasResourcesViewState) {
             binding.loadingComponent.isVisible = state.isLoading
-        }
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
         }
     }
 

@@ -11,5 +11,5 @@ data class OrderContainerModel(
     var price: Number,
     var status: Long,
     var deliveryDni: String?,
-    var onClickListener: View.OnClickListener
+    var onClickListener: View.OnClickListener?
 )

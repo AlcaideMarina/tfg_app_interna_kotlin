@@ -8,7 +8,7 @@ class GetOrderUseCase @Inject constructor(
     private val getOrderService: GetOrderService
 ) {
 
-    suspend operator fun invoke(clientDocumentId: String, orderDocumentId: String) : OrderData? =
+    suspend operator fun invoke(clientDocumentId: String, orderDocumentId: String): OrderData? =
         getOrderService.getOrder(clientDocumentId, orderDocumentId)
 
 }

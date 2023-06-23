@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
-import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.domain.usecases.NewFeedResourcesUseCase
-import com.example.hueverianieto.ui.views.hensresouces.fragments.newhensresources.NewHensResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -24,12 +22,12 @@ class NewFeedResourcesViewModel @Inject constructor(
     val viewState: StateFlow<NewFeedResourcesViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addFeedResource(feedResourcesData: FeedResourcesData) {
         viewModelScope.launch {
             _viewState.value = NewFeedResourcesViewState(isLoading = true)
-            when(newFeedResourcesUseCase(feedResourcesData)) {
+            when (newFeedResourcesUseCase(feedResourcesData)) {
                 false -> {
                     _viewState.value = NewFeedResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -50,4 +48,5 @@ class NewFeedResourcesViewModel @Inject constructor(
             }
         }
     }
+
 }

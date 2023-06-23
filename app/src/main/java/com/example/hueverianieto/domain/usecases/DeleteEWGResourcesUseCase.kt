@@ -9,6 +9,7 @@ class DeleteEWGResourcesUseCase @Inject constructor(
 
     suspend operator fun invoke(documentId: String) =
         deleteDocumentWithDocIdService.deleteDocument(
-            "material_electricity_water_gas", documentId)
+            "material_electricity_water_gas", documentId
+        )
 
 }

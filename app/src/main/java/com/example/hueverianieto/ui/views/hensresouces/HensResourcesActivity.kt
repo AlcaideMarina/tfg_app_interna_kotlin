@@ -33,7 +33,8 @@ class HensResourcesActivity : BaseActivity() {
         setContentView(this.binding.root)
 
         setSupportActionBar(this.binding.topBar)
-        navController = this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
+        navController =
+            this.binding.fragmentContainerView.getFragment<NavHostFragment>().navController
         this.binding.topBar.setupWithNavController(navController)
         appBarConfiguration = AppBarConfiguration(
             setOf(R.layout.fragment_all_hens_resources)
@@ -54,7 +55,7 @@ class HensResourcesActivity : BaseActivity() {
         // Not necessary
     }
 
-    fun getToolbar() : Toolbar {
+    fun getToolbar(): Toolbar {
         return this.binding.topBar
     }
 

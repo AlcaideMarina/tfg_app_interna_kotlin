@@ -8,7 +8,7 @@ class NewInternalUserUseCase @Inject constructor(
     private val newInternalUserService: NewInternalUserService
 ) {
 
-    suspend operator fun invoke(internalUserData: InternalUserData) : Boolean =
+    suspend operator fun invoke(internalUserData: InternalUserData): Boolean =
         newInternalUserService.addNewInternalUser(internalUserData)
 
 }

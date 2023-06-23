@@ -11,349 +11,394 @@
         android:layout_height="match_parent"
         android:padding="24dp">
 
-        <TableLayout
-            android:id="@+id/prices_table_layout"
+        <LinearLayout
+            android:id="@+id/prices_text_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:stretchColumns="1, 3"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"  >
 
-            <TableRow android:padding="5dip">
+            <TextView
+                android:id="@+id/order_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Precio actual:"
+                android:layout_marginBottom="8dp"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/black_color"  />
+
+            <TextView
+                android:id="@+id/xl_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huevos tamaño XL:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:layout_marginBottom="4dp"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="3"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:text="XL:" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Docena"
-                    android:textSize="16sp" />
-
+                    android:layout_height="wrap_content"
+                    android:text="Docena:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/xl_dozen_edit_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_column="1"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    android:background="@drawable/custom_input"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:textSize="16sp" />
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:textColor="@color/black_color"/>
+                <TextView
+                    android:id="@+id/xl_dozen_price_text_input_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="€"
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="€"
-                    android:textSize="16sp" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Caja"
-                    android:textSize="16sp" />
-
+                    android:text="Caja:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/xl_box_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_column="1"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name" />
-
+                    android:layout_marginBottom="8dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
                 <TextView
+                    android:id="@+id/xl_box_price_text_input_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
                     android:text="€"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
-            </TableRow>
+            </GridLayout>
 
-            <TableRow android:padding="5dip">
+            <TextView
+                android:id="@+id/l_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huevos tamaño L:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:layout_marginBottom="4dp"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="3"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:text="L:" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Docena"
-                    android:textSize="16sp" />
-
+                    android:layout_height="wrap_content"
+                    android:text="Docena:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/l_dozen_edit_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_column="1"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    android:background="@drawable/custom_input"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:textSize="16sp" />
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
+                <TextView
+                    android:id="@+id/l_dozen_price_text_input_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="€"
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="€"
-                    android:textSize="16sp" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Caja"
-                    android:textSize="16sp" />
-
+                    android:text="Caja:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/l_box_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_column="1"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name" />
-
+                    android:layout_marginBottom="8dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
                 <TextView
+                    android:id="@+id/l_box_price_text_input_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
                     android:text="€"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
-            </TableRow>
+            </GridLayout>
 
-            <TableRow android:padding="5dip">
+            <TextView
+                android:id="@+id/m_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huevos tamaño M:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:layout_marginBottom="4dp"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="3"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:text="M:" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Docena"
-                    android:textSize="16sp" />
-
+                    android:layout_height="wrap_content"
+                    android:text="Docena:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/m_dozen_edit_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_column="1"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    android:background="@drawable/custom_input"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:textSize="16sp" />
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
+                <TextView
+                    android:id="@+id/m_dozen_price_text_input_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="€"
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="€"
-                    android:textSize="16sp" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Caja"
-                    android:textSize="16sp" />
-
+                    android:text="Caja:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/m_box_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_column="1"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name" />
-
+                    android:layout_marginBottom="8dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
                 <TextView
+                    android:id="@+id/m_box_price_text_input_layout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
                     android:text="€"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
-            </TableRow>
+            </GridLayout>
 
-            <TableRow android:padding="5dip">
+            <TextView
+                android:id="@+id/s_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Huevos tamaño S:"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:textColor="@color/black_color"
+                android:layout_marginBottom="4dp"/>
+
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:rowCount="2"
+                android:columnCount="3"
+                android:focusable="true"
+                android:focusableInTouchMode="true" >
 
                 <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_span="2"
-                    android:text="S:" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Docena"
-                    android:textSize="16sp" />
-
+                    android:layout_height="wrap_content"
+                    android:text="Docena:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
                 <EditText
                     android:id="@+id/s_dozen_edit_text"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="40dp"
-                    android:layout_column="1"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name"
-                    android:background="@drawable/custom_input"
+                    android:layout_columnWeight="1"
                     android:ems="10"
-                    android:inputType="numberDecimal"
-                    android:paddingHorizontal="12dp"
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="€"
-                    android:textSize="16sp" />
-
-            </TableRow>
-
-            <TableRow>
-
-                <TextView
-                    android:layout_height="wrap_content"
-                    android:layout_column="0"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:text="Caja"
-                    android:textSize="16sp" />
-
-                <EditText
-                    android:id="@+id/s_box_edit_text"
-                    android:layout_width="match_parent"
-                    android:layout_column="1"
-                    android:layout_height="40dp"
-                    android:ems="10"
-                    android:inputType="numberDecimal"
+                    android:inputType="number"
                     android:textSize="16sp"
                     android:background="@drawable/custom_input"
                     android:paddingHorizontal="12dp"
-                    android:layout_marginTop="@dimen/size8"
-                    android:layout_marginHorizontal="@dimen/size16"
-                    android:autofillHints="name" />
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginBottom="2dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
+                <TextView
+                    android:id="@+id/s_dozen_price_text_input_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="€"
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_column="2"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
+                    android:text="Caja:"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="12dp" />
+                <EditText
+                    android:id="@+id/s_box_edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_columnWeight="1"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    android:background="@drawable/custom_input"
+                    android:paddingHorizontal="12dp"
+                    android:layout_marginBottom="8dp"
+                    android:autofillHints="name"
+                    android:textColor="@color/black_color"/>
+                <TextView
+                    android:id="@+id/s_box_price_text_input_layout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="€"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:gravity="end"
+                    android:textColor="@color/black_color"
+                    android:paddingHorizontal="12dp"  />
 
-            </TableRow>
+            </GridLayout>
 
-        </TableLayout>
+        </LinearLayout>
 
-        <com.example.hueverianieto.ui.components.HNButton
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/save_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_squared_button"
             android:layout_marginTop="56dp"
-            app:layout_constraintTop_toBottomOf="@id/prices_table_layout"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/prices_text_layout">
 
-        <com.example.hueverianieto.ui.components.HNButton
+            <TextView
+                android:id="@+id/save_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size24"
+                android:textColor="@color/white_color"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:text="Guardar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cancel_button"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
+            android:background="@drawable/bg_squared_button_black"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/save_button"
+            android:layout_marginBottom="@dimen/size8"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/save_button">
+
+            <TextView
+                android:id="@+id/modify_button_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/size24"
+                android:textColor="@color/white_color"
+                android:textSize="14dp"
+                android:textStyle="bold"
+                android:text="Cancelar"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ProgressBar
             android:id="@+id/loading_component"
@@ -372,3 +417,6 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>
+
+
+

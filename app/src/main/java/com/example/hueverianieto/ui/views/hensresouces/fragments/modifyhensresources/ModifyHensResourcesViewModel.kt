@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.HensResourcesData
-import com.example.hueverianieto.data.services.UpdateFirestoreService
 import com.example.hueverianieto.domain.usecases.UpdateHensUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import com.example.hueverianieto.utils.MaterialUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -31,7 +29,8 @@ class ModifyHensResourcesViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyHensResourcesViewState(isLoading = true)
             val hensResourcesMap = MaterialUtils.hensParcelableToMap(hensResourcesData)
-            when(val result = updateHensUseCase(hensResourcesMap, hensResourcesData.documentId!!)) {
+            when (val result =
+                updateHensUseCase(hensResourcesMap, hensResourcesData.documentId!!)) {
                 false -> {
                     _viewState.value = ModifyHensResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -41,10 +40,11 @@ class ModifyHensResourcesViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ModifyHensResourcesViewState(isLoading = false, error = false)
+                    _viewState.value =
+                        ModifyHensResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
-                        "Cliente actualizado",
-                        "Los datos del cliente se han actualizado correctamente.",
+                        "Recurso actualizado",
+                        "La información sobre el recurso ha sido actualizada correctamente en la base de datos.",
                         true,
                         0
                     )

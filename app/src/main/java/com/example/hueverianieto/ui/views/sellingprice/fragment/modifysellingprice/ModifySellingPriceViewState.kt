@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.sellingprice.fragment.modifysellingpr
 
 import com.example.hueverianieto.base.BaseState
 
-class ModifySellingPriceViewState (
+class ModifySellingPriceViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false
 ) : BaseState

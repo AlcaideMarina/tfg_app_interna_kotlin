@@ -7,8 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.UpdateFirestoreUserUseCase
-import com.example.hueverianieto.ui.views.internalusers.fragments.modifyinternaluser.ModifyInternalUserViewState
-import com.example.hueverianieto.ui.views.workersresources.fragment.workersdetail.WorkerDetailViewState
 import com.example.hueverianieto.utils.InternalUserUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -31,10 +29,11 @@ class ModifyWorkerViewModel @Inject constructor(
     fun updateUser(internalUserData: InternalUserData) {
         viewModelScope.launch {
             _viewState.value = ModifyWorkerViewState(isLoading = true)
-            if(Utils.isValidEmail(internalUserData.email)) {
+            if (Utils.isValidEmail(internalUserData.email)) {
                 val internalUserDataMap = InternalUserUtils.parcelableToMap(internalUserData)
                 when (val result = updateFirestoreUserUseCase(
-                    internalUserDataMap, internalUserData.documentId!!, "user_info")) {
+                    internalUserDataMap, internalUserData.documentId!!, "user_info"
+                )) {
                     false -> {
                         _viewState.value = ModifyWorkerViewState(isLoading = false, error = true)
                         _alertDialog.value = AlertOkData(

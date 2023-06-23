@@ -1,6 +1,5 @@
 package com.example.hueverianieto.data.services
 
-import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.OrderData
 import com.example.hueverianieto.utils.OrderUtils
 import com.google.firebase.firestore.DocumentReference
@@ -11,7 +10,7 @@ class NewOrderService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun addNewOrder(clientDocumentId: String, orderData: OrderData) : Boolean = runCatching {
+    suspend fun addNewOrder(clientDocumentId: String, orderData: OrderData): Boolean = runCatching {
         firebaseClient.db
             .collection("client_info")
             .document(clientDocumentId)

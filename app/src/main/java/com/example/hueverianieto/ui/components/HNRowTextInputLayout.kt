@@ -5,10 +5,9 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
-import com.example.hueverianieto.domain.model.textinputlayout.TextInputLayoutModel
 import com.example.hueverianieto.databinding.ComponentRowTextInputLayoutBinding
 
-open class HNRowTextInputLayout: HNTextInputLayout, BaseComponent {
+open class HNRowTextInputLayout : HNTextInputLayout, BaseComponent {
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -16,18 +15,15 @@ open class HNRowTextInputLayout: HNTextInputLayout, BaseComponent {
         context, attrs, defStyleAttr
     )
 
-    private var binding: ComponentRowTextInputLayoutBinding = ComponentRowTextInputLayoutBinding.bind(
-        LayoutInflater
-            .from(context)
-            .inflate(R.layout.component_row_text_input_layout, this, true)
-    )
+    private var binding: ComponentRowTextInputLayoutBinding =
+        ComponentRowTextInputLayoutBinding.bind(
+            LayoutInflater
+                .from(context)
+                .inflate(R.layout.component_row_text_input_layout, this, true)
+        )
 
     init {
         this.addView(this.binding.root)
-    }
-
-    fun setLeftTextInputLayout(leftInputLayoutModel: TextInputLayoutModel) {
-        //this.binding.leftTextInputLayout.let
     }
 
 }

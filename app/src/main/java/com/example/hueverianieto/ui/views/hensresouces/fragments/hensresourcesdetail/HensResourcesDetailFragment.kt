@@ -9,19 +9,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.databinding.ComponentTicketBinding
-import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
-import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class HensResourcesDetailFragment : BaseFragment() {
@@ -44,7 +41,7 @@ class HensResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args : HensResourcesDetailFragmentArgs by navArgs()
+        val args: HensResourcesDetailFragmentArgs by navArgs()
         this.hensResourcesData = args.hensResourcesData
         this.currentUserData = args.currentUserData
 
@@ -73,6 +70,23 @@ class HensResourcesDetailFragment : BaseFragment() {
                 setText()
             }
         }
+        this.hensResourcesDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    alertOkData.title,
+                    alertOkData.text,
+                    "De acuerdo",
+                    null,
+                    {
+                        alertDialog.cancel()
+                        (activity as BaseActivity).goBackFragments()
+                    },
+                    null
+                )
+            }
+        }
     }
 
     override fun setListeners() {
@@ -98,7 +112,6 @@ class HensResourcesDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.hensResourcesDetailViewModel
                         .deleteHenResources(hensResourcesData.documentId!!)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }
@@ -113,8 +126,8 @@ class HensResourcesDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
+        this.binding.saveButtonText.text = "Modificar"
+        this.binding.cancelButtonText.text = "Eliminar"
     }
 
     private fun setText() {
@@ -122,8 +135,10 @@ class HensResourcesDetailFragment : BaseFragment() {
             this.dateTextView.text = Utils.parseTimestampToString(hensResourcesData.expenseDatetime)
             this.quantityTextInputLayout.setText(hensResourcesData.hensNumber.toString())
             this.quantityTextInputLayout.isEnabled = false
+            this.quantityTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             this.totalPriceTextInputLayout.setText(hensResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 

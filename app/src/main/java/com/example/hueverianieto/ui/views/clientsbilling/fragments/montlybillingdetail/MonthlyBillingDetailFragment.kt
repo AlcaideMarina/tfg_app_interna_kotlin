@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.navArgs
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -11,13 +12,14 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentMontlyBillingDetailBinding
 import com.example.hueverianieto.domain.model.billingmodel.BillingModel
 import com.example.hueverianieto.ui.views.clientsbilling.ClientsBillingActivity
-import com.example.hueverianieto.ui.views.main.MainActivity
+import kotlin.properties.Delegates
 
 class MonthlyBillingDetailFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentMontlyBillingDetailBinding
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var billingModel : BillingModel
+    private lateinit var binding: FragmentMontlyBillingDetailBinding
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var billingModel: BillingModel
+    private var thisMonth by Delegates.notNull<Boolean>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,15 +30,16 @@ class MonthlyBillingDetailFragment : BaseFragment() {
         this.binding = FragmentMontlyBillingDetailBinding.inflate(
             inflater, container, false
         )
-        val args : MonthlyBillingDetailFragmentArgs by navArgs()
+        val args: MonthlyBillingDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.billingModel = args.billingModel
+        this.thisMonth = args.thisMonth
         return this.binding.root
     }
 
-    // TODO: Falta por ocultar el texto cuando no es el mes actual
     override fun configureUI() {
         with(this.binding) {
+            currentMonthWarning.isVisible = thisMonth
             cashTextView.text = billingModel.paymentByCash.toString() + " €"
             receiptTextView.text = billingModel.paymentByReceipt.toString() + " €"
             transferTextView.text = billingModel.paymentByTransfer.toString() + " €"
@@ -47,14 +50,15 @@ class MonthlyBillingDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
+
 }

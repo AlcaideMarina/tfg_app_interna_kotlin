@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.BoxesAndCartonsResourcesData
 import com.example.hueverianieto.domain.usecases.UpdateBoxesAndCartonsUseCase
-import com.example.hueverianieto.ui.views.feedresources.fragments.modifyfeedresources.ModifyFeedResourcesViewState
 import com.example.hueverianieto.utils.MaterialUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,9 +29,11 @@ class ModifyBoxesAndCartonsResourcesViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyBoxesAndCartonsResourcesViewState(isLoading = true)
             val hensResourcesMap = MaterialUtils.boxesAndCartonsParcelableToMap(bcResourcesData)
-            when(val result = updateBoxesAndCartonsUseCase(hensResourcesMap, bcResourcesData.documentId!!)) {
+            when (val result =
+                updateBoxesAndCartonsUseCase(hensResourcesMap, bcResourcesData.documentId!!)) {
                 false -> {
-                    _viewState.value = ModifyBoxesAndCartonsResourcesViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        ModifyBoxesAndCartonsResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
                         "Error",
                         "Se ha producido un error cuando se estaban actualizado los datos del recurso. Por favor, revise los datos e inténtelo de nuevo.",
@@ -40,7 +41,8 @@ class ModifyBoxesAndCartonsResourcesViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ModifyBoxesAndCartonsResourcesViewState(isLoading = false, error = false)
+                    _viewState.value =
+                        ModifyBoxesAndCartonsResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
                         "Cliente actualizado",
                         "Los datos del recurso se han actualizado correctamente.",

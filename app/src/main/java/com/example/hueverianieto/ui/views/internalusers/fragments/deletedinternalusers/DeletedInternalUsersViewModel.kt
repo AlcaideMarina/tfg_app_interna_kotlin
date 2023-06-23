@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetAllInternalUsersUseCase
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -28,13 +27,15 @@ class DeletedInternalUsersViewModel @Inject constructor(
     fun getInternalUserData() {
         viewModelScope.launch {
             _viewState.value = DeletedInternalUsersViewState(isLoading = true)
-            when(val result : List<InternalUserData?>? = getAllInternalUsersUseCase(true)) {
+            when (val result: List<InternalUserData?>? = getAllInternalUsersUseCase(true)) {
                 null -> {
-                    _viewState.value = DeletedInternalUsersViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        DeletedInternalUsersViewState(isLoading = false, error = true)
                     _internalUserList.value = listOf()
                 }
                 listOf<ClientData>() -> {
-                    _viewState.value = DeletedInternalUsersViewState(isLoading = false, isEmpty = false)
+                    _viewState.value =
+                        DeletedInternalUsersViewState(isLoading = false, isEmpty = false)
                     _internalUserList.value = listOf()
                 }
                 else -> {

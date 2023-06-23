@@ -1,12 +1,10 @@
 package com.example.hueverianieto.ui.views.main.fragments.orderanddelivery
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -19,8 +17,6 @@ import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentOrdersAndDeliveryBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerAdapter
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersFragment
-import com.example.hueverianieto.ui.views.internalusers.fragments.allinternalusers.AllInternalUsersViewState
 import com.example.hueverianieto.ui.views.main.MainActivity
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
@@ -31,24 +27,30 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class OrderAndDeliveryFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentOrdersAndDeliveryBinding
+    private lateinit var binding: FragmentOrdersAndDeliveryBinding
     private lateinit var currentUserData: InternalUserData
-    private lateinit var alertDialog: HNModalDialog
-    private val orderAndDeliveryViewModel : OrderAndDeliveryViewModel by viewModels()
+    private val orderAndDeliveryViewModel: OrderAndDeliveryViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
+        (activity as MainActivity).setToolbarTitle("Pedidos y repartos")
         currentUserData = (activity as MainActivity).currentUserData
         binding =
-            FragmentOrdersAndDeliveryBinding.bind(inflater.inflate(R.layout.fragment_orders_and_delivery, container, false))
+            FragmentOrdersAndDeliveryBinding.bind(
+                inflater.inflate(
+                    R.layout.fragment_orders_and_delivery,
+                    container,
+                    false
+                )
+            )
         return binding.root
     }
 
     override fun configureUI() {
-        setButtons()
+
         this.binding.dateTextView.text = Utils.parseTimestampToString(Timestamp.now())
         this.orderAndDeliveryViewModel.getTodayOrders()
         lifecycleScope.launchWhenStarted {
@@ -62,13 +64,17 @@ class OrderAndDeliveryFragment : BaseFragment() {
     override fun setObservers() {
         this.orderAndDeliveryViewModel.allOrderList.observe(this) { orderDataList ->
             if (orderDataList == null) {
-                // TODO: error
+                this.binding.todayOrderRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
+                this.binding.containerWaringNoInternalUsers.setTitle("Error")
+                this.binding.containerWaringNoInternalUsers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
 
                 val orderList = mutableListOf<OrderContainerModel>()
                 for (orderData in orderDataList) {
                     if (orderData != null &&
-                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()) {
+                        orderData.status != Constants.orderStatus[R.string.cancelled]!!.toLong()
+                    ) {
                         val orderContainerModel = OrderContainerModel(
                             orderData.orderDatetime,
                             orderData.orderId!!,
@@ -76,15 +82,17 @@ class OrderAndDeliveryFragment : BaseFragment() {
                             OrderUtils.getOrderSummary(OrderUtils.orderDataToBDOrderModel(orderData)),
                             orderData.totalPrice ?: -1,
                             orderData.status,
-                            orderData.deliveryDni
-                        ) {
-                            // TODO
-                        }
+                            orderData.deliveryDni,
+                            null
+                        )
                         orderList.add(orderContainerModel)
                     }
                 }
                 if (orderList.isEmpty()) {
-                    // TODO: Vacío
+                    this.binding.todayOrderRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
+                    this.binding.containerWaringNoInternalUsers.setTitle("No hay pedidos que mostrar")
+                    this.binding.containerWaringNoInternalUsers.setText("Hoy no se ha realizado ningún pedido todavía.")
                 } else {
                     this.binding.todayOrderRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.todayOrderRecyclerView.adapter = HNOrderContainerAdapter(orderList)
@@ -107,11 +115,6 @@ class OrderAndDeliveryFragment : BaseFragment() {
             with(state as OrderAndDeliveryViewState) {
                 with(binding) {
                     this.loadingComponent.isVisible = state.isLoading
-                    if (state.error) {
-                        // TODO: Popup error
-                    } else if (state.isEmpty) {
-                        // TODO: Popup está vacío
-                    }
                 }
             }
         } catch (e: Exception) {
@@ -125,13 +128,8 @@ class OrderAndDeliveryFragment : BaseFragment() {
         super.onResume()
     }
 
-    private fun setButtons() {
-        this.binding.seeAllOrdersButton.setText("Ver todo")
-    }
-
     companion object {
         private val TAG = OrderAndDeliveryFragment::class.java.simpleName
     }
-
 
 }

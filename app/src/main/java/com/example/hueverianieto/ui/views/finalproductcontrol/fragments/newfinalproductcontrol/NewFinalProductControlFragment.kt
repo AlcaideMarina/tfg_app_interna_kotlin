@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -19,7 +20,6 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 import kotlin.properties.Delegates
 
@@ -107,14 +107,16 @@ class NewFinalProductControlFragment : BaseFragment() {
         this.binding.saveButton.setOnClickListener {
             it.hideSoftInput()
             if (this.binding.layingDateTextInputLayout.text != null && this.binding.layingDateTextInputLayout.text.toString() != "" &&
-                    this.binding.packingDateTextInputLayout.text != null && this.binding.packingDateTextInputLayout.text.toString() != "" &&
-                    this.binding.acceptedEggsTextInputLayout.text != null && this.binding.acceptedEggsTextInputLayout.text.toString() != "" &&
-                    this.binding.rejectedEggsTextInputLayout.text != null && this.binding.rejectedEggsTextInputLayout.text.toString() != "" &&
-                    this.binding.lotTextInputLayout.text != null && this.binding.lotTextInputLayout.text.toString() != "" &&
-                    this.binding.bestBeforeDateTextInputLayout.text != null && this.binding.bestBeforeDateTextInputLayout.text.toString() != "" &&
-                    this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != "") {
+                this.binding.packingDateTextInputLayout.text != null && this.binding.packingDateTextInputLayout.text.toString() != "" &&
+                this.binding.acceptedEggsTextInputLayout.text != null && this.binding.acceptedEggsTextInputLayout.text.toString() != "" &&
+                this.binding.rejectedEggsTextInputLayout.text != null && this.binding.rejectedEggsTextInputLayout.text.toString() != "" &&
+                this.binding.lotTextInputLayout.text != null && this.binding.lotTextInputLayout.text.toString() != "" &&
+                this.binding.bestBeforeDateTextInputLayout.text != null && this.binding.bestBeforeDateTextInputLayout.text.toString() != "" &&
+                this.binding.issueDateTextInputLayout.text != null && this.binding.issueDateTextInputLayout.text.toString() != ""
+            ) {
                 if (layingDatetimeSelected <= packingDatetimeSelected && layingDatetimeSelected <= packingDatetimeSelected
-                        && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected) {
+                    && layingDatetimeSelected <= bestBeforeDatetimeSelected && layingDatetimeSelected <= issueDatetimeSelected
+                ) {
                     this.newFinalProductControlViewModel.addFPC(
                         FPCData(
                             this.binding.acceptedEggsTextInputLayout.text.toString().toLong(),
@@ -164,37 +166,46 @@ class NewFinalProductControlFragment : BaseFragment() {
     }
 
     fun setButtons() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
+        this.binding.saveButtonText.text = "Guardar"
+        this.binding.cancelButtonText.text = "Cancelar"
     }
 
     private fun setFields() {
         with(this.binding) {
-            lotTextInputLayout.setText((lastLot + 1).toString())
+            // lot
+            this.lotTextInputLayout.setText((lastLot + 1).toString())
+            this.lotTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             // Laying date
             layingDatetimeSelected = Timestamp(Date())
             this.layingDateTextInputLayout.setText(
                 Utils.parseDateToString(layingDatetimeSelected.toDate())
             )
             this.layingDateTextInputLayout.setOnClickListener { onClickScheduledLayingDate() }
+            this.layingDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             // packing date
             packingDatetimeSelected = Timestamp(Date())
             this.packingDateTextInputLayout.setText(
                 Utils.parseDateToString(packingDatetimeSelected.toDate())
             )
             this.packingDateTextInputLayout.setOnClickListener { onClickScheduledPackingDate() }
+            this.packingDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             // best before date
             bestBeforeDatetimeSelected = Timestamp(Date())
             this.bestBeforeDateTextInputLayout.setText(
                 Utils.parseDateToString(bestBeforeDatetimeSelected.toDate())
             )
             this.bestBeforeDateTextInputLayout.setOnClickListener { onClickScheduledBestBeforeDate() }
+            this.bestBeforeDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
             // issue date
             issueDatetimeSelected = Timestamp(Date())
             this.issueDateTextInputLayout.setText(
                 Utils.parseDateToString(issueDatetimeSelected.toDate())
             )
             this.issueDateTextInputLayout.setOnClickListener { onClickScheduledIssueDate() }
+            this.issueDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            // eggs control
+            this.acceptedEggsTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            this.rejectedEggsTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
         }
     }
 

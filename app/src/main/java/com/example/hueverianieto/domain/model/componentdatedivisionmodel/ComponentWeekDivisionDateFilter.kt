@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ComponentWeekDivisionDateFilter (
+data class ComponentWeekDivisionDateFilter(
     val initTimestamp: Timestamp,
     val endTimestamp: Timestamp
 ) : Parcelable

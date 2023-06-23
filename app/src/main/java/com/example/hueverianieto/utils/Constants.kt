@@ -12,7 +12,7 @@ object Constants {
     const val loginInvalidPasswordError: String =
         "The password is invalid or the user does not have a password."
 
-    val roles : Map<Int, Int> = mapOf(
+    val roles: Map<Int, Int> = mapOf(
         R.string.warehouse_job to 0,
         R.string.boss_job to 1,
         R.string.delivery_job to 2,
@@ -20,7 +20,7 @@ object Constants {
         R.string.farm_job to 4
     )
 
-    val orderStatus : Map<Int, Int> = mapOf(
+    val orderStatus: Map<Int, Int> = mapOf(
         R.string.price_pending to 0,
         R.string.backordered to 1,
         R.string.in_delivery to 2,
@@ -29,18 +29,17 @@ object Constants {
         R.string.cancelled to 5
     )
 
-    val paymentMethod : Map<Int, Int> = mapOf(
+    val paymentMethod: Map<Int, Int> = mapOf(
         R.string.in_cash to 0,
         R.string.per_receipt to 1,
         R.string.transfer to 2
     )
 
-    val ewgTypes : Map<Int, Int> = mapOf(
+    val ewgTypes: Map<Int, Int> = mapOf(
         R.string.electricity to 0,
         R.string.water to 1,
         R.string.gas to 2
     )
-
 
     const val dateFormat = "dd/MM/yyyy"
 

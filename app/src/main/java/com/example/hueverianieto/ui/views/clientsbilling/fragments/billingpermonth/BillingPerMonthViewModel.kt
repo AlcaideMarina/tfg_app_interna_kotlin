@@ -22,9 +22,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
+import kotlin.math.roundToInt
 
 @HiltViewModel
-class BillingPerMonthViewModel  @Inject constructor(
+class BillingPerMonthViewModel @Inject constructor(
     val billingUseCase: BillingPerMonthUseCase
 ) : ViewModel() {
 
@@ -41,7 +42,7 @@ class BillingPerMonthViewModel  @Inject constructor(
         _viewState.value = BillingPerMonthViewState(isLoading = false)
         viewModelScope.launch {
             _viewState.value = BillingPerMonthViewState(isLoading = true)
-            when(val result = billingUseCase(documentId)) {
+            when (val result = billingUseCase(documentId)) {
                 null -> {
                     _viewState.value = BillingPerMonthViewState(isLoading = false, error = true)
                     _billingContainerList.value = listOf()
@@ -61,7 +62,7 @@ class BillingPerMonthViewModel  @Inject constructor(
         }
     }
 
-    private fun getOrderBillingModel(orderDataList: List<OrderData?>?) : List<OrderBillingModel> {
+    private fun getOrderBillingModel(orderDataList: List<OrderData?>?): List<OrderBillingModel> {
         val list = mutableListOf<OrderBillingModel>()
         if (orderDataList != null) {
             for (item in orderDataList) {
@@ -81,7 +82,7 @@ class BillingPerMonthViewModel  @Inject constructor(
         return list
     }
 
-    private fun getBillingContainerFromOrderData(orderBillingModelList: List<OrderBillingModel>) : List<BillingPerMonthContainerModel> {
+    private fun getBillingContainerFromOrderData(orderBillingModelList: List<OrderBillingModel>): List<BillingPerMonthContainerModel> {
 
         val list = mutableListOf<BillingPerMonthContainerModel>()
         var orderBillingModelListAux = orderBillingModelList
@@ -95,7 +96,7 @@ class BillingPerMonthViewModel  @Inject constructor(
         var orderBillingModelMonthlyList = mutableListOf<OrderBillingModel>()
 
         // Ordenamos la lista por fecha de pedido en desc.
-        orderBillingModelListAux = orderBillingModelListAux.sortedBy { it.orderDatetime } .reversed()
+        orderBillingModelListAux = orderBillingModelListAux.sortedBy { it.orderDatetime }.reversed()
 
         // Cogemos la primera posición -> Es la más reciente -> Último mes
         val firstOrder = orderBillingModelListAux[0]
@@ -112,18 +113,19 @@ class BillingPerMonthViewModel  @Inject constructor(
         var initDateTimestamp = Utils.parseStringToTimestamp(
             "01/$m/$y"
         )
-        var endDateTimestamp = Timestamp(Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = 1))
+        var endDateTimestamp =
+            Timestamp(Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = 1))
 
         for (item in orderBillingModelListAux) {
             if (initDateTimestamp > item.orderDatetime) {
                 // Añadimos el elemento a la lista de retorno
                 val billingModel = BillingModel(
-                    paymentByCash = paymentByCash,
-                    paymentByReceipt = paymentByReceipt,
-                    paymentByTransfer = paymentByTransfer,
-                    paid = paid,
-                    toBePaid = toBePaid,
-                    totalPrice = totalPrice,
+                    paymentByCash = (paymentByCash * 100.0).roundToInt() / 100.0,
+                    paymentByReceipt = (paymentByReceipt * 100.0).roundToInt() / 100.0,
+                    paymentByTransfer = (paymentByTransfer * 100.0).roundToInt() / 100.0,
+                    paid = (paid * 100.0).roundToInt() / 100.0,
+                    toBePaid = (toBePaid * 100.0).roundToInt() / 100.0,
+                    totalPrice = (totalPrice * 100.0).roundToInt() / 100.0,
                     //orderBillingModelList = orderBillingModelMonthlyList
                 )
                 val billingContainerModel = BillingPerMonthContainerModel(
@@ -135,7 +137,8 @@ class BillingPerMonthViewModel  @Inject constructor(
                 // Reseteamos todas las variables y guardamos
                 endDateTimestamp = initDateTimestamp
                 initDateTimestamp = Timestamp(
-                    Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = -1))
+                    Utils.addToDate(initDateTimestamp.toDate(), monthsToAdd = -1)
+                )
                 paymentByCash = 0.0
                 paymentByReceipt = 0.0
                 paymentByTransfer = 0.0
@@ -146,13 +149,13 @@ class BillingPerMonthViewModel  @Inject constructor(
             }
 
             // Actualizamos métodos de pago
-            when(item.paymentMethod.toInt()) {
+            when (item.paymentMethod.toInt()) {
                 0 -> paymentByCash += (item.totalPrice ?: 0).toDouble()
                 1 -> paymentByReceipt += (item.totalPrice ?: 0).toDouble()
                 2 -> paymentByTransfer += (item.totalPrice ?: 0).toDouble()
             }
             // Actualizamos si es un pedido pagado o por pagar
-            when(item.paid) {
+            when (item.paid) {
                 true -> paid += (item.totalPrice ?: 0).toDouble()
                 false -> toBePaid += (item.totalPrice ?: 0).toDouble()
             }
@@ -161,13 +164,12 @@ class BillingPerMonthViewModel  @Inject constructor(
 
             if (orderBillingModelListAux.last() == item) {
                 val billingModel = BillingModel(
-                    paymentByCash = paymentByCash,
-                    paymentByReceipt = paymentByReceipt,
-                    paymentByTransfer = paymentByTransfer,
-                    paid = paid,
-                    toBePaid = toBePaid,
-                    totalPrice = totalPrice,
-                    //orderBillingModelList = orderBillingModelMonthlyList
+                    paymentByCash = (paymentByCash * 100.0).roundToInt() / 100.0,
+                    paymentByReceipt = (paymentByReceipt * 100.0).roundToInt() / 100.0,
+                    paymentByTransfer = (paymentByTransfer * 100.0).roundToInt() / 100.0,
+                    paid = (paid * 100.0).roundToInt() / 100.0,
+                    toBePaid = (toBePaid * 100.0).roundToInt() / 100.0,
+                    totalPrice = (totalPrice * 100.0).roundToInt() / 100.0,
                 )
                 val billingContainerModel = BillingPerMonthContainerModel(
                     initDate = initDateTimestamp,
@@ -181,7 +183,8 @@ class BillingPerMonthViewModel  @Inject constructor(
     }
 
     fun navigateToMonthlyBillingDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_billingPerMontFragment_to_monthlyBillingDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_billingPerMontFragment_to_monthlyBillingDetailFragment, bundle)
             ?: Log.e(
                 BillingPerMonthViewModel::class.simpleName,
                 "Error en la navegación a detalle de facturación mensual"

@@ -9,8 +9,6 @@ import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.domain.usecases.CreateAuthUserUseCase
 import com.example.hueverianieto.domain.usecases.GetClientIdUseCase
 import com.example.hueverianieto.domain.usecases.NewClientUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
-import com.example.hueverianieto.utils.ClientUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -29,14 +27,14 @@ class NewClientViewModel @Inject constructor(
     val viewState: StateFlow<NewClientViewState> get() = _viewState
 
     private var _alertDialog = MutableLiveData(AlertOkData())
-    val alertDialog : LiveData<AlertOkData> get() = _alertDialog
+    val alertDialog: LiveData<AlertOkData> get() = _alertDialog
 
     fun addNewClient(clientData: ClientData) {
         viewModelScope.launch {
             _viewState.value = NewClientViewState(isLoading = true)
             if (Utils.isValidEmail(clientData.email)) {
                 if (clientData.hasAccount && clientData.user != null) {
-                    when(val newUid = createAuthUserUseCase(clientData.email, clientData.user!!)) {
+                    when (val newUid = createAuthUserUseCase(clientData.email, clientData.user!!)) {
                         null -> {
                             _viewState.value = NewClientViewState(isLoading = false, error = true)
                             _alertDialog.value = AlertOkData(
@@ -47,17 +45,19 @@ class NewClientViewModel @Inject constructor(
                         }
                         else -> {
                             clientData.uid = newUid
-                            when(val clientId = getClientIdUseCase()) {
+                            when (val clientId = getClientIdUseCase()) {
                                 null -> {
-                                    _viewState.value = NewClientViewState(isLoading = false, error = true)
+                                    _viewState.value =
+                                        NewClientViewState(isLoading = false, error = true)
                                 }
                                 else -> {
                                     clientData.id = clientId
-                                    when(newClientUseCase(clientData)) {
+                                    when (newClientUseCase(clientData)) {
                                         false -> {
                                             _viewState.value = NewClientViewState(
                                                 isLoading = false,
-                                                error = true)
+                                                error = true
+                                            )
                                             _alertDialog.value = AlertOkData(
                                                 title = "Error",
                                                 text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",
@@ -82,17 +82,18 @@ class NewClientViewModel @Inject constructor(
                         }
                     }
                 } else {
-                    when(val clientId = getClientIdUseCase()) {
+                    when (val clientId = getClientIdUseCase()) {
                         null -> {
                             _viewState.value = NewClientViewState(isLoading = false, error = true)
                         }
                         else -> {
                             clientData.id = clientId
-                            when(newClientUseCase(clientData)) {
+                            when (newClientUseCase(clientData)) {
                                 false -> {
                                     _viewState.value = NewClientViewState(
                                         isLoading = false,
-                                        error = true)
+                                        error = true
+                                    )
                                     _alertDialog.value = AlertOkData(
                                         title = "Error",
                                         text = "Se ha producido un error al guardar el nuevo cliente. Por favor, revise los datos e inténtelo de nuevo.",

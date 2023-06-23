@@ -14,13 +14,10 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllFeedResourcesBinding
-import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
 import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
-import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllFeedResourcesFragment : BaseFragment() {
@@ -61,10 +58,13 @@ class AllFeedResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allFeedResourcesViewModel.feedList.observe(this) { feedResourcesDataList ->
             if (feedResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.feedRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Lo sentimos, pero ha habido un error al intentar recuperar los datos. Por favor, inténtelo de nuevo más tarde.")
             } else {
                 feedDataList = mutableListOf()
-                for (feedResourcesData in feedResourcesDataList)  {
+                for (feedResourcesData in feedResourcesDataList) {
                     if (feedResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             feedResourcesData.expenseDatetime,
@@ -86,8 +86,8 @@ class AllFeedResourcesFragment : BaseFragment() {
                 if (feedDataList.isEmpty()) {
                     this.binding.feedRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoOrders.visibility = View.VISIBLE
-                    this.binding.containerWaringNoOrders.setTitle("No hay clientes")
-                    this.binding.containerWaringNoOrders.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoOrders.setTitle("No hay recursos")
+                    this.binding.containerWaringNoOrders.setText("No hay registro de recursos de pienso sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

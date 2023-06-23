@@ -22,10 +22,10 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class InternalUserDetailFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentInternalUserDetailBinding
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var internalUserData : InternalUserData
-    private val internalUserDetailViewModel : InternalUserDetailViewModel by viewModels()
+    private lateinit var binding: FragmentInternalUserDetailBinding
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var internalUserData: InternalUserData
+    private val internalUserDetailViewModel: InternalUserDetailViewModel by viewModels()
     private lateinit var alertDialog: HNModalDialog
 
     override fun onCreateView(
@@ -38,7 +38,7 @@ class InternalUserDetailFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : InternalUserDetailFragmentArgs by navArgs()
+        val args: InternalUserDetailFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.internalUserData = args.internalUserData
 
@@ -136,10 +136,10 @@ class InternalUserDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.modifyButton.setText("Modificar")
-        this.binding.deleteUserButton.setText("Eliminar usuario")
+        this.binding.modifyButtonText.text = "Modificar"
+        this.binding.deleteUserButtonText.text = "Eliminar usuario"
         if (currentUserData.documentId == internalUserData.documentId) {
-            this.binding.deleteUserButton.isEnabled = false
+            this.binding.deleteUserButtonText.isEnabled = false
         }
     }
 

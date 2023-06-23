@@ -10,7 +10,7 @@ class GetHensService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getHens() : List<HensResourcesData?>? = runCatching {
+    suspend fun getHens(): List<HensResourcesData?>? = runCatching {
         firebaseClient.db
             .collection("material_hens")
             .whereEqualTo("deleted", false)
@@ -18,7 +18,7 @@ class GetHensService @Inject constructor(
             .await()
     }.toHensResourcesData()
 
-    private fun Result<QuerySnapshot>.toHensResourcesData() = when(val result = getOrNull()) {
+    private fun Result<QuerySnapshot>.toHensResourcesData() = when (val result = getOrNull()) {
         null -> null
         else -> {
             val list = mutableListOf<HensResourcesData>()

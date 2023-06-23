@@ -16,6 +16,7 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
+import com.example.hueverianieto.data.models.local.DBOrderFieldData
 import com.example.hueverianieto.data.models.local.EggPricesData
 import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -25,36 +26,30 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.ui.components.componentgridview.CustomGridLayoutManager
 import com.example.hueverianieto.ui.components.componentgridview.HNGridTextAdapter
 import com.example.hueverianieto.ui.views.allorders.AllOrdersActivity
-import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersFragment
-import com.example.hueverianieto.ui.views.allorders.fragments.allorders.AllOrdersViewState
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.OrderUtils
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
 class ModifyOrderFragment : BaseFragment() {
 
-    private lateinit var binding : FragmentOrderDetailBinding
-    private lateinit var alertDialog : HNModalDialog
-    private lateinit var currentUserData : InternalUserData
-    private lateinit var clientData : ClientData
-    private lateinit var orderData : OrderData
-    private val modifyOrderViewModel : ModifyOrderViewModel by viewModels()
+    private lateinit var binding: FragmentOrderDetailBinding
+    private lateinit var alertDialog: HNModalDialog
+    private lateinit var currentUserData: InternalUserData
+    private lateinit var clientData: ClientData
+    private lateinit var orderData: OrderData
+    private lateinit var eggPrices: EggPricesData
+    private val modifyOrderViewModel: ModifyOrderViewModel by viewModels()
 
-    private val recyclerViewTitles = listOf(0, 7, 14, 21)
-    private val recyclerViewSubtitles = listOf(1, 3, 4, 6, 8, 10, 11, 13, 15, 17, 18, 20, 22, 24, 25, 27)
-    private val recyclerViewTextInputLayouts = listOf(2, 5, 9, 12, 16, 19, 23, 26)
-
-    private lateinit var approxDeliveryDatetimeSelected : Timestamp
+    private lateinit var approxDeliveryDatetimeSelected: Timestamp
     private var dropdownPaymentMethodItems: MutableList<String> = mutableListOf()
     private var dropdownStatusItems: MutableList<String> = mutableListOf()
     private var dropdownDeliveryPersonItemMap = mutableMapOf<String, String>()
     private var dropdownDeliveryPersonItem = mutableListOf<String>()
-    private var deliveryPersonDocumentId : String? = null
+    private var deliveryPersonDocumentId: String? = null
 
     private var finished: Boolean = false
     private var paid: Boolean = false
@@ -69,7 +64,7 @@ class ModifyOrderFragment : BaseFragment() {
             inflater, container, false
         )
 
-        val args : ModifyOrderFragmentArgs by navArgs()
+        val args: ModifyOrderFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
         this.clientData = args.clientData
         this.orderData = args.orderData
@@ -87,8 +82,8 @@ class ModifyOrderFragment : BaseFragment() {
             this.modifyOrderViewModel.getDeliveryPerson(orderData.deliveryPerson!!)
         this.modifyOrderViewModel.getPrices()
         setButtons()
-        disableTextInputLayouts()
         setTexts()
+        disableTextInputLayouts()
         getPaymentMethodDropdownValues()
         getStatusDropdownValues()
 
@@ -141,6 +136,7 @@ class ModifyOrderFragment : BaseFragment() {
             }
         }
         this.modifyOrderViewModel.eggPrices.observe(this) {
+            eggPrices = it
             setRecyclerView(it)
         }
     }
@@ -159,22 +155,24 @@ class ModifyOrderFragment : BaseFragment() {
         }
         this.binding.modifyButton.setOnClickListener {
             it.hideSoftInput()
-            val paymentMethodSelected : Int? = when (this.binding.paymentMethodAutoCompleteTextView.text.toString()) {
-                requireContext().getString(R.string.in_cash) -> R.string.in_cash
-                requireContext().getString(R.string.per_receipt) -> R.string.per_receipt
-                requireContext().getString(R.string.transfer) -> R.string.transfer
-                else -> null
-            }
-            val statusSelected : Int? = when (this.binding.statusAutoCompleteTextView.text.toString()) {
-                requireContext().getString(R.string.price_pending) -> R.string.price_pending
-                requireContext().getString(R.string.backordered) -> R.string.backordered
-                requireContext().getString(R.string.in_delivery) -> R.string.in_delivery
-                requireContext().getString(R.string.delivered) -> R.string.delivered
-                requireContext().getString(R.string.delivery_attempt) -> R.string.delivery_attempt
-                requireContext().getString(R.string.cancelled) -> R.string.cancelled
-                else -> null
-            }
-            val dbOrderFieldData = OrderUtils.getOrderStructure(this.binding.orderRecyclerView)
+            val paymentMethodSelected: Int? =
+                when (this.binding.paymentMethodAutoCompleteTextView.text.toString()) {
+                    requireContext().getString(R.string.in_cash) -> R.string.in_cash
+                    requireContext().getString(R.string.per_receipt) -> R.string.per_receipt
+                    requireContext().getString(R.string.transfer) -> R.string.transfer
+                    else -> null
+                }
+            val statusSelected: Int? =
+                when (this.binding.statusAutoCompleteTextView.text.toString()) {
+                    requireContext().getString(R.string.price_pending) -> R.string.price_pending
+                    requireContext().getString(R.string.backordered) -> R.string.backordered
+                    requireContext().getString(R.string.in_delivery) -> R.string.in_delivery
+                    requireContext().getString(R.string.delivered) -> R.string.delivered
+                    requireContext().getString(R.string.delivery_attempt) -> R.string.delivery_attempt
+                    requireContext().getString(R.string.cancelled) -> R.string.cancelled
+                    else -> null
+                }
+            val dbOrderFieldData = getDBOrderFieldData()
 
             if (paymentMethodSelected == null) {
                 Utils.setPopUp(
@@ -244,7 +242,7 @@ class ModifyOrderFragment : BaseFragment() {
                         null
                     )
                 } else {
-                    val orderData = OrderData(
+                    val updatedOrder = OrderData(
                         approxDeliveryDatetime = approxDeliveryDatetimeSelected,
                         clientId = clientData.id!!,
                         company = clientData.company,
@@ -264,7 +262,22 @@ class ModifyOrderFragment : BaseFragment() {
                         totalPrice = totalPrice,
                         documentId = this.orderData.documentId
                     )
-                    modifyOrderViewModel.updateOrder(clientData.documentId!!, orderData)
+
+                    Utils.setPopUp(
+                        alertDialog,
+                        requireContext(),
+                        "Precio final",
+                        "El precio total del pedido será de $totalPrice €. ¿Desea continuar?",
+                        "Atrás",
+                        "Continuar",
+                        { alertDialog.cancel() },
+                        {
+                            alertDialog.cancel()
+                            continueOrder(
+                                updatedOrder
+                            )
+                        }
+                    )
                 }
 
 
@@ -285,8 +298,8 @@ class ModifyOrderFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.modifyButton.setText("Guardar")
-        this.binding.deleteButton.setText("Cancelar")
+        this.binding.modifyButtonText.text = "Guardar"
+        this.binding.deleteButtonText.text = "Cancelar"
     }
 
     private fun disableTextInputLayouts() {
@@ -298,14 +311,18 @@ class ModifyOrderFragment : BaseFragment() {
         this.binding.orderDateTextInputLayout.isEnabled = false
         if (listOf<Long>(2, 3, 4, 5).contains(this.orderData.status)) {
             this.binding.deliveryDateTextInputLayout.isEnabled = false
+            this.binding.deliveryDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             if (this.orderData.status == (3).toLong()) {
                 finished = true
                 this.binding.statusTextInputLayout.isEnabled = !finished
+                this.binding.statusAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_light_color_80))
                 this.binding.deliveryDniTextInputLayout.isEnabled = !finished
+                this.binding.deliveryDniTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             }
         }
         if (paid) {
             this.binding.paymentMethodTextInputLayout.isEnabled = false
+            this.binding.paymentMethodAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
 
         this.binding.totalPriceTextLayout.visibility = View.GONE
@@ -320,53 +337,144 @@ class ModifyOrderFragment : BaseFragment() {
         val phone2 = clientData.phone[1].entries.iterator().next()
 
         with(this.binding) {
-            orderIdTextView.text = "ID pedido: " + orderData.orderId.toString()
+            orderIdTextView.text = orderData.orderId.toString()
             companyAutoCompleteTextView.setText(clientData.company, false)
             directionTextInputLayout.setText(clientData.direction)
             cifTextInputLayout.setText(clientData.cif)
             phoneTextInputLayoutPhone1.setText(phone1.value.toString())
             phoneTextInputLayoutPhone2.setText(phone2.value.toString())
             orderDateTextInputLayout.setText(
-                Utils.parseTimestampToString(orderData.orderDatetime) ?: "")
+                Utils.parseTimestampToString(orderData.orderDatetime) ?: ""
+            )
             deliveryDateTextInputLayout.setText(
                 Utils.parseTimestampToString(
-                    orderData.deliveryDatetime ?: orderData.approxDeliveryDatetime))
-            //TODO: deliveryPersonTextInputLayout.setInputText(orderData.deliveryPerson ?: "")
+                    orderData.deliveryDatetime ?: orderData.approxDeliveryDatetime
+                )
+            )
             deliveryNoteTextInputLayout.setText(orderData.deliveryNote?.toString() ?: "")
             deliveryDniTextInputLayout.setText(orderData.deliveryDni ?: "")
             lotTextInputLayout.setText(orderData.lot ?: "")
             paidCheckedTextView.isChecked = orderData.paid
             paymentMethodAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!),false)
+                    Utils.getKey(Constants.paymentMethod, orderData.paymentMethod.toInt())!!
+                ), false
+            )
             statusAutoCompleteTextView.setText(
                 requireContext().getString(
-                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!), false)
+                    Utils.getKey(Constants.orderStatus, orderData.status.toInt())!!
+                ), false
+            )
+
+            paymentMethodAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_color))
+            deliveryDateTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            deliveryPersonAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_color))
+            deliveryNoteTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            lotTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            deliveryDniTextInputLayout.setTextColor(requireContext().getColor(R.color.black_color))
+            statusAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_color))
+
         }
 
     }
 
     private fun setRecyclerView(eggPricesData: EggPricesData) {
 
-        val isEnabled = if (paid) {
-            false
-        } else !finished
+        val isEnabled =
+            if (paid) false
+            else !finished
 
-        val list = OrderUtils.getOrderDataModifyGridModel(orderData, eggPricesData, isEnabled)
+        val textColor =
+            if (isEnabled) R.color.black_color
+            else R.color.black_light_color_80
 
-        val manager = CustomGridLayoutManager(this.context, 4)
-        manager.setScrollEnabled(false)
-        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (recyclerViewTitles.contains(position)) 4
-                else if(recyclerViewTextInputLayouts.contains(position)) 2
-                else 1
-            }
+        val bdOrderModel = OrderUtils.orderDataAndEggPricesDataToBDOrderModel(
+            orderData, eggPricesData)
+
+        with(this.binding) {
+            this.xlDozenTextInputLayout.setText(bdOrderModel.xlDozenQuantity.toString())
+            this.xlDozenPriceTextInputLayout.text = (bdOrderModel.xlDozenPrice ?: eggPricesData.xlDozen).toString() + " €/ud"
+            this.xlDozenTextInputLayout.isEnabled = isEnabled
+            this.xlDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
+            this.xlBoxTextInputLayout.setText(bdOrderModel.xlBoxQuantity.toString())
+            this.xlBoxPriceTextInputLayout.text = (bdOrderModel.xlBoxPrice ?: eggPricesData.xlBox).toString() + " €/ud"
+            this.xlBoxTextInputLayout.isEnabled = isEnabled
+            this.xlBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
+
+            this.lDozenTextInputLayout.setText(bdOrderModel.lDozenQuantity.toString())
+            this.lDozenPriceTextInputLayout.text = (bdOrderModel.lDozenPrice ?: eggPricesData.lDozen).toString() + " €/ud"
+            this.lDozenTextInputLayout.isEnabled = isEnabled
+            this.lDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
+            this.lBoxTextInputLayout.setText(bdOrderModel.lBoxQuantity.toString())
+            this.lBoxPriceTextInputLayout.text = (bdOrderModel.lBoxPrice ?: eggPricesData.lBox).toString() + " €/ud"
+            this.lBoxTextInputLayout.isEnabled = isEnabled
+            this.lBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
+
+            this.mDozenTextInputLayout.setText(bdOrderModel.mDozenQuantity.toString())
+            this.mDozenPriceTextInputLayout.text = (bdOrderModel.mDozenPrice ?: eggPricesData.mDozen).toString() + " €/ud"
+            this.mDozenTextInputLayout.isEnabled = isEnabled
+            this.mDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
+            this.mBoxTextInputLayout.setText(bdOrderModel.mBoxQuantity.toString())
+            this.mBoxPriceTextInputLayout.text = (bdOrderModel.mBoxPrice ?: eggPricesData.mBox).toString() + " €/ud"
+            this.mBoxTextInputLayout.isEnabled = isEnabled
+            this.mBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
+
+            this.sDozenTextInputLayout.setText(bdOrderModel.sDozenQuantity.toString())
+            this.sDozenPriceTextInputLayout.text = (bdOrderModel.sDozenPrice ?: eggPricesData.sDozen).toString() + " €/ud"
+            this.sDozenTextInputLayout.isEnabled = isEnabled
+            this.sDozenTextInputLayout.setTextColor(requireContext().getColor(textColor))
+            this.sBoxTextInputLayout.setText(bdOrderModel.sBoxQuantity.toString())
+            this.sBoxPriceTextInputLayout.text = (bdOrderModel.sBoxPrice ?: eggPricesData.sBox).toString() + " €/ud"
+            this.sBoxTextInputLayout.isEnabled = isEnabled
+            this.sBoxTextInputLayout.setTextColor(requireContext().getColor(textColor))
         }
 
-        this.binding.orderRecyclerView.layoutManager = manager
-        this.binding.orderRecyclerView.adapter = HNGridTextAdapter(list)
+    }
 
+    private fun getDBOrderFieldData() : DBOrderFieldData {
+        val xlBox =
+            if(this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.xlBoxTextInputLayout.text.toString().toIntOrNull()
+        val xlDozen =
+            if(this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.xlDozenTextInputLayout.text.toString().toIntOrNull()
+        val lBox =
+            if(this.binding.lBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.lBoxTextInputLayout.text.toString().toIntOrNull()
+        val lDozen =
+            if(this.binding.lDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.lDozenTextInputLayout.text.toString().toIntOrNull()
+        val mBox =
+            if(this.binding.mBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.mBoxTextInputLayout.text.toString().toIntOrNull()
+        val mDozen =
+            if(this.binding.mDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.mDozenTextInputLayout.text.toString().toIntOrNull()
+        val sBox =
+            if(this.binding.sBoxTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.sBoxTextInputLayout.text.toString().toIntOrNull()
+        val sDozen =
+            if(this.binding.sDozenTextInputLayout.text.toString().toIntOrNull() == 0) null
+            else this.binding.sDozenTextInputLayout.text.toString().toIntOrNull()
+
+        return DBOrderFieldData(
+            eggPrices.xlBox,
+            xlBox,
+            eggPrices.xlDozen,
+            xlDozen,
+            eggPrices.lBox,
+            lBox,
+            eggPrices.lDozen,
+            lDozen,
+            eggPrices.mBox,
+            mBox,
+            eggPrices.mDozen,
+            mDozen,
+            eggPrices.sBox,
+            sBox,
+            eggPrices.sDozen,
+            sDozen,
+        )
     }
 
     private fun onClickScheduledDate() {
@@ -382,7 +490,8 @@ class ModifyOrderFragment : BaseFragment() {
             if (monthStr.length < 2) monthStr = "0$monthStr"
             if (yearStr.length < 4) yearStr = "0$yearStr"
             this.binding.deliveryDateTextInputLayout.setText("$dayStr/$monthStr/$yearStr")
-            approxDeliveryDatetimeSelected = Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
+            approxDeliveryDatetimeSelected =
+                Utils.parseStringToTimestamp("$dayStr/$monthStr/$yearStr")
         }
         val datePickerDialog = DatePickerDialog(requireContext(), listener, year, month, day)
         datePickerDialog.datePicker.minDate = Utils.addToDate(Date(), 3).time
@@ -396,7 +505,8 @@ class ModifyOrderFragment : BaseFragment() {
         }
         this.binding.paymentMethodAutoCompleteTextView.setAdapter(
             ArrayAdapter(
-                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems)
+                requireContext(), R.layout.component_dropdown_list_item, dropdownPaymentMethodItems
+            )
         )
     }
 
@@ -407,14 +517,16 @@ class ModifyOrderFragment : BaseFragment() {
         }
         this.binding.statusAutoCompleteTextView.setAdapter(
             ArrayAdapter(
-                requireContext(), R.layout.component_dropdown_list_item, dropdownStatusItems)
+                requireContext(), R.layout.component_dropdown_list_item, dropdownStatusItems
+            )
         )
     }
 
     private fun setDeliveryPersonDropdownValues(internalUserDataList: List<InternalUserData?>) {
         for (deliveryPerson in internalUserDataList) {
             if (deliveryPerson != null) {
-                dropdownDeliveryPersonItemMap[deliveryPerson.id.toString() + " - " + deliveryPerson.name + " " + deliveryPerson.surname] = deliveryPerson.documentId!!
+                dropdownDeliveryPersonItemMap[deliveryPerson.id.toString() + " - " + deliveryPerson.name + " " + deliveryPerson.surname] =
+                    deliveryPerson.documentId!!
                 dropdownDeliveryPersonItem.add(deliveryPerson.id.toString() + " - " + deliveryPerson.name + " " + deliveryPerson.surname)
             }
         }
@@ -423,6 +535,12 @@ class ModifyOrderFragment : BaseFragment() {
                 requireContext(), R.layout.component_dropdown_list_item, dropdownDeliveryPersonItem
             )
         )
+    }
+
+    private fun continueOrder(
+        updatedOrder: OrderData
+    ) {
+        modifyOrderViewModel.updateOrder(clientData.documentId!!, updatedOrder)
     }
 
     companion object {

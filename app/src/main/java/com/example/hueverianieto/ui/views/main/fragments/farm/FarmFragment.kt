@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import com.example.hueverianieto.R
+import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
@@ -25,6 +26,7 @@ class FarmFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         (activity as MainActivity).configNav(false)
+        (activity as BaseActivity).changeTopBarName("Granja")
         internalUserData = (activity as MainActivity).currentUserData
         binding =
             FragmentFarmBinding.bind(inflater.inflate(R.layout.fragment_farm, container, false))
@@ -32,7 +34,7 @@ class FarmFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
+        // Not necessary
     }
 
     override fun setObservers() {
@@ -56,11 +58,6 @@ class FarmFragment : BaseFragment() {
 
     override fun updateUI(state: BaseState) {
         // Not necessary
-    }
-
-    private fun setButtons() {
-        this.binding.finalProductControlButton.setText("Control prod. final")
-        this.binding.farmSituationMonitoringButton.setText("Seg. situación granja")
     }
 
 }

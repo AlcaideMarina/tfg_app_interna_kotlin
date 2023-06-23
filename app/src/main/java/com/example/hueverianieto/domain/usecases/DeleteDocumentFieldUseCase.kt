@@ -7,7 +7,7 @@ class DeleteDocumentFieldUseCase @Inject constructor(
     private val deleteDocumentFieldService: DeleteDocumentFieldService
 ) {
 
-    suspend operator fun invoke(documentId: String, collection: String) : Boolean =
+    suspend operator fun invoke(documentId: String, collection: String): Boolean =
         deleteDocumentFieldService.deleteDocumentField(documentId, collection)
 
 }

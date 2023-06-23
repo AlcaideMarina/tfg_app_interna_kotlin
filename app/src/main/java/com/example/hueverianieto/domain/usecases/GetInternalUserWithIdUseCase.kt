@@ -8,7 +8,7 @@ class GetInternalUserWithIdUseCase @Inject constructor(
     private val getInternalUserWithIdService: GetInternalUserWithIdService
 ) {
 
-    suspend operator fun invoke(documentId: String) : InternalUserData? =
+    suspend operator fun invoke(documentId: String): InternalUserData? =
         getInternalUserWithIdService.getInternalUserWithId(documentId)
 
 }

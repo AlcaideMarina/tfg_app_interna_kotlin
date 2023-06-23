@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.hueverianieto.R
 import com.example.hueverianieto.domain.model.finalproductcontrol.FPCContainerItemModel
 
-class ComponentMonthlyFPCAdapter (
+class ComponentMonthlyFPCAdapter(
     private val fpcContainerItemModelList: List<FPCContainerItemModel>
 ) : RecyclerView.Adapter<ComponentMonthlyFPCViewHolder>() {
 
@@ -15,9 +15,11 @@ class ComponentMonthlyFPCAdapter (
         viewType: Int
     ): ComponentMonthlyFPCViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return ComponentMonthlyFPCViewHolder(layoutInflater.inflate(
-            R.layout.component_billing_per_month_container, parent, false
-        ))
+        return ComponentMonthlyFPCViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_billing_per_month_container, parent, false
+            )
+        )
     }
 
     override fun getItemCount(): Int = fpcContainerItemModelList.size

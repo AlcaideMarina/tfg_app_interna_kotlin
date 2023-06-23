@@ -50,7 +50,7 @@
         android:checked="false"
         android:gravity="center"
         android:drawableStart="?android:attr/listChoiceIndicatorMultiple"
-        android:text="holaholahola"
+        android:text="Type something"
         android:layout_marginStart="@dimen/size24"
         android:paddingStart="12dp"
         android:paddingEnd="16dp"

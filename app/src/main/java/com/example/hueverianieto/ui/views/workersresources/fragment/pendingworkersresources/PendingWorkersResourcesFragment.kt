@@ -52,7 +52,10 @@ class PendingWorkersResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.pendingWorkersResourcesViewModel.workerList.observe(this) { internalUserDataList ->
             if (internalUserDataList == null) {
-                // TODO: ERROR
+                this.binding.workersRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
+                this.binding.containerWaringNoWorkers.setTitle("Error")
+                this.binding.containerWaringNoWorkers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 pendingWorkersList = mutableListOf()
                 for (internalUserData in internalUserDataList) {
@@ -80,7 +83,7 @@ class PendingWorkersResourcesFragment : BaseFragment() {
                     this.binding.workersRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoWorkers.visibility = View.VISIBLE
                     this.binding.containerWaringNoWorkers.setTitle("No hay usuarios con sueldo pendiente")
-                    this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios a los que le falte el sueldo en la base de datos")
+                    this.binding.containerWaringNoWorkers.setText("No hay registro de usuarios internos activos en la base de datos que estén pendientes de asignar el salario.")
                 } else {
                     initRecyclerView()
                 }
@@ -89,11 +92,11 @@ class PendingWorkersResourcesFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     override fun updateUI(state: BaseState) {
-        //TODO("Not yet implemented")
+        // Not necessary
     }
 
     private fun initRecyclerView() {
@@ -101,4 +104,5 @@ class PendingWorkersResourcesFragment : BaseFragment() {
         this.binding.workersRecyclerView.adapter = HNComponentWorkerAdapter(pendingWorkersList)
         this.binding.workersRecyclerView.setHasFixedSize(false)
     }
+
 }

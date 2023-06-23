@@ -9,9 +9,11 @@ class UpdateEggPricesUseCase @Inject constructor(
     private val updateConstantService: UpdateConstantService
 ) {
 
-    suspend operator fun invoke(eggPricesData: EggPricesData, userDocumentId: String) : Boolean {
+    suspend operator fun invoke(eggPricesData: EggPricesData, userDocumentId: String): Boolean {
         val map = DefaultConstantsUtils.eggPricesParcelizeToMap(eggPricesData)
-        return when(val result = updateConstantService.updateConstantService(map, "egg_prices", userDocumentId).getOrNull()) {
+        return when (val result =
+            updateConstantService.updateConstantService(map, "egg_prices", userDocumentId)
+                .getOrNull()) {
             null -> false
             else -> true
         }

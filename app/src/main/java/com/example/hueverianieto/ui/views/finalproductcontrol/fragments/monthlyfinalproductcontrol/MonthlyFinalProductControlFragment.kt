@@ -26,6 +26,8 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
     private val monthlyFinalProductControlViewModel: MonthlyFinalProductControlViewModel by viewModels()
 
+    private var lastLot = (0).toLong()
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,6 +48,7 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
 
     override fun configureUI() {
         this.monthlyFinalProductControlViewModel.getMonthlyFPCData()
+        this.monthlyFinalProductControlViewModel.getNextLot()
         lifecycleScope.launchWhenStarted {
             monthlyFinalProductControlViewModel.getMonthlyFPCData()
             monthlyFinalProductControlViewModel.viewState.collect { viewState ->
@@ -57,7 +60,10 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
     override fun setObservers() {
         this.monthlyFinalProductControlViewModel.monthlyFPCContainerModelList.observe(this) { monthlyFPCContainerModelList ->
             if (monthlyFPCContainerModelList == null) {
-                // TODO
+                this.binding.monthlyFpcRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoMonthlyFpc.visibility = View.VISIBLE
+                this.binding.containerWaringNoMonthlyFpc.setTitle("Error")
+                this.binding.containerWaringNoMonthlyFpc.setText("Se ha producido un error cuando se estaban actualizado los datos. Por favor, inténtelo de nuevo.")
             } else {
                 val list = mutableListOf<FPCContainerItemModel>()
                 for (item in monthlyFPCContainerModelList) {
@@ -77,18 +83,33 @@ class MonthlyFinalProductControlFragment : BaseFragment() {
                     }
                 }
                 if (list.isEmpty()) {
-                    // TODO
+                    this.binding.monthlyFpcRecyclerView.visibility = View.GONE
+                    this.binding.containerWaringNoMonthlyFpc.visibility = View.VISIBLE
+                    this.binding.containerWaringNoMonthlyFpc.setTitle("No hay registros")
+                    this.binding.containerWaringNoMonthlyFpc.setText("No hay registros en la base de datos.")
                 } else {
                     this.binding.monthlyFpcRecyclerView.layoutManager = LinearLayoutManager(context)
                     this.binding.monthlyFpcRecyclerView.adapter = ComponentMonthlyFPCAdapter(list)
                     this.binding.monthlyFpcRecyclerView.visibility = View.VISIBLE
+                    this.binding.containerWaringNoMonthlyFpc.visibility = View.GONE
                 }
             }
+        }
+        this.monthlyFinalProductControlViewModel.lot.observe(this) { lot ->
+            lastLot = (lot).toLong()
         }
     }
 
     override fun setListeners() {
-        //TODO("Not yet implemented")
+        this.binding.addButton.setOnClickListener {
+            this.monthlyFinalProductControlViewModel.navigateToNewFPC(
+                this.view,
+                bundleOf(
+                    "currentUserData" to currentUserData,
+                    "lastLot" to lastLot
+                )
+            )
+        }
     }
 
     override fun updateUI(state: BaseState) {

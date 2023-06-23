@@ -5,6 +5,6 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class ComponentDailyDivisionDateFilter (
+data class ComponentDailyDivisionDateFilter(
     val situationDatetime: Timestamp
 ) : Parcelable

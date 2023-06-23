@@ -13,7 +13,6 @@ import com.example.hueverianieto.data.models.remote.ClientData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.GetAllInternalUsersUseCase
 import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewModel
-import com.example.hueverianieto.ui.views.workersresources.fragment.allworkersresources.AllWorkersResourcesViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -36,7 +35,8 @@ class PendingWorkersResourcesViewModel @Inject constructor(
             _viewState.value = PendingWorkersResourcesViewState(isLoading = true)
             when (val result = getAllInternalUsersUseCase(false)) {
                 null -> {
-                    _viewState.value = PendingWorkersResourcesViewState(isLoading = false, error = true)
+                    _viewState.value =
+                        PendingWorkersResourcesViewState(isLoading = false, error = true)
                     _workerList.value = listOf()
                 }
                 listOf<ClientData>() -> {
@@ -53,10 +53,12 @@ class PendingWorkersResourcesViewModel @Inject constructor(
     }
 
     fun navigateToWorkerDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_pendingWorkersResourcesFragment_to_workerDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_pendingWorkersResourcesFragment_to_workerDetailFragment, bundle)
             ?: Log.e(
                 AllWorkersResourcesViewModel::class.simpleName,
                 "Error en la navegación a trabajadores pendientes"
             )
     }
+
 }

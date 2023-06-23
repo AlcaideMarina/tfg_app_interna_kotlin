@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
     android:padding="@dimen/size16"
-    android:layout_marginTop="@dimen/size8">
+    android:layout_marginBottom="@dimen/size8">
 
     <LinearLayout
         android:id="@+id/texts_linear_layout"
@@ -30,7 +30,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/size8">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,7 +45,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:contentDescription="Ver usuario"
-                    android:src="@drawable/ic_next_arrow" />
+                    android:src="@drawable/ic_right" />
 
                 <TextView
                     android:id="@+id/accepted_eggs_text"
@@ -75,7 +76,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:contentDescription="Ver usuario"
-                    android:src="@drawable/ic_next_arrow" />
+                    android:src="@drawable/ic_wrong" />
 
                 <TextView
                     android:id="@+id/rejected_eggs_text"

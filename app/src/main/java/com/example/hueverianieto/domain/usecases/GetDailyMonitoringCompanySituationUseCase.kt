@@ -10,8 +10,10 @@ class GetDailyMonitoringCompanySituationUseCase @Inject constructor(
     private val getDailyMonitoringCompanySituationService: GetDailyMonitoringCompanySituationService
 ) {
 
-    suspend operator fun invoke(timestamp: Timestamp) : MonitoringCompanySituationData? =
-        when(val result = getDailyMonitoringCompanySituationService.getDailyMonitoringCompanySituation(timestamp).getOrNull()) {
+    suspend operator fun invoke(timestamp: Timestamp): MonitoringCompanySituationData? =
+        when (val result =
+            getDailyMonitoringCompanySituationService.getDailyMonitoringCompanySituation(timestamp)
+                .getOrNull()) {
             null -> null
             else -> {
                 if (!result.isEmpty && result.documents.isNotEmpty()) {
@@ -22,6 +24,5 @@ class GetDailyMonitoringCompanySituationUseCase @Inject constructor(
                 } else null
             }
         }
-
 
 }

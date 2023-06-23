@@ -27,19 +27,24 @@ class WeeklyMonitoringCompanySituationViewModel @Inject constructor(
     private val _viewState = MutableStateFlow(WeeklyMonitoringCompanySituationViewState())
     val viewState: StateFlow<WeeklyMonitoringCompanySituationViewState> get() = _viewState
 
-    private val _weeklyMonitoringCompanySituationData = MutableLiveData<WeeklyMonitoringCompanySituationData?>()
+    private val _weeklyMonitoringCompanySituationData =
+        MutableLiveData<WeeklyMonitoringCompanySituationData?>()
     val weeklyMonitoringCompanySituationData: LiveData<WeeklyMonitoringCompanySituationData?> get() = _weeklyMonitoringCompanySituationData
 
     fun getWeeklyMonitoringCompanySituation(initTimestamp: Timestamp, endTimestamp: Timestamp) {
         viewModelScope.launch {
             _viewState.value = WeeklyMonitoringCompanySituationViewState(isLoading = true)
-            _weeklyMonitoringCompanySituationData.value = getWeeklyMonitoringCompanySituationUseCase(initTimestamp, endTimestamp)
+            _weeklyMonitoringCompanySituationData.value =
+                getWeeklyMonitoringCompanySituationUseCase(initTimestamp, endTimestamp)
             _viewState.value = WeeklyMonitoringCompanySituationViewState(isLoading = false)
         }
     }
 
     fun navigateToDailyMonitoringCompanySituation(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_weeklyMonitoringCompanySituationFragment_to_dailyMonitoringCompanySituationFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_weeklyMonitoringCompanySituationFragment_to_dailyMonitoringCompanySituationFragment,
+            bundle
+        )
             ?: Log.e(
                 MonthlyMonitoringCompanySituationViewModel::class.java.simpleName,
                 "Error a la navegación de seguimiento de situación de la empresa - vista semanal"

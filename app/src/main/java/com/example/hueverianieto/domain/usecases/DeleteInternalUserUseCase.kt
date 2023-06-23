@@ -7,7 +7,7 @@ class DeleteInternalUserUseCase @Inject constructor(
     private val deleteInternalUserService: DeleteInternalUserService
 ) {
 
-    suspend operator fun invoke(documentId: String) : Boolean =
+    suspend operator fun invoke(documentId: String): Boolean =
         deleteInternalUserService.deleteInternalUser(documentId)
 
 }

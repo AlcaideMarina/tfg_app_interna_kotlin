@@ -4,7 +4,7 @@ import com.example.hueverianieto.data.services.GetClientWithIdService
 import javax.inject.Inject
 
 class GetClientWithIdUseCase @Inject constructor(
-    private val getClientWithIdService : GetClientWithIdService
+    private val getClientWithIdService: GetClientWithIdService
 ) {
 
     suspend operator fun invoke(clientId: Long) =

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/bg_red_gray_secondary_rounded_16_dp"
     android:padding="@dimen/size16"
     android:layout_marginTop="@dimen/size8">
@@ -21,33 +22,75 @@
             android:layout_weight="0.8"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/id_text"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="ID"
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="ID:"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_color"/>
+
+                <TextView
+                    android:id="@+id/id_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_color"
+                    tools:text="ID" />
+
+            </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/divider_1"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:background="@color/red_gray_light_secondary_color"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintTop_toBottomOf="@id/buttons_container"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
             <TextView
                 android:id="@+id/name_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Nombre"
-                android:textSize="16sp" />
+                android:layout_marginTop="8dp"
+                tools:text="Nombre"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black_color" />
 
-            <TextView
-                android:id="@+id/cif_text"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="CIF: "
-                android:textSize="16sp" />
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="8dp">
 
-            <TextView
-                android:id="@+id/actual_order_text"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="Pedido actual: "
-                android:textSize="16sp" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:text="CIF:"
+                    android:textSize="16sp"
+                    android:layout_marginEnd="8dp"
+                    android:textStyle="bold"
+                    android:textColor="@color/black_color"/>
+
+                <TextView
+                    android:id="@+id/cif_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="16sp"
+                    android:textColor="@color/black_color"
+                    tools:text="CIF" />
+
+            </LinearLayout>
 
         </LinearLayout>
 

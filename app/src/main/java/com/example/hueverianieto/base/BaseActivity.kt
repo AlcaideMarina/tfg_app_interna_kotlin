@@ -76,7 +76,7 @@ abstract class BaseActivity : AppCompatActivity() {
     fun configNav(setHome: Boolean) {
         supportActionBar?.setDisplayHomeAsUpEnabled(setHome)
     }
-    
+
     fun changeTopBarName(newName: String) {
         supportActionBar?.title = newName
     }

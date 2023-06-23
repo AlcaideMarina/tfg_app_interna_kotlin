@@ -2,7 +2,7 @@ package com.example.hueverianieto.ui.views.boxesandcartonsresources.fragments.mo
 
 import com.example.hueverianieto.base.BaseState
 
-class ModifyBoxesAndCartonsResourcesViewState (
+class ModifyBoxesAndCartonsResourcesViewState(
     var isLoading: Boolean = false,
     var error: Boolean = false,
     var isEmpty: Boolean = false

@@ -1,6 +1,6 @@
 package com.example.hueverianieto.data.models.local
 
-data class DBOrderFieldData (
+data class DBOrderFieldData(
     // XL - box
     var xlBoxPrice: Number? = null,
     var xlBoxQuantity: Number? = 0,

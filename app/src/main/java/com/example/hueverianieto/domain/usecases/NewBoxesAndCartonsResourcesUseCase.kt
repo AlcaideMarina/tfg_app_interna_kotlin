@@ -9,9 +9,9 @@ class NewBoxesAndCartonsResourcesUseCase @Inject constructor(
     private val newDocumentService: NewDocumentService
 ) {
 
-    suspend operator fun invoke(bcResourcesData: BoxesAndCartonsResourcesData) : Boolean {
+    suspend operator fun invoke(bcResourcesData: BoxesAndCartonsResourcesData): Boolean {
         val dataMap = MaterialUtils.boxesAndCartonsParcelableToMap(bcResourcesData)
-        return when(newDocumentService.newDocument("material_boxes_and_cartons", dataMap)
+        return when (newDocumentService.newDocument("material_boxes_and_cartons", dataMap)
             .getOrNull()) {
             null -> false
             else -> true

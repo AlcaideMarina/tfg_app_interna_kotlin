@@ -16,13 +16,10 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.ElectricityWaterGasResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentElectricityWaterGasResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesFragmentArgs
 import com.example.hueverianieto.utils.Constants
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
@@ -34,7 +31,7 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
 
     private lateinit var alertDialog: HNModalDialog
 
-    private var dropdownTypesItems : MutableList<String> = mutableListOf()
+    private var dropdownTypesItems: MutableList<String> = mutableListOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -87,17 +84,21 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
                 { alertDialog.cancel() },
                 {
                     alertDialog.cancel()
-                    val typeSelected : Int? = when(this.binding.typeAutoCompleteTextView.text.toString()) {
-                        resources.getString(R.string.electricity) -> R.string.electricity
-                        resources.getString(R.string.water) -> R.string.water
-                        resources.getString(R.string.gas) -> R.string.gas
-                        else -> null
-                    }
-                    if(typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
-                            this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                    val typeSelected: Int? =
+                        when (this.binding.typeAutoCompleteTextView.text.toString()) {
+                            resources.getString(R.string.electricity) -> R.string.electricity
+                            resources.getString(R.string.water) -> R.string.water
+                            resources.getString(R.string.gas) -> R.string.gas
+                            else -> null
+                        }
+                    if (typeSelected != null && this.binding.totalPriceTextInputLayout.text != null &&
+                        this.binding.totalPriceTextInputLayout.text.toString() != ""
+                    ) {
                         this.ewgResourcesData.type = Constants.ewgTypes[typeSelected]!!.toLong()
-                        this.ewgResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
-                        this.ewgResourcesData.notes = (this.binding.notesTextInputLayout.text ?: "").toString()
+                        this.ewgResourcesData.totalPrice =
+                            this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                        this.ewgResourcesData.notes =
+                            (this.binding.notesTextInputLayout.text ?: "").toString()
 
                         this.modifyElectricityWaterGasResourcesViewModel.updateEWG(
                             this.ewgResourcesData
@@ -127,8 +128,8 @@ class ModifyElectricityWaterGasResourcesFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
+        this.binding.saveButtonText.text = "Guardar"
+        this.binding.cancelButtonText.text = "Cancelar"
     }
 
     private fun setText() {

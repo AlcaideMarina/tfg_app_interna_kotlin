@@ -10,7 +10,7 @@ class GetBoxesAndCartonsService @Inject constructor(
     private val firebaseClient: FirebaseClient
 ) {
 
-    suspend fun getBoxesAndCartons() : List<BoxesAndCartonsResourcesData?>? = runCatching {
+    suspend fun getBoxesAndCartons(): List<BoxesAndCartonsResourcesData?>? = runCatching {
         firebaseClient.db
             .collection("material_boxes_and_cartons")
             .whereEqualTo("deleted", false)
@@ -18,19 +18,21 @@ class GetBoxesAndCartonsService @Inject constructor(
             .await()
     }.toBoxesAndCartonsResourcesData()
 
-    private fun Result<QuerySnapshot>.toBoxesAndCartonsResourcesData() = when(val result = getOrNull()) {
-        null -> null
-        else -> {
-            val list = mutableListOf<BoxesAndCartonsResourcesData>()
-            if (!result.isEmpty && result.documents.size > 0) {
-                for (document in result) {
-                    val data = document.data
-                    val bcResourcesData = MaterialUtils.boxesAndCartonsMapToParcelable(data, document.id)
-                    list.add(bcResourcesData)
+    private fun Result<QuerySnapshot>.toBoxesAndCartonsResourcesData() =
+        when (val result = getOrNull()) {
+            null -> null
+            else -> {
+                val list = mutableListOf<BoxesAndCartonsResourcesData>()
+                if (!result.isEmpty && result.documents.size > 0) {
+                    for (document in result) {
+                        val data = document.data
+                        val bcResourcesData =
+                            MaterialUtils.boxesAndCartonsMapToParcelable(data, document.id)
+                        list.add(bcResourcesData)
+                    }
                 }
+                list
             }
-            list
         }
-    }
 
 }

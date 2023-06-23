@@ -16,21 +16,52 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginHorizontal="@dimen/size32">
+            android:orientation="vertical">
 
-            <com.example.hueverianieto.ui.components.HNButton
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/deleted_fpc_button"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="50dp"
+                android:background="@drawable/bg_squared_button"
+                android:layout_marginHorizontal="@dimen/size24"
+                android:layout_marginTop="@dimen/size16"
+                android:layout_marginBottom="@dimen/size16"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/password_text_input_layout">
+
+                <TextView
+                    android:id="@+id/button_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/size24"
+                    android:textColor="@color/white_color"
+                    android:textSize="14dp"
+                    android:text="Eliminados"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/size1"
+                android:background="@color/light_gray_color2" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/daily_fpc_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size16"
+                android:paddingTop="@dimen/size16"
+                android:paddingBottom="@dimen/size8"
+                android:paddingHorizontal="@dimen/size24"
                 android:visibility="gone"
-                android:nestedScrollingEnabled="false"/>
+                android:nestedScrollingEnabled="false" />
 
             <com.example.hueverianieto.ui.components.HNWarningContainer
                 android:id="@+id/container_waring_no_daily_fpc"
@@ -64,7 +95,10 @@
         android:layout_height="56dp"
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@drawable/ic_launcher_background"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="@color/red_primary_color"
+        app:borderWidth="0dp"
+        app:tint="@color/white_color"
         app:layout_anchorGravity="top|end"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

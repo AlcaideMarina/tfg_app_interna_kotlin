@@ -10,13 +10,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginHorizontal="@dimen/size32">
+        android:layout_marginHorizontal="@dimen/size24">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/clients_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/size8"
+            android:layout_marginTop="@dimen/size16"
+            android:layout_marginBottom="@dimen/size8"
             android:nestedScrollingEnabled="false"/>
 
         <com.example.hueverianieto.ui.components.HNWarningContainer

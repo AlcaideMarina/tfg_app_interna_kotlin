@@ -5,11 +5,10 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentClientBinding
 
-class HNComponentClients: ConstraintLayout, BaseComponent {
+class HNComponentClients : ConstraintLayout, BaseComponent {
 
     private var binding: ComponentClientBinding = ComponentClientBinding.inflate(
         LayoutInflater.from(this.context)
@@ -47,9 +46,5 @@ class HNComponentClients: ConstraintLayout, BaseComponent {
 
     fun setCifText(cifText: String) {
         this.binding.cifText.text = cifText
-    }
-
-    fun setActualOrderText(actualOrderText: String) {
-        this.binding.actualOrderText.text = actualOrderText
     }
 }

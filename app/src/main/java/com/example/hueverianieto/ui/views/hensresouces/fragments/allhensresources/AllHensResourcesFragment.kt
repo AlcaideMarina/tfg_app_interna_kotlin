@@ -12,17 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
-import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllHensResourcesBinding
-import com.example.hueverianieto.domain.model.componentclientmodel.ComponentClientBillingModel
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
-import com.example.hueverianieto.ui.components.componentclientbilling.ComponentClientBillingAdapter
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
-import com.example.hueverianieto.ui.views.clientsbilling.fragments.clientsbilling.ClientsBillingViewState
 import com.example.hueverianieto.ui.views.hensresouces.HensResourcesActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.observeOn
 
 @AndroidEntryPoint
 class AllHensResourcesFragment : BaseFragment() {
@@ -63,10 +58,13 @@ class AllHensResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allHensResourcesViewModel.hensList.observe(this) { hensResourcesDataList ->
             if (hensResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.hensRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 hensDataList = mutableListOf()
-                for (hensResourcesData in hensResourcesDataList)  {
+                for (hensResourcesData in hensResourcesDataList) {
                     if (hensResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             hensResourcesData.expenseDatetime,
@@ -88,8 +86,8 @@ class AllHensResourcesFragment : BaseFragment() {
                 if (hensDataList.isEmpty()) {
                     this.binding.hensRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoOrders.visibility = View.VISIBLE
-                    this.binding.containerWaringNoOrders.setTitle("No hay clientes")
-                    this.binding.containerWaringNoOrders.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoOrders.setTitle("No hay recursos")
+                    this.binding.containerWaringNoOrders.setText("No hay registro de recursos de gallinas sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

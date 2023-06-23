@@ -31,7 +31,7 @@ class ClientsBillingViewModel @Inject constructor(
     fun getClientsData() {
         viewModelScope.launch {
             _viewState.value = ClientsBillingViewState(isLoading = true)
-            when (val result : List<ClientData?>? = getAllClientsUseCase(false)) {
+            when (val result: List<ClientData?>? = getAllClientsUseCase(false)) {
                 null -> {
                     _viewState.value = ClientsBillingViewState(isLoading = false, error = true)
                     _clientList.value = listOf()
@@ -50,7 +50,8 @@ class ClientsBillingViewModel @Inject constructor(
 
     fun navigateToClientBillingPerMonth(view: View?, bundle: Bundle) {
         view?.findNavController()?.navigate(
-            R.id.action_clientsBillingFragment_to_billingPerMonthFragment, bundle)
+            R.id.action_clientsBillingFragment_to_billingPerMonthFragment, bundle
+        )
             ?: Log.e(
                 ClientsBillingViewModel::class.simpleName,
                 "Error en la navegación a facturación mensual"

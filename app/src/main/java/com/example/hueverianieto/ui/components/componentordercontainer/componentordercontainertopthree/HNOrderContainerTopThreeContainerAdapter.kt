@@ -7,13 +7,19 @@ import com.example.hueverianieto.R
 import com.example.hueverianieto.data.models.local.OrderContainerModel
 import com.example.hueverianieto.ui.components.componentordercontainer.HNOrderContainerViewHolder
 
-class HNOrderContainerTopThreeContainerAdapter (
+class HNOrderContainerTopThreeContainerAdapter(
     private val orderContainerModelList: List<OrderContainerModel>
 ) : RecyclerView.Adapter<HNOrderContainerViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HNOrderContainerViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        return HNOrderContainerViewHolder(layoutInflater.inflate(R.layout.component_order_container, parent, false))
+        return HNOrderContainerViewHolder(
+            layoutInflater.inflate(
+                R.layout.component_order_container,
+                parent,
+                false
+            )
+        )
     }
 
     override fun getItemCount(): Int {

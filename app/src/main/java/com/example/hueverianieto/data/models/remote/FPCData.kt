@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class FPCData (
+class FPCData(
     var acceptedEggs: Long,
     var bestBeforeDatetime: Timestamp,
     var createdBy: String,

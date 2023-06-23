@@ -3,7 +3,7 @@
 
     <item android:state_enabled="true">
         <shape>
-            <corners android:radius="8dp" />
+            <corners android:radius="16dp" />
             <solid android:color="@color/red_gray_light_secondary_color" />
             <stroke android:color="@color/red_primary_color" android:width="2dp" />
         </shape>
@@ -11,7 +11,7 @@
 
     <item android:state_enabled="false">
         <shape>
-            <corners android:radius="8dp" />
+            <corners android:radius="16dp" />
             <solid android:color="@color/gray_color" />
             <stroke android:color="@color/red_primary_color" android:width="2dp" />
         </shape>
@@ -19,7 +19,7 @@
 
     <item android:state_pressed="true">
         <shape>
-            <corners android:radius="8dp" />
+            <corners android:radius="16dp" />
             <solid android:color="@color/red_gray_secondary_color" />
             <stroke android:color="@color/red_primary_color" android:width="2dp" />
 

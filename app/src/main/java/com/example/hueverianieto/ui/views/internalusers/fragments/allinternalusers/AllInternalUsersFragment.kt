@@ -9,28 +9,18 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
-import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
-import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
 import com.example.hueverianieto.databinding.FragmentAllInternalUsersBinding
-import com.example.hueverianieto.ui.views.clients.AllClientsActivity
-import com.example.hueverianieto.ui.views.main.fragments.usersandclients.UsersAndClientsFragment
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsFragment
-import com.example.hueverianieto.ui.views.clients.fragments.allclients.AllClientsViewState
+import com.example.hueverianieto.domain.model.componentinternaluser.ComponentInternalUserModel
+import com.example.hueverianieto.ui.components.componentinternaluseradapter.ComponentInternalUserAdapter
 import com.example.hueverianieto.ui.views.internalusers.AllInternalUsersActivity
 import com.example.hueverianieto.utils.Constants
-import com.example.hueverianieto.utils.InternalUserUtils
 import com.example.hueverianieto.utils.Utils
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllInternalUsersFragment : BaseFragment() {
@@ -39,7 +29,7 @@ class AllInternalUsersFragment : BaseFragment() {
     private lateinit var currentUserData: InternalUserData
 
     private var internalUserList: MutableList<ComponentInternalUserModel> = mutableListOf()
-    private val allInternalUsersViewModel : AllInternalUsersViewModel by viewModels()
+    private val allInternalUsersViewModel: AllInternalUsersViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -58,8 +48,7 @@ class AllInternalUsersFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        this.binding.newInternalUserButton.setText("Nuevo")
-        this.binding.deletedInternalUsersButton.setText("Usuarios eliminados")
+        this.binding.deletedUsersButtonText.setText("Usuarios eliminados")
         this.allInternalUsersViewModel.getInternalUserData()
         lifecycleScope.launchWhenStarted {
             allInternalUsersViewModel.viewState.collect { viewState ->
@@ -71,7 +60,10 @@ class AllInternalUsersFragment : BaseFragment() {
     override fun setObservers() {
         allInternalUsersViewModel.internalUserList.observe(this) { internalUserDataList ->
             if (internalUserDataList == null) {
-                // TODO: ERROR
+                this.binding.internalUsersRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoInternalUsers.visibility = View.VISIBLE
+                this.binding.containerWaringNoInternalUsers.setTitle("Error")
+                this.binding.containerWaringNoInternalUsers.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 internalUserList = mutableListOf()
                 for (internalUserData in internalUserDataList) {
@@ -81,7 +73,12 @@ class AllInternalUsersFragment : BaseFragment() {
                             internalUserData.name,
                             internalUserData.surname,
                             internalUserData.dni,
-                            requireContext().getString(Utils.getKey(Constants.roles, internalUserData.position.toInt())!!)
+                            requireContext().getString(
+                                Utils.getKey(
+                                    Constants.roles,
+                                    internalUserData.position.toInt()
+                                )!!
+                            )
                         ) {
                             this.allInternalUsersViewModel.navigateToInternalUserDetail(
                                 this.view,
@@ -107,7 +104,7 @@ class AllInternalUsersFragment : BaseFragment() {
     }
 
     override fun setListeners() {
-        this.binding.deletedInternalUsersButton.setOnClickListener {
+        this.binding.deletedUsersButton.setOnClickListener {
             this.allInternalUsersViewModel.navigateDeleteInternalUsers(
                 this.view,
                 bundleOf(
@@ -115,7 +112,7 @@ class AllInternalUsersFragment : BaseFragment() {
                 )
             )
         }
-        this.binding.newInternalUserButton.setOnClickListener {
+        this.binding.newUserButton.setOnClickListener {
             this.allInternalUsersViewModel.navigateToNewInternalUsers(
                 this.view,
                 bundleOf(
@@ -144,7 +141,8 @@ class AllInternalUsersFragment : BaseFragment() {
 
     private fun initRecyclerView() {
         this.binding.internalUsersRecyclerView.layoutManager = LinearLayoutManager(context)
-        this.binding.internalUsersRecyclerView.adapter = ComponentInternalUserAdapter(internalUserList)
+        this.binding.internalUsersRecyclerView.adapter =
+            ComponentInternalUserAdapter(internalUserList)
         this.binding.internalUsersRecyclerView.setHasFixedSize(false)
     }
 

@@ -13,11 +13,12 @@ import com.example.hueverianieto.base.BaseComponent
 import com.example.hueverianieto.databinding.ComponentMonthYearPickerDialogBinding
 import java.util.*
 
-class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
+open class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
 
-    private var binding: ComponentMonthYearPickerDialogBinding = ComponentMonthYearPickerDialogBinding.inflate(
-        LayoutInflater.from(this.context)
-    )
+    private var binding: ComponentMonthYearPickerDialogBinding =
+        ComponentMonthYearPickerDialogBinding.inflate(
+            LayoutInflater.from(this.context)
+        )
     private lateinit var alertDialog: AlertDialog
 
     constructor(context: Context) : super(context)
@@ -36,7 +37,20 @@ class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
 
     private val MAX_YEAR = 3000
     private val MIN_YEAR = 1950
-    private val MONTH_TEXT_ARRAY = arrayOf("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre")
+    private val MONTH_TEXT_ARRAY = arrayOf(
+        "Enero",
+        "Febrero",
+        "Marzo",
+        "Abril",
+        "Mayo",
+        "Junio",
+        "Julio",
+        "Agosto",
+        "Septiembre",
+        "Octubre",
+        "Noviembre",
+        "Diciembre"
+    )
 
     interface OnDateSetListener {
         fun onDateSet(year: Int, month: Int)
@@ -50,7 +64,7 @@ class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
         return this
     }
 
-    open fun show(context: Context, rightListener: View.OnClickListener) {
+    open fun show(context: Context, rightListener: OnClickListener) {
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         this.binding = ComponentMonthYearPickerDialogBinding.inflate(inflater)
 
@@ -93,11 +107,11 @@ class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
         this.alertDialog.cancel()
     }
 
-    fun getMonthPicker() : NumberPicker {
+    fun getMonthPicker(): NumberPicker {
         return this.binding.monthNumberPicker
     }
 
-    fun getYearPicker() : NumberPicker {
+    fun getYearPicker(): NumberPicker {
         return this.binding.yearNumberPicker
     }
 
@@ -107,10 +121,6 @@ class HNMonthYearPickerDialog : ConstraintLayout, BaseComponent {
 
     private fun setModalDialogRightButtonListener(listener: OnClickListener) {
         this.binding.acceptButton.setOnClickListener(listener)
-    }
-
-    private fun getMonthSelectedValue() {
-        // TODO
     }
 
 }

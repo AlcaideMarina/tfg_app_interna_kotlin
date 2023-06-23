@@ -7,7 +7,7 @@ class CreateAuthUserUseCase @Inject constructor(
     private val createAuthUserService: CreateAuthUserService
 ) {
 
-    suspend operator fun invoke(email: String, password: String) : String? =
+    suspend operator fun invoke(email: String, password: String): String? =
         createAuthUserService.createAuthUser(email, password)
 
 }

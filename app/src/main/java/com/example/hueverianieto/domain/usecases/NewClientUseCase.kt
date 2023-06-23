@@ -8,7 +8,7 @@ class NewClientUseCase @Inject constructor(
     private val newClientService: NewClientService
 ) {
 
-    suspend operator fun invoke(clientData: ClientData) : Boolean =
+    suspend operator fun invoke(clientData: ClientData): Boolean =
         newClientService.addNewClient(clientData)
 
 }

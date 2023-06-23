@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.domain.usecases.UpdateFirestoreUserUseCase
-import com.example.hueverianieto.ui.views.clients.fragments.modifyclient.ModifyClientViewState
 import com.example.hueverianieto.utils.InternalUserUtils
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,12 +29,14 @@ class ModifyInternalUserViewModel @Inject constructor(
     fun updateUser(internalUserData: InternalUserData) {
         viewModelScope.launch {
             _viewState.value = ModifyInternalUserViewState(isLoading = true)
-            if(Utils.isValidEmail(internalUserData.email)) {
+            if (Utils.isValidEmail(internalUserData.email)) {
                 val internalUserDataMap = InternalUserUtils.parcelableToMap(internalUserData)
                 when (val result = updateFirestoreUserUseCase(
-                    internalUserDataMap, internalUserData.documentId!!, "user_info")) {
+                    internalUserDataMap, internalUserData.documentId!!, "user_info"
+                )) {
                     false -> {
-                        _viewState.value = ModifyInternalUserViewState(isLoading = false, error = true)
+                        _viewState.value =
+                            ModifyInternalUserViewState(isLoading = false, error = true)
                         _alertDialog.value = AlertOkData(
                             "Error",
                             "Se ha producido un error cuando se estaban actualizado los datos del cliente. Por favor, revise los datos e inténtelo de nuevo.",
@@ -43,7 +44,8 @@ class ModifyInternalUserViewModel @Inject constructor(
                         )
                     }
                     true -> {
-                        _viewState.value = ModifyInternalUserViewState(isLoading = false, error = false)
+                        _viewState.value =
+                            ModifyInternalUserViewState(isLoading = false, error = false)
                         _alertDialog.value = AlertOkData(
                             "Cliente actualizado",
                             "Los datos del cliente se han actualizado correctamente.",

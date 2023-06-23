@@ -2,9 +2,9 @@ package com.example.hueverianieto.ui.components.rowtextinputlayout
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hueverianieto.databinding.ComponentRowTextInputLayoutBinding
 import com.example.hueverianieto.domain.model.textinputlayout.RowTextInputLayoutModel
 import com.example.hueverianieto.domain.model.textinputlayout.TextInputLayoutModel
-import com.example.hueverianieto.databinding.ComponentRowTextInputLayoutBinding
 
 class RowTextInputLayoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
@@ -25,13 +25,13 @@ class RowTextInputLayoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         leftTextInputLayoutModel.inputText?.let { inputText ->
             this.binding.leftTextInputLayout.setInputText(inputText)
         }
-        leftTextInputLayoutModel.inputType?.let {inputType ->
+        leftTextInputLayoutModel.inputType?.let { inputType ->
             this.binding.leftTextInputLayout.setInputType(inputType)
         }
-        leftTextInputLayoutModel.transformationMethod?.let {transformationMethod ->
+        leftTextInputLayoutModel.transformationMethod?.let { transformationMethod ->
             this.binding.leftTextInputLayout.setTransformationMethod(transformationMethod)
         }
-        leftTextInputLayoutModel.maxLines?.let {maxLines ->
+        leftTextInputLayoutModel.maxLines?.let { maxLines ->
             this.binding.leftTextInputLayout.setMaxLines(maxLines)
         }
         if (leftTextInputLayoutModel.hintText != null) {
@@ -44,7 +44,7 @@ class RowTextInputLayoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         leftTextInputLayoutModel.radius?.let { radius ->
             this.binding.leftTextInputLayout.setBoxCornerRadii(radius, radius, radius, radius)
         }
-        leftTextInputLayoutModel.strokeColor?.let {strokeColor ->
+        leftTextInputLayoutModel.strokeColor?.let { strokeColor ->
             this.binding.leftTextInputLayout.setStrokeColor(strokeColor)
         }
     }
@@ -53,13 +53,13 @@ class RowTextInputLayoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         rightTextInputLayoutModel.inputText?.let { inputText ->
             this.binding.rightTextInputLayout.setInputText(inputText)
         }
-        rightTextInputLayoutModel.inputType?.let {inputType ->
+        rightTextInputLayoutModel.inputType?.let { inputType ->
             this.binding.rightTextInputLayout.setInputType(inputType)
         }
-        rightTextInputLayoutModel.transformationMethod?.let {transformationMethod ->
+        rightTextInputLayoutModel.transformationMethod?.let { transformationMethod ->
             this.binding.rightTextInputLayout.setTransformationMethod(transformationMethod)
         }
-        rightTextInputLayoutModel.maxLines?.let {maxLines ->
+        rightTextInputLayoutModel.maxLines?.let { maxLines ->
             this.binding.rightTextInputLayout.setMaxLines(maxLines)
         }
         if (rightTextInputLayoutModel.hintText != null) {
@@ -72,7 +72,7 @@ class RowTextInputLayoutViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         rightTextInputLayoutModel.radius?.let { radius ->
             this.binding.rightTextInputLayout.setBoxCornerRadii(radius, radius, radius, radius)
         }
-        rightTextInputLayoutModel.strokeColor?.let {strokeColor ->
+        rightTextInputLayoutModel.strokeColor?.let { strokeColor ->
             this.binding.rightTextInputLayout.setStrokeColor(strokeColor)
         }
     }

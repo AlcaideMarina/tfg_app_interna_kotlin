@@ -32,13 +32,14 @@ class AllWorkersResourcesViewModel @Inject constructor(
     fun getAllWorkers() {
         viewModelScope.launch {
             _viewState.value = AllWorkersResourcesViewState(isLoading = true)
-            when(val result = getAllInternalUsersUseCase(false)) {
+            when (val result = getAllInternalUsersUseCase(false)) {
                 null -> {
                     _viewState.value = AllWorkersResourcesViewState(isLoading = false, error = true)
                     _workerList.value = listOf()
                 }
                 listOf<ClientData>() -> {
-                    _viewState.value = AllWorkersResourcesViewState(isLoading = false, isEmpty = false)
+                    _viewState.value =
+                        AllWorkersResourcesViewState(isLoading = false, isEmpty = false)
                     _workerList.value = listOf()
                 }
                 else -> {
@@ -50,7 +51,10 @@ class AllWorkersResourcesViewModel @Inject constructor(
     }
 
     fun navigateToPendingWorkers(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allWorkersResourcesFragment_to_pendingWorkersResourcesFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_allWorkersResourcesFragment_to_pendingWorkersResourcesFragment,
+            bundle
+        )
             ?: Log.e(
                 AllWorkersResourcesViewModel::class.simpleName,
                 "Error en la navegación a trabajadores pendientes"
@@ -58,7 +62,8 @@ class AllWorkersResourcesViewModel @Inject constructor(
     }
 
     fun navigateToWorkerDetail(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_allWorkersResourcesFragment_to_workerDetailFragment, bundle)
+        view?.findNavController()
+            ?.navigate(R.id.action_allWorkersResourcesFragment_to_workerDetailFragment, bundle)
             ?: Log.e(
                 AllWorkersResourcesViewModel::class.simpleName,
                 "Error en la navegación a trabajadores pendientes"

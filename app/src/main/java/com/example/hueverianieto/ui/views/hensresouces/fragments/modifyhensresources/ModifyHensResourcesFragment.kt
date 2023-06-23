@@ -14,11 +14,9 @@ import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.HensResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentWorkersDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class ModifyHensResourcesFragment : BaseFragment() {
@@ -107,8 +105,10 @@ class ModifyHensResourcesFragment : BaseFragment() {
                 { alertDialog.cancel() },
                 {
                     alertDialog.cancel()
-                    hensResourcesData.totalPrice = this.binding.totalPriceTextInputLayout.text.toString().toDouble()
-                    hensResourcesData.hensNumber = this.binding.quantityTextInputLayout.text.toString().toLong()
+                    hensResourcesData.totalPrice =
+                        this.binding.totalPriceTextInputLayout.text.toString().toDouble()
+                    hensResourcesData.hensNumber =
+                        this.binding.quantityTextInputLayout.text.toString().toLong()
                     this.modifyHensResourcesViewModel.updateHens(hensResourcesData)
                 }
             )
@@ -124,8 +124,8 @@ class ModifyHensResourcesFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Guardar")
-        this.binding.cancelButton.setText("Cancelar")
+        this.binding.saveButtonText.text = "Guardar"
+        this.binding.cancelButtonText.text = "Cancelar"
     }
 
     private fun setText() {

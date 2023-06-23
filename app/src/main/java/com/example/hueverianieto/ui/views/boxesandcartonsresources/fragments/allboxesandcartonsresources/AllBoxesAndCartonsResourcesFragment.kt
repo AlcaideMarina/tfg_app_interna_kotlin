@@ -14,14 +14,11 @@ import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentAllBoxesAndCartonsResourcesBinding
-import com.example.hueverianieto.databinding.FragmentAllFeedResourcesBinding
 import com.example.hueverianieto.domain.model.componentticket.ComponentTicketModel
 import com.example.hueverianieto.ui.components.componentticket.HNComponentTicketAdapter
 import com.example.hueverianieto.ui.views.boxesandcartonsresources.BoxesAndCartonsActivity
-import com.example.hueverianieto.ui.views.feedresources.FeedResourcesActivity
 import com.example.hueverianieto.utils.MaterialUtils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
@@ -62,16 +59,21 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
     override fun setObservers() {
         this.allBoxesAndCartonsResourcesViewModel.cbList.observe(this) { cbResourcesDataList ->
             if (cbResourcesDataList == null) {
-                // TODO: ERROR
+                this.binding.boxesAndCartonsRecyclerView.visibility = View.GONE
+                this.binding.containerWaringNoOrders.visibility = View.VISIBLE
+                this.binding.containerWaringNoOrders.setTitle("Error")
+                this.binding.containerWaringNoOrders.setText("Se ha producido un error cuando se estaban actualizado los datos del pedido. Por favor, revise los datos e inténtelo de nuevo.")
             } else {
                 bcDataList = mutableListOf()
-                for (bcResourcesData in cbResourcesDataList)  {
+                for (bcResourcesData in cbResourcesDataList) {
                     if (bcResourcesData != null) {
                         val componentTicketModel = ComponentTicketModel(
                             bcResourcesData.expenseDatetime,
                             MaterialUtils.getBCOrderSummary(
                                 MaterialUtils.bcOrderToDBBoxesAndCartonsOrderModel(
-                                    bcResourcesData)),
+                                    bcResourcesData
+                                )
+                            ),
                             "",
                             bcResourcesData.totalPrice
                         ) {
@@ -89,8 +91,8 @@ class AllBoxesAndCartonsResourcesFragment : BaseFragment() {
                 if (bcDataList.isEmpty()) {
                     this.binding.boxesAndCartonsRecyclerView.visibility = View.GONE
                     this.binding.containerWaringNoOrders.visibility = View.VISIBLE
-                    this.binding.containerWaringNoOrders.setTitle("No hay clientes")
-                    this.binding.containerWaringNoOrders.setText("No hay registro de clientes activos en la base de datos")
+                    this.binding.containerWaringNoOrders.setTitle("No hay recursos")
+                    this.binding.containerWaringNoOrders.setText("No hay registro de recursos de cajas y cartones sin eliminar en la base de datos.")
                 } else {
                     initRecyclerView()
                 }

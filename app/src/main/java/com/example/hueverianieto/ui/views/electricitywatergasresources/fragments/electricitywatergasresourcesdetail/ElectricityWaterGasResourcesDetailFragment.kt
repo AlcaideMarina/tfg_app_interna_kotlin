@@ -9,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
@@ -67,6 +68,23 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
                 setText()
             }
         }
+        this.ewgResourcesDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    alertOkData.title,
+                    alertOkData.text,
+                    "De acuerdo",
+                    null,
+                    {
+                        alertDialog.cancel()
+                        (activity as BaseActivity).goBackFragments()
+                    },
+                    null
+                )
+            }
+        }
     }
 
     override fun setListeners() {
@@ -83,7 +101,6 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.ewgResourcesDetailViewModel
                         .deleteEWGResources(ewgResourcesData.documentId!!)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }
@@ -105,8 +122,8 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
+        this.binding.saveButtonText.text = "Modificar"
+        this.binding.cancelButtonText.text = "Eliminar"
     }
 
     private fun setText() {
@@ -122,10 +139,13 @@ class ElectricityWaterGasResourcesDetailFragment : BaseFragment() {
             this.typeAutoCompleteTextView.setText(type)
             this.typeAutoCompleteTextView.isEnabled = false
             this.typeTextInputLayout.isEnabled = false
+            this.typeAutoCompleteTextView.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             this.totalPriceTextInputLayout.setText(ewgResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             this.notesTextInputLayout.setText(ewgResourcesData.notes)
             this.notesTextInputLayout.isEnabled = false
+            this.notesTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 

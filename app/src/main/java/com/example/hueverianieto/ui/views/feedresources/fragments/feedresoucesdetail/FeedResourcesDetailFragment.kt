@@ -1,6 +1,5 @@
 package com.example.hueverianieto.ui.views.feedresources.fragments.feedresoucesdetail
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,18 +9,16 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
+import com.example.hueverianieto.R
 import com.example.hueverianieto.base.BaseActivity
 import com.example.hueverianieto.base.BaseFragment
 import com.example.hueverianieto.base.BaseState
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.data.models.remote.InternalUserData
 import com.example.hueverianieto.databinding.FragmentFeedResourcesDetailBinding
-import com.example.hueverianieto.databinding.FragmentHensResourcesDetailBinding
 import com.example.hueverianieto.ui.components.HNModalDialog
-import com.example.hueverianieto.ui.views.hensresouces.fragments.hensresourcesdetail.HensResourcesDetailFragmentArgs
 import com.example.hueverianieto.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class FeedResourcesDetailFragment : BaseFragment() {
@@ -42,7 +39,7 @@ class FeedResourcesDetailFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args : FeedResourcesDetailFragmentArgs by navArgs()
+        val args: FeedResourcesDetailFragmentArgs by navArgs()
         this.feedResourcesData = args.feedResourcesData
         this.currentUserData = args.currentUserData
 
@@ -66,10 +63,27 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     override fun setObservers() {
-        this.feedResourcesDetailViewModel.feedResource.observe(this) { feedResurcesDataObserver ->
-            if (feedResurcesDataObserver != null) {
-                feedResourcesData = feedResurcesDataObserver
+        this.feedResourcesDetailViewModel.feedResource.observe(this) { feedResourcesDataObserver ->
+            if (feedResourcesDataObserver != null) {
+                feedResourcesData = feedResourcesDataObserver
                 setText()
+            }
+        }
+        this.feedResourcesDetailViewModel.alertDialog.observe(this) { alertOkData ->
+            if (alertOkData.finish) {
+                Utils.setPopUp(
+                    alertDialog,
+                    requireContext(),
+                    alertOkData.title,
+                    alertOkData.text,
+                    "De acuerdo",
+                    null,
+                    {
+                        alertDialog.cancel()
+                        (activity as BaseActivity).goBackFragments()
+                    },
+                    null
+                )
             }
         }
     }
@@ -88,7 +102,6 @@ class FeedResourcesDetailFragment : BaseFragment() {
                     alertDialog.cancel()
                     this.feedResourcesDetailViewModel
                         .deleteFeedResources(feedResourcesData.documentId!!)
-                    activity?.onBackPressedDispatcher?.onBackPressed()
                 }
             )
         }
@@ -110,8 +123,8 @@ class FeedResourcesDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
+        this.binding.saveButtonText.text = "Modificar"
+        this.binding.cancelButtonText.text = "Eliminar"
     }
 
     private fun setText() {
@@ -119,8 +132,10 @@ class FeedResourcesDetailFragment : BaseFragment() {
             this.dateTextView.text = Utils.parseTimestampToString(feedResourcesData.expenseDatetime)
             this.kilosTextInputLayout.setText(feedResourcesData.kilos.toString())
             this.kilosTextInputLayout.isEnabled = false
+            this.kilosTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
             this.totalPriceTextInputLayout.setText(feedResourcesData.totalPrice.toString())
             this.totalPriceTextInputLayout.isEnabled = false
+            this.totalPriceTextInputLayout.setTextColor(requireContext().getColor(R.color.black_light_color_80))
         }
     }
 

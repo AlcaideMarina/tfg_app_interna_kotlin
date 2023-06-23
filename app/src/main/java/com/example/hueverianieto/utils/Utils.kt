@@ -21,10 +21,12 @@ object Utils {
         }
     }
 
-    fun setPopUp(alertDialog: HNModalDialog, context: Context, title: String,
-                 message: String, leftButton: String, rightButton: String?,
-                 leftButtonListener: View.OnClickListener,
-                 rightButtonListener: View.OnClickListener?) {
+    fun setPopUp(
+        alertDialog: HNModalDialog, context: Context, title: String,
+        message: String, leftButton: String, rightButton: String?,
+        leftButtonListener: View.OnClickListener,
+        rightButtonListener: View.OnClickListener?
+    ) {
         alertDialog.show(
             context,
             ModalDialogModel(
@@ -48,16 +50,19 @@ object Utils {
         return null
     }
 
-    fun parseTimestampToString(timestamp: Timestamp?, format: String = Constants.dateFormat) : String? {
-        return if(timestamp == null) {
+    fun parseTimestampToString(
+        timestamp: Timestamp?,
+        format: String = Constants.dateFormat
+    ): String? {
+        return if (timestamp == null) {
             null
         } else {
             SimpleDateFormat(format).format(timestamp.toDate())
         }
     }
 
-    fun getDayOfWeek(dayOfWeek: Int) : String {
-        return when(dayOfWeek) {
+    fun getDayOfWeek(dayOfWeek: Int): String {
+        return when (dayOfWeek) {
             1 -> "Domingo"
             2 -> "Lunes"
             3 -> "Martes"
@@ -69,13 +74,13 @@ object Utils {
         }
     }
 
-    fun parseStringToTimestamp(dateStr : String, pattern : String? = Constants.dateFormat) :
+    fun parseStringToTimestamp(dateStr: String, pattern: String? = Constants.dateFormat):
             Timestamp = Timestamp(SimpleDateFormat(pattern).parse(dateStr))
 
-    fun parseDateToString(date: Date, format: String? = null) :
-            String = SimpleDateFormat(format ?: Constants.dateFormat).format(date)
+    fun parseDateToString(date: Date, format: String = Constants.dateFormat):
+            String = SimpleDateFormat(format).format(date)
 
-    fun addToDate(date: Date, daysToAdd: Int = 0, monthsToAdd: Int = 0) : Date {
+    fun addToDate(date: Date, daysToAdd: Int = 0, monthsToAdd: Int = 0): Date {
         val c = Calendar.getInstance()
         c.time = date
         c.add(Calendar.DATE, daysToAdd)

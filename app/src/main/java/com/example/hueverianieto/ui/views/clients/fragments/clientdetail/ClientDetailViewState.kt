@@ -5,7 +5,5 @@ import com.example.hueverianieto.base.BaseState
 class ClientDetailViewState (
     var isLoading: Boolean = false,
     var error: Boolean = false,
-    var correct: Boolean = false,
-    var hasAccount : Boolean = false,
-    var hasOrders : Boolean = false,
+    var correct: Boolean = false
 ) : BaseState

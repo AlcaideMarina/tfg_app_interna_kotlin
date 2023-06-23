@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.hueverianieto.data.models.local.AlertOkData
 import com.example.hueverianieto.data.models.remote.FeedResourcesData
 import com.example.hueverianieto.domain.usecases.UpdateFeedUseCase
-import com.example.hueverianieto.ui.views.hensresouces.fragments.modifyhensresources.ModifyHensResourcesViewState
 import com.example.hueverianieto.utils.MaterialUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -30,7 +29,8 @@ class ModifyFeedResourcesViewModel @Inject constructor(
         viewModelScope.launch {
             _viewState.value = ModifyFeedResourcesViewState(isLoading = true)
             val hensResourcesMap = MaterialUtils.feedParcelableToMap(feedResourcesData)
-            when(val result = updateFeedUseCase(hensResourcesMap, feedResourcesData.documentId!!)) {
+            when (val result =
+                updateFeedUseCase(hensResourcesMap, feedResourcesData.documentId!!)) {
                 false -> {
                     _viewState.value = ModifyFeedResourcesViewState(isLoading = false, error = true)
                     _alertDialog.value = AlertOkData(
@@ -40,7 +40,8 @@ class ModifyFeedResourcesViewModel @Inject constructor(
                     )
                 }
                 true -> {
-                    _viewState.value = ModifyFeedResourcesViewState(isLoading = false, error = false)
+                    _viewState.value =
+                        ModifyFeedResourcesViewState(isLoading = false, error = false)
                     _alertDialog.value = AlertOkData(
                         "Cliente actualizado",
                         "Los datos del recurso se han actualizado correctamente.",

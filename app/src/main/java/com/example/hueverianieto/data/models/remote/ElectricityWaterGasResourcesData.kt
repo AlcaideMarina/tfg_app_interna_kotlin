@@ -5,9 +5,9 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-class ElectricityWaterGasResourcesData (
+class ElectricityWaterGasResourcesData(
     var createBy: String,
-    var creationDatatime: Timestamp,
+    var creationDatetime: Timestamp,
     var deleted: Boolean,
     var documentId: String?,
     var expenseDatetime: Timestamp,

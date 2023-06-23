@@ -16,7 +16,10 @@ class MonthlyMonitoringCompanySituationViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun navigateToWeeklyMonitoringCompanySituation(view: View?, bundle: Bundle) {
-        view?.findNavController()?.navigate(R.id.action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment, bundle)
+        view?.findNavController()?.navigate(
+            R.id.action_monthlyMonitoringCompanySituationFragment_to_weeklyMonitoringCompanySituationFragment,
+            bundle
+        )
             ?: Log.e(
                 MonthlyMonitoringCompanySituationViewModel::class.java.simpleName,
                 "Error a la navegación de seguimiento de situación de la empresa - vista semanal"

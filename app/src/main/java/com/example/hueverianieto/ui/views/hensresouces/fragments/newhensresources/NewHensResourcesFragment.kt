@@ -21,7 +21,6 @@ import com.example.hueverianieto.ui.components.HNModalDialog
 import com.example.hueverianieto.utils.Utils
 import com.google.firebase.Timestamp
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 import java.util.*
 
 @AndroidEntryPoint
@@ -33,7 +32,7 @@ class NewHensResourcesFragment : BaseFragment() {
 
     private lateinit var alertDialog: HNModalDialog
 
-    private lateinit var datetimeSelected : Timestamp
+    private lateinit var datetimeSelected: Timestamp
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +43,7 @@ class NewHensResourcesFragment : BaseFragment() {
 
         this.alertDialog = HNModalDialog(requireContext())
 
-        val args : NewHensResourcesFragmentArgs by navArgs()
+        val args: NewHensResourcesFragmentArgs by navArgs()
         this.currentUserData = args.currentUserData
 
         this.binding = FragmentNewHensResourcesBinding.inflate(
@@ -54,7 +53,6 @@ class NewHensResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         lifecycleScope.launchWhenStarted {
             newHensResourcesViewModel.viewState.collect { viewState ->
@@ -107,7 +105,8 @@ class NewHensResourcesFragment : BaseFragment() {
                 this.binding.quantityTextInputLayout.text != null && this.binding.quantityTextInputLayout.text.toString() != "" &&
                 this.binding.shedATextInputLayout.text != null && this.binding.shedATextInputLayout.text.toString() != "" &&
                 this.binding.shedBTextInputLayout.text != null && this.binding.shedBTextInputLayout.text.toString() != "" &&
-                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != "") {
+                this.binding.totalPriceTextInputLayout.text != null && this.binding.totalPriceTextInputLayout.text.toString() != ""
+            ) {
 
                 val quantity = this.binding.quantityTextInputLayout.text.toString().toInt()
                 val shedAStr = (this.binding.shedATextInputLayout.text ?: 0).toString()
@@ -148,7 +147,7 @@ class NewHensResourcesFragment : BaseFragment() {
                     alertDialog,
                     requireContext(),
                     "Formulario incompleto",
-                    "Debe rellenar todos los campos del formulario. Por favor, revise lod datos e inténtelo de nuevo.",
+                    "Debe rellenar todos los campos del formulario. Por favor, revise los datos e inténtelo de nuevo.",
                     "De acuerdo",
                     null,
                     { alertDialog.cancel() },
@@ -163,13 +162,6 @@ class NewHensResourcesFragment : BaseFragment() {
             with(binding) {
                 this.loadingComponent.isVisible = state.isLoading
             }
-        }
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
         }
     }
 
@@ -192,7 +184,9 @@ class NewHensResourcesFragment : BaseFragment() {
         override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
         override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {}
         override fun afterTextChanged(s: Editable) {
-            if (this@NewHensResourcesFragment.binding.quantityTextInputLayout.text.toString().isEmpty()) {
+            if (this@NewHensResourcesFragment.binding.quantityTextInputLayout.text.toString()
+                    .isEmpty()
+            ) {
                 this@NewHensResourcesFragment.binding.shedATextInputLayout.setText("")
                 this@NewHensResourcesFragment.binding.shedATextInputLayout.isEnabled = false
                 this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText("")
@@ -204,13 +198,16 @@ class NewHensResourcesFragment : BaseFragment() {
                     this@NewHensResourcesFragment.binding.shedBTextInputLayout.isEnabled = true
                     if (hensNumber % 2 == 0) {
                         this@NewHensResourcesFragment.binding.shedATextInputLayout.setText(
-                            (hensNumber / 2).toString())
+                            (hensNumber / 2).toString()
+                        )
                     } else {
                         this@NewHensResourcesFragment.binding.shedATextInputLayout.setText(
-                            ((hensNumber / 2) + 1).toString())
+                            ((hensNumber / 2) + 1).toString()
+                        )
                     }
                     this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText(
-                        ((hensNumber / 2)).toString())
+                        ((hensNumber / 2)).toString()
+                    )
                 } catch (e: Exception) {
                     this@NewHensResourcesFragment.binding.shedATextInputLayout.setText("")
                     this@NewHensResourcesFragment.binding.shedBTextInputLayout.setText("")

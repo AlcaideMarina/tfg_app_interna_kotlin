@@ -5,7 +5,7 @@ import com.google.firebase.Timestamp
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class OrderData (
+data class OrderData(
     val approxDeliveryDatetime: Timestamp,
     val clientId: Long,
     val company: String,
@@ -23,5 +23,5 @@ data class OrderData (
     val paymentMethod: Long,
     val status: Long,
     val totalPrice: Number?,
-    val documentId: String?,         // Este campo no se guarda en BBDD, es sólo para localizar en local
+    val documentId: String?,
 ) : Parcelable
