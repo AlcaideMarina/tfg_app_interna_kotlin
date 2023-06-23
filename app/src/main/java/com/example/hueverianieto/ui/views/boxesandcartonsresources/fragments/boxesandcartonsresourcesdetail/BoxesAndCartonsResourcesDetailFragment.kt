@@ -122,8 +122,8 @@ class BoxesAndCartonsResourcesDetailFragment : BaseFragment() {
     }
 
     private fun setButtons() {
-        this.binding.saveButton.setText("Modificar")
-        this.binding.cancelButton.setText("Eliminar")
+        this.binding.saveButtonText.text = "Modificar"
+        this.binding.cancelButtonText.text = "Eliminar"
     }
 
     private fun setText() {
