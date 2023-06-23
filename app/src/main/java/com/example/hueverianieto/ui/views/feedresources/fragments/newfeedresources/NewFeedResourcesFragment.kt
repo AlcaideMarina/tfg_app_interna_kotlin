@@ -49,7 +49,6 @@ class NewFeedResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         lifecycleScope.launchWhenStarted {
             newFeedResourcesViewModel.viewState.collect { viewState ->
@@ -135,13 +134,6 @@ class NewFeedResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         with(state as NewFeedResourcesViewState) {
             binding.loadingComponent.isVisible = state.isLoading
-        }
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
         }
     }
 
