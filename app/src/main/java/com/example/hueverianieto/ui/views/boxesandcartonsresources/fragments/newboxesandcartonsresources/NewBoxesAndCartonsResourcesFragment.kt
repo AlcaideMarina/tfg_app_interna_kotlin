@@ -52,7 +52,6 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
     }
 
     override fun configureUI() {
-        setButtons()
         setFields()
         lifecycleScope.launchWhenStarted {
             newBoxesAndCartonsResourcesViewModel.viewState.collect { viewState ->
@@ -114,13 +113,6 @@ class NewBoxesAndCartonsResourcesFragment : BaseFragment() {
     override fun updateUI(state: BaseState) {
         state as NewBoxesAndCartonsResourcesViewState
         binding.loadingComponent.isVisible = state.isLoading
-    }
-
-    private fun setButtons() {
-        with(this.binding) {
-            this.cancelButton.setText("Cancelar")
-            this.saveButton.setText("Guardar")
-        }
     }
 
     private fun setFields() {
